@@ -1,0 +1,531 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Git &#8212; Personal Notes</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="author" title="About these documents" href="about.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Sphinx" href="sphinx.html" />
+    <link rel="prev" title="Personal Notes" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="sphinx.html" title="Sphinx"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Personal Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Personal Notes</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="git">
+<h1>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="page-content">
+<p class="topic-title first">Page content</p>
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
+<li><a class="reference internal" href="#installation" id="id3">Installation</a></li>
+<li><a class="reference internal" href="#configuration" id="id4">Configuration</a><ul>
+<li><a class="reference internal" href="#minimal-post-install-configuration" id="id5">Minimal post-install configuration</a></li>
+<li><a class="reference internal" href="#creating-aliases" id="id6">Creating aliases</a></li>
+<li><a class="reference internal" href="#splitting-the-configuration-file" id="id7">Splitting the configuration file</a></li>
+<li><a class="reference internal" href="#local-configuration" id="id8">Local configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#working-with-a-separate-repository" id="id9">Working with a separate repository</a></li>
+<li><a class="reference internal" href="#working-from-outside-the-working-directory" id="id10">Working from outside the working directory</a></li>
+<li><a class="reference internal" href="#cloning-an-existing-repository" id="id11">Cloning an existing repository</a></li>
+<li><a class="reference internal" href="#staging-changes" id="id12">Staging changes</a></li>
+<li><a class="reference internal" href="#showing-changes" id="id13">Showing changes</a></li>
+<li><a class="reference internal" href="#committing" id="id14">Committing</a></li>
+<li><a class="reference internal" href="#viewing-the-commit-log" id="id15">Viewing the commit log</a></li>
+<li><a class="reference internal" href="#working-with-remote-repositories" id="id16">Working with remote repositories</a></li>
+<li><a class="reference internal" href="#working-with-branches" id="id17">Working with branches</a></li>
+<li><a class="reference internal" href="#stashing-changes" id="id18">Stashing changes</a></li>
+<li><a class="reference internal" href="#maintaining-a-difference-between-working-and-committed-trees" id="id19">Maintaining a difference between working and committed trees</a></li>
+<li><a class="reference internal" href="#other-resources" id="id20">Other resources</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2><a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Git (a <a class="reference external" href="https://en.wikipedia.org/wiki/Distributed_version_control">distributed version control system</a>) is complex and
+it’s easy to forget how to exactly do this or that. This page is where I note
+the Git commands and configuration items I came across.</p>
+</div>
+<div class="section" id="installation">
+<h2><a class="toc-backref" href="#id3">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p id="index-0">On a <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> system, install Git (<strong>as
+root</strong>) with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apt-get install git <span class="c1"># As root.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuration">
+<h2><a class="toc-backref" href="#id4">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="minimal-post-install-configuration">
+<h3><a class="toc-backref" href="#id5">Minimal post-install configuration</a><a class="headerlink" href="#minimal-post-install-configuration" title="Permalink to this headline">¶</a></h3>
+<p id="index-1">After installing Git, user name and e-mail address should be configured:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git config --global user.name <span class="s2">&quot;My Name&quot;</span>
+git config --global user.email <span class="s2">&quot;my.id@example.com&quot;</span>
+</pre></div>
+</div>
+<p>You should probably also configure the action of the <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> (without
+argument) command. Value <code class="code docutils literal notranslate"><span class="pre">simple</span></code> <a class="reference external" href="https://git-scm.com/docs/git-config#git-config-pushdefault">may be appropriate in most cases</a>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git config --global push.default simple
+</pre></div>
+</div>
+<p>You can see your Git configuration with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git config --list
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-aliases">
+<span id="git-aliases"></span><h3><a class="toc-backref" href="#id6">Creating aliases</a><a class="headerlink" href="#creating-aliases" title="Permalink to this headline">¶</a></h3>
+<p id="index-2">Create aliases with commands like:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git config --global alias.ci commit <span class="c1"># Create alias &quot;ci&quot; for command &quot;commit&quot;.</span>
+
+git config --global <span class="se">\</span>
+    alias.g <span class="s1">&#39;log --pretty=oneline --abbrev-commit&#39;</span> <span class="c1"># Create alias &quot;g&quot; for</span>
+                                                   <span class="c1"># command &quot;log&quot; with</span>
+                                                   <span class="c1"># options for compact</span>
+                                                   <span class="c1"># output.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="splitting-the-configuration-file">
+<h3><a class="toc-backref" href="#id7">Splitting the configuration file</a><a class="headerlink" href="#splitting-the-configuration-file" title="Permalink to this headline">¶</a></h3>
+<p id="index-3">All the <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span> <span class="pre">--global</span></code> commands mentioned above actually create
+entries (“config directives”) in file <code class="code docutils literal notranslate"><span class="pre">~/.gitconfig</span></code>. You may want to
+store some entries in one or more separate files. Create an <code class="code docutils literal notranslate"><span class="pre">[include]</span></code>
+section in your <code class="code docutils literal notranslate"><span class="pre">~/.gitconfig</span></code> file for that. <a class="reference external" href="http://travisjeffery.com/b/2012/03/using-git-s-include-for-private-configuration-information-like-github-tokens/">Travis Jeffery gives more
+details</a>.</p>
+</div>
+<div class="section" id="local-configuration">
+<h3><a class="toc-backref" href="#id8">Local configuration</a><a class="headerlink" href="#local-configuration" title="Permalink to this headline">¶</a></h3>
+<p id="index-4">Configuration entries can be created in the repository local configuration
+(file <code class="code docutils literal notranslate"><span class="pre">.git/config</span></code>) by using the <code class="code docutils literal notranslate"><span class="pre">--local</span></code> option instead of the
+<code class="code docutils literal notranslate"><span class="pre">--global</span></code> option in the <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">config</span></code> commands. Repository local
+configuration can be used to define smudge and clean filters (see
+<a class="reference internal" href="#git-maintain-work-commit-diff"><span class="std std-ref">Maintaining a difference between working and committed trees</span></a>).</p>
+</div>
+</div>
+<div class="section" id="working-with-a-separate-repository">
+<h2><a class="toc-backref" href="#id9">Working with a separate repository</a><a class="headerlink" href="#working-with-a-separate-repository" title="Permalink to this headline">¶</a></h2>
+<p id="index-5">This command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git init --separate-git-dir path/to/separate_git_dir.git
+</pre></div>
+</div>
+<p>creates an empty Git repository like <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span></code> but does not create a
+<code class="code docutils literal notranslate"><span class="pre">.git</span></code> repository in the current directory. It creates
+<code class="code docutils literal notranslate"><span class="pre">path/to/separate_git_dir.git</span></code> instead (plus a <code class="code docutils literal notranslate"><span class="pre">.git</span></code> <em>file</em> in
+the current folder containing the path to the actual repository). The same
+command <em>moves</em> the repository to the specified location if it already exists.</p>
+<p>The <code class="code docutils literal notranslate"><span class="pre">--git-dir</span></code> option can be used in any Git command to specify the path
+to the repository. Useful for cases where the working directory does not
+contain any <code class="code docutils literal notranslate"><span class="pre">.git</span></code> directory or file (and this can happen if the working
+directory is an artifact of a build process and is cleaned out and regenerated
+by, say, a <code class="code docutils literal notranslate"><span class="pre">make</span> <span class="pre">clean</span> <span class="pre">html</span></code> command (case of <a class="reference external" href="http://www.sphinx-doc.org/en/master">Sphinx</a> HTML project)). Example:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git --git-dir<span class="o">=</span>path/to/separate_git_dir.git status
+</pre></div>
+</div>
+</div>
+<div class="section" id="working-from-outside-the-working-directory">
+<h2><a class="toc-backref" href="#id10">Working from outside the working directory</a><a class="headerlink" href="#working-from-outside-the-working-directory" title="Permalink to this headline">¶</a></h2>
+<p id="index-6">The <code class="code docutils literal notranslate"><span class="pre">-C</span></code> switch can be used in any Git command to specify the path to the
+working directory. Example:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git -C path/to/working/directory status
+</pre></div>
+</div>
+<p>The <code class="code docutils literal notranslate"><span class="pre">-C</span></code> switch and the <code class="code docutils literal notranslate"><span class="pre">--git-dir</span></code> option can be combined to work
+from outside a working directory that does not contain any <code class="code docutils literal notranslate"><span class="pre">.git</span></code>
+directory or file.</p>
+</div>
+<div class="section" id="cloning-an-existing-repository">
+<h2><a class="toc-backref" href="#id11">Cloning an existing repository</a><a class="headerlink" href="#cloning-an-existing-repository" title="Permalink to this headline">¶</a></h2>
+<p id="index-7">Clone a repository with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone repository_url
+</pre></div>
+</div>
+<p>Force the name of the cloned repository by providing the name as a
+supplementary argument:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git clone repository_url cloned_repository_name
+</pre></div>
+</div>
+</div>
+<div class="section" id="staging-changes">
+<span id="git-staging"></span><h2><a class="toc-backref" href="#id12">Staging changes</a><a class="headerlink" href="#staging-changes" title="Permalink to this headline">¶</a></h2>
+<p id="index-8"><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-A</span></code> stages all changes (including new files and file removals).
+<code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span></code> is equivalent to <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-A</span></code> (except with Git version
+1.x (file removals not staged)).</p>
+<p><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">--ignore-removal</span></code> does not stage file removals.</p>
+<p><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-u</span></code> does not stage new files.</p>
+<p>Use the <code class="code docutils literal notranslate"><span class="pre">-p</span></code> switch to stage only parts of the changes made to a file
+(interactive command):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git add -p path/to/file
+</pre></div>
+</div>
+<p>The following commands stage the removal of a file:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git rm path/to/file
+
+git rm --cached path/to/file <span class="c1"># Does not remove the file from the working</span>
+                             <span class="c1"># directory.</span>
+</pre></div>
+</div>
+<p><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> shows the staged files (among other things).</p>
+</div>
+<div class="section" id="showing-changes">
+<h2><a class="toc-backref" href="#id13">Showing changes</a><a class="headerlink" href="#showing-changes" title="Permalink to this headline">¶</a></h2>
+<p id="index-9">Show the difference between what is staged (or what is in the last commit if no
+change is staged) and the working tree with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git diff
+
+git diff -- path/to/files <span class="c1"># Show changes for the specified files only.</span>
+</pre></div>
+</div>
+<p>Show the difference between the last commit of branch “branch_name” and the
+working tree with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git diff branch_name
+
+git diff branch_name -- path/to/files <span class="c1"># Show changes for the specified files</span>
+                                      <span class="c1"># only.</span>
+</pre></div>
+</div>
+<p>Assuming at least one of the path is outside the working tree, the following
+command shows the difference between the two files:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git diff path/to/file other/path/to/file
+</pre></div>
+</div>
+<p>Show the difference between what is staged the last commit with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git diff --staged
+
+git diff --staged -- path/to/file <span class="c1"># Show changes for the specified files</span>
+                                  <span class="c1"># only.</span>
+</pre></div>
+</div>
+<p>Show the difference between a particular commit and the working tree with
+commands like:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git diff 42b9c3b
+
+git diff 42b9c3b -- path/to/files <span class="c1"># Show changes for the specified files</span>
+                                  <span class="c1"># only.</span>
+</pre></div>
+</div>
+<p>Show the difference between two particular commits with commands like:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git diff 42b9c3b a92c02a
+
+git diff 42b9c3b a92c02a -- path/to/files <span class="c1"># Show changes for the specified</span>
+                                          <span class="c1"># files only.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="committing">
+<h2><a class="toc-backref" href="#id14">Committing</a><a class="headerlink" href="#committing" title="Permalink to this headline">¶</a></h2>
+<p id="index-10">The following commands commit the staged changes to the repository:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git commit                                <span class="c1"># Opens a text editor for commit</span>
+                                          <span class="c1"># message edition.</span>
+
+git commit -m <span class="s2">&quot;Commit message&quot;</span>            <span class="c1"># Takes the commit message from the</span>
+                                          <span class="c1"># command line.</span>
+
+git commit -F path/to/commit/message/file <span class="c1"># Reads the commit message from a</span>
+                                          <span class="c1"># file.</span>
+</pre></div>
+</div>
+<p>With the <code class="code docutils literal notranslate"><span class="pre">-a</span></code> switch, all the changes (except file addition) are staged
+before committing:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git commit -a
+</pre></div>
+</div>
+<p>A commit that has not been already pushed to a remote can be amended, that is
+you can <a class="reference internal" href="#git-staging"><span class="std std-ref">stage changes</span></a> and then create a commit that
+contains the changes already committed and the new changes. This new commit
+replaces the previous commit. Use the <code class="code docutils literal notranslate"><span class="pre">--amend</span></code> option to create the new
+commit:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git commit --amend
+</pre></div>
+</div>
+</div>
+<div class="section" id="viewing-the-commit-log">
+<h2><a class="toc-backref" href="#id15">Viewing the commit log</a><a class="headerlink" href="#viewing-the-commit-log" title="Permalink to this headline">¶</a></h2>
+<p id="index-11">Show the commit log with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git log
+</pre></div>
+</div>
+<p>The <code class="code docutils literal notranslate"><span class="pre">log</span></code> command is extremely configurable. I have
+<a class="reference internal" href="#git-aliases"><span class="std std-ref">aliases</span></a> for those variants:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git log --pretty<span class="o">=</span>oneline --abbrev-commit <span class="c1"># Compact output.</span>
+
+git log --graph --oneline --alla         <span class="c1"># Compact graphical reprszentation.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="working-with-remote-repositories">
+<h2><a class="toc-backref" href="#id16">Working with remote repositories</a><a class="headerlink" href="#working-with-remote-repositories" title="Permalink to this headline">¶</a></h2>
+<p id="index-12">Configure a remote named “origin” with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git remote add origin remote_repository_url
+</pre></div>
+</div>
+<p>Check the configured remotes with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git remote -v
+</pre></div>
+</div>
+<p>Push the commits in the “master” branch to “origin” with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git push origin master
+</pre></div>
+</div>
+<p>The following command downloads changes from “origin” (but does not affect the
+history of the local repository):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git fetch origin
+</pre></div>
+</div>
+<p>The following command downloads changes from “origin” for branch “master” and
+merges the changes into the local repository:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git pull origin master
+</pre></div>
+</div>
+</div>
+<div class="section" id="working-with-branches">
+<h2><a class="toc-backref" href="#id17">Working with branches</a><a class="headerlink" href="#working-with-branches" title="Permalink to this headline">¶</a></h2>
+<p id="index-13"><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> shows the current branch (among other things).</p>
+<p>Switch to branch named “branch_name” with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git checkout branch_name
+
+git checkout -b branch_name <span class="c1"># Creates the branch named &quot;branch_name&quot;.</span>
+</pre></div>
+</div>
+<p>Rebase current branch on the latest commit of branch “master” with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git rebase master
+</pre></div>
+</div>
+<p>Merge the branch named “branch_name” into the current branch with one of the
+following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git merge --no-ff branch_name <span class="c1"># Creates a merge commit.</span>
+
+git merge branch_name         <span class="c1"># Does not create a merge commit when the merge</span>
+                              <span class="c1"># resolves as fast-forward.</span>
+</pre></div>
+</div>
+<p>It is possible to merge all changes on the branch named “branch_name” into the
+current branch without keeping the commit history:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git merge --squash branch_name <span class="c1"># A &quot;git commit&quot; command is needed after that</span>
+                               <span class="c1"># to actually create a merge commit.</span>
+</pre></div>
+</div>
+<p>Delete the local branch named “branch_name” with one of the following
+commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git branch -d branch_name <span class="c1"># Does not delete the branch if it&#39;s not fully</span>
+                          <span class="c1"># merged.</span>
+
+git branch -D branch_name <span class="c1"># Deletes the branch even if it&#39;s not fully merged.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="stashing-changes">
+<h2><a class="toc-backref" href="#id18">Stashing changes</a><a class="headerlink" href="#stashing-changes" title="Permalink to this headline">¶</a></h2>
+<p id="index-14">Store the current state of the working tree and the index in the stash stack
+and go back to a clean working tree with one of the following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git stash push
+git stash                       <span class="c1"># Equivalent to &quot;git stash push&quot;.</span>
+git stash push -m <span class="s2">&quot;Description&quot;</span> <span class="c1"># Provides a descriptive message.</span>
+</pre></div>
+</div>
+<p>If you don’t want to revert the staged changes, use the <code class="code docutils literal notranslate"><span class="pre">--keep-index</span></code>
+option:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git stash push --keep-index
+</pre></div>
+</div>
+<p>Each <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span> <span class="pre">push</span></code> command creates a new entry in the stash stack.</p>
+<p>List the stash entries with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git stash list
+</pre></div>
+</div>
+<p>Inspect a stash entry with a command like one of the following:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git stash show stash@<span class="o">{</span><span class="m">0</span><span class="o">}</span>
+git stash show -p stash@<span class="o">{</span><span class="m">0</span><span class="o">}</span> <span class="c1"># Produces a patch-like output.</span>
+</pre></div>
+</div>
+<p>Remove an entry from the stash stack and apply the changes to the working tree
+with a command like:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git stash pop stash@<span class="o">{</span><span class="m">0</span><span class="o">}</span>
+git stash pop           <span class="c1"># Equivalent to &quot;git stash pop stash@{0}&quot;</span>
+</pre></div>
+</div>
+<p>Use the <code class="code docutils literal notranslate"><span class="pre">--index</span></code> option to also reapply the staging:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git stash pop --index
+</pre></div>
+</div>
+</div>
+<div class="section" id="maintaining-a-difference-between-working-and-committed-trees">
+<span id="git-maintain-work-commit-diff"></span><h2><a class="toc-backref" href="#id19">Maintaining a difference between working and committed trees</a><a class="headerlink" href="#maintaining-a-difference-between-working-and-committed-trees" title="Permalink to this headline">¶</a></h2>
+<p id="index-15">In some cases, you want a particular file content in your working tree, that
+you don’t want to commit.</p>
+<p>For example, this page you are currently reading is part of a
+<a class="reference external" href="http://www.sphinx-doc.org/en/master">Sphinx</a> project. The page you’re
+reading is the result of Sphinx processing some source files and generating
+HTML output. On project creation, Sphinx writes a
+<a class="reference external" href="http://mrbook.org/blog/tutorials/make/">Makefile</a> and you just have to issue
+a <code class="code docutils literal notranslate"><span class="pre">make</span> <span class="pre">html</span></code> command to generate the HTML output. The <code class="code docutils literal notranslate"><span class="pre">html</span></code>
+argument is mandatory because the Makefile is so that <code class="code docutils literal notranslate"><span class="pre">make</span></code> (without
+argument) does not generate the HTML output (it just outputs a help message).</p>
+<p>For some reasons, I want to be able to generate the HTML output with
+<code class="code docutils literal notranslate"><span class="pre">make</span></code> (without argument). One way to achieve that is to add those 2
+lines somewhere in the file (the leading blank in the second line is actually a
+tabulation character):</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>html: Makefile
+      @<span class="k">$(</span>SPHINXBUILD<span class="k">)</span> -M html <span class="s2">&quot;</span><span class="k">$(</span>SOURCEDIR<span class="k">)</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="k">$(</span>BUILDDIR<span class="k">)</span><span class="s2">&quot;</span> <span class="k">$(</span>SPHINXOPTS<span class="k">)</span> <span class="k">$(</span>O<span class="k">)</span>
+</pre></div>
+</div>
+<p>(You can <a class="reference download internal" href="_downloads/Makefile" download=""><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">the</span> <span class="pre">whole</span> <span class="pre">file</span></code></a>.)</p>
+<p>I think this change could surprise Sphinx users accustomed to the usual
+behaviour of the Sphinx Makefile, so I prefer to commit the file with the
+change commented out:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># html: Makefile</span>
+<span class="c1">#     @$(SPHINXBUILD) -M html &quot;$(SOURCEDIR)&quot; &quot;$(BUILDDIR)&quot; $(SPHINXOPTS) $(O)</span>
+</pre></div>
+</div>
+<p>A Git smudge / clean filter makes that possible. Just create a
+<code class="code docutils literal notranslate"><span class="pre">.gitattributes</span></code> file with the following line, which indicates that file
+Makefile is to be filtered on checkout and on staging using (respectively) a
+smudge and a clean filter named “html_as_default_target”:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>Makefile <span class="nv">filter</span><span class="o">=</span>html_as_default_target
+</pre></div>
+</div>
+<p>There’s no point committing the <code class="code docutils literal notranslate"><span class="pre">.gitattributes</span></code> in such a case, so I
+added it to the <a class="reference external" href="https://www.atlassian.com/git/tutorials/saving-changes/gitignore">.gitignore file</a>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> .gitattributes&gt;&gt;.gitignore
+</pre></div>
+</div>
+<p>The last step is to define the smudge and clean filters. The filters are
+commands (typically involving the
+<a class="reference external" href="https://www.gnu.org/software/sed/manual/sed.html">sed</a> program) given as
+local configuration directives:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git config --local filter.html_as_default_target.smudge <span class="s1">&#39;sed &quot;s/^# *\(.*html[ :].*\)$/\1/&quot;&#39;</span>
+git config --local filter.html_as_default_target.clean <span class="s1">&#39;sed &quot;s/^\(.*html[ :].*\)$/# \1/&quot;&#39;</span>
+</pre></div>
+</div>
+<p>The smudge filter uncomments the lines containing “html ” or “html:” and the
+clean filter comments out those lines. They’re visible in the
+<code class="code docutils literal notranslate"><span class="pre">.git/config</span></code> file.</p>
+</div>
+<div class="section" id="other-resources">
+<h2><a class="toc-backref" href="#id20">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://git-scm.com/docs">Git documentation</a></li>
+<li><a class="reference external" href="https://www.git-tower.com/blog/git-cheat-sheet">Git cheat sheet</a></li>
+<li><a class="reference external" href="https://nvie.com/posts/a-successful-git-branching-model">A Git branching model</a></li>
+<li><a class="reference external" href="https://dev.to/maxwell_dev/the-git-rebase-introduction-i-wish-id-had">The Git Rebase Introduction I Wish I’d Had</a></li>
+<li><code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> and <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code>: <a class="reference external" href="https://delicious-insights.com/en/posts/getting-solid-at-git-rebase-vs-merge">When to use?</a></li>
+<li><a class="reference external" href="https://jamescooke.info/git-to-squash-or-not-to-squash.html">Git: To squash or not to squash?</a></li>
+<li><a class="reference external" href="https://blog.github.com/2016-02-01-working-with-submodules">Git Submodules</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Git</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#minimal-post-install-configuration">Minimal post-install configuration</a></li>
+<li><a class="reference internal" href="#creating-aliases">Creating aliases</a></li>
+<li><a class="reference internal" href="#splitting-the-configuration-file">Splitting the configuration file</a></li>
+<li><a class="reference internal" href="#local-configuration">Local configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#working-with-a-separate-repository">Working with a separate repository</a></li>
+<li><a class="reference internal" href="#working-from-outside-the-working-directory">Working from outside the working directory</a></li>
+<li><a class="reference internal" href="#cloning-an-existing-repository">Cloning an existing repository</a></li>
+<li><a class="reference internal" href="#staging-changes">Staging changes</a></li>
+<li><a class="reference internal" href="#showing-changes">Showing changes</a></li>
+<li><a class="reference internal" href="#committing">Committing</a></li>
+<li><a class="reference internal" href="#viewing-the-commit-log">Viewing the commit log</a></li>
+<li><a class="reference internal" href="#working-with-remote-repositories">Working with remote repositories</a></li>
+<li><a class="reference internal" href="#working-with-branches">Working with branches</a></li>
+<li><a class="reference internal" href="#stashing-changes">Stashing changes</a></li>
+<li><a class="reference internal" href="#maintaining-a-difference-between-working-and-committed-trees">Maintaining a difference between working and committed trees</a></li>
+<li><a class="reference internal" href="#other-resources">Other resources</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Personal Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sphinx.html"
+                        title="next chapter">Sphinx</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="sphinx.html" title="Sphinx"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Personal Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Personal Notes</a> &#187;</li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        &#169; Copyright 2018, Thierry Rascle.<br />
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br />
+      
+      Static website generated using
+      <a href="http://sphinx-doc.org/">Sphinx</a>
+      1.7.9.<br />
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>
