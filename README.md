@@ -2,7 +2,7 @@
 
 ## General information
 
-This repository contains the files (mainly HTMl) of the "Personal Notes"
+This repository contains the files (mainly HTML) of the "Personal Notes"
 website at http://thierr26.github.io.
 
 Those files have been build by [Sphinx](http://www.sphinx-doc.org) from sources
