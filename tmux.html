@@ -9,11 +9,14 @@
     <title>tmux &#8212; Personal Notes</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -56,6 +59,9 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#listing-killing-tmux-sessions" id="id8">Listing / killing tmux sessions</a></li>
+<li><a class="reference internal" href="#detaching-client-attaching-session" id="id9">Detaching client / attaching session</a></li>
+<li><a class="reference internal" href="#managing-windows-and-panes" id="id10">Managing windows and panes</a></li>
+<li><a class="reference internal" href="#other-resources" id="id11">Other resources</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -78,23 +84,23 @@ unprivileged user):</p>
 git clone https://github.com/tmux-plugins/tmux-resurrect resurrect
 </pre></div>
 </div>
-<p>The default key bindings for tmux-resurrect are <code class="code docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">+</span> <span class="pre">Ctrl-s</span></code> (save
-session) and <code class="code docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">+</span> <span class="pre">Ctrl-r</span></code> (restore session).</p>
+<p>The default key bindings for tmux-resurrect are <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">Ctrl-s</span></code> (save
+session) and <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">Ctrl-r</span></code> (restore session).</p>
 </div>
 <div class="section" id="configuration">
 <h2><a class="toc-backref" href="#id3">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="my-tmux-conf">
 <span id="index-1"></span><h3><a class="toc-backref" href="#id4">My .tmux.conf</a><a class="headerlink" href="#my-tmux-conf" title="Permalink to this headline">¶</a></h3>
-<p>You can download <a class="reference download internal" href="_downloads/.tmux.conf" download=""><code class="xref download docutils literal notranslate"><span class="pre">my</span> <span class="pre">~/.tmux.conf</span></code></a>.</p>
+<p>You can download <a class="reference download internal" download="" href="_downloads/0fa059d0a49a6770f5324ed3b3078a03/.tmux.conf"><code class="xref download docutils literal notranslate"><span class="pre">my</span> <span class="pre">~/.tmux.conf</span></code></a>.</p>
 </div>
 <div class="section" id="disabling-control-flow">
 <h3><a class="toc-backref" href="#id5">Disabling control flow</a><a class="headerlink" href="#disabling-control-flow" title="Permalink to this headline">¶</a></h3>
 <p id="index-2">You should probably disable control flow by adding this line to your
-<code class="code docutils literal notranslate"><span class="pre">~/.bashrc</span></code>:</p>
+<code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>stty -ixon
 </pre></div>
 </div>
-<p>You can find more details about that in Tom Ryder’s <a class="reference external" href="https://sanctum.geek.nz/arabesque/terminal-annoyances">Terminal annoyances blog
+<p>You can find more details about that in Tom Ryder’s <a class="reference external" href="https://sanctum.geek.nz/arabesque/terminal-annoyances">“Terminal annoyances” blog
 post</a>.</p>
 </div>
 <div class="section" id="colors">
@@ -111,7 +117,7 @@ configuration (source: <a class="reference external" href="https://superuser.com
 <div class="section" id="vim-configuration">
 <h3><a class="toc-backref" href="#id7">Vim configuration</a><a class="headerlink" href="#vim-configuration" title="Permalink to this headline">¶</a></h3>
 <p>Enable the use of the mouse in terminal Vim by adding this line to your
-<code class="code docutils literal notranslate"><span class="pre">~/.vimrc</span></code>:</p>
+<code class="docutils literal notranslate"><span class="pre">~/.vimrc</span></code>:</p>
 <div class="highlight-vim notranslate"><div class="highlight"><pre><span></span><span class="k">set</span> <span class="nb">mouse</span><span class="p">=</span><span class="k">a</span>
 </pre></div>
 </div>
@@ -131,10 +137,41 @@ configuration (source: <a class="reference external" href="https://superuser.com
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tmux kill-session -a
 </pre></div>
 </div>
-<p>To kill a specific session, read session number from <code class="code docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">ls</span></code> and do:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tmux kill-session -t session_number
+<p>To kill a specific session, read session ID from <code class="docutils literal notranslate"><span class="pre">tmux</span> <span class="pre">ls</span></code> and do:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tmux kill-session -t &lt;session_id&gt;
 </pre></div>
 </div>
+</div>
+<div class="section" id="detaching-client-attaching-session">
+<h2><a class="toc-backref" href="#id9">Detaching client / attaching session</a><a class="headerlink" href="#detaching-client-attaching-session" title="Permalink to this headline">¶</a></h2>
+<p id="index-6">Detach the current client with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">d</span></code> or:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tmux detach
+</pre></div>
+</div>
+<p>Reattach with one off:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>tmux attach
+tmux a
+tmux attach -d -t &lt;session_id&gt; <span class="c1"># To attach to a specific session.</span>
+                               <span class="c1"># -d causes any other clients attached to the</span>
+                               <span class="c1"># session to be detached.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="managing-windows-and-panes">
+<h2><a class="toc-backref" href="#id10">Managing windows and panes</a><a class="headerlink" href="#managing-windows-and-panes" title="Permalink to this headline">¶</a></h2>
+<p id="index-7">Create a new window with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">c</span></code>.</p>
+<p>Rename the current window with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">,</span></code>.</p>
+<p>Close the current window with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">&amp;</span></code>.</p>
+<p>Split pane vertically with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">%</span></code>.</p>
+<p>Split pane horizontally with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">&quot;</span></code>.</p>
+<p>Resize pane with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">+</span> <span class="pre">left/down/up/right</span> <span class="pre">arrow</span></code>. See also <a class="reference external" href="https://michaelsoolee.com/resize-tmux-panes/">this article
+by Michael Lee</a>.</p>
+</div>
+<div class="section" id="other-resources">
+<h2><a class="toc-backref" href="#id11">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://tmuxcheatsheet.com/">tmux cheatsheet</a></li>
+</ul>
 </div>
 </div>
 
@@ -144,7 +181,7 @@ configuration (source: <a class="reference external" href="https://superuser.com
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
+  <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">tmux</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -157,6 +194,9 @@ configuration (source: <a class="reference external" href="https://superuser.com
 </ul>
 </li>
 <li><a class="reference internal" href="#listing-killing-tmux-sessions">Listing / killing tmux sessions</a></li>
+<li><a class="reference internal" href="#detaching-client-attaching-session">Detaching client / attaching session</a></li>
+<li><a class="reference internal" href="#managing-windows-and-panes">Managing windows and panes</a></li>
+<li><a class="reference internal" href="#other-resources">Other resources</a></li>
 </ul>
 </li>
 </ul>
@@ -199,14 +239,14 @@ configuration (source: <a class="reference external" href="https://superuser.com
       </ul>
     </div>
   <div class="footer" role="contentinfo">
-        &#169; Copyright 2018, Thierry Rascle.<br />
+        &#169; Copyright 2018-2019, Thierry Rascle.<br />
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
     Work licensed under a
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br />
       
       Static website generated using
       <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.7.9.<br />
+      1.8.4.<br />
     <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
   </div>
 

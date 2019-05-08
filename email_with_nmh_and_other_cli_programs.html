@@ -9,15 +9,18 @@
     <title>Email with nmh and other command-line programs &#8212; Personal Notes</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="About me and this website" href="about.html" />
+    <link rel="next" title="Wi-Fi" href="wifi.html" />
     <link rel="prev" title="tmux" href="tmux.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -27,7 +30,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="about.html" title="About me and this website"
+          <a href="wifi.html" title="Wi-Fi"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="tmux.html" title="tmux"
@@ -54,9 +57,15 @@
 <li><a class="reference internal" href="#nmh-user-installation" id="id8">nmh user installation</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#retrieving-mails" id="id9">Retrieving mails</a></li>
-<li><a class="reference internal" href="#sending-a-mail" id="id10">Sending a mail</a></li>
-<li><a class="reference internal" href="#other-resources" id="id11">Other resources</a></li>
+<li><a class="reference internal" href="#retrieving-mails" id="id9">Retrieving mails</a><ul>
+<li><a class="reference internal" href="#without-any-filtering" id="id10">Without any filtering</a></li>
+<li><a class="reference internal" href="#with-filtering-by-bogofilter" id="id11">With filtering by Bogofilter</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sending-a-mail" id="id12">Sending a mail</a></li>
+<li><a class="reference internal" href="#deleting-mails" id="id13">Deleting mails</a></li>
+<li><a class="reference internal" href="#training-bogofilter-anti-spam-filter" id="id14">Training Bogofilter (anti-spam filter)</a></li>
+<li><a class="reference internal" href="#other-resources" id="id15">Other resources</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -64,17 +73,20 @@
 <p id="index-0">I have a few email accounts that offer <a class="reference external" href="https://en.wikipedia.org/wiki/Post_Office_Protocol">POP3 access</a> and I send my emails via
 the <a class="reference external" href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">SMTP</a>
 server of my Internet service Provider.</p>
-<p>I’m a happy <a class="reference external" href="https://www.claws-mail.org">Claws Mail</a> user on my <a class="reference external" href="https://www.debian.org">Debian
-GNU/Linux</a> box, but I’m interested in being able to
-manage email via command-line programs. Claws Mail stores mails in the so
-called MH mailbox format. This mailbox format is the one of the <a class="reference external" href="https://en.wikipedia.org/wiki/MH_Message_Handling_System">MH Message
+<p>I’m a happy <a class="reference external" href="https://www.claws-mail.org">Claws Mail</a> (with the <a class="reference external" href="https://www.claws-mail.org/plugin.php?plugin=bogofilter">Bogofilter
+plugin</a>) user on my
+<a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> box, but I’m interested in being
+able to manage email via command-line programs. Claws Mail stores mails in the
+so called MH mailbox format. This mailbox format is the one of the <a class="reference external" href="https://en.wikipedia.org/wiki/MH_Message_Handling_System">MH Message
 Handling System</a>, a
 command-line based mail handling system.</p>
 <p><a class="reference external" href="http://www.nongnu.org/nmh">nmh</a> is the current implementation of the MH
 system (provided by package nmh on a Debian GNU/Linux system). It is <a class="reference external" href="http://lists.nongnu.org/archive/html/nmh-workers/2014-02/msg00049.html">possible
 to use both Claws Mail and nmh</a>.</p>
 <p>This page gives the various actions I had to take to be able to receive and
-send emails using the nmh command-line programs.</p>
+send emails using the nmh command-line programs. Filtering the incoming
+messages with <a class="reference external" href="http://bogofilter.sourceforge.net/">Bogofilter</a> (anti-spam
+filter) is also covered.</p>
 </div>
 <div class="section" id="installation">
 <h2><a class="toc-backref" href="#id4">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
@@ -83,14 +95,14 @@ nmh (<strong>as root</strong>) with:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apt-get install fetchmail nmh mh-book <span class="c1"># As root.</span>
 </pre></div>
 </div>
-<p>The nmh programs are installed in <code class="code docutils literal notranslate"><span class="pre">/usr/bin/mh</span></code>. This directory is not in
-the search path by default. You can add it to the search path by adding this
-line to your <code class="code docutils literal notranslate"><span class="pre">~/.profile</span></code> file:</p>
+<p>The nmh programs are installed in <code class="docutils literal notranslate"><span class="pre">/usr/bin/mh</span></code>. This directory is not in the
+search path by default. You can add it to the search path by adding this line
+to your <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code> file:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PATH</span><span class="s2">:/usr/bin/mh&quot;</span>
 </pre></div>
 </div>
 <p>This makes it possible to invoke the nmh programs by their base name (e.g.
-<code class="code docutils literal notranslate"><span class="pre">inc</span></code>) instead of their full path (e.g. <code class="code docutils literal notranslate"><span class="pre">/usr/bin/mh/inc</span></code>).</p>
+<code class="docutils literal notranslate"><span class="pre">inc</span></code>) instead of their full path (e.g. <code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/inc</span></code>).</p>
 <p>If exim4 is not already installed, install it (<strong>as root</strong>) with:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apt-get install exim4 <span class="c1"># As root.</span>
 </pre></div>
@@ -136,16 +148,16 @@ Test
 .
 </pre></div>
 </div>
-<p><code class="code docutils literal notranslate"><span class="pre">/usr/sbin/sendmail</span></code> is a symbolic link to exim4 executable.</p>
+<p><code class="docutils literal notranslate"><span class="pre">/usr/sbin/sendmail</span></code> is a symbolic link to exim4 executable.</p>
 </div>
 <div class="section" id="fetchmail">
 <h3><a class="toc-backref" href="#id7">fetchmail</a><a class="headerlink" href="#fetchmail" title="Permalink to this headline">¶</a></h3>
-<p id="index-3">Create a <code class="code docutils literal notranslate"><span class="pre">~/.fetchmailrc</span></code> file and change its permission so that only the
+<p id="index-3">Create a <code class="docutils literal notranslate"><span class="pre">~/.fetchmailrc</span></code> file and change its permission so that only the
 user can read and write it:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>chmod <span class="m">600</span> ~/.fetchmailrc
 </pre></div>
 </div>
-<p>You can <a class="reference download internal" href="_downloads/.fetchmailrc" download=""><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">an</span> <span class="pre">example</span> <span class="pre">.fetchmailrc</span> <span class="pre">file</span> <span class="pre">with</span> <span class="pre">two</span> <span class="pre">POP3</span>
+<p>You can <a class="reference download internal" download="" href="_downloads/ead1d06d75e88a57afb097d5a78970de/.fetchmailrc"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">an</span> <span class="pre">example</span> <span class="pre">.fetchmailrc</span> <span class="pre">file</span> <span class="pre">with</span> <span class="pre">two</span> <span class="pre">POP3</span>
 <span class="pre">connections</span> <span class="pre">defined</span></code></a>.</p>
 </div>
 <div class="section" id="nmh-user-installation">
@@ -154,72 +166,140 @@ user can read and write it:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>install-mh
 </pre></div>
 </div>
-<p>Here’s the quote of my <code class="code docutils literal notranslate"><span class="pre">install-mh</span></code> session:</p>
-<blockquote>
-<div><p>Do you want help? yes</p>
-<p>Prior to using nmh, it is necessary to have a file in your login
-directory (/home/my_user_name) named .mh_profile which contains information
-to direct certain nmh operations.  The only item which is required
-is the path to use for all nmh folder operations.  The suggested nmh
-path for you is /home/my_user_name/Mail…</p>
-<p>You already have the standard nmh directory “/home/my_user_name/Mail”.
-Do you want to use it for nmh? yes
-[Using existing directory]</p>
-<p>Please see the nmh(7) man page for an introduction to nmh.</p>
-<p>Send bug reports, questions, suggestions, and patches to
-<a class="reference external" href="mailto:nmh-workers&#37;&#52;&#48;nongnu&#46;org">nmh-workers<span>&#64;</span>nongnu<span>&#46;</span>org</a>.  That mailing list is relatively quiet, so user
-questions are encouraged.  Users are also encouraged to subscribe, and
-view the archives, at <code class="docutils literal notranslate"><span class="pre">http://lists.gnu.org/mailman/listinfo/nmh-workers</span></code></p>
-<p>If problems are encountered with an nmh program, they should be
-reported to the local maintainers of nmh, if any, or to the mailing
-list noted above.  When doing this, the name of the program should be
-reported, along with the version information for the program.</p>
-<p>To find out what version of an nmh program is being run, invoke the
-program with the -version switch.  This prints the version of nmh, the
-host it was compiled on, and the date the program was linked.</p>
-<p>New releases and other information of potential interest are announced
-at <a class="reference external" href="http://www.nongnu.org/nmh/">http://www.nongnu.org/nmh/</a> .</p>
-</div></blockquote>
+<p>Here’s the quote of my <code class="docutils literal notranslate"><span class="pre">install-mh</span></code> session:</p>
+<div class="line-block">
+<div class="line">Do you want help? yes</div>
+<div class="line"><br /></div>
+<div class="line">Prior to using nmh, it is necessary to have a file in your login</div>
+<div class="line">directory (/home/my_user_name) named .mh_profile which contains information</div>
+<div class="line">to direct certain nmh operations.  The only item which is required</div>
+<div class="line">is the path to use for all nmh folder operations.  The suggested nmh</div>
+<div class="line">path for you is /home/my_user_name/Mail…</div>
+<div class="line"><br /></div>
+<div class="line">You already have the standard nmh directory “/home/my_user_name/Mail”.</div>
+<div class="line">Do you want to use it for nmh? yes</div>
+<div class="line">[Using existing directory]</div>
+<div class="line"><br /></div>
+<div class="line">Please see the nmh(7) man page for an introduction to nmh.</div>
+<div class="line"><br /></div>
+<div class="line">Send bug reports, questions, suggestions, and patches to</div>
+<div class="line"><a class="reference external" href="mailto:nmh-workers&#37;&#52;&#48;nongnu&#46;org">nmh-workers<span>&#64;</span>nongnu<span>&#46;</span>org</a>.  That mailing list is relatively quiet, so user</div>
+<div class="line">questions are encouraged.  Users are also encouraged to subscribe, and</div>
+<div class="line">view the archives, at <code class="docutils literal notranslate"><span class="pre">http://lists.gnu.org/mailman/listinfo/nmh-workers</span></code></div>
+<div class="line"><br /></div>
+<div class="line">If problems are encountered with an nmh program, they should be</div>
+<div class="line">reported to the local maintainers of nmh, if any, or to the mailing</div>
+<div class="line">list noted above.  When doing this, the name of the program should be</div>
+<div class="line">reported, along with the version information for the program.</div>
+<div class="line"><br /></div>
+<div class="line">To find out what version of an nmh program is being run, invoke the</div>
+<div class="line">program with the -version switch.  This prints the version of nmh, the</div>
+<div class="line">host it was compiled on, and the date the program was linked.</div>
+<div class="line"><br /></div>
+<div class="line">New releases and other information of potential interest are announced</div>
+<div class="line">at <a class="reference external" href="http://www.nongnu.org/nmh/">http://www.nongnu.org/nmh/</a> .</div>
+</div>
 </div>
 </div>
 <div class="section" id="retrieving-mails">
 <h2><a class="toc-backref" href="#id9">Retrieving mails</a><a class="headerlink" href="#retrieving-mails" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="without-any-filtering">
+<h3><a class="toc-backref" href="#id10">Without any filtering</a><a class="headerlink" href="#without-any-filtering" title="Permalink to this headline">¶</a></h3>
 <p id="index-5">Run the two following commands to retrieve mails:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fetchmail       <span class="c1"># Retrieves new mails.</span>
 /usr/bin/mh/inc <span class="c1"># Incorporates retrieved mails to the inbox folder of the nmh</span>
                 <span class="c1"># directory.</span>
 </pre></div>
 </div>
+<p>If the <code class="docutils literal notranslate"><span class="pre">fetchmail</span></code> command fails with a “upgrade to TLS failed” error message
+as described in <a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=921450#32">one of messages of Debian bug #921450</a>, use the
+<code class="docutils literal notranslate"><span class="pre">--sslproto=&quot;&quot;</span></code> option:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fetchmail --sslproto<span class="o">=</span><span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="with-filtering-by-bogofilter">
+<h3><a class="toc-backref" href="#id11">With filtering by Bogofilter</a><a class="headerlink" href="#with-filtering-by-bogofilter" title="Permalink to this headline">¶</a></h3>
+<p id="index-6">Make sure procmail and bogofilter are installed:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apt-get install procmail bogofilter <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>Create a <code class="docutils literal notranslate"><span class="pre">~/.procmailrc</span></code> like <a class="reference download internal" download="" href="_downloads/0ca0af769e79fc5c08621ec9aba2657a/.procmailrc"><code class="xref download docutils literal notranslate"><span class="pre">this</span> <span class="pre">example</span> <span class="pre">.procmailrc</span> <span class="pre">file</span></code></a> and when invoking fetchmail, use the <code class="docutils literal notranslate"><span class="pre">--mda</span></code>
+option:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>fetchmail --mda <span class="s2">&quot;procmail -f %F&quot;</span>
+</pre></div>
+</div>
+<p>This results in the messages classified as spam being moved automatically to
+the “Spam” subdirectory of your nmh directory, and messages classified as
+unsure to the “Unsure spam” subdirectory.</p>
+<p>Note the “slash dot” after the subdirectory names in the <code class="docutils literal notranslate"><span class="pre">~/.procmailrc</span></code>
+file. That’s how procmail knows that we’re talking MH subdirectories. See here:
+<a class="reference external" href="https://unix.stackexchange.com/a/336422">https://unix.stackexchange.com/a/336422</a></p>
+<p>And also, don’t forget to <a class="reference internal" href="#training-bogofilter"><span class="std std-ref">train Bogofilter</span></a>!</p>
+</div>
 </div>
 <div class="section" id="sending-a-mail">
-<h2><a class="toc-backref" href="#id10">Sending a mail</a><a class="headerlink" href="#sending-a-mail" title="Permalink to this headline">¶</a></h2>
-<p>Use <code class="code docutils literal notranslate"><span class="pre">/usr/bin/mh/comp</span></code>. This program opens the text editor (on my <a class="reference external" href="https://www.debian.org">Debian
+<h2><a class="toc-backref" href="#id12">Sending a mail</a><a class="headerlink" href="#sending-a-mail" title="Permalink to this headline">¶</a></h2>
+<p>Use <code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/comp</span></code>. This program opens the text editor (on my <a class="reference external" href="https://www.debian.org">Debian
 GNU/Linux</a> system at least, on other system it may
-just launch <code class="code docutils literal notranslate"><span class="pre">/usr/bin/mh/prompter</span></code>) so that you can edit the message
-draft. Save and quit when you are done. You’ll then get a prompt. Just hit
-“Enter” to see the list of available commands. One of these commands is “send”.</p>
-<p>By default, <code class="code docutils literal notranslate"><span class="pre">/etc/nmh/components</span></code> is used as message template. If your
-nmh directory is <code class="code docutils literal notranslate"><span class="pre">/home/my_user_name/Mail</span></code>, you can put a custom
-<code class="code docutils literal notranslate"><span class="pre">components</span></code> file there. It will be used automatically by
-<code class="code docutils literal notranslate"><span class="pre">/usr/bin/mh/comp</span></code>. You can <a class="reference download internal" href="_downloads/components" download=""><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">an</span> <span class="pre">example</span> <span class="pre">components</span>
-<span class="pre">file</span> <span class="pre">with</span> <span class="pre">sender's</span> <span class="pre">name,</span> <span class="pre">address</span> <span class="pre">and</span> <span class="pre">signature</span></code></a>.</p>
-<p>To force <code class="code docutils literal notranslate"><span class="pre">/usr/bin/mh/comp</span></code> to use a specific message template, use the
-<code class="code docutils literal notranslate"><span class="pre">-form</span></code> switch:</p>
+just launch <code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/prompter</span></code>) so that you can edit the message draft.
+Save and quit when you are done. You’ll then get a prompt. Just hit “Enter” to
+see the list of available commands. One of these commands is “send”.</p>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">/etc/nmh/components</span></code> is used as message template. If your nmh
+directory is <code class="docutils literal notranslate"><span class="pre">/home/my_user_name/Mail</span></code>, you can put a custom <code class="docutils literal notranslate"><span class="pre">components</span></code>
+file there. It will be used automatically by <code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/comp</span></code>. You can
+<a class="reference download internal" download="" href="_downloads/0c0c573d08499da2c3f8bbd93b9f3881/components"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">an</span> <span class="pre">example</span> <span class="pre">components</span> <span class="pre">file</span> <span class="pre">with</span> <span class="pre">sender's</span> <span class="pre">name,</span> <span class="pre">address</span> <span class="pre">and</span>
+<span class="pre">signature</span></code></a>.</p>
+<p>To force <code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/comp</span></code> to use a specific message template, use the
+<code class="docutils literal notranslate"><span class="pre">-form</span></code> switch:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>/usr/bin/mh/comp -form path/to/components/file
 </pre></div>
 </div>
 <p>To send a message that has already been prepared and saved in a file, use
-<code class="code docutils literal notranslate"><span class="pre">/usr/bin/mh/send</span></code>:</p>
+<code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/send</span></code>:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>/usr/bin/mh/send path/to/message/file
 </pre></div>
 </div>
-<p>nmh also offers other programs to send mails: <code class="code docutils literal notranslate"><span class="pre">repl</span></code> (to reply to a
-message) and <code class="code docutils literal notranslate"><span class="pre">forw</span></code> (to forward a message) for example. They don’t use
-the same message templates as <code class="code docutils literal notranslate"><span class="pre">comp</span></code>. <code class="code docutils literal notranslate"><span class="pre">repl</span></code> uses
-<code class="code docutils literal notranslate"><span class="pre">/etc/nmh/replcomps</span></code> and <code class="code docutils literal notranslate"><span class="pre">forw</span></code> uses <code class="code docutils literal notranslate"><span class="pre">/etc/nmh/forwcomps</span></code>.</p>
+<p>nmh also offers other programs to send mails: <code class="docutils literal notranslate"><span class="pre">repl</span></code> (to reply to a message)
+and <code class="docutils literal notranslate"><span class="pre">forw</span></code> (to forward a message) for example. They don’t use the same
+message templates as <code class="docutils literal notranslate"><span class="pre">comp</span></code>. <code class="docutils literal notranslate"><span class="pre">repl</span></code> uses <code class="docutils literal notranslate"><span class="pre">/etc/nmh/replcomps</span></code> and
+<code class="docutils literal notranslate"><span class="pre">forw</span></code> uses <code class="docutils literal notranslate"><span class="pre">/etc/nmh/forwcomps</span></code>.</p>
+</div>
+<div class="section" id="deleting-mails">
+<h2><a class="toc-backref" href="#id13">Deleting mails</a><a class="headerlink" href="#deleting-mails" title="Permalink to this headline">¶</a></h2>
+<p id="index-8">You can delete the mail with number 421 in the “Sent” folder with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rmm +Sent <span class="m">421</span>
+</pre></div>
+</div>
+<p>This does not really delete the mail, but renames it to “,421”. You may want to
+periodically erase your deleted mails with a command like:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>find /home/my_user_name/Mail -name ,* -exec rm -f <span class="o">{}</span> <span class="se">\;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="training-bogofilter-anti-spam-filter">
+<span id="training-bogofilter"></span><h2><a class="toc-backref" href="#id14">Training Bogofilter (anti-spam filter)</a><a class="headerlink" href="#training-bogofilter-anti-spam-filter" title="Permalink to this headline">¶</a></h2>
+<p id="index-9">Assuming that your current working directory is your standard nmh directory and
+your spam messages are in the “Spam” subfolder, you can (re)train Bogofilter
+with the three following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rm -f ~/.bogofilter/wordlist.db <span class="c1"># Don&#39;t do this if you don&#39;t want to entirely</span>
+                                <span class="c1"># reset the training.</span>
+cat Spam/* <span class="p">|</span> bogofilter -s
+find . -mindepth <span class="m">1</span> -type f -not -path <span class="s2">&quot;./Spam/*&quot;</span> -exec cat <span class="o">{}</span> <span class="se">\;</span> <span class="se">\</span>
+    <span class="p">|</span> bogofilter -n
+</pre></div>
+</div>
+<p>You can check in which category (spam (S), ham (H), unsure (U)) Bogofilter
+classifies a message with commands like:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>cat Spam/1 <span class="p">|</span> bogofilter -t
+</pre></div>
+</div>
+<p>Such commands output one line. The first character of the line is S, H or U.</p>
+<p>Follow the <a class="reference external" href="http://bogofilter.sourceforge.net/">link for interesting details about how Bogofilter works (in
+French)</a>.</p>
 </div>
 <div class="section" id="other-resources">
-<h2><a class="toc-backref" href="#id11">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id15">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><a class="reference external" href="http://www.nongnu.org/nmh">nmh home page</a></li>
 <li><a class="reference external" href="https://rand-mh.sourceforge.io/book/">MH &amp; nmh (book by Jerry Peek)</a></li>
@@ -234,7 +314,7 @@ the same message templates as <code class="code docutils literal notranslate"><s
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
+  <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Email with nmh and other command-line programs</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -245,8 +325,14 @@ the same message templates as <code class="code docutils literal notranslate"><s
 <li><a class="reference internal" href="#nmh-user-installation">nmh user installation</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#retrieving-mails">Retrieving mails</a></li>
+<li><a class="reference internal" href="#retrieving-mails">Retrieving mails</a><ul>
+<li><a class="reference internal" href="#without-any-filtering">Without any filtering</a></li>
+<li><a class="reference internal" href="#with-filtering-by-bogofilter">With filtering by Bogofilter</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#sending-a-mail">Sending a mail</a></li>
+<li><a class="reference internal" href="#deleting-mails">Deleting mails</a></li>
+<li><a class="reference internal" href="#training-bogofilter-anti-spam-filter">Training Bogofilter (anti-spam filter)</a></li>
 <li><a class="reference internal" href="#other-resources">Other resources</a></li>
 </ul>
 </li>
@@ -256,8 +342,8 @@ the same message templates as <code class="code docutils literal notranslate"><s
   <p class="topless"><a href="tmux.html"
                         title="previous chapter">tmux</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="about.html"
-                        title="next chapter">About me and this website</a></p>
+  <p class="topless"><a href="wifi.html"
+                        title="next chapter">Wi-Fi</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -281,7 +367,7 @@ the same message templates as <code class="code docutils literal notranslate"><s
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="about.html" title="About me and this website"
+          <a href="wifi.html" title="Wi-Fi"
              >next</a> |</li>
         <li class="right" >
           <a href="tmux.html" title="tmux"
@@ -290,14 +376,14 @@ the same message templates as <code class="code docutils literal notranslate"><s
       </ul>
     </div>
   <div class="footer" role="contentinfo">
-        &#169; Copyright 2018, Thierry Rascle.<br />
+        &#169; Copyright 2018-2019, Thierry Rascle.<br />
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
     Work licensed under a
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br />
       
       Static website generated using
       <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.7.9.<br />
+      1.8.4.<br />
     <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
   </div>
 

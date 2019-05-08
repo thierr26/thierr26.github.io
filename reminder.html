@@ -9,11 +9,14 @@
     <title>Reminder &#8212; Personal Notes</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -61,8 +64,8 @@ periodically by <a class="reference external" href="https://en.wikipedia.org/wik
 </div>
 <div class="section" id="graphical-popup-using-xmessage">
 <h2><a class="toc-backref" href="#id2">Graphical popup (using xmessage)</a><a class="headerlink" href="#graphical-popup-using-xmessage" title="Permalink to this headline">¶</a></h2>
-<p id="index-0">The <code class="code docutils literal notranslate"><span class="pre">xmessage</span></code> command (provided by package x11-utils on a Debian
-GNU/Linux system) causes a popup message box to appear:</p>
+<p id="index-0">The <code class="docutils literal notranslate"><span class="pre">xmessage</span></code> command (provided by package x11-utils on a Debian GNU/Linux
+system) causes a popup message box to appear:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>xmessage <span class="s1">&#39;My message&#39;</span>
 
 xmessage -display :0.0 <span class="s1">&#39;My message&#39;</span>            <span class="c1"># A cron job launching</span>
@@ -81,7 +84,7 @@ options</a>.</p>
 </div>
 <div class="section" id="broadcasted-messsage-using-wall">
 <h2><a class="toc-backref" href="#id3">Broadcasted messsage (using wall)</a><a class="headerlink" href="#broadcasted-messsage-using-wall" title="Permalink to this headline">¶</a></h2>
-<p id="index-1">The <code class="code docutils literal notranslate"><span class="pre">wall</span></code> command (provided by package bsdutils on a Debian GNU/Linux
+<p id="index-1">The <code class="docutils literal notranslate"><span class="pre">wall</span></code> command (provided by package bsdutils on a Debian GNU/Linux
 system) causes a message to be broadcasted to every terminal:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>wall <span class="s1">&#39;My message&#39;</span>
 </pre></div>
@@ -97,7 +100,7 @@ system) causes a message to be broadcasted to every terminal:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>crontab -l
 </pre></div>
 </div>
-<p>An <a class="reference download internal" href="_downloads/crontab_l" download=""><code class="xref download docutils literal notranslate"><span class="pre">example</span> <span class="pre">output</span> <span class="pre">of</span> <span class="pre">&quot;crontab</span> <span class="pre">-l&quot;</span> <span class="pre">(with</span> <span class="pre">a</span> <span class="pre">xmessage</span> <span class="pre">job)</span></code></a> is downloadable.</p>
+<p>An <a class="reference download internal" download="" href="_downloads/7f8aa948078427dab42c240902379b85/crontab_l"><code class="xref download docutils literal notranslate"><span class="pre">example</span> <span class="pre">output</span> <span class="pre">of</span> <span class="pre">&quot;crontab</span> <span class="pre">-l&quot;</span> <span class="pre">(with</span> <span class="pre">a</span> <span class="pre">xmessage</span> <span class="pre">job)</span></code></a> is downloadable.</p>
 </div>
 </div>
 
@@ -107,7 +110,7 @@ system) causes a message to be broadcasted to every terminal:</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
+  <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Reminder</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -156,14 +159,14 @@ system) causes a message to be broadcasted to every terminal:</p>
       </ul>
     </div>
   <div class="footer" role="contentinfo">
-        &#169; Copyright 2018, Thierry Rascle.<br />
+        &#169; Copyright 2018-2019, Thierry Rascle.<br />
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
     Work licensed under a
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br />
       
       Static website generated using
       <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.7.9.<br />
+      1.8.4.<br />
     <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
   </div>
 

@@ -9,11 +9,14 @@
     <title>Sphinx &#8212; Personal Notes</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -74,100 +77,113 @@ root</strong>) with:</p>
 <div class="section" id="starting-a-project">
 <h2><a class="toc-backref" href="#id4">Starting a project</a><a class="headerlink" href="#starting-a-project" title="Permalink to this headline">¶</a></h2>
 <p id="index-1">To create a new Sphinx project, create a directory, move to that directory and
-run <code class="code docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code>:</p>
+run <code class="docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code>:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir my_sphinx_project
 <span class="nb">cd</span> my_sphinx_project
 sphinx-quickstart
 </pre></div>
 </div>
-<p><code class="code docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code> is an interactive command. Here’s the quote of the
-<code class="code docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code> session run to start this “Personal Notes” project
+<p><code class="docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code> is an interactive command. Here’s the quote of the
+<code class="docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code> session run to start this “Personal Notes” project
 you are currently reading:</p>
-<blockquote>
-<div><p>Welcome to the Sphinx 1.7.9 quickstart utility.</p>
-<p>Please enter values for the following settings (just press Enter to
-accept a default value, if one is given in brackets).</p>
-<p>Selected root path: .</p>
-<p>You have two options for placing the build directory for Sphinx output.
-Either, you use a directory “_build” within the root path, or you separate
-“source” and “build” directories within the root path.
-&gt; Separate source and build directories (y/n) [n]: y</p>
-<p>Inside the root directory, two more directories will be created; “_templates”
-for custom HTML templates and “_static” for custom stylesheets and other static
-files. You can enter another prefix (such as “.”) to replace the underscore.
-&gt; Name prefix for templates and static dir [_]:</p>
-<p>The project name will occur in several places in the built documentation.
-&gt; Project name: Personal Notes
-&gt; Author name(s): My Name
-&gt; Project release []:</p>
-<p>If the documents are to be written in a language other than English,
-you can select a language here by its language code. Sphinx will then
-translate text that it generates into that language.</p>
-<p>For a list of supported codes, see
-<a class="reference external" href="http://sphinx-doc.org/config.html#confval-language">http://sphinx-doc.org/config.html#confval-language</a>.
-&gt; Project language [en]:</p>
-<p>The file name suffix for source files. Commonly, this is either “.txt”
-or “.rst”.  Only files with this suffix are considered documents.
-&gt; Source file suffix [.rst]:</p>
-<p>One document is special in that it is considered the top node of the
-“contents tree”, that is, it is the root of the hierarchical structure
-of the documents. Normally, this is “index”, but if your “index”
-document is a custom template, you can also set this to another filename.
-&gt; Name of your master document (without suffix) [index]:</p>
-<p>Sphinx can also add configuration for epub output:
-&gt; Do you want to use the epub builder (y/n) [n]:
-Indicate which of the following Sphinx extensions should be enabled:
-&gt; autodoc: automatically insert docstrings from modules (y/n) [n]:
-&gt; doctest: automatically test code snippets in doctest blocks (y/n) [n]:
-&gt; intersphinx: link between Sphinx documentation of different projects (y/n) [n]:
-&gt; todo: write “todo” entries that can be shown or hidden on build (y/n) [n]:
-&gt; coverage: checks for documentation coverage (y/n) [n]:
-&gt; imgmath: include math, rendered as PNG or SVG images (y/n) [n]:
-&gt; mathjax: include math, rendered in the browser by MathJax (y/n) [n]:
-&gt; ifconfig: conditional inclusion of content based on config values (y/n) [n]:
-&gt; viewcode: include links to the source code of documented Python objects (y/n) [n]:
-&gt; githubpages: create .nojekyll file to publish the document on GitHub pages (y/n) [n]: y</p>
-<p>A Makefile and a Windows command file can be generated for you so that you
-only have to run e.g. ‘make html’ instead of invoking sphinx-build
-directly.
-&gt; Create Makefile? (y/n) [y]:
-&gt; Create Windows command file? (y/n) [y]: n</p>
-<p>Creating file ./source/conf.py.
-Creating file ./source/index.rst.
-Creating file ./Makefile.</p>
-<p>Finished: An initial directory structure has been created.</p>
-<p>You should now populate your master file ./source/index.rst and create other documentation
-source files. Use the Makefile to build the docs, like so:</p>
-<blockquote>
-<div>make builder</div></blockquote>
-<p>where “builder” is one of the supported builders, e.g. html, latex or linkcheck.</p>
-</div></blockquote>
+<div class="line-block">
+<div class="line">Welcome to the Sphinx 1.7.9 quickstart utility.</div>
+<div class="line"><br /></div>
+<div class="line">Please enter values for the following settings (just press Enter to</div>
+<div class="line">accept a default value, if one is given in brackets).</div>
+<div class="line"><br /></div>
+<div class="line">Selected root path: .</div>
+<div class="line"><br /></div>
+<div class="line">You have two options for placing the build directory for Sphinx output.</div>
+<div class="line">Either, you use a directory “_build” within the root path, or you separate</div>
+<div class="line">“source” and “build” directories within the root path.</div>
+<div class="line">&gt; Separate source and build directories (y/n) [n]: y</div>
+<div class="line"><br /></div>
+<div class="line">Inside the root directory, two more directories will be created; “_templates”</div>
+<div class="line">for custom HTML templates and “_static” for custom stylesheets and other static</div>
+<div class="line">files. You can enter another prefix (such as “.”) to replace the underscore.</div>
+<div class="line">&gt; Name prefix for templates and static dir [_]:</div>
+<div class="line"><br /></div>
+<div class="line">The project name will occur in several places in the built documentation.</div>
+<div class="line">&gt; Project name: Personal Notes</div>
+<div class="line">&gt; Author name(s): My Name</div>
+<div class="line">&gt; Project release []:</div>
+<div class="line"><br /></div>
+<div class="line">If the documents are to be written in a language other than English,</div>
+<div class="line">you can select a language here by its language code. Sphinx will then</div>
+<div class="line">translate text that it generates into that language.</div>
+<div class="line"><br /></div>
+<div class="line">For a list of supported codes, see</div>
+<div class="line"><a class="reference external" href="http://sphinx-doc.org/config.html#confval-language">http://sphinx-doc.org/config.html#confval-language</a>.</div>
+<div class="line">&gt; Project language [en]:</div>
+<div class="line"><br /></div>
+<div class="line">The file name suffix for source files. Commonly, this is either “.txt”</div>
+<div class="line">or “.rst”.  Only files with this suffix are considered documents.</div>
+<div class="line">&gt; Source file suffix [.rst]:</div>
+<div class="line"><br /></div>
+<div class="line">One document is special in that it is considered the top node of the</div>
+<div class="line">“contents tree”, that is, it is the root of the hierarchical structure</div>
+<div class="line">of the documents. Normally, this is “index”, but if your “index”</div>
+<div class="line">document is a custom template, you can also set this to another filename.</div>
+<div class="line">&gt; Name of your master document (without suffix) [index]:</div>
+<div class="line"><br /></div>
+<div class="line">Sphinx can also add configuration for epub output:</div>
+<div class="line">&gt; Do you want to use the epub builder (y/n) [n]:</div>
+<div class="line">Indicate which of the following Sphinx extensions should be enabled:</div>
+<div class="line">&gt; autodoc: automatically insert docstrings from modules (y/n) [n]:</div>
+<div class="line">&gt; doctest: automatically test code snippets in doctest blocks (y/n) [n]:</div>
+<div class="line">&gt; intersphinx: link between Sphinx documentation of different projects (y/n) [n]:</div>
+<div class="line">&gt; todo: write “todo” entries that can be shown or hidden on build (y/n) [n]:</div>
+<div class="line">&gt; coverage: checks for documentation coverage (y/n) [n]:</div>
+<div class="line">&gt; imgmath: include math, rendered as PNG or SVG images (y/n) [n]:</div>
+<div class="line">&gt; mathjax: include math, rendered in the browser by MathJax (y/n) [n]:</div>
+<div class="line">&gt; ifconfig: conditional inclusion of content based on config values (y/n) [n]:</div>
+<div class="line">&gt; viewcode: include links to the source code of documented Python objects (y/n) [n]:</div>
+<div class="line">&gt; githubpages: create .nojekyll file to publish the document on GitHub pages (y/n) [n]: y</div>
+<div class="line"><br /></div>
+<div class="line">A Makefile and a Windows command file can be generated for you so that you</div>
+<div class="line">only have to run e.g. ‘make html’ instead of invoking sphinx-build</div>
+<div class="line">directly.</div>
+<div class="line">&gt; Create Makefile? (y/n) [y]:</div>
+<div class="line">&gt; Create Windows command file? (y/n) [y]: n</div>
+<div class="line"><br /></div>
+<div class="line">Creating file ./source/conf.py.</div>
+<div class="line">Creating file ./source/index.rst.</div>
+<div class="line">Creating file ./Makefile.</div>
+<div class="line"><br /></div>
+<div class="line">Finished: An initial directory structure has been created.</div>
+<div class="line"><br /></div>
+<div class="line">You should now populate your master file ./source/index.rst and create other documentation</div>
+<div class="line">source files. Use the Makefile to build the docs, like so:</div>
+<div class="line-block">
+<div class="line">make builder</div>
+</div>
+<div class="line">where “builder” is one of the supported builders, e.g. html, latex or linkcheck.</div>
+</div>
 </div>
 <div class="section" id="generating-html-output">
 <h2><a class="toc-backref" href="#id5">Generating HTML output</a><a class="headerlink" href="#generating-html-output" title="Permalink to this headline">¶</a></h2>
-<p id="index-2">Assuming <code class="code docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code> has created a Makefile,  you can build the
-HTML output with:</p>
+<p id="index-2">Assuming <code class="docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code> has created a Makefile,  you can build the HTML
+output with:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make html
 </pre></div>
 </div>
-<p>This will write the output in the <code class="code docutils literal notranslate"><span class="pre">build/html</span></code> subdirectory.</p>
-<p>If you want the <code class="code docutils literal notranslate"><span class="pre">build/html</span></code> subdirectory to be cleaned up before writing
-the output, do:</p>
+<p>This will write the output in the <code class="docutils literal notranslate"><span class="pre">build/html</span></code> subdirectory.</p>
+<p>If you want the <code class="docutils literal notranslate"><span class="pre">build/html</span></code> subdirectory to be cleaned up before writing the
+output, do:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make clean html
 </pre></div>
 </div>
-<p>If you also want to find the broken links in your project, add
-<code class="code docutils literal notranslate"><span class="pre">linkcheck</span></code>:</p>
+<p>If you also want to find the broken links in your project, add <code class="docutils literal notranslate"><span class="pre">linkcheck</span></code>:</p>
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make clean html linkcheck
 </pre></div>
 </div>
 </div>
 <div class="section" id="having-make-produce-html-output-by-default">
 <h2><a class="toc-backref" href="#id6">Having make produce HTML output by default</a><a class="headerlink" href="#having-make-produce-html-output-by-default" title="Permalink to this headline">¶</a></h2>
-<p id="index-3">The <code class="code docutils literal notranslate"><span class="pre">make</span></code> (without argument) command outputs a help message.
-Substituting the Makefile created by <code class="code docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code> with
-<a class="reference download internal" href="_downloads/Makefile" download=""><code class="xref download docutils literal notranslate"><span class="pre">this</span> <span class="pre">one</span></code></a>
-causes <code class="code docutils literal notranslate"><span class="pre">make</span></code> (without argument) to produce the HTML output.</p>
+<p id="index-3">The <code class="docutils literal notranslate"><span class="pre">make</span></code> (without argument) command outputs a help message. Substituting
+the Makefile created by <code class="docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code> with <a class="reference download internal" download="" href="_downloads/cf1fe8bd3d7996b1300f89978ac3d631/Makefile"><code class="xref download docutils literal notranslate"><span class="pre">this</span> <span class="pre">one</span></code></a> causes <code class="docutils literal notranslate"><span class="pre">make</span></code>
+(without argument) to produce the HTML output.</p>
 <p>If you use Git and don’t want this Makefile change to be committed, see
 <a class="reference internal" href="git.html#git-maintain-work-commit-diff"><span class="std std-ref">Maintaining a difference between working and committed trees</span></a>.</p>
 </div>
@@ -185,7 +201,7 @@ causes <code class="code docutils literal notranslate"><span class="pre">make</s
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
+  <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Sphinx</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -236,14 +252,14 @@ causes <code class="code docutils literal notranslate"><span class="pre">make</s
       </ul>
     </div>
   <div class="footer" role="contentinfo">
-        &#169; Copyright 2018, Thierry Rascle.<br />
+        &#169; Copyright 2018-2019, Thierry Rascle.<br />
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
     Work licensed under a
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br />
       
       Static website generated using
       <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.7.9.<br />
+      1.8.4.<br />
     <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
   </div>
 
