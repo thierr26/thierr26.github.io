@@ -1,39 +1,38 @@
-
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-    <meta charset="utf-8" />
-    <title>Reminder &#8212; Personal Notes</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <title>Reminder — Personal Notes</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <link rel="author" title="About these documents" href="about.html" />
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Base16 color schemes (xterm and Vim)" href="base16_color_schemes_xterm_and_vim.html" />
-    <link rel="prev" title="Sphinx" href="sphinx.html" /> 
-  </head><body>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="Base16 color schemes (xterm and Vim)" href="base16_color_schemes_xterm_and_vim.html">
+    <link rel="prev" title="Sphinx" href="sphinx.html"> 
+  </head>
+<body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="base16_color_schemes_xterm_and_vim.html" title="Base16 color schemes (xterm and Vim)"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="sphinx.html" title="Sphinx"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Personal Notes</a> &#187;</li> 
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="base16_color_schemes_xterm_and_vim.html" title="Base16 color schemes (xterm and Vim)" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="sphinx.html" title="Sphinx" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
       </ul>
     </div>  
 
@@ -43,7 +42,8 @@
           <div class="body" role="main">
             
   <div class="section" id="reminder">
-<h1>Reminder<a class="headerlink" href="#reminder" title="Permalink to this headline">¶</a></h1>
+<h1>Reminder<a class="headerlink" href="#reminder" title="Permalink to this headline">¶</a>
+</h1>
 <div class="contents local topic" id="page-content">
 <p class="topic-title first">Page content</p>
 <ul class="simple">
@@ -54,23 +54,28 @@
 </ul>
 </div>
 <div class="section" id="introduction">
-<h2><a class="toc-backref" href="#id1">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>
+<a class="toc-backref" href="#id1">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+</h2>
 <p>This page provides commands that can be used to produce a graphical popup and
 to broadcast a message to opened terminals.</p>
 <p>It also indicates how to setup reminders by having these commands called
 periodically by <a class="reference external" href="https://en.wikipedia.org/wiki/Cron">cron</a>.</p>
 </div>
 <div class="section" id="graphical-popup-using-xmessage">
-<h2><a class="toc-backref" href="#id2">Graphical popup (using xmessage)</a><a class="headerlink" href="#graphical-popup-using-xmessage" title="Permalink to this headline">¶</a></h2>
+<h2>
+<a class="toc-backref" href="#id2">Graphical popup (using xmessage)</a><a class="headerlink" href="#graphical-popup-using-xmessage" title="Permalink to this headline">¶</a>
+</h2>
 <p id="index-0">The <code class="docutils literal notranslate"><span class="pre">xmessage</span></code> command (provided by package x11-utils on a Debian GNU/Linux
 system) causes a popup message box to appear:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>xmessage <span class="s1">&#39;My message&#39;</span>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>xmessage <span class="s1">'My message'</span>
 
-xmessage -display :0.0 <span class="s1">&#39;My message&#39;</span>            <span class="c1"># A cron job launching</span>
+xmessage -display :0.0 <span class="s1">'My message'</span>            <span class="c1"># A cron job launching</span>
                                                <span class="c1"># xmessage with the display</span>
                                                <span class="c1"># option fails.</span>
 
-xmessage -center -geometry 130x68 <span class="s1">&#39;My message&#39;</span> <span class="c1"># Specifies position (center</span>
+xmessage -center -geometry 130x68 <span class="s1">'My message'</span> <span class="c1"># Specifies position (center</span>
                                                <span class="c1"># of the screen) and size.</span>
                                                <span class="c1"># In Xmonad at least, message</span>
                                                <span class="c1"># is not readable if size is</span>
@@ -81,24 +86,31 @@ xmessage -center -geometry 130x68 <span class="s1">&#39;My message&#39;</span> <
 options</a>.</p>
 </div>
 <div class="section" id="broadcasted-messsage-using-wall">
-<h2><a class="toc-backref" href="#id3">Broadcasted messsage (using wall)</a><a class="headerlink" href="#broadcasted-messsage-using-wall" title="Permalink to this headline">¶</a></h2>
+<h2>
+<a class="toc-backref" href="#id3">Broadcasted messsage (using wall)</a><a class="headerlink" href="#broadcasted-messsage-using-wall" title="Permalink to this headline">¶</a>
+</h2>
 <p id="index-1">The <code class="docutils literal notranslate"><span class="pre">wall</span></code> command (provided by package bsdutils on a Debian GNU/Linux
 system) causes a message to be broadcasted to every terminal:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>wall <span class="s1">&#39;My message&#39;</span>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>wall <span class="s1">'My message'</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="using-cron-to-display-or-broadcast-a-message">
-<h2><a class="toc-backref" href="#id4">Using cron to display or broadcast a message</a><a class="headerlink" href="#using-cron-to-display-or-broadcast-a-message" title="Permalink to this headline">¶</a></h2>
+<h2>
+<a class="toc-backref" href="#id4">Using cron to display or broadcast a message</a><a class="headerlink" href="#using-cron-to-display-or-broadcast-a-message" title="Permalink to this headline">¶</a>
+</h2>
 <p id="index-2">Add a job to your crontab with:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>crontab -e
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>crontab -e
 </pre></div>
 </div>
 <p>List the content of your crontab with:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>crontab -l
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>crontab -l
 </pre></div>
 </div>
-<p>An <a class="reference download internal" download="" href="_downloads/7f8aa948078427dab42c240902379b85/crontab_l"><code class="xref download docutils literal notranslate"><span class="pre">example</span> <span class="pre">output</span> <span class="pre">of</span> <span class="pre">&quot;crontab</span> <span class="pre">-l&quot;</span> <span class="pre">(with</span> <span class="pre">a</span> <span class="pre">xmessage</span> <span class="pre">job)</span></code></a> is downloadable.</p>
+<p>An <a class="reference download internal" download="" href="_downloads/7f8aa948078427dab42c240902379b85/crontab_l"><code class="xref download docutils literal notranslate"><span class="pre">example</span> <span class="pre">output</span> <span class="pre">of</span> <span class="pre">"crontab</span> <span class="pre">-l"</span> <span class="pre">(with</span> <span class="pre">a</span> <span class="pre">xmessage</span> <span class="pre">job)</span></code></a> is downloadable.</p>
 </div>
 </div>
 
@@ -110,7 +122,8 @@ system) causes a message to be broadcasted to every terminal:</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Reminder</a><ul>
+<li>
+<a class="reference internal" href="#">Reminder</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#graphical-popup-using-xmessage">Graphical popup (using xmessage)</a></li>
 <li><a class="reference internal" href="#broadcasted-messsage-using-wall">Broadcasted messsage (using wall)</a></li>
@@ -120,23 +133,21 @@ system) causes a message to be broadcasted to every terminal:</p>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="sphinx.html"
-                        title="previous chapter">Sphinx</a></p>
+  <p class="topless"><a href="sphinx.html" title="previous chapter">Sphinx</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="base16_color_schemes_xterm_and_vim.html"
-                        title="next chapter">Base16 color schemes (xterm and Vim)</a></p>
+  <p class="topless"><a href="base16_color_schemes_xterm_and_vim.html" title="next chapter">Base16 color schemes (xterm and Vim)</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q">
+      <input type="submit" value="Go">
+      <input type="hidden" name="check_keywords" value="yes">
+      <input type="hidden" name="area" value="default">
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -145,26 +156,22 @@ system) causes a message to be broadcasted to every terminal:</p>
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="base16_color_schemes_xterm_and_vim.html" title="Base16 color schemes (xterm and Vim)"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="sphinx.html" title="Sphinx"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Personal Notes</a> &#187;</li> 
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="base16_color_schemes_xterm_and_vim.html" title="Base16 color schemes (xterm and Vim)">next</a> |</li>
+        <li class="right">
+          <a href="sphinx.html" title="Sphinx">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
       </ul>
     </div>
   <div class="footer" role="contentinfo">
-        &#169; Copyright 2018-2019, Thierry Rascle.<br />
-    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
+        © Copyright 2018-2019, Thierry Rascle.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
     Work licensed under a
-    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br />
-      
-      Static website generated using
-      <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.8.4.<br />
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="http://validator.w3.org/check/referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
     <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
   </div>
 

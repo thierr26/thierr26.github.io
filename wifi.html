@@ -1,39 +1,38 @@
-
 <!DOCTYPE html>
-
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-    <meta charset="utf-8" />
-    <title>Wi-Fi &#8212; Personal Notes</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
+    <title>Wi-Fi — Personal Notes</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <link rel="author" title="About these documents" href="about.html" />
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="About me and this website" href="about.html" />
-    <link rel="prev" title="Email with nmh and other command-line programs" href="email_with_nmh_and_other_cli_programs.html" /> 
-  </head><body>
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="About me and this website" href="about.html">
+    <link rel="prev" title="Email with nmh and other command-line programs" href="email_with_nmh_and_other_cli_programs.html"> 
+  </head>
+<body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="about.html" title="About me and this website"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="email_with_nmh_and_other_cli_programs.html" title="Email with nmh and other command-line programs"
-             accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Personal Notes</a> &#187;</li> 
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="about.html" title="About me and this website" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="email_with_nmh_and_other_cli_programs.html" title="Email with nmh and other command-line programs" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
       </ul>
     </div>  
 
@@ -43,7 +42,8 @@
           <div class="body" role="main">
             
   <div class="section" id="wi-fi">
-<h1>Wi-Fi<a class="headerlink" href="#wi-fi" title="Permalink to this headline">¶</a></h1>
+<h1>Wi-Fi<a class="headerlink" href="#wi-fi" title="Permalink to this headline">¶</a>
+</h1>
 <div class="contents local topic" id="page-content">
 <p class="topic-title first">Page content</p>
 <ul class="simple">
@@ -53,13 +53,17 @@
 </ul>
 </div>
 <div class="section" id="introduction">
-<h2><a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2>
+<a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+</h2>
 <p id="index-0">This page describes how I could connect my <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> desktop computer (which originally had no Wi-Fi
 capability) to various <a class="reference external" href="https://en.wikipedia.org/wiki/Orange_Livebox">Livebox</a> Wi-Fi networks (more precisely
 to one Livebox Play Wi-Fi network and one Livebox 4 Wi-Fi network).</p>
 </div>
 <div class="section" id="wi-fi-network-adapter-and-driver">
-<h2><a class="toc-backref" href="#id3">Wi-Fi network adapter and driver</a><a class="headerlink" href="#wi-fi-network-adapter-and-driver" title="Permalink to this headline">¶</a></h2>
+<h2>
+<a class="toc-backref" href="#id3">Wi-Fi network adapter and driver</a><a class="headerlink" href="#wi-fi-network-adapter-and-driver" title="Permalink to this headline">¶</a>
+</h2>
 <p id="index-1">For the Wi-Fi network adapter I followed the recommendation of the <a class="reference external" href="https://wiki.debian.org/WiFi">Debian Wiki</a> and bought a <a class="reference external" href="https://www.tp-link.com/ae/home-networking/adapter/tl-wn821n">TP-Link TL-WN821N wireless N USB
 adapter</a>. This
 device is easily available on various online stores.</p>
@@ -67,17 +71,20 @@ device is easily available on various online stores.</p>
 method to download, compile and install the driver.</p>
 <p>First, install (<strong>as root</strong>) some packages needed to be able to compile the
 driver:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apt-get install gcc git build-essential <span class="c1"># As root.</span>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install gcc git build-essential <span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>Then, install (<strong>as root</strong>) the header files for your Linux kernel:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apt-get install linux-headers-<span class="sb">`</span>uname -r<span class="sb">`</span> <span class="c1"># As root.</span>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install linux-headers-<span class="sb">`</span>uname -r<span class="sb">`</span> <span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>As a normal user, create a folder for the driver somewhere in your home
 directory tree, clone  <a class="reference external" href="https://github.com/jeremyb31/rtl8192eu-linux-driver">the driver repository</a> and change directory to
 the cloned repository:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>mkdir -p ~/drivers
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>mkdir -p ~/drivers
 <span class="nb">cd</span> ~/drivers
 git clone https://github.com/jeremyb31/rtl8192eu-linux-driver.git
 <span class="nb">cd</span> rtl8192eu-linux-driver
@@ -85,25 +92,31 @@ git clone https://github.com/jeremyb31/rtl8192eu-linux-driver.git
 </div>
 <p>Change user to <strong>root</strong>, change directory to the directory you where in as a
 normal user, and compile and install the driver:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>make         <span class="c1"># As root.</span>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>make         <span class="c1"># As root.</span>
 make install <span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>Plug in the Wi-Fi network adapter and restart the computer. After reboot, you
 should see 8192eu in the list of loaded modules:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>lsmod<span class="p">|</span>grep 8192eu
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>lsmod<span class="p">|</span>grep 8192eu
 </pre></div>
 </div>
 </div>
 <div class="section" id="configuration">
-<h2><a class="toc-backref" href="#id4">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h2>
+<h2>
+<a class="toc-backref" href="#id4">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a>
+</h2>
 <p id="index-2">Install wireless-tools (<strong>as root</strong>) with:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>apt-get install wireless-tools <span class="c1"># As root.</span>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install wireless-tools <span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>The following command gives the name of the wireless network interface
 (probably a name starting with “wlx503”):</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>/sbin/iwconfig <span class="m">2</span>&gt;/dev/null<span class="p">|</span>grep -v <span class="s2">&quot;^\(\s\|</span>$<span class="s2">\)&quot;</span><span class="p">|</span>sed <span class="s2">&quot;s/\s.\+</span>$<span class="s2">//&quot;</span>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>/sbin/iwconfig <span class="m">2</span>&gt;/dev/null<span class="p">|</span>grep -v <span class="s2">"^\(\s\|</span>$<span class="s2">\)"</span><span class="p">|</span>sed <span class="s2">"s/\s.\+</span>$<span class="s2">//"</span>
 </pre></div>
 </div>
 <p>The wireless network interface name is referred to as &lt;interface_name&gt; in the
@@ -118,7 +131,8 @@ probably be shown on the Livebox display.</p>
 configured to not show it). In the case of the Livebox Play, the key shown on
 the display is not the WPA PSK but an hexadecimal key. <strong>You have to use the
 wpa_passphrase program to get the WPA PSK</strong>:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>wpa_passphrase &lt;wifi_net&gt; &lt;hexadecimal_key&gt;<span class="p">|</span>grep <span class="s2">&quot;^\s*psk=&quot;</span><span class="p">|</span>sed <span class="s2">&quot;s/^.\+=//&quot;</span>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>wpa_passphrase &lt;wifi_net&gt; &lt;hexadecimal_key&gt;<span class="p">|</span>grep <span class="s2">"^\s*psk="</span><span class="p">|</span>sed <span class="s2">"s/^.\+=//"</span>
 </pre></div>
 </div>
 <p>The WPA PSK is referred to as &lt;psk&gt; in the rest of the page.</p>
@@ -133,7 +147,8 @@ file:</p>
 <p>As the WPA PSK is confidential, only root should be able to access
 /etc/network/interfaces. Change the file permission (<strong>as root</strong>) with this
 command:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>chmod <span class="m">600</span> /etc/network/interfaces <span class="c1"># As root.</span>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>chmod <span class="m">600</span> /etc/network/interfaces <span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>Unplug the Ethernet connection (if any) from the computer and restart it. It
@@ -149,7 +164,8 @@ should now be connected to the wireless network.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Wi-Fi</a><ul>
+<li>
+<a class="reference internal" href="#">Wi-Fi</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#wi-fi-network-adapter-and-driver">Wi-Fi network adapter and driver</a></li>
 <li><a class="reference internal" href="#configuration">Configuration</a></li>
@@ -158,23 +174,21 @@ should now be connected to the wireless network.</p>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="email_with_nmh_and_other_cli_programs.html"
-                        title="previous chapter">Email with nmh and other command-line programs</a></p>
+  <p class="topless"><a href="email_with_nmh_and_other_cli_programs.html" title="previous chapter">Email with nmh and other command-line programs</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="about.html"
-                        title="next chapter">About me and this website</a></p>
+  <p class="topless"><a href="about.html" title="next chapter">About me and this website</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
+      <input type="text" name="q">
+      <input type="submit" value="Go">
+      <input type="hidden" name="check_keywords" value="yes">
+      <input type="hidden" name="area" value="default">
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -183,26 +197,22 @@ should now be connected to the wireless network.</p>
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="about.html" title="About me and this website"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="email_with_nmh_and_other_cli_programs.html" title="Email with nmh and other command-line programs"
-             >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Personal Notes</a> &#187;</li> 
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="about.html" title="About me and this website">next</a> |</li>
+        <li class="right">
+          <a href="email_with_nmh_and_other_cli_programs.html" title="Email with nmh and other command-line programs">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
       </ul>
     </div>
   <div class="footer" role="contentinfo">
-        &#169; Copyright 2018-2019, Thierry Rascle.<br />
-    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
+        © Copyright 2018-2019, Thierry Rascle.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
     Work licensed under a
-    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br />
-      
-      Static website generated using
-      <a href="http://sphinx-doc.org/">Sphinx</a>
-      1.8.4.<br />
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="http://validator.w3.org/check/referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
     <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
   </div>
 
