@@ -153,6 +153,8 @@ configuration (source: <a class="reference external" href="https://superuser.com
 <p>Kill all the opened tmux sessions and the tmux server with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>tmux kill-server
+tmux confirm-before kill-server <span class="c1"># Prompts the user for confirmation in</span>
+                                <span class="c1"># tmux status bar.</span>
 </pre></div>
 </div>
 <p>If you’re in a tmux session and want to kill all the other sessions, use:</p>

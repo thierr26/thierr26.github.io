@@ -128,10 +128,11 @@ argument) command. Value <code class="docutils literal notranslate"><span class=
 </h3>
 <p id="index-2">Create aliases with commands like:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>git config --global alias.ci commit <span class="c1"># Create alias "ci" for command "commit".</span>
+<div class="highlight"><pre><span></span>git config --global alias.ci commit <span class="c1"># Creates alias "ci" for command</span>
+                                    <span class="c1"># "commit".</span>
 
 git config --global <span class="se">\</span>
-    alias.g <span class="s1">'log --pretty=oneline --abbrev-commit'</span> <span class="c1"># Create alias "g" for</span>
+    alias.g <span class="s1">'log --pretty=oneline --abbrev-commit'</span> <span class="c1"># Creates alias "g" for</span>
                                                    <span class="c1"># command "log" with</span>
                                                    <span class="c1"># options for compact</span>
                                                    <span class="c1"># output.</span>
@@ -269,7 +270,7 @@ change is staged) and the working tree with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git diff
 
-git diff -- path/to/files <span class="c1"># Show changes for the specified files only.</span>
+git diff -- path/to/files <span class="c1"># Shows changes for the specified files only.</span>
 </pre></div>
 </div>
 <p>Show the difference between the last commit of branch “branch_name” and the
@@ -277,7 +278,7 @@ working tree with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git diff branch_name
 
-git diff branch_name -- path/to/files <span class="c1"># Show changes for the specified files</span>
+git diff branch_name -- path/to/files <span class="c1"># Shows changes for the specified files</span>
                                       <span class="c1"># only.</span>
 </pre></div>
 </div>
@@ -291,7 +292,7 @@ command shows the difference between the two files:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git diff --staged
 
-git diff --staged -- path/to/file <span class="c1"># Show changes for the specified files</span>
+git diff --staged -- path/to/file <span class="c1"># Shows changes for the specified files</span>
                                   <span class="c1"># only.</span>
 </pre></div>
 </div>
@@ -300,7 +301,7 @@ commands like:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git diff 42b9c3b
 
-git diff 42b9c3b -- path/to/files <span class="c1"># Show changes for the specified files</span>
+git diff 42b9c3b -- path/to/files <span class="c1"># Shows changes for the specified files</span>
                                   <span class="c1"># only.</span>
 </pre></div>
 </div>
@@ -308,7 +309,7 @@ git diff 42b9c3b -- path/to/files <span class="c1"># Show changes for the specif
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git diff 42b9c3b a92c02a
 
-git diff 42b9c3b a92c02a -- path/to/files <span class="c1"># Show changes for the specified</span>
+git diff 42b9c3b a92c02a -- path/to/files <span class="c1"># Shows changes for the specified</span>
                                           <span class="c1"># files only.</span>
 </pre></div>
 </div>
