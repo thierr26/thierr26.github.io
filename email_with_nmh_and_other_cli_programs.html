@@ -76,12 +76,12 @@
 the <a class="reference external" href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">SMTP</a>
 server of my Internet service Provider.</p>
 <p>I’m a happy <a class="reference external" href="https://www.claws-mail.org">Claws Mail</a> (with the <a class="reference external" href="https://www.claws-mail.org/plugin.php?plugin=bogofilter">Bogofilter
-plugin</a>) user on my
-<a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> box, but I’m interested in being
-able to manage email via command-line programs. Claws Mail stores mails in the
-so called MH mailbox format. This mailbox format is the one of the <a class="reference external" href="https://en.wikipedia.org/wiki/MH_Message_Handling_System">MH Message
-Handling System</a>, a
-command-line based mail handling system.</p>
+plugin</a> for spam
+filtering) user on my <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> box, but I’m
+interested in being able to manage email via command-line programs. Claws Mail
+stores mails in the so called MH mailbox format. This mailbox format is the one
+of the <a class="reference external" href="https://en.wikipedia.org/wiki/MH_Message_Handling_System">MH Message Handling System</a>, a command-line
+based mail handling system.</p>
 <p><a class="reference external" href="http://www.nongnu.org/nmh">nmh</a> is the current implementation of the MH
 system (provided by package nmh on a Debian GNU/Linux system). It is <a class="reference external" href="http://lists.nongnu.org/archive/html/nmh-workers/2014-02/msg00049.html">possible
 to use both Claws Mail and nmh</a>.</p>
@@ -182,7 +182,7 @@ user can read and write it:</p>
 </h3>
 <p id="index-4">Perform nmh user installation with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>install-mh
+<div class="highlight"><pre><span></span>/usr/bin/mh/install-mh
 </pre></div>
 </div>
 <p>Here’s the quote of my <code class="docutils literal notranslate"><span class="pre">install-mh</span></code> session:</p>
@@ -306,7 +306,7 @@ message templates as <code class="docutils literal notranslate"><span class="pre
 </h2>
 <p id="index-8">You can delete the mail with number 421 in the “Sent” folder with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>rmm +Sent <span class="m">421</span>
+<div class="highlight"><pre><span></span>/usr/bin/mh/rmm +Sent <span class="m">421</span>
 </pre></div>
 </div>
 <p>This does not really delete the mail, but renames it to “,421”. You may want to
@@ -320,15 +320,28 @@ periodically erase your deleted mails with a command like:</p>
 <span id="training-bogofilter"></span><h2>
 <a class="toc-backref" href="#id14">Training Bogofilter (anti-spam filter)</a><a class="headerlink" href="#training-bogofilter-anti-spam-filter" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-9">Assuming that your current working directory is your standard nmh directory and
-your spam messages are in the “Spam” subfolder, you can (re)train Bogofilter
-with the three following commands:</p>
+<p id="index-9">Assuming that:
+- Your current working directory is your standard nmh directory,
+- Your spam messages are in the “Spam” folder,
+- You also have an “Unsure spam” folder that contains only spam messages (which</p>
+<blockquote>
+<div>implies that you have moved any ham (non spam) message away from this folder
+with (for example) commands like
+<code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/refile</span> <span class="pre">1</span> <span class="pre">-src</span> <span class="pre">+'Unsure</span> <span class="pre">spam'</span> <span class="pre">+'Any</span> <span class="pre">ham</span> <span class="pre">folder'</span></code>),</div>
+</blockquote>
+<p>you can move the messages in ‘Unsure spam’ to Spam and (re)train Bogofilter
+with the following commands:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>rm -f ~/.bogofilter/wordlist.db <span class="c1"># Don't do this if you don't want to entirely</span>
-                                <span class="c1"># reset the training.</span>
-cat Spam/* <span class="p">|</span> bogofilter -s
+<div class="highlight"><pre><span></span>rm -f ~/.bogofilter/wordlist.db      <span class="c1"># Don't do this if you don't want to</span>
+                                     <span class="c1"># entirely reset the training.</span>
+
+refile all -src +<span class="s1">'Unsure spam'</span> +Spam <span class="c1"># Move the messages in 'Unsure spam' to</span>
+                                     <span class="c1"># Spam.</span>
+
+cat Spam/* <span class="p">|</span> bogofilter -s           <span class="c1"># Register spam messages.</span>
+
 find . -mindepth <span class="m">1</span> -type f -not -path <span class="s2">"./Spam/*"</span> -exec cat <span class="o">{}</span> <span class="se">\;</span> <span class="se">\</span>
-    <span class="p">|</span> bogofilter -n
+    <span class="p">|</span> bogofilter -n                  <span class="c1"># Register ham messages.</span>
 </pre></div>
 </div>
 <p>You can check in which category (spam (S), ham (H), unsure (U)) Bogofilter
