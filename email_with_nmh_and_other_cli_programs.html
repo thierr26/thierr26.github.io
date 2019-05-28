@@ -47,30 +47,35 @@
 <div class="contents local topic" id="page-content">
 <p class="topic-title first">Page content</p>
 <ul class="simple">
-<li><a class="reference internal" href="#introduction" id="id3">Introduction</a></li>
-<li><a class="reference internal" href="#installation" id="id4">Installation</a></li>
+<li><a class="reference internal" href="#introduction" id="id5">Introduction</a></li>
+<li><a class="reference internal" href="#installation" id="id6">Installation</a></li>
 <li>
-<a class="reference internal" href="#configuration" id="id5">Configuration</a><ul>
-<li><a class="reference internal" href="#exim4" id="id6">Exim4</a></li>
-<li><a class="reference internal" href="#fetchmail" id="id7">fetchmail</a></li>
-<li><a class="reference internal" href="#nmh-user-installation" id="id8">nmh user installation</a></li>
+<a class="reference internal" href="#configuration" id="id7">Configuration</a><ul>
+<li><a class="reference internal" href="#exim4" id="id8">Exim4</a></li>
+<li><a class="reference internal" href="#fetchmail" id="id9">fetchmail</a></li>
+<li><a class="reference internal" href="#nmh-user-installation" id="id10">nmh user installation</a></li>
 </ul>
 </li>
 <li>
-<a class="reference internal" href="#retrieving-mails" id="id9">Retrieving mails</a><ul>
-<li><a class="reference internal" href="#without-any-filtering" id="id10">Without any filtering</a></li>
-<li><a class="reference internal" href="#with-filtering-by-bogofilter" id="id11">With filtering by Bogofilter</a></li>
+<a class="reference internal" href="#retrieving-mails" id="id11">Retrieving mails</a><ul>
+<li><a class="reference internal" href="#without-any-filtering" id="id12">Without any filtering</a></li>
+<li><a class="reference internal" href="#with-filtering-by-bogofilter" id="id13">With filtering by Bogofilter</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#sending-a-mail" id="id12">Sending a mail</a></li>
-<li><a class="reference internal" href="#deleting-mails" id="id13">Deleting mails</a></li>
-<li><a class="reference internal" href="#training-bogofilter-anti-spam-filter" id="id14">Training Bogofilter (anti-spam filter)</a></li>
-<li><a class="reference internal" href="#other-resources" id="id15">Other resources</a></li>
+<li><a class="reference internal" href="#sending-a-mail" id="id14">Sending a mail</a></li>
+<li>
+<a class="reference internal" href="#message-management" id="id15">Message management</a><ul>
+<li><a class="reference internal" href="#deleting-mails" id="id16">Deleting mails</a></li>
+<li><a class="reference internal" href="#searching-for-recent-messages" id="id17">Searching for recent messages</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#training-bogofilter-anti-spam-filter" id="id18">Training Bogofilter (anti-spam filter)</a></li>
+<li><a class="reference internal" href="#other-resources" id="id19">Other resources</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
 <h2>
-<a class="toc-backref" href="#id3">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id5">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
 </h2>
 <p id="index-0">I have a few email accounts that offer <a class="reference external" href="https://en.wikipedia.org/wiki/Post_Office_Protocol">POP3 access</a> and I send my emails via
 the <a class="reference external" href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">SMTP</a>
@@ -88,11 +93,13 @@ to use both Claws Mail and nmh</a>.</p>
 <p>This page gives the various actions I had to take to be able to receive and
 send emails using the nmh command-line programs. Filtering the incoming
 messages with <a class="reference external" href="http://bogofilter.sourceforge.net/">Bogofilter</a> (anti-spam
-filter) is also covered.</p>
+filter) is also covered. Some basic commands for message management (deletion,
+search) are also provided. Of course, nmh programs have many options that are
+not covered here. Please refer to the <a class="reference external" href="http://manpages.org/nmh/7">nmh man pages</a> for all the details.</p>
 </div>
 <div class="section" id="installation">
 <h2>
-<a class="toc-backref" href="#id4">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id6">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a>
 </h2>
 <p>On a <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> system, install fetchmail and
 nmh (<strong>as root</strong>) with:</p>
@@ -117,11 +124,11 @@ to your <code class="docutils literal notranslate"><span class="pre">~/.profile<
 </div>
 <div class="section" id="configuration">
 <h2>
-<a class="toc-backref" href="#id5">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id7">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a>
 </h2>
 <div class="section" id="exim4">
 <h3>
-<a class="toc-backref" href="#id6">Exim4</a><a class="headerlink" href="#exim4" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id8">Exim4</a><a class="headerlink" href="#exim4" title="Permalink to this headline">¶</a>
 </h3>
 <p id="index-2">Configure Exim4 (<strong>as root</strong>) with:</p>
 <div class="highlight-shell notranslate">
@@ -165,7 +172,7 @@ Test
 </div>
 <div class="section" id="fetchmail">
 <h3>
-<a class="toc-backref" href="#id7">fetchmail</a><a class="headerlink" href="#fetchmail" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id9">fetchmail</a><a class="headerlink" href="#fetchmail" title="Permalink to this headline">¶</a>
 </h3>
 <p id="index-3">Create a <code class="docutils literal notranslate"><span class="pre">~/.fetchmailrc</span></code> file and change its permission so that only the
 user can read and write it:</p>
@@ -178,7 +185,7 @@ user can read and write it:</p>
 </div>
 <div class="section" id="nmh-user-installation">
 <h3>
-<a class="toc-backref" href="#id8">nmh user installation</a><a class="headerlink" href="#nmh-user-installation" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id10">nmh user installation</a><a class="headerlink" href="#nmh-user-installation" title="Permalink to this headline">¶</a>
 </h3>
 <p id="index-4">Perform nmh user installation with:</p>
 <div class="highlight-shell notranslate">
@@ -224,11 +231,11 @@ user can read and write it:</p>
 </div>
 <div class="section" id="retrieving-mails">
 <h2>
-<a class="toc-backref" href="#id9">Retrieving mails</a><a class="headerlink" href="#retrieving-mails" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id11">Retrieving mails</a><a class="headerlink" href="#retrieving-mails" title="Permalink to this headline">¶</a>
 </h2>
 <div class="section" id="without-any-filtering">
 <h3>
-<a class="toc-backref" href="#id10">Without any filtering</a><a class="headerlink" href="#without-any-filtering" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id12">Without any filtering</a><a class="headerlink" href="#without-any-filtering" title="Permalink to this headline">¶</a>
 </h3>
 <p id="index-5">Run the two following commands to retrieve mails:</p>
 <div class="highlight-shell notranslate">
@@ -247,7 +254,7 @@ as described in <a class="reference external" href="https://bugs.debian.org/cgi-
 </div>
 <div class="section" id="with-filtering-by-bogofilter">
 <h3>
-<a class="toc-backref" href="#id11">With filtering by Bogofilter</a><a class="headerlink" href="#with-filtering-by-bogofilter" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id13">With filtering by Bogofilter</a><a class="headerlink" href="#with-filtering-by-bogofilter" title="Permalink to this headline">¶</a>
 </h3>
 <p id="index-6">Make sure procmail and bogofilter are installed:</p>
 <div class="highlight-shell notranslate">
@@ -271,7 +278,7 @@ file. That’s how procmail knows that we’re talking MH subdirectories. See he
 </div>
 <div class="section" id="sending-a-mail">
 <h2>
-<a class="toc-backref" href="#id12">Sending a mail</a><a class="headerlink" href="#sending-a-mail" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id14">Sending a mail</a><a class="headerlink" href="#sending-a-mail" title="Permalink to this headline">¶</a>
 </h2>
 <p>Use <code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/comp</span></code>. This program opens the text editor (on my <a class="reference external" href="https://www.debian.org">Debian
 GNU/Linux</a> system at least, on other system it may
@@ -300,11 +307,44 @@ and <code class="docutils literal notranslate"><span class="pre">forw</span></co
 message templates as <code class="docutils literal notranslate"><span class="pre">comp</span></code>. <code class="docutils literal notranslate"><span class="pre">repl</span></code> uses <code class="docutils literal notranslate"><span class="pre">/etc/nmh/replcomps</span></code> and
 <code class="docutils literal notranslate"><span class="pre">forw</span></code> uses <code class="docutils literal notranslate"><span class="pre">/etc/nmh/forwcomps</span></code>.</p>
 </div>
-<div class="section" id="deleting-mails">
+<div class="section" id="message-management">
 <h2>
-<a class="toc-backref" href="#id13">Deleting mails</a><a class="headerlink" href="#deleting-mails" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id15">Message management</a><a class="headerlink" href="#message-management" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-8">You can delete the mail with number 421 in the “Sent” folder with:</p>
+<p id="index-8">This section provides a few examples of commands you can use to manage the
+messages in your MH mailbox with nmh. Please keep in mind that nmh message
+management programs operate by default on <em>the current folder</em>. You can set the
+current folder with the <code class="docutils literal notranslate"><span class="pre">folder</span></code> program:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>/usr/bin/mh/folder +<span class="s1">'any folder'</span> <span class="c1"># Selects folder "any folder" as the current</span>
+                                 <span class="c1"># folder.</span>
+
+/usr/bin/mh/folder +any/folder   <span class="c1"># Selects folder "any/folder" subfolder as</span>
+                                 <span class="c1"># the current folder.</span>
+
+/usr/bin/mh/folder +./any/folder <span class="c1"># Selects folder "any/folder" subfolder as</span>
+                                 <span class="c1"># the current folder (valid if the current</span>
+                                 <span class="c1"># working directory is the MH mailbox).</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">folder</span></code> without arguments simply indicates the current folder:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>/usr/bin/mh/folder
+</pre></div>
+</div>
+<p>You can force an nmh program to operate on a specific folder by providing this
+folder as argument (prepended with a plus sign). Note that with most nmh
+programs, <strong>this causes this folder to be selected as the current folder for
+the subsequent commands</strong>.</p>
+<p>Note also that when no message (or <a class="reference external" href="http://manpages.org/mh-sequence/5">message sequence</a>) is provided on the command line, an nmh
+program operates on the current message <strong>or</strong> on all messages in the current
+folder. The <a class="reference external" href="http://manpages.org/nmh/7">nmh man pages</a> state clearly what the
+default message (or message sequence) is for each program.</p>
+<div class="section" id="deleting-mails">
+<h3>
+<a class="toc-backref" href="#id16">Deleting mails</a><a class="headerlink" href="#deleting-mails" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-9">You can delete the mail with number 421 in the “Sent” folder with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>/usr/bin/mh/rmm +Sent <span class="m">421</span>
 </pre></div>
@@ -316,32 +356,56 @@ periodically erase your deleted mails with a command like:</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="searching-for-recent-messages">
+<h3>
+<a class="toc-backref" href="#id17">Searching for recent messages</a><a class="headerlink" href="#searching-for-recent-messages" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-10">You can search for recent messages with commands like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>/usr/bin/mh pick -after <span class="m">5</span>/15/2019 <span class="c1"># Searches for messages dated May 5th, 2019</span>
+                                  <span class="c1"># or later.</span>
+
+/usr/bin/mh pick -after -8        <span class="c1"># Searches for messages not older than 8</span>
+                                  <span class="c1"># days.</span>
+</pre></div>
+</div>
+<p>I couldn’t find a way of finding messages recursively (i.e. in all folders and
+subfolders) with nmh programs, but the <code class="docutils literal notranslate"><span class="pre">find</span></code> command can help here (it is
+assumed that the current working directory is the MH mailbox):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>find . -mindepth <span class="m">1</span> -type d -exec sh -c <span class="se">\</span>
+    <span class="s1">'/usr/bin/mh/pick +"$1" -after -8 2&gt;/dev/null \</span>
+<span class="s1">    &amp;&amp; echo "This was for $1"'</span> - <span class="o">{}</span> <span class="se">\;</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="training-bogofilter-anti-spam-filter">
 <span id="training-bogofilter"></span><h2>
-<a class="toc-backref" href="#id14">Training Bogofilter (anti-spam filter)</a><a class="headerlink" href="#training-bogofilter-anti-spam-filter" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id18">Training Bogofilter (anti-spam filter)</a><a class="headerlink" href="#training-bogofilter-anti-spam-filter" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-9">Assuming that:
-- Your current working directory is your standard nmh directory,
-- Your spam messages are in the “Spam” folder,
-- You also have an “Unsure spam” folder that contains only spam messages (which</p>
-<blockquote>
-<div>implies that you have moved any ham (non spam) message away from this folder
+<p id="index-11">Assuming that:</p>
+<ul class="simple">
+<li>Your current working directory is your MH mailbox,</li>
+<li>Your spam messages are in the “Spam” folder,</li>
+<li>You also have an “Unsure spam” folder that contains only spam messages (which
+implies that you have moved any ham (non spam) message away from this folder
 with (for example) commands like
-<code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/refile</span> <span class="pre">1</span> <span class="pre">-src</span> <span class="pre">+'Unsure</span> <span class="pre">spam'</span> <span class="pre">+'Any</span> <span class="pre">ham</span> <span class="pre">folder'</span></code>),</div>
-</blockquote>
+<code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/refile</span> <span class="pre">1</span> <span class="pre">-src</span> <span class="pre">+'Unsure</span> <span class="pre">spam'</span> <span class="pre">+'Any</span> <span class="pre">ham</span> <span class="pre">folder'</span></code>),</li>
+</ul>
 <p>you can move the messages in ‘Unsure spam’ to Spam and (re)train Bogofilter
 with the following commands:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>rm -f ~/.bogofilter/wordlist.db      <span class="c1"># Don't do this if you don't want to</span>
                                      <span class="c1"># entirely reset the training.</span>
 
-refile all -src +<span class="s1">'Unsure spam'</span> +Spam <span class="c1"># Move the messages in 'Unsure spam' to</span>
+refile all -src +<span class="s1">'Unsure spam'</span> +Spam <span class="c1"># Moves the messages in 'Unsure spam' to</span>
                                      <span class="c1"># Spam.</span>
 
-cat Spam/* <span class="p">|</span> bogofilter -s           <span class="c1"># Register spam messages.</span>
+cat Spam/* <span class="p">|</span> bogofilter -s           <span class="c1"># Registers spam messages.</span>
 
 find . -mindepth <span class="m">1</span> -type f -not -path <span class="s2">"./Spam/*"</span> -exec cat <span class="o">{}</span> <span class="se">\;</span> <span class="se">\</span>
-    <span class="p">|</span> bogofilter -n                  <span class="c1"># Register ham messages.</span>
+    <span class="p">|</span> bogofilter -n                  <span class="c1"># Registers ham messages.</span>
 </pre></div>
 </div>
 <p>You can check in which category (spam (S), ham (H), unsure (U)) Bogofilter
@@ -356,11 +420,12 @@ French)</a>.</p>
 </div>
 <div class="section" id="other-resources">
 <h2>
-<a class="toc-backref" href="#id15">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id19">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
 </h2>
 <ul class="simple">
 <li><a class="reference external" href="http://www.nongnu.org/nmh">nmh home page</a></li>
 <li><a class="reference external" href="https://rand-mh.sourceforge.io/book/">MH &amp; nmh (book by Jerry Peek)</a></li>
+<li><a class="reference external" href="https://rand-mh.sourceforge.io/book/">nmh man pages</a></li>
 <li><a class="reference external" href="http://www.exstrom.com/journal/comp/bogofilter.html">Getting bogofilter to work with procmail, fetchmail, and mutt</a></li>
 </ul>
 </div>
@@ -392,7 +457,12 @@ French)</a>.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#sending-a-mail">Sending a mail</a></li>
+<li>
+<a class="reference internal" href="#message-management">Message management</a><ul>
 <li><a class="reference internal" href="#deleting-mails">Deleting mails</a></li>
+<li><a class="reference internal" href="#searching-for-recent-messages">Searching for recent messages</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#training-bogofilter-anti-spam-filter">Training Bogofilter (anti-spam filter)</a></li>
 <li><a class="reference internal" href="#other-resources">Other resources</a></li>
 </ul>
