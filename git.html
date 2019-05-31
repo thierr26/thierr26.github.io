@@ -707,10 +707,11 @@ hooks.</p>
 another Git repository, the <code class="docutils literal notranslate"><span class="pre">-C</span></code> and <code class="docutils literal notranslate"><span class="pre">--git-dir</span></code> options may not be
 respected. One solution can be to omit those options and to set environment
 variables instead:</p>
-<ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">GIT_WORK_TREE=...</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">GIT_DIR=...</span></code></li>
-</ul>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">GIT_WORK_TREE</span><span class="o">=</span>...
+<span class="nb">export</span> <span class="nv">GIT_DIR</span><span class="o">=</span>...
+</pre></div>
+</div>
 <p>Also the GIT_INDEX_FILE environment variable must probably be unset:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span><span class="nb">unset</span> GIT_INDEX_FILE
