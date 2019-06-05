@@ -52,15 +52,16 @@
 <li>
 <a class="reference internal" href="#configuration" id="id3">Configuration</a><ul>
 <li><a class="reference internal" href="#my-tmux-conf" id="id4">My .tmux.conf</a></li>
-<li><a class="reference internal" href="#disabling-control-flow" id="id5">Disabling control flow</a></li>
-<li><a class="reference internal" href="#colors" id="id6">Colors</a></li>
-<li><a class="reference internal" href="#vim-configuration" id="id7">Vim configuration</a></li>
+<li><a class="reference internal" href="#reloading-configuration" id="id5">Reloading configuration</a></li>
+<li><a class="reference internal" href="#disabling-control-flow" id="id6">Disabling control flow</a></li>
+<li><a class="reference internal" href="#colors" id="id7">Colors</a></li>
+<li><a class="reference internal" href="#vim-configuration" id="id8">Vim configuration</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#listing-killing-tmux-sessions" id="id8">Listing / killing tmux sessions</a></li>
-<li><a class="reference internal" href="#detaching-client-attaching-session" id="id9">Detaching client / attaching session</a></li>
-<li><a class="reference internal" href="#managing-windows-and-panes" id="id10">Managing windows and panes</a></li>
-<li><a class="reference internal" href="#other-resources" id="id11">Other resources</a></li>
+<li><a class="reference internal" href="#listing-killing-tmux-sessions" id="id9">Listing / killing tmux sessions</a></li>
+<li><a class="reference internal" href="#detaching-client-attaching-session" id="id10">Detaching client / attaching session</a></li>
+<li><a class="reference internal" href="#managing-windows-and-panes" id="id11">Managing windows and panes</a></li>
+<li><a class="reference internal" href="#other-resources" id="id12">Other resources</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -100,13 +101,99 @@ session) and <code class="docutils literal notranslate"><span class="pre">prefix
 <span id="index-1"></span><h3>
 <a class="toc-backref" href="#id4">My .tmux.conf</a><a class="headerlink" href="#my-tmux-conf" title="Permalink to this headline">¶</a>
 </h3>
-<p>You can download <a class="reference download internal" download="" href="_downloads/0fa059d0a49a6770f5324ed3b3078a03/.tmux.conf"><code class="xref download docutils literal notranslate"><span class="pre">my</span> <span class="pre">~/.tmux.conf</span></code></a>.</p>
+<p id="index-2">You can download <a class="reference download internal" download="" href="_downloads/0fa059d0a49a6770f5324ed3b3078a03/.tmux.conf"><code class="xref download docutils literal notranslate"><span class="pre">my</span> <span class="pre">~/.tmux.conf</span></code></a>.</p>
+<p>I had a little bit of a hard time defining the <code class="docutils literal notranslate"><span class="pre">status-right</span></code> option (the
+right hand side of the status line). It causes the right hand side of the
+status line to show:</p>
+<ul class="simple">
+<li>A Caps lock mode indicator (a yellow “Caps lock on” when Caps lock is <strong>on</strong>,
+nothing visible otherwise).</li>
+<li>A Num lock mode indicator (a yellow “Num lock off” when Caps lock is <strong>off</strong>,
+nothing visible otherwise).</li>
+<li>A power supply indicator (“CHG” if the machine is plugged in, “BAT” if the
+machine is running on the battery, nothing visible if the information is not
+found).</li>
+<li>The remaining capacity of charge in the battery in percent (yellow if lower
+than 20% and machine not plugged in), nothing visible if the information is
+not found.</li>
+<li>Time and date, with the day of the week.</li>
+</ul>
+<p>The time / date part was easy enough, the format specification is passed
+through <a class="reference external" href="https://linux.die.net/man/3/strftime">strftime(3)</a>. The sole time /
+date part could be obtained with <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">-g</span> <span class="pre">status-right</span> <span class="pre">"%H:%M</span> <span class="pre">%Y-%m-%d(%a)"</span></code>.</p>
+<p>I could obtain the other parts using shell statements. The shell statements
+must be enclosed in a <code class="docutils literal notranslate"><span class="pre">#()</span></code> construct. So my <code class="docutils literal notranslate"><span class="pre">status-right</span></code> option “line”
+now is something like
+<code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">-g</span> <span class="pre">status-right</span> <span class="pre">"#(&lt;shell</span> <span class="pre">statements&gt;)</span> <span class="pre">%H:%M</span> <span class="pre">%Y-%m-%d(%a)"</span></code>.</p>
+<p>If the shell statements are long, one solution is to write them in a separate
+script file and just call the script file in the <code class="docutils literal notranslate"><span class="pre">#()</span></code> construct. Another
+solution is to use line continuation. Lines can be continuated by adding <code class="docutils literal notranslate"><span class="pre">\</span></code>
+at the end. That’s the route I went, and my <code class="docutils literal notranslate"><span class="pre">status-right</span></code> option “line”
+now is more like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">set</span> -g status-right <span class="s2">"#(\</span>
+<span class="s2">&lt;shell \</span>
+<span class="s2">statements&gt;\</span>
+<span class="s2">) %H:%M %Y-%m-%d(%a)"</span>
+</pre></div>
+</div>
+<p>The shell statements actually ended up being a sequence of calls to <code class="docutils literal notranslate"><span class="pre">printf</span></code>
+in <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">...</span> <span class="pre">else</span> <span class="pre">...</span> <span class="pre">fi;</span></code> constructs. Text coloring in the tmux status line is
+controlled using strings like <code class="docutils literal notranslate"><span class="pre">#[fg=colour184]</span></code>. Example:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">set</span> -g status-right <span class="s2">"#(printf '#[fg=colour184]yellow#[fg=colour0] black') %a"</span>
+</pre></div>
+</div>
+<p>The Caps lock mode indicator is build from the content of a file like
+<code class="docutils literal notranslate"><span class="pre">/sys/class/leds/input5::capslock/brightness</span></code>. But there might be multiple
+files like this one (if you have multiple keyboards plugged in to your
+machine). You can <code class="docutils literal notranslate"><span class="pre">cat</span></code> only one of them with a command like (from my
+experience, they all have the same content at a given time):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>cat <span class="k">$(</span>find /sys/class/leds -name <span class="s2">"*capslock"</span><span class="p">|</span>head -1<span class="k">)</span>/brightness
+</pre></div>
+</div>
+<p>Similarly, for Num lock mode:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>cat <span class="k">$(</span>find /sys/class/leds -name <span class="s2">"*numlock"</span><span class="p">|</span>head -1<span class="k">)</span>/brightness
+</pre></div>
+</div>
+<p>The power supply indicator is build from the content of the
+<code class="docutils literal notranslate"><span class="pre">/sys/class/power_supply/AC/online</span></code> if it exists (from my experience, and on
+a Debian system, it exists on a laptop computer but not on a desktop computer).</p>
+<p>Finally, the remaining capacity of charge in the battery is taken in file
+<code class="docutils literal notranslate"><span class="pre">/sys/class/power_supply/BAT/capacity</span></code> if it exists. It exists on my Debian
+laptop. On other systems, the file may be
+<code class="docutils literal notranslate"><span class="pre">/sys/class/power_supply/BAT0/capacity</span></code> instead. And some laptop have two
+batteries. My <code class="docutils literal notranslate"><span class="pre">status-right</span></code> option displays the remaining capacity for only
+one battery.</p>
+<p>I’ve set the refresh rate of the status line to 3 seconds:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">set</span> -g status-interval <span class="m">3</span>
+</pre></div>
+</div>
+<p>And I also had to specify the <code class="docutils literal notranslate"><span class="pre">status-right-length</span></code> option, without that the
+status line is truncated:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">set</span> -g status-right-length <span class="m">56</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="reloading-configuration">
+<h3>
+<a class="toc-backref" href="#id5">Reloading configuration</a><a class="headerlink" href="#reloading-configuration" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-3">After changing your <code class="docutils literal notranslate"><span class="pre">~/.tmux.conf</span></code>, you can reload it with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>tmux source-file ~/.tmux.conf
+</pre></div>
+</div>
 </div>
 <div class="section" id="disabling-control-flow">
 <h3>
-<a class="toc-backref" href="#id5">Disabling control flow</a><a class="headerlink" href="#disabling-control-flow" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id6">Disabling control flow</a><a class="headerlink" href="#disabling-control-flow" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-2">You should probably disable control flow by adding this line to your
+<p id="index-4">You should probably disable control flow by adding this line to your
 <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>stty -ixon
@@ -117,13 +204,13 @@ post</a>.</p>
 </div>
 <div class="section" id="colors">
 <h3>
-<a class="toc-backref" href="#id6">Colors</a><a class="headerlink" href="#colors" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id7">Colors</a><a class="headerlink" href="#colors" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-3">The following command shows the colors that can be used in a tmux
+<p id="index-5">The following command shows the colors that can be used in a tmux
 configuration (source: <a class="reference external" href="https://superuser.com/a/1104214">https://superuser.com/a/1104214</a>):</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span><span class="k">for</span> i in <span class="o">{</span><span class="m">0</span>..255<span class="o">}</span><span class="p">;</span> <span class="se">\</span>
-  <span class="k">do</span> <span class="nb">printf</span> <span class="s2">"\x1b[38;5;</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">mcolor%-5i\x1b[0m"</span> <span class="nv">$i</span><span class="p">;</span> <span class="se">\</span>
+  <span class="k">do</span> <span class="nb">printf</span> <span class="s2">"\x1b[38;5;</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">mcolour%-5i\x1b[0m"</span> <span class="nv">$i</span><span class="p">;</span> <span class="se">\</span>
   <span class="k">if</span> ! <span class="o">((</span> <span class="o">(</span><span class="nv">$i</span> + <span class="m">1</span> <span class="o">)</span> % <span class="m">8</span> <span class="o">))</span><span class="p">;</span> <span class="k">then</span> echo<span class="p">;</span> <span class="k">fi</span><span class="p">;</span> <span class="se">\</span>
 <span class="k">done</span>
 </pre></div>
@@ -131,7 +218,7 @@ configuration (source: <a class="reference external" href="https://superuser.com
 </div>
 <div class="section" id="vim-configuration">
 <h3>
-<a class="toc-backref" href="#id7">Vim configuration</a><a class="headerlink" href="#vim-configuration" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id8">Vim configuration</a><a class="headerlink" href="#vim-configuration" title="Permalink to this headline">¶</a>
 </h3>
 <p>Enable the use of the mouse in terminal Vim by adding this line to your
 <code class="docutils literal notranslate"><span class="pre">~/.vimrc</span></code>:</p>
@@ -143,9 +230,9 @@ configuration (source: <a class="reference external" href="https://superuser.com
 </div>
 <div class="section" id="listing-killing-tmux-sessions">
 <h2>
-<a class="toc-backref" href="#id8">Listing / killing tmux sessions</a><a class="headerlink" href="#listing-killing-tmux-sessions" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id9">Listing / killing tmux sessions</a><a class="headerlink" href="#listing-killing-tmux-sessions" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-5">List your opened tmux sessions with:</p>
+<p id="index-7">List your opened tmux sessions with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>tmux ls
 </pre></div>
@@ -170,9 +257,9 @@ tmux confirm-before kill-server <span class="c1"># Prompts the user for confirma
 </div>
 <div class="section" id="detaching-client-attaching-session">
 <h2>
-<a class="toc-backref" href="#id9">Detaching client / attaching session</a><a class="headerlink" href="#detaching-client-attaching-session" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id10">Detaching client / attaching session</a><a class="headerlink" href="#detaching-client-attaching-session" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-6">Detach the current client with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">d</span></code> or:</p>
+<p id="index-8">Detach the current client with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">d</span></code> or:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>tmux detach
 </pre></div>
@@ -189,9 +276,9 @@ tmux attach -d -t &lt;session_id&gt; <span class="c1"># To attach to a specific 
 </div>
 <div class="section" id="managing-windows-and-panes">
 <h2>
-<a class="toc-backref" href="#id10">Managing windows and panes</a><a class="headerlink" href="#managing-windows-and-panes" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id11">Managing windows and panes</a><a class="headerlink" href="#managing-windows-and-panes" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-7">Create a new window with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">c</span></code>.</p>
+<p id="index-9">Create a new window with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">c</span></code>.</p>
 <p>Rename the current window with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">,</span></code>.</p>
 <p>Close the current window with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">&amp;</span></code>.</p>
 <p>Split pane vertically with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">%</span></code>.</p>
@@ -201,7 +288,7 @@ by Michael Lee</a>.</p>
 </div>
 <div class="section" id="other-resources">
 <h2>
-<a class="toc-backref" href="#id11">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id12">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
 </h2>
 <ul class="simple">
 <li><a class="reference external" href="https://tmuxcheatsheet.com/">tmux cheatsheet</a></li>
@@ -224,6 +311,7 @@ by Michael Lee</a>.</p>
 <li>
 <a class="reference internal" href="#configuration">Configuration</a><ul>
 <li><a class="reference internal" href="#my-tmux-conf">My .tmux.conf</a></li>
+<li><a class="reference internal" href="#reloading-configuration">Reloading configuration</a></li>
 <li><a class="reference internal" href="#disabling-control-flow">Disabling control flow</a></li>
 <li><a class="reference internal" href="#colors">Colors</a></li>
 <li><a class="reference internal" href="#vim-configuration">Vim configuration</a></li>
