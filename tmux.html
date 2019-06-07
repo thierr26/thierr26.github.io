@@ -114,30 +114,30 @@ nothing visible otherwise).</li>
 machine is running on the battery, nothing visible if the information is not
 found).</li>
 <li>The remaining capacity of charge in the battery in percent (yellow if lower
-than 20% and machine not plugged in), nothing visible if the information is
-not found.</li>
+than 20% and machine not plugged in, nothing visible if the information is
+not found).</li>
 <li>Time and date, with the day of the week.</li>
 </ul>
 <p>The time / date part was easy enough, the format specification is passed
 through <a class="reference external" href="https://linux.die.net/man/3/strftime">strftime(3)</a>. The sole time /
 date part could be obtained with <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">-g</span> <span class="pre">status-right</span> <span class="pre">"%H:%M</span> <span class="pre">%Y-%m-%d(%a)"</span></code>.</p>
-<p>I could obtain the other parts using shell statements. The shell statements
-must be enclosed in a <code class="docutils literal notranslate"><span class="pre">#()</span></code> construct. So my <code class="docutils literal notranslate"><span class="pre">status-right</span></code> option “line”
-now is something like
-<code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">-g</span> <span class="pre">status-right</span> <span class="pre">"#(&lt;shell</span> <span class="pre">statements&gt;)</span> <span class="pre">%H:%M</span> <span class="pre">%Y-%m-%d(%a)"</span></code>.</p>
-<p>If the shell statements are long, one solution is to write them in a separate
-script file and just call the script file in the <code class="docutils literal notranslate"><span class="pre">#()</span></code> construct. Another
-solution is to use line continuation. Lines can be continuated by adding <code class="docutils literal notranslate"><span class="pre">\</span></code>
-at the end. That’s the route I went, and my <code class="docutils literal notranslate"><span class="pre">status-right</span></code> option “line”
-now is more like:</p>
+<p>I could obtain the other parts using shell commands. The shell commands must be
+enclosed in a <code class="docutils literal notranslate"><span class="pre">#()</span></code> construct. So my <code class="docutils literal notranslate"><span class="pre">status-right</span></code> option “line” now is
+something like
+<code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">-g</span> <span class="pre">status-right</span> <span class="pre">"#(&lt;shell</span> <span class="pre">commands&gt;)</span> <span class="pre">%H:%M</span> <span class="pre">%Y-%m-%d(%a)"</span></code>.</p>
+<p>When multiple and/or long shell commands are needed, one solution is to write
+them in a separate script file and just call the script file in the <code class="docutils literal notranslate"><span class="pre">#()</span></code>
+construct. Another solution is to use line continuation. Lines can be
+continuated by adding <code class="docutils literal notranslate"><span class="pre">\</span></code> at the end. That’s the route I went, and my
+<code class="docutils literal notranslate"><span class="pre">status-right</span></code> option “line” now is more like:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span><span class="nb">set</span> -g status-right <span class="s2">"#(\</span>
 <span class="s2">&lt;shell \</span>
-<span class="s2">statements&gt;\</span>
+<span class="s2">commands&gt;\</span>
 <span class="s2">) %H:%M %Y-%m-%d(%a)"</span>
 </pre></div>
 </div>
-<p>The shell statements actually ended up being a sequence of calls to <code class="docutils literal notranslate"><span class="pre">printf</span></code>
+<p>The shell commands actually ended up being a sequence of calls to <code class="docutils literal notranslate"><span class="pre">printf</span></code>
 in <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">...</span> <span class="pre">else</span> <span class="pre">...</span> <span class="pre">fi;</span></code> constructs. Text coloring in the tmux status line is
 controlled using strings like <code class="docutils literal notranslate"><span class="pre">#[fg=colour184]</span></code>. Example:</p>
 <div class="highlight-shell notranslate">
@@ -167,6 +167,14 @@ laptop. On other systems, the file may be
 <code class="docutils literal notranslate"><span class="pre">/sys/class/power_supply/BAT0/capacity</span></code> instead. And some laptop have two
 batteries. My <code class="docutils literal notranslate"><span class="pre">status-right</span></code> option displays the remaining capacity for only
 one battery.</p>
+<p>Determining whether the remaining capacity is lower than 20% or not is achieved
+by piping the remaining capacity to a <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">'\(^\|[0-1]\).$'</span></code> command. If the
+output is non empty, then the remaining capacity is lower than 20%. Note that
+in the <code class="docutils literal notranslate"><span class="pre">~/.tmux.conf</span></code> the backslashes must be escaped:
+<code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">'\\(^\\|[0-1]\\).$')</span></code>.</p>
+<p>Note also the format string in the <code class="docutils literal notranslate"><span class="pre">printf</span></code> command for the remaining
+capacity. The percent sign must be tripled
+(<code class="docutils literal notranslate"><span class="pre">printf</span> <span class="pre">'%</span> <span class="pre">3d%%%'</span> <span class="pre">$(cat</span> <span class="pre">/sys/class/power_supply/BAT/capacity);</span></code>).</p>
 <p>I’ve set the refresh rate of the status line to 3 seconds:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span><span class="nb">set</span> -g status-interval <span class="m">3</span>
