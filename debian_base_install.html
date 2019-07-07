@@ -73,11 +73,12 @@
 <h2>
 <a class="toc-backref" href="#id1">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
 </h2>
-<p>These are my notes about the installation of a <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> system. A significant part of these notes describe
-the preparation of the installation medias. The assumption is made that you
-have access to a working machine with a Debian GNU/Linux system installed a
-fast enough internet connection (to download a few hundreds of megabytes). This
-machine will be used to prepare the installation medias for the new system.</p>
+<p>These are my notes about the installation of a <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> system on a 64-bit (“AMD64” architecture) PC. A
+significant part of these notes describe the preparation of the installation
+medias. The assumption is made that you have access to a working machine with a
+Debian GNU/Linux system installed a fast enough internet connection (to
+download a few hundreds of megabytes). This machine will be used to prepare the
+installation medias for the new system.</p>
 <p>Many software packages are also downloaded during the installation, so the
 target machine should also have a fast enough internet connection.</p>
 </div>
@@ -90,32 +91,58 @@ information about how to download a Debian installer CD image or buy
 installation CDs.</p>
 <p>If you have a fast enough internet connection and a CD burning drive, you can
 download a <a class="reference external" href="https://www.debian.org/distrib/netinst">small (approximately 300MB) installation image</a> and burn it to a blank CD-R.
-Commands like the ones below should do it. The example is for Debian 9.9.0
-(Stretch). Note also that it is assumed that you have <a class="reference external" href="http://scdbackup.sourceforge.net/cdrskin_eng.html">cdrskin</a> installed. Run <code class="docutils literal notranslate"><span class="pre">apt-get</span>
+Commands like the ones below should do it. The example is for Debian 10.0.0
+(Buster). Note also that it is assumed that you have <a class="reference external" href="http://scdbackup.sourceforge.net/cdrskin_eng.html">cdrskin</a> installed. Run <code class="docutils literal notranslate"><span class="pre">apt-get</span>
 <span class="pre">install</span> <span class="pre">cdrskin</span></code> <strong>as root</strong> if not. Note also that the
 dev=&lt;cd_burning_drive_device_file&gt; option is probably not mandatory as cdrskin
 can detect CD burning devices (<code class="docutils literal notranslate"><span class="pre">cdrskin</span> <span class="pre">--devices</span></code> lists the detected
 devices):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>wget https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-9.9.0-amd64-netinst.iso
-cdrskin <span class="nv">dev</span><span class="o">=</span>&lt;cd_burning_drive_device_file&gt; -eject -v -data debian-9.9.0-amd64-netinst.iso
+<div class="highlight"><pre><span></span>wget https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.0.0-amd64-netinst.iso
+cdrskin <span class="nv">dev</span><span class="o">=</span>&lt;cd_burning_drive_device_file&gt; -eject -v -data debian-10.0.0-amd64-netinst.iso
 </pre></div>
 </div>
-<p>You might want to verify the authenticity of the ISO image. Follow the same
-procedure as for the firmware archive verification provided in the
-<a class="reference internal" href="#firmware-archive-media"><span class="std std-ref">firmware archive section</span></a>.</p>
+<p>You might want to verify the authenticity of the ISO image. Download the SHA512
+checksum and associated signature file:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>wget https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/SHA512SUMS
+wget https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/SHA512SUMS.sign
+</pre></div>
+</div>
+<p>Then, attempt to verify the authenticity of the image:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>gpg --verify SHA512SUMS.sign
+</pre></div>
+</div>
+<p>If there are lines like the following in the output, it means that you have
+never imported the key used to sign the image (and this is confirmed by the
+fact that it does not appear in the output of <code class="docutils literal notranslate"><span class="pre">gpg</span> <span class="pre">--list-keys</span></code>).</p>
+<div class="line-block">
+<div class="line">gpg:                using RSA key DF9B9C49EAA9298432589D76DA87E80D6294BE9B</div>
+<div class="line">gpg: Can’t check signature: No public key</div>
+</div>
+<p>You can import the key with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>gpg --keyserver keyring.debian.org --recv DF9B9C49EAA9298432589D76DA87E80D6294BE9B
+</pre></div>
+</div>
+<p>A new attempt to check the signature with <code class="docutils literal notranslate"><span class="pre">gpg</span> <span class="pre">--verify</span> <span class="pre">SHA512SUMS.sign</span></code> now
+produces a line like</p>
+<div class="line-block">
+<div class="line">gpg: Good signature from “Debian CD signing key &lt;<a class="reference external" href="mailto:debian-cd%40lists.debian.org">debian-cd<span>@</span>lists<span>.</span>debian<span>.</span>org</a>&gt;”</div>
+</div>
 <p>When the burning is done, you might also want to check the integrity of the
 burned CD. Just compare the output of the following command with the checksum
 from the downloaded checksum file:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>dd <span class="k">if</span><span class="o">=</span>/dev/&lt;cd_burning_drive_device_file&gt; <span class="nv">bs</span><span class="o">=</span><span class="m">2048</span> <span class="se">\</span>
-  <span class="nv">count</span><span class="o">=</span><span class="k">$(($(</span>stat -c %s debian-9.9.0-amd64-netinst.iso<span class="k">)</span><span class="o">/</span><span class="m">2048</span><span class="k">))</span> <span class="se">\</span>
-  <span class="nv">conv</span><span class="o">=</span>notrunc,noerror <span class="p">|</span> sha512sums
+  <span class="nv">count</span><span class="o">=</span><span class="k">$(($(</span>stat -c %s debian-10.0.0-amd64-netinst.iso<span class="k">)</span><span class="o">/</span><span class="m">2048</span><span class="k">))</span> <span class="se">\</span>
+  <span class="nv">conv</span><span class="o">=</span>notrunc,noerror <span class="p">|</span> sha512sum
 </pre></div>
 </div>
 </div>
 <div class="section" id="preparing-a-media-with-firmware-archive-just-in-case">
-<span id="firmware-archive-media"></span><h2>
+<h2>
 <a class="toc-backref" href="#id3">Preparing a media with firmware archive, just in case</a><a class="headerlink" href="#preparing-a-media-with-firmware-archive-just-in-case" title="Permalink to this headline">¶</a>
 </h2>
 <p id="index-1">Note that this step is <strong>not necessary if your installation CD already includes
@@ -125,36 +152,18 @@ cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware).</p>
 instructions, but here are the details of what I’ve done (for a Debian Buster
 install, and including the authenticity verification of the archive):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>mkdir -p ~/download/debian_buster_firmware <span class="c1"># Prepare a folder somewhere.</span>
-<span class="nb">cd</span> ~/download/debian_buster_firmware       <span class="c1"># Move to that folder.</span>
+<div class="highlight"><pre><span></span>mkdir -p ~/download/debian_buster_firmware <span class="c1"># Create a directory somewhere.</span>
+<span class="nb">cd</span> ~/download/debian_buster_firmware       <span class="c1"># Move to that directory.</span>
 
 <span class="c1"># Download the firmware archive, its SHA512 checksum and associated signature</span>
 <span class="c1"># file.</span>
 wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/buster/current/firmware.tar.gz
 wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/buster/current/SHA512SUMS
-wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/buster/current/SHA512SUMS.sign
-
-<span class="c1"># Attempt to verify the authenticity of the file.</span>
-gpg --verify SHA512SUMS.sign
 </pre></div>
 </div>
-<p>In the output of the last command, there were lines like:</p>
-<div class="line-block">
-<div class="line">gpg:                using RSA key F41D30342F3546695F65C66942468F4009EA8AC3</div>
-<div class="line">gpg: Can’t check signature: No public key</div>
-</div>
-<p>It means I had never imported the key used to sign the firmware archive (and
-this is confirmed by the fact that it does not appear in the output of <code class="docutils literal notranslate"><span class="pre">gpg</span>
-<span class="pre">--list-keys</span></code>). I could import the key with:</p>
-<div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>gpg --keyserver keyring.debian.org --recv F41D30342F3546695F65C66942468F4009EA8AC3
-</pre></div>
-</div>
-<p>A new attempt to check the signature with <code class="docutils literal notranslate"><span class="pre">gpg</span> <span class="pre">--verify</span> <span class="pre">SHA512SUMS.sign</span></code> now
-produces a line like</p>
-<div class="line-block">
-<div class="line">gpg: Good signature from “Debian Testing CDs Automatic Signing Key &lt;<a class="reference external" href="mailto:debian-cd%40lists.debian.org">debian-cd<span>@</span>lists<span>.</span>debian<span>.</span>org</a>&gt;”</div>
-</div>
+<p>I’ve checked the SHA512 checksum of <code class="docutils literal notranslate"><span class="pre">firmware.tar.gz</span></code> by issuing a
+<code class="docutils literal notranslate"><span class="pre">sha512sum</span> <span class="pre">firmware.tar.gz</span></code> command and comparing the output with what is in
+SHA512SUMS.</p>
 <p>The final steps consisted in extracting the files from the firmware archive
 (<code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">xvzf</span> <span class="pre">firmware.tar.gz</span></code>) and copy all the files with <code class="docutils literal notranslate"><span class="pre">.deb</span></code> extension
 to a “firmware” directory located at the root of a USB stick.</p>
