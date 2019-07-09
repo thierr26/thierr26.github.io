@@ -88,8 +88,8 @@ stores mails in the so called MH mailbox format. This mailbox format is the one
 of the <a class="reference external" href="https://en.wikipedia.org/wiki/MH_Message_Handling_System">MH Message Handling System</a>, a command-line
 based mail handling system.</p>
 <p><a class="reference external" href="http://www.nongnu.org/nmh">nmh</a> is the current implementation of the MH
-system (provided by package nmh on a Debian GNU/Linux system). It is <a class="reference external" href="http://lists.nongnu.org/archive/html/nmh-workers/2014-02/msg00049.html">possible
-to use both Claws Mail and nmh</a>.</p>
+system (provided by package <code class="docutils literal notranslate"><span class="pre">nmh</span></code> on a Debian GNU/Linux system). It is
+<a class="reference external" href="http://lists.nongnu.org/archive/html/nmh-workers/2014-02/msg00049.html">possible to use both Claws Mail and nmh</a>.</p>
 <p>This page gives the various actions I had to take to be able to receive and
 send emails using the nmh command-line programs. Filtering the incoming
 messages with <a class="reference external" href="http://bogofilter.sourceforge.net/">Bogofilter</a> (anti-spam
@@ -161,7 +161,9 @@ to your <code class="docutils literal notranslate"><span class="pre">~/.profile<
 <dd>Default value (no)</dd>
 </dl>
 <p>As a test, I issued the following command which is supposed to send a mail
-containing “Test” to a recipient (the -v switch is for verbosity):</p>
+containing “Test” to a recipient. The -v switch is for verbosity. I notice that
+the mails that I send that way are not delivered to all recipients. So <strong>there must be something wrong</strong>. I don’t know what exactly, probably something that
+makes those mails appear as spam to certain filter programs:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>/usr/sbin/sendmail -v recipient@example.com
 Test
@@ -169,6 +171,15 @@ Test
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">/usr/sbin/sendmail</span></code> is a symbolic link to exim4 executable.</p>
+<p>You can specify the “from” address using a -f switch on the command line and
+specify the mail subject by starting the message with a <code class="docutils literal notranslate"><span class="pre">subject:</span></code> line:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>/usr/sbin/sendmail -f sender@example.com -v recipient@example.com
+subject:The subject
+The mail body.
+.
+</pre></div>
+</div>
 </div>
 <div class="section" id="fetchmail">
 <h3>
@@ -180,7 +191,7 @@ user can read and write it:</p>
 <div class="highlight"><pre><span></span>chmod <span class="m">600</span> ~/.fetchmailrc
 </pre></div>
 </div>
-<p>You can <a class="reference download internal" download="" href="_downloads/ead1d06d75e88a57afb097d5a78970de/.fetchmailrc"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">an</span> <span class="pre">example</span> <span class="pre">.fetchmailrc</span> <span class="pre">file</span> <span class="pre">with</span> <span class="pre">two</span> <span class="pre">POP3</span>
+<p>You can <a class="reference download internal" download="" href="_downloads/5fad7fcb3d70e70646f9dfe1b9ca21a2/.fetchmailrc"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">an</span> <span class="pre">example</span> <span class="pre">.fetchmailrc</span> <span class="pre">file</span> <span class="pre">with</span> <span class="pre">two</span> <span class="pre">POP3</span>
 <span class="pre">connections</span> <span class="pre">defined</span></code></a>.</p>
 </div>
 <div class="section" id="nmh-user-installation">
@@ -261,7 +272,7 @@ as described in <a class="reference external" href="https://bugs.debian.org/cgi-
 <div class="highlight"><pre><span></span>apt-get install procmail bogofilter <span class="c1"># As root.</span>
 </pre></div>
 </div>
-<p>Create a <code class="docutils literal notranslate"><span class="pre">~/.procmailrc</span></code> like <a class="reference download internal" download="" href="_downloads/0ca0af769e79fc5c08621ec9aba2657a/.procmailrc"><code class="xref download docutils literal notranslate"><span class="pre">this</span> <span class="pre">example</span> <span class="pre">.procmailrc</span> <span class="pre">file</span></code></a> and when invoking fetchmail, use the <code class="docutils literal notranslate"><span class="pre">--mda</span></code>
+<p>Create a <code class="docutils literal notranslate"><span class="pre">~/.procmailrc</span></code> like <a class="reference download internal" download="" href="_downloads/702a1ae7d249151978a758f5e08802e0/.procmailrc"><code class="xref download docutils literal notranslate"><span class="pre">this</span> <span class="pre">example</span> <span class="pre">.procmailrc</span> <span class="pre">file</span></code></a> and when invoking fetchmail, use the <code class="docutils literal notranslate"><span class="pre">--mda</span></code>
 option:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>fetchmail --mda <span class="s2">"procmail -f %F"</span>
@@ -288,7 +299,7 @@ see the list of available commands. One of these commands is “send”.</p>
 <p>By default, <code class="docutils literal notranslate"><span class="pre">/etc/nmh/components</span></code> is used as message template. If your nmh
 directory is <code class="docutils literal notranslate"><span class="pre">/home/my_user_name/Mail</span></code>, you can put a custom <code class="docutils literal notranslate"><span class="pre">components</span></code>
 file there. It will be used automatically by <code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/comp</span></code>. You can
-<a class="reference download internal" download="" href="_downloads/0c0c573d08499da2c3f8bbd93b9f3881/components"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">an</span> <span class="pre">example</span> <span class="pre">components</span> <span class="pre">file</span> <span class="pre">with</span> <span class="pre">sender's</span> <span class="pre">name,</span> <span class="pre">address</span> <span class="pre">and</span>
+<a class="reference download internal" download="" href="_downloads/713c4a5251305d5c24c940715e7a00d6/components"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">an</span> <span class="pre">example</span> <span class="pre">components</span> <span class="pre">file</span> <span class="pre">with</span> <span class="pre">sender's</span> <span class="pre">name,</span> <span class="pre">address</span> <span class="pre">and</span>
 <span class="pre">signature</span></code></a>.</p>
 <p>To force <code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/comp</span></code> to use a specific message template, use the
 <code class="docutils literal notranslate"><span class="pre">-form</span></code> switch:</p>
@@ -388,6 +399,7 @@ assumed that the current working directory is the MH mailbox):</p>
 <ul class="simple">
 <li>Your current working directory is your MH mailbox,</li>
 <li>Your spam messages are in the “Spam” folder,</li>
+<li>Your trash folder (if any) is empty,</li>
 <li>You also have an “Unsure spam” folder that contains only spam messages (which
 implies that you have moved any ham (non spam) message away from this folder
 with (for example) commands like
@@ -396,22 +408,26 @@ with (for example) commands like
 <p>you can move the messages in ‘Unsure spam’ to Spam and (re)train Bogofilter
 with the following commands:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>rm -f ~/.bogofilter/wordlist.db      <span class="c1"># Don't do this if you don't want to</span>
+<div class="highlight"><pre><span></span>rm -rf ~/.bogofilter                 <span class="c1"># Don't do this if you don't want to</span>
                                      <span class="c1"># entirely reset the training.</span>
 
 refile all -src +<span class="s1">'Unsure spam'</span> +Spam <span class="c1"># Moves the messages in 'Unsure spam' to</span>
                                      <span class="c1"># Spam.</span>
 
-cat Spam/* <span class="p">|</span> bogofilter -s           <span class="c1"># Registers spam messages.</span>
+rm <span class="s1">'Unsure spam'</span>/*                   <span class="c1"># Actually delete files in 'Unsure spam'</span>
 
-find . -mindepth <span class="m">1</span> -type f -not -path <span class="s2">"./Spam/*"</span> -exec cat <span class="o">{}</span> <span class="se">\;</span> <span class="se">\</span>
-    <span class="p">|</span> bogofilter -n                  <span class="c1"># Registers ham messages.</span>
+bogofilter -vsB Spam                 <span class="c1"># Registers spam messages.</span>
+
+find . -mindepth <span class="m">1</span> <span class="se">\</span>
+       -type d <span class="se">\</span>
+       -not -path <span class="s2">"\./Spam"</span> <span class="se">\</span>
+  <span class="p">|</span> bogofilter -vnb                  <span class="c1"># Registers ham messages.</span>
 </pre></div>
 </div>
 <p>You can check in which category (spam (S), ham (H), unsure (U)) Bogofilter
 classifies a message with commands like:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>cat Spam/1 <span class="p">|</span> bogofilter -t
+<div class="highlight"><pre><span></span>bogofilter -tB Spam/1
 </pre></div>
 </div>
 <p>Such commands output one line. The first character of the line is S, H or U.</p>
