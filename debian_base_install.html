@@ -56,17 +56,18 @@
 <li>
 <a class="reference internal" href="#immediate-post-install-actions" id="id7">Immediate post-install actions</a><ul>
 <li><a class="reference internal" href="#system-update" id="id8">System update</a></li>
-<li><a class="reference internal" href="#adding-deb-multimedia-to-the-sources" id="id9">Adding deb-multimedia to the sources</a></li>
-<li><a class="reference internal" href="#checking-the-configured-time-zone" id="id10">Checking the configured time zone</a></li>
-<li><a class="reference internal" href="#synchronizing-the-system-date-with-network-time-servers" id="id11">Synchronizing the system date with network time servers</a></li>
-<li><a class="reference internal" href="#installing-a-console-locker" id="id12">Installing a console locker</a></li>
-<li><a class="reference internal" href="#installing-a-memory-ram-tester" id="id13">Installing a memory (RAM) tester</a></li>
-<li><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool" id="id14">Installing a wireless devices status management tool</a></li>
-<li><a class="reference internal" href="#installing-a-cd-burning-tool" id="id15">Installing a CD burning tool</a></li>
-<li><a class="reference internal" href="#installing-locate-updatedb" id="id16">Installing locate / updatedb</a></li>
+<li><a class="reference internal" href="#preventing-the-system-from-beeping" id="id9">Preventing the system from beeping</a></li>
+<li><a class="reference internal" href="#adding-deb-multimedia-to-the-sources" id="id10">Adding deb-multimedia to the sources</a></li>
+<li><a class="reference internal" href="#checking-the-configured-time-zone" id="id11">Checking the configured time zone</a></li>
+<li><a class="reference internal" href="#synchronizing-the-system-date-with-network-time-servers" id="id12">Synchronizing the system date with network time servers</a></li>
+<li><a class="reference internal" href="#installing-a-console-locker" id="id13">Installing a console locker</a></li>
+<li><a class="reference internal" href="#installing-a-memory-ram-tester" id="id14">Installing a memory (RAM) tester</a></li>
+<li><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool" id="id15">Installing a wireless devices status management tool</a></li>
+<li><a class="reference internal" href="#installing-a-cd-burning-tool" id="id16">Installing a CD burning tool</a></li>
+<li><a class="reference internal" href="#installing-locate-updatedb" id="id17">Installing locate / updatedb</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#post-install-maintenance" id="id17">Post-install maintenance</a></li>
+<li><a class="reference internal" href="#post-install-maintenance" id="id18">Post-install maintenance</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -255,11 +256,27 @@ apt-get dist-upgrade <span class="c1"># As root.</span>
 </pre></div>
 </div>
 </div>
+<div class="section" id="preventing-the-system-from-beeping">
+<h3>
+<a class="toc-backref" href="#id9">Preventing the system from beeping</a><a class="headerlink" href="#preventing-the-system-from-beeping" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-6">The newly installed system may emit beeps quiet often (for example when working
+in a terminal emulator). To stop that, you can blacklist module pcspkr by
+adding a file <strong>as root</strong> in <code class="docutils literal notranslate"><span class="pre">/etc/modprobe.d</span></code> (file name suggestion:
+<code class="docutils literal notranslate"><span class="pre">nobeep.conf</span></code>). The file should contain this line:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>blacklist pcspkr
+</pre></div>
+</div>
+<p>After rebooting the system, module <code class="docutils literal notranslate"><span class="pre">pcspkr</span></code> should not be loaded any more
+(i.e. <code class="docutils literal notranslate"><span class="pre">lsmod</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">pcspkr</span></code> should output nothing) and you should not hear
+beeps any more.</p>
+</div>
 <div class="section" id="adding-deb-multimedia-to-the-sources">
 <h3>
-<a class="toc-backref" href="#id9">Adding deb-multimedia to the sources</a><a class="headerlink" href="#adding-deb-multimedia-to-the-sources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id10">Adding deb-multimedia to the sources</a><a class="headerlink" href="#adding-deb-multimedia-to-the-sources" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-6">You may want to add deb-multimedia as a source of packages for the newly
+<p id="index-7">You may want to add deb-multimedia as a source of packages for the newly
 installed Debian system (see <a class="reference external" href="https://linuxconfig.org/amp-up-your-multimedia-experience-on-debian-9-stretch-linux">this linuxconfig.org article</a>).</p>
 <p><a class="reference external" href="http://deb-multimedia.org">http://deb-multimedia.org</a> provides some instructions:</p>
 <p>First, add <strong>as root</strong> a line like this one (example for Debian Buster) in your
@@ -278,9 +295,9 @@ apt-get dist-upgrade
 </div>
 <div class="section" id="checking-the-configured-time-zone">
 <h3>
-<a class="toc-backref" href="#id10">Checking the configured time zone</a><a class="headerlink" href="#checking-the-configured-time-zone" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id11">Checking the configured time zone</a><a class="headerlink" href="#checking-the-configured-time-zone" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-7">Check the configured time zone with:</p>
+<p id="index-8">Check the configured time zone with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>cat /etc/timezone
 </pre></div>
@@ -293,9 +310,9 @@ apt-get dist-upgrade
 </div>
 <div class="section" id="synchronizing-the-system-date-with-network-time-servers">
 <h3>
-<a class="toc-backref" href="#id11">Synchronizing the system date with network time servers</a><a class="headerlink" href="#synchronizing-the-system-date-with-network-time-servers" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id12">Synchronizing the system date with network time servers</a><a class="headerlink" href="#synchronizing-the-system-date-with-network-time-servers" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-8">Just install package <code class="docutils literal notranslate"><span class="pre">ntp</span></code>:</p>
+<p id="index-9">Just install package <code class="docutils literal notranslate"><span class="pre">ntp</span></code>:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install ntp <span class="c1"># As root.</span>
 </pre></div>
@@ -304,9 +321,9 @@ apt-get dist-upgrade
 </div>
 <div class="section" id="installing-a-console-locker">
 <h3>
-<a class="toc-backref" href="#id12">Installing a console locker</a><a class="headerlink" href="#installing-a-console-locker" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id13">Installing a console locker</a><a class="headerlink" href="#installing-a-console-locker" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-9">There are many screen and/or console locker programs. I’ve installed <a class="reference external" href="https://github.com/muennich/physlock">physlock</a>:</p>
+<p id="index-10">There are many screen and/or console locker programs. I’ve installed <a class="reference external" href="https://github.com/muennich/physlock">physlock</a>:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install physlock <span class="c1"># As root.</span>
 </pre></div>
@@ -314,9 +331,9 @@ apt-get dist-upgrade
 </div>
 <div class="section" id="installing-a-memory-ram-tester">
 <h3>
-<a class="toc-backref" href="#id13">Installing a memory (RAM) tester</a><a class="headerlink" href="#installing-a-memory-ram-tester" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id14">Installing a memory (RAM) tester</a><a class="headerlink" href="#installing-a-memory-ram-tester" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-10">RAM failures are not so rare in my experience. A tester like <a class="reference external" href="https://www.memtest.org/">Memtest86+</a> can really help diagnosing a RAM failure. The
+<p id="index-11">RAM failures are not so rare in my experience. A tester like <a class="reference external" href="https://www.memtest.org/">Memtest86+</a> can really help diagnosing a RAM failure. The
 <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span></code> command below installs Memtest86+ and adds an entry in the
 <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_GRUB">Grub</a> menu (you have to reboot your
 machine and select the Memtest86+ grub entry to start Memtest86+):</p>
@@ -327,9 +344,9 @@ machine and select the Memtest86+ grub entry to start Memtest86+):</p>
 </div>
 <div class="section" id="installing-a-wireless-devices-status-management-tool">
 <h3>
-<a class="toc-backref" href="#id14">Installing a wireless devices status management tool</a><a class="headerlink" href="#installing-a-wireless-devices-status-management-tool" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id15">Installing a wireless devices status management tool</a><a class="headerlink" href="#installing-a-wireless-devices-status-management-tool" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-11">On a laptop computer, it may be useful to check the status (enabled, hard
+<p id="index-12">On a laptop computer, it may be useful to check the status (enabled, hard
 blocked, soft blocked) of the wireless devices. Package <code class="docutils literal notranslate"><span class="pre">rfkill</span></code> makes that
 possible:</p>
 <div class="highlight-shell notranslate">
@@ -344,9 +361,9 @@ possible:</p>
 </div>
 <div class="section" id="installing-a-cd-burning-tool">
 <h3>
-<a class="toc-backref" href="#id15">Installing a CD burning tool</a><a class="headerlink" href="#installing-a-cd-burning-tool" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id16">Installing a CD burning tool</a><a class="headerlink" href="#installing-a-cd-burning-tool" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-12">I use cdrskin to burn CDs (in particular the Debian installation CDs) on an
+<p id="index-13">I use cdrskin to burn CDs (in particular the Debian installation CDs) on an
 internal or external (USB) CD burning drive:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install cdrskin <span class="c1"># As root.</span>
@@ -355,9 +372,9 @@ internal or external (USB) CD burning drive:</p>
 </div>
 <div class="section" id="installing-locate-updatedb">
 <h3>
-<a class="toc-backref" href="#id16">Installing locate / updatedb</a><a class="headerlink" href="#installing-locate-updatedb" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id17">Installing locate / updatedb</a><a class="headerlink" href="#installing-locate-updatedb" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-13">Command <code class="docutils literal notranslate"><span class="pre">locate</span></code> is a way of finding files on your computer. It is faster
+<p id="index-14">Command <code class="docutils literal notranslate"><span class="pre">locate</span></code> is a way of finding files on your computer. It is faster
 than <code class="docutils literal notranslate"><span class="pre">find</span></code>. It relies on a database (upatedb) which is automatically updated
 now and then.</p>
 <p>Install locate and updatedb with:</p>
@@ -374,9 +391,9 @@ now and then.</p>
 </div>
 <div class="section" id="post-install-maintenance">
 <h2>
-<a class="toc-backref" href="#id17">Post-install maintenance</a><a class="headerlink" href="#post-install-maintenance" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id18">Post-install maintenance</a><a class="headerlink" href="#post-install-maintenance" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-14">I regularly run the following commands to keep the system up to date:</p>
+<p id="index-15">I regularly run the following commands to keep the system up to date:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get update <span class="p">&amp;</span> apt-get dist-upgrade
 apt-get autoremove <span class="c1"># Useful if some packages have become unneeded.</span>
@@ -405,6 +422,7 @@ apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows o
 <li>
 <a class="reference internal" href="#immediate-post-install-actions">Immediate post-install actions</a><ul>
 <li><a class="reference internal" href="#system-update">System update</a></li>
+<li><a class="reference internal" href="#preventing-the-system-from-beeping">Preventing the system from beeping</a></li>
 <li><a class="reference internal" href="#adding-deb-multimedia-to-the-sources">Adding deb-multimedia to the sources</a></li>
 <li><a class="reference internal" href="#checking-the-configured-time-zone">Checking the configured time zone</a></li>
 <li><a class="reference internal" href="#synchronizing-the-system-date-with-network-time-servers">Synchronizing the system date with network time servers</a></li>
