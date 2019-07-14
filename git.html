@@ -61,20 +61,21 @@
 <li><a class="reference internal" href="#working-from-outside-the-working-directory" id="id12">Working from outside the working directory</a></li>
 <li><a class="reference internal" href="#cloning-an-existing-repository" id="id13">Cloning an existing repository</a></li>
 <li><a class="reference internal" href="#staging-changes" id="id14">Staging changes</a></li>
-<li><a class="reference internal" href="#showing-changes" id="id15">Showing changes</a></li>
-<li><a class="reference internal" href="#committing" id="id16">Committing</a></li>
-<li><a class="reference internal" href="#viewing-the-commit-log" id="id17">Viewing the commit log</a></li>
-<li><a class="reference internal" href="#working-with-remote-repositories" id="id18">Working with remote repositories</a></li>
-<li><a class="reference internal" href="#working-with-branches" id="id19">Working with branches</a></li>
-<li><a class="reference internal" href="#stashing-changes" id="id20">Stashing changes</a></li>
-<li><a class="reference internal" href="#finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree" id="id21">Finding text patterns in the indexed files (or in any directory tree)</a></li>
-<li><a class="reference internal" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file" id="id22">Find the last modification date and author of any line of a file</a></li>
-<li><a class="reference internal" href="#reverting-the-index-and-working-directory-to-a-previous-commit" id="id23">Reverting the index and working directory to a previous commit</a></li>
-<li><a class="reference internal" href="#maintaining-a-difference-between-working-and-committed-trees" id="id24">Maintaining a difference between working and committed trees</a></li>
-<li><a class="reference internal" href="#creating-an-archive-of-the-latest-commit-without-any-history" id="id25">Creating an archive of the latest commit (without any history)</a></li>
-<li><a class="reference internal" href="#scripting" id="id26">Scripting</a></li>
-<li><a class="reference internal" href="#hooks" id="id27">Hooks</a></li>
-<li><a class="reference internal" href="#other-resources" id="id28">Other resources</a></li>
+<li><a class="reference internal" href="#unstaging-changes" id="id15">Unstaging changes</a></li>
+<li><a class="reference internal" href="#showing-changes" id="id16">Showing changes</a></li>
+<li><a class="reference internal" href="#committing" id="id17">Committing</a></li>
+<li><a class="reference internal" href="#viewing-the-commit-log" id="id18">Viewing the commit log</a></li>
+<li><a class="reference internal" href="#working-with-remote-repositories" id="id19">Working with remote repositories</a></li>
+<li><a class="reference internal" href="#working-with-branches" id="id20">Working with branches</a></li>
+<li><a class="reference internal" href="#stashing-changes" id="id21">Stashing changes</a></li>
+<li><a class="reference internal" href="#finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree" id="id22">Finding text patterns in the indexed files (or in any directory tree)</a></li>
+<li><a class="reference internal" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file" id="id23">Find the last modification date and author of any line of a file</a></li>
+<li><a class="reference internal" href="#reverting-the-index-and-working-directory-to-a-previous-commit" id="id24">Reverting the index and working directory to a previous commit</a></li>
+<li><a class="reference internal" href="#maintaining-a-difference-between-working-and-committed-trees" id="id25">Maintaining a difference between working and committed trees</a></li>
+<li><a class="reference internal" href="#creating-an-archive-of-the-latest-commit-without-any-history" id="id26">Creating an archive of the latest commit (without any history)</a></li>
+<li><a class="reference internal" href="#scripting" id="id27">Scripting</a></li>
+<li><a class="reference internal" href="#hooks" id="id28">Hooks</a></li>
+<li><a class="reference internal" href="#other-resources" id="id29">Other resources</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -123,6 +124,20 @@ argument) command. Value <code class="docutils literal notranslate"><span class=
 <div class="highlight"><pre><span></span>git config --list
 </pre></div>
 </div>
+<p>If you use a git hosting service like <a class="reference external" href="https://github.com/">GitHub</a>,
+<a class="reference external" href="https://about.gitlab.com/">GitLab</a> or <a class="reference external" href="https://bitbucket.org/">Bitbucket</a>,
+you may want Git to store your credentials for the service. One way to achieve
+that is to use the Git credential helper.</p>
+<p>The following command causes Git to store the credentials you provide next time
+you issue a (for example) <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> command, so that you won’t ever have to
+retype them:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git config --global credential.helper store
+</pre></div>
+</div>
+<p>The credentials are stored in <code class="docutils literal notranslate"><span class="pre">~/.git-credentials</span></code>. <strong>They are not
+encrypted</strong>, so check that only you have read permission on that file (if this
+is not the case, issue a <code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">600</span> <span class="pre">~/.git-credentials</span></code> command).</p>
 </div>
 <div class="section" id="creating-aliases">
 <span id="git-aliases"></span><h3>
@@ -263,11 +278,22 @@ git rm --cached path/to/file <span class="c1"># Does not remove the file from th
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> shows the staged files (among other things).</p>
 </div>
+<div class="section" id="unstaging-changes">
+<h2>
+<a class="toc-backref" href="#id15">Unstaging changes</a><a class="headerlink" href="#unstaging-changes" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-9">You can unstage a file that you have just mistakenly staged with a command
+like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git reset -- path/to/file
+</pre></div>
+</div>
+</div>
 <div class="section" id="showing-changes">
 <h2>
-<a class="toc-backref" href="#id15">Showing changes</a><a class="headerlink" href="#showing-changes" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id16">Showing changes</a><a class="headerlink" href="#showing-changes" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-9">Show the difference between what is staged (or what is in the last commit if no
+<p id="index-10">Show the difference between what is staged (or what is in the last commit if no
 change is staged) and the working tree with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git diff
@@ -318,9 +344,9 @@ git diff 42b9c3b a92c02a -- path/to/files <span class="c1"># Shows changes for t
 </div>
 <div class="section" id="committing">
 <h2>
-<a class="toc-backref" href="#id16">Committing</a><a class="headerlink" href="#committing" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id17">Committing</a><a class="headerlink" href="#committing" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-10">The following commands commit the staged changes to the repository:</p>
+<p id="index-11">The following commands commit the staged changes to the repository:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git commit                                <span class="c1"># Opens a text editor for commit</span>
                                           <span class="c1"># message edition.</span>
@@ -350,9 +376,9 @@ commit:</p>
 </div>
 <div class="section" id="viewing-the-commit-log">
 <h2>
-<a class="toc-backref" href="#id17">Viewing the commit log</a><a class="headerlink" href="#viewing-the-commit-log" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id18">Viewing the commit log</a><a class="headerlink" href="#viewing-the-commit-log" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-11">Show the commit log with:</p>
+<p id="index-12">Show the commit log with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git log
 </pre></div>
@@ -378,9 +404,9 @@ git log --graph --oneline --all          <span class="c1"># Compact graphical re
 </div>
 <div class="section" id="working-with-remote-repositories">
 <h2>
-<a class="toc-backref" href="#id18">Working with remote repositories</a><a class="headerlink" href="#working-with-remote-repositories" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id19">Working with remote repositories</a><a class="headerlink" href="#working-with-remote-repositories" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-12">Configure a remote named “origin” with:</p>
+<p id="index-13">Configure a remote named “origin” with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git remote add origin remote_repository_url
 </pre></div>
@@ -410,9 +436,9 @@ merges the changes into the local repository:</p>
 </div>
 <div class="section" id="working-with-branches">
 <h2>
-<a class="toc-backref" href="#id19">Working with branches</a><a class="headerlink" href="#working-with-branches" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id20">Working with branches</a><a class="headerlink" href="#working-with-branches" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-13"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> shows the current branch (among other things).</p>
+<p id="index-14"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> shows the current branch (among other things).</p>
 <p>Switch to branch named “branch_name” with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git checkout branch_name
@@ -458,9 +484,9 @@ git branch -D branch_name <span class="c1"># Deletes the branch even if it's not
 </div>
 <div class="section" id="stashing-changes">
 <h2>
-<a class="toc-backref" href="#id20">Stashing changes</a><a class="headerlink" href="#stashing-changes" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id21">Stashing changes</a><a class="headerlink" href="#stashing-changes" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-14">Store the current state of the working tree and the index in the stash stack
+<p id="index-15">Store the current state of the working tree and the index in the stash stack
 and go back to a clean working tree with one of the following commands:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git stash push
@@ -508,9 +534,9 @@ git stash drop           <span class="c1"># Equivalent to "git stash drop stash@
 </div>
 <div class="section" id="finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree">
 <h2>
-<a class="toc-backref" href="#id21">Finding text patterns in the indexed files (or in any directory tree)</a><a class="headerlink" href="#finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id22">Finding text patterns in the indexed files (or in any directory tree)</a><a class="headerlink" href="#finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-15">Use commands like the following ones to search text patterns:</p>
+<p id="index-16">Use commands like the following ones to search text patterns:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git grep &lt;reg_exp&gt;            <span class="c1"># Search regular expression &lt;reg_exp&gt; in</span>
                               <span class="c1"># indexed file.</span>
@@ -524,9 +550,9 @@ git grep --no-index &lt;reg_exp&gt; <span class="c1"># Useful to search in a dir
 </div>
 <div class="section" id="find-the-last-modification-date-and-author-of-any-line-of-a-file">
 <h2>
-<a class="toc-backref" href="#id22">Find the last modification date and author of any line of a file</a><a class="headerlink" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id23">Find the last modification date and author of any line of a file</a><a class="headerlink" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-16">Use this command to see the last modification date and author of any line of a
+<p id="index-17">Use this command to see the last modification date and author of any line of a
 file:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git blame path/to/file
@@ -535,9 +561,9 @@ file:</p>
 </div>
 <div class="section" id="reverting-the-index-and-working-directory-to-a-previous-commit">
 <h2>
-<a class="toc-backref" href="#id23">Reverting the index and working directory to a previous commit</a><a class="headerlink" href="#reverting-the-index-and-working-directory-to-a-previous-commit" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id24">Reverting the index and working directory to a previous commit</a><a class="headerlink" href="#reverting-the-index-and-working-directory-to-a-previous-commit" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-17">Revert the index and working directory to the last, penultimate, etc… commit
+<p id="index-18">Revert the index and working directory to the last, penultimate, etc… commit
 with commands like:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git reset --hard HEAD^
@@ -549,9 +575,9 @@ git reset --hard HEAD^^^
 </div>
 <div class="section" id="maintaining-a-difference-between-working-and-committed-trees">
 <span id="git-maintain-work-commit-diff"></span><h2>
-<a class="toc-backref" href="#id24">Maintaining a difference between working and committed trees</a><a class="headerlink" href="#maintaining-a-difference-between-working-and-committed-trees" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id25">Maintaining a difference between working and committed trees</a><a class="headerlink" href="#maintaining-a-difference-between-working-and-committed-trees" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-18">In some cases, you want a particular file content in your working tree, that
+<p id="index-19">In some cases, you want a particular file content in your working tree, that
 you don’t want to commit.</p>
 <p>For example, this page you are currently reading is part of a <a class="reference external" href="http://www.sphinx-doc.org/en/master">Sphinx</a> project. The page you’re reading is the
 result of Sphinx processing some source files and generating HTML output. On
@@ -609,9 +635,9 @@ file.</p>
 </div>
 <div class="section" id="creating-an-archive-of-the-latest-commit-without-any-history">
 <h2>
-<a class="toc-backref" href="#id25">Creating an archive of the latest commit (without any history)</a><a class="headerlink" href="#creating-an-archive-of-the-latest-commit-without-any-history" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id26">Creating an archive of the latest commit (without any history)</a><a class="headerlink" href="#creating-an-archive-of-the-latest-commit-without-any-history" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-19">The following commands create archives of the working directory in “tar” and
+<p id="index-20">The following commands create archives of the working directory in “tar” and
 “zip” formats:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git archive -o latest.tar HEAD
@@ -621,9 +647,9 @@ git archive -o latest.zip HEAD
 </div>
 <div class="section" id="scripting">
 <h2>
-<a class="toc-backref" href="#id26">Scripting</a><a class="headerlink" href="#scripting" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id27">Scripting</a><a class="headerlink" href="#scripting" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-20">It is sometimes needed to automate a sequence of Git commands and write a
+<p id="index-21">It is sometimes needed to automate a sequence of Git commands and write a
 script (a <a class="reference external" href="https://en.wikipedia.org/wiki/Shell_script">shell script</a> for
 example). Scripting makes it possible to define <a class="reference internal" href="#hooks"><span class="std std-ref">hooks</span></a>.</p>
 <p><a class="reference external" href="https://stackoverflow.com/a/39848551">Git commands are divided into two categories</a>:</p>
@@ -681,9 +707,9 @@ git merge-base --is-ancestor hash1 hash2  <span class="c1"># Does not output any
 </div>
 <div class="section" id="hooks">
 <span id="id2"></span><h2>
-<a class="toc-backref" href="#id27">Hooks</a><a class="headerlink" href="#hooks" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id28">Hooks</a><a class="headerlink" href="#hooks" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-21">Assuming that:</p>
+<p id="index-22">Assuming that:</p>
 <ul class="simple">
 <li>You have a script “script-name” meant to be used as, say, a post-commit hook,</li>
 <li>This script is located at the top level of the working tree,</li>
@@ -725,7 +751,7 @@ variables instead:</p>
 </div>
 <div class="section" id="other-resources">
 <h2>
-<a class="toc-backref" href="#id28">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id29">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
 </h2>
 <ul class="simple">
 <li><a class="reference external" href="https://git-scm.com/docs">Git documentation</a></li>
@@ -765,6 +791,7 @@ variables instead:</p>
 <li><a class="reference internal" href="#working-from-outside-the-working-directory">Working from outside the working directory</a></li>
 <li><a class="reference internal" href="#cloning-an-existing-repository">Cloning an existing repository</a></li>
 <li><a class="reference internal" href="#staging-changes">Staging changes</a></li>
+<li><a class="reference internal" href="#unstaging-changes">Unstaging changes</a></li>
 <li><a class="reference internal" href="#showing-changes">Showing changes</a></li>
 <li><a class="reference internal" href="#committing">Committing</a></li>
 <li><a class="reference internal" href="#viewing-the-commit-log">Viewing the commit log</a></li>
