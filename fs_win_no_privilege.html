@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <title>Free Software on Windows (without any privilege) — Personal Notes</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="About me and this website" href="about.html">
+    <link rel="prev" title="Nu HTML Checker" href="nu_html_checker.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="about.html" title="About me and this website" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="nu_html_checker.html" title="Nu HTML Checker" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="free-software-on-windows-without-any-privilege">
+<h1>Free Software on Windows (without any privilege)<a class="headerlink" href="#free-software-on-windows-without-any-privilege" title="Permalink to this headline">¶</a>
+</h1>
+<div class="contents local topic" id="page-content">
+<p class="topic-title first">Page content</p>
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id3">Introduction</a></li>
+<li><a class="reference internal" href="#unxutils" id="id4">UnxUtils</a></li>
+<li><a class="reference internal" href="#ccrypt" id="id5">ccrypt</a></li>
+<li><a class="reference internal" href="#vim-text-editor-and-pathogen-plugin" id="id6">Vim text editor (and Pathogen plugin)</a></li>
+<li><a class="reference internal" href="#git" id="id7">Git</a></li>
+<li><a class="reference internal" href="#gnat-community-edition" id="id8">GNAT Community Edition</a></li>
+<li><a class="reference internal" href="#gnu-octave" id="id9">GNU Octave</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2>
+<a class="toc-backref" href="#id3">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+</h2>
+<p>This page indicates which free softwares I’ve been able to install on Windows
+10 Enterprises 64 bits machine, as an unprivileged user (no administration
+rights) and how I did the installations.</p>
+</div>
+<div class="section" id="unxutils">
+<h2>
+<a class="toc-backref" href="#id4">UnxUtils</a><a class="headerlink" href="#unxutils" title="Permalink to this headline">¶</a>
+</h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/UnxUtils">UnxUtils</a> provides ports of some GNU
+commands (ls, grep, sed, find, …). It makes possible to use those commands,
+in the windows command line (cmd).</p>
+<p>Download UnxUtils.zip from <a class="reference external" href="https://sourceforge.net/projects/unxutils">https://sourceforge.net/projects/unxutils</a>. Create a
+UnxUtils directory somewhere and unzip the downloaded file to that directory.
+The executable files for the GNU commands are in the <code class="docutils literal notranslate"><span class="pre">usr\local\wbin</span></code>
+subdirectory.</p>
+<p>You now have to update your <code class="docutils literal notranslate"><span class="pre">Path</span></code> variable. Open the system setting dialog
+(press Win+I). Type “environment” in the search box and choose “Edit
+Environment variables for your account”. Add the path to <code class="docutils literal notranslate"><span class="pre">usr\local\wbin</span></code> to
+the <code class="docutils literal notranslate"><span class="pre">Path</span></code> variable.</p>
+<p>Open a cmd window. The GNU commands should be usable.</p>
+<p>There is a problem with the <code class="docutils literal notranslate"><span class="pre">find</span></code> command which conficts with the windows
+command with the same name. To invoke the GNU <code class="docutils literal notranslate"><span class="pre">find</span></code> command and not the
+windows command, you have to prepend the exact path to the command:</p>
+<div class="highlight-text notranslate">
+<div class="highlight"><pre><span></span>...\UnxUtils\usr\local\wbin\find ...
+</pre></div>
+</div>
+<p>To make live a little bit easier, I’ve substituted a drive letter (‘U’, but is
+doesn’t have to be ‘U’) for the path. So I can invoke the GNU <code class="docutils literal notranslate"><span class="pre">find</span></code> command
+with:</p>
+<div class="highlight-text notranslate">
+<div class="highlight"><pre><span></span>U:\find ...
+</pre></div>
+</div>
+<p>I’ve defined the substitution in a <code class="docutils literal notranslate"><span class="pre">startup.bat</span></code> batch file:</p>
+<div class="line-block">
+<div class="line">@echo off</div>
+<div class="line"><br></div>
+<div class="line">subst U: …UnxUtilsusrlocalwbin 1&gt;nul</div>
+</div>
+<p>And I’ve changed the target property of the shortcut I use to launch cmd, by
+adding the <code class="docutils literal notranslate"><span class="pre">/k</span></code> option:
+<code class="docutils literal notranslate"><span class="pre">%windir%\system32\cmd.exe</span> <span class="pre">/k</span> <span class="pre">C:\users\p006245\Documents\cmd_startup\startup.bat</span></code>
+This ensures that <code class="docutils literal notranslate"><span class="pre">startup.bat</span></code> is run when I launch cmd.</p>
+</div>
+<div class="section" id="ccrypt">
+<h2>
+<a class="toc-backref" href="#id5">ccrypt</a><a class="headerlink" href="#ccrypt" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-1"><cite>ccrypt &lt;https://en.wikipedia.org/wiki/Ccrypt&gt;</cite> is a program to encrypt and
+decrypt file. The same key is used on encryption and decryption.</p>
+<p>Download ccrypt archive from <a class="reference external" href="http://ccrypt.sourceforge.net">http://ccrypt.sourceforge.net</a>. Unzip the archive
+and update your <code class="docutils literal notranslate"><span class="pre">Path</span></code> variable by adding the directory containing
+<code class="docutils literal notranslate"><span class="pre">ccrypt.exe</span></code>.</p>
+</div>
+<div class="section" id="vim-text-editor-and-pathogen-plugin">
+<h2>
+<a class="toc-backref" href="#id6">Vim text editor (and Pathogen plugin)</a><a class="headerlink" href="#vim-text-editor-and-pathogen-plugin" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-2">Download Vim from <a class="reference external" href="https://www.vim.org/download.php">https://www.vim.org/download.php</a> and run the installation
+program. Here again, you have to update your <code class="docutils literal notranslate"><span class="pre">Path</span></code> variable.</p>
+<p>Launch Vim (or gVim) and get your home directory with command <code class="docutils literal notranslate"><span class="pre">:echo</span> <span class="pre">$HOME</span></code>.
+That’s where you have to put your <code class="docutils literal notranslate"><span class="pre">_vimrc</span></code> file.</p>
+<p>Issue the command <code class="docutils literal notranslate"><span class="pre">:set</span> <span class="pre">runtimepath?</span></code>. It gives a list of directory. The
+first one is where you have to create the <code class="docutils literal notranslate"><span class="pre">bundle</span></code> subdirectory for the
+plugins.</p>
+<p>Download the Pathogen plugin from the GitHub repository:
+<a class="reference external" href="https://github.com/tpope/vim-pathogen">https://github.com/tpope/vim-pathogen</a>. It contains essentially an <code class="docutils literal notranslate"><span class="pre">autoload</span></code>
+directory. Place this directory in the same directory as the <code class="docutils literal notranslate"><span class="pre">bundle</span></code>
+directory.</p>
+<p>Download your favorite Vim plugins and place them all in the <code class="docutils literal notranslate"><span class="pre">bundle</span></code>
+directory (each plugin in its own subdirectory).</p>
+</div>
+<div class="section" id="git">
+<h2>
+<a class="toc-backref" href="#id7">Git</a><a class="headerlink" href="#git" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-3">Git is a <a class="reference external" href="https://en.wikipedia.org/wiki/Distributed_version_control">distributed version control system</a>.</p>
+<p>Download Git from <a class="reference external" href="https://git-scm.com/download">https://git-scm.com/download</a>.</p>
+<p>I always use it from Git Bash. I’ve used a <a class="reference external" href="https://github.com/thierr26/thierr26_config_files/blob/master/.bashrc">~/.bashrc file</a>
+originating from <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> with no issue.</p>
+<p>You might be interested by my <a class="reference internal" href="git.html"><span class="doc">general page about Git</span></a>.</p>
+</div>
+<div class="section" id="gnat-community-edition">
+<h2>
+<a class="toc-backref" href="#id8">GNAT Community Edition</a><a class="headerlink" href="#gnat-community-edition" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-4">GNAT Community Edition is Adacore’s programming tools (most notably the <a class="reference external" href="https://en.wikipedia.org/wiki/Ada_%28programming_language%29">Ada</a> Compiler and
+the <a class="reference external" href="https://en.wikipedia.org/wiki/GNAT_Programming_Studio">GNAT Programming Studio</a> integrated
+development environment) for free software developers.</p>
+<p>Download GNAT Community Edition from <a class="reference external" href="https://www.adacore.com/download">https://www.adacore.com/download</a> and run
+the installation program.</p>
+<p>Again, update your <code class="docutils literal notranslate"><span class="pre">Path</span></code> variable (add the <code class="docutils literal notranslate"><span class="pre">bin</span></code> subdirectory of the GNAT
+Community Edition installation).</p>
+</div>
+<div class="section" id="gnu-octave">
+<h2>
+<a class="toc-backref" href="#id9">GNU Octave</a><a class="headerlink" href="#gnu-octave" title="Permalink to this headline">¶</a>
+</h2>
+<p><a class="reference external" href="https://wiki.octave.org/GNU_Octave_Wiki">GNU Octave</a> is an interpreted
+language, similar to <a class="reference external" href="https://en.wikipedia.org/wiki/MATLAB">Matlab</a>.</p>
+<p>Download the Zip archive for the latest version (octave-5.1.0-w64-64.zip at the
+time of this writing) from <a class="reference external" href="https://ftp.gnu.org/gnu/octave/windows">https://ftp.gnu.org/gnu/octave/windows</a>, unzip it and
+run the <code class="docutils literal notranslate"><span class="pre">post-install.bat</span></code> file.</p>
+<p>Once more, update your <code class="docutils literal notranslate"><span class="pre">Path</span></code> variable (add the directory containing the
+<code class="docutils literal notranslate"><span class="pre">octave.vbs</span></code> file).</p>
+<p>GNU Octave for Windows comes with <a class="reference external" href="https://www.msys2.org">MSYS2</a>, and that is
+another solution (beside UnxUtils) to use the GNU commands on Windows. Launch
+<code class="docutils literal notranslate"><span class="pre">msys2_shell.cmd</span></code>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li>
+<a class="reference internal" href="#">Free Software on Windows (without any privilege)</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#unxutils">UnxUtils</a></li>
+<li><a class="reference internal" href="#ccrypt">ccrypt</a></li>
+<li><a class="reference internal" href="#vim-text-editor-and-pathogen-plugin">Vim text editor (and Pathogen plugin)</a></li>
+<li><a class="reference internal" href="#git">Git</a></li>
+<li><a class="reference internal" href="#gnat-community-edition">GNAT Community Edition</a></li>
+<li><a class="reference internal" href="#gnu-octave">GNU Octave</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nu_html_checker.html" title="previous chapter">Nu HTML Checker</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="about.html" title="next chapter">About me and this website</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q">
+      <input type="submit" value="Go">
+      <input type="hidden" name="check_keywords" value="yes">
+      <input type="hidden" name="area" value="default">
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="about.html" title="About me and this website">next</a> |</li>
+        <li class="right">
+          <a href="nu_html_checker.html" title="Nu HTML Checker">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>

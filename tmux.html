@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     <title>tmux — Personal Notes</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css">
@@ -82,6 +82,8 @@ root</strong>) with:</p>
 <div class="highlight"><pre><span></span>apt-get install tmux <span class="c1"># As root.</span>
 </pre></div>
 </div>
+<p>You can launch tmux with command <code class="docutils literal notranslate"><span class="pre">tmux</span></code>. I always use tmux in an <a class="reference external" href="https://en.wikipedia.org/wiki/Xterm">xterm</a> and launch both with a single <code class="docutils literal notranslate"><span class="pre">xterm</span>
+<span class="pre">tmux</span></code> command.</p>
 <p>You may need the tmux-resurrect plugin. You can install it that way (as an
 unprivileged user):</p>
 <div class="highlight-shell notranslate">
@@ -293,6 +295,9 @@ tmux attach -d -t &lt;session_id&gt; <span class="c1"># To attach to a specific 
 <p>Split pane horizontally with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">"</span></code>.</p>
 <p>Resize pane with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">+</span> <span class="pre">left/down/up/right</span> <span class="pre">arrow</span></code>. See also <a class="reference external" href="https://michaelsoolee.com/resize-tmux-panes/">this article
 by Michael Lee</a>.</p>
+<p>To swap two windows, enter command mode with <code class="docutils literal notranslate"><span class="pre">prefix</span> <span class="pre">:</span></code> and type a command
+like <code class="docutils literal notranslate"><span class="pre">swap-window</span> <span class="pre">-s</span> <span class="pre">3</span> <span class="pre">-t</span> <span class="pre">1</span></code>. This command swaps numbering of windows 3 and
+1.</p>
 </div>
 <div class="section" id="other-resources">
 <h2>
@@ -368,7 +373,7 @@ by Michael Lee</a>.</p>
       </ul>
     </div>
   <div class="footer" role="contentinfo">
-        © Copyright 2018-2019, Thierry Rascle.<br>
+        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
     Work licensed under a
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>

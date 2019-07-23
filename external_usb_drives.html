@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <title>External (USB) drives — Personal Notes</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="Git" href="git.html">
+    <link rel="prev" title="Debian applications installation" href="debian_apps_install.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="git.html" title="Git" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="debian_apps_install.html" title="Debian applications installation" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="external-usb-drives">
+<h1>External (USB) drives<a class="headerlink" href="#external-usb-drives" title="Permalink to this headline">¶</a>
+</h1>
+<div class="contents local topic" id="page-content">
+<p class="topic-title first">Page content</p>
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id1">Introduction</a></li>
+<li>
+<a class="reference internal" href="#recreating-the-partition-table" id="id2">Recreating the partition table</a><ul>
+<li><a class="reference internal" href="#device-identification" id="id3">Device identification</a></li>
+<li><a class="reference internal" href="#deletion-of-existing-partitions-and-creation-of-the-new-partition" id="id4">Deletion of existing partitions and creation of the new partition</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#formatting-the-new-partition" id="id5">Formatting the new partition</a></li>
+<li><a class="reference internal" href="#fat32-formatting" id="id6">FAT32 formatting</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2>
+<a class="toc-backref" href="#id1">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+</h2>
+<p>I’m using <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> and I backup my data to
+external (USB) drives. This page describes how I’ve setup those drives, that is
+how I’ve recreated a partition table (with a single Linux type partition) and
+how I’ve formatted and labeled the partition with the ext4 filesystem. This of
+course erases all the data on the drive, so <strong>don’t do that if your external
+drive contains precious data that you must preserve and retain!</strong>.</p>
+<p>Indications about how to format to FAT32 are also provided.</p>
+</div>
+<div class="section" id="recreating-the-partition-table">
+<h2>
+<a class="toc-backref" href="#id2">Recreating the partition table</a><a class="headerlink" href="#recreating-the-partition-table" title="Permalink to this headline">¶</a>
+</h2>
+<div class="section" id="device-identification">
+<span id="index-0"></span><h3>
+<a class="toc-backref" href="#id3">Device identification</a><a class="headerlink" href="#device-identification" title="Permalink to this headline">¶</a>
+</h3>
+<p>I’ve plugged in the USB drive and have identified the associated device by
+checking the output of the <code class="docutils literal notranslate"><span class="pre">dmesg</span></code> command (<strong>as root</strong>). The last lines
+should contain the name of the device (probably something like <code class="docutils literal notranslate"><span class="pre">/dev/sdb</span></code> or
+<code class="docutils literal notranslate"><span class="pre">/dev/sdc</span></code>) for the just mounted drive.</p>
+<p>Alternatively, a <code class="docutils literal notranslate"><span class="pre">fdisk</span> <span class="pre">-l</span></code> command (<strong>as root</strong>) can be used, as it shows
+all the disk devices on the system.</p>
+</div>
+<div class="section" id="deletion-of-existing-partitions-and-creation-of-the-new-partition">
+<h3>
+<a class="toc-backref" href="#id4">Deletion of existing partitions and creation of the new partition</a><a class="headerlink" href="#deletion-of-existing-partitions-and-creation-of-the-new-partition" title="Permalink to this headline">¶</a>
+</h3>
+<p>Launch fdisk <strong>as root</strong> with the device as argument:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>fdisk /dev/sdb <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>Check current partition table with command <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+<p>Delete first partition with command <code class="docutils literal notranslate"><span class="pre">d</span></code>. If there are more than one
+partition, repeat command <code class="docutils literal notranslate"><span class="pre">d</span></code> as many times as needed.</p>
+<p>Command <code class="docutils literal notranslate"><span class="pre">p</span></code> should now show no partition.</p>
+<p>Create a new partition with command <code class="docutils literal notranslate"><span class="pre">n</span></code>. fdisk now asks for a few questions.
+Answer <code class="docutils literal notranslate"><span class="pre">p</span></code> (primary), <code class="docutils literal notranslate"><span class="pre">1</span></code> (partition number) and just press enter when
+asked for the first and last sectors. fdisk may propose to remove the
+signature, accept.</p>
+<p>The use command <code class="docutils literal notranslate"><span class="pre">t</span></code> to select the partition type. Choose type 83 (Linux). Use
+<code class="docutils literal notranslate"><span class="pre">L</span></code> to see the list of possible codes.</p>
+<p>Finally, write the new partition table to the disk with command <code class="docutils literal notranslate"><span class="pre">w</span></code>.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">fdisk</span> <span class="pre">-l</span> <span class="pre">/dev/sdb</span></code> command (<strong>as root</strong>) should show the newly created
+partition.</p>
+</div>
+</div>
+<div class="section" id="formatting-the-new-partition">
+<h2>
+<a class="toc-backref" href="#id5">Formatting the new partition</a><a class="headerlink" href="#formatting-the-new-partition" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-1">Use <code class="docutils literal notranslate"><span class="pre">mkfs.ext4</span></code> (<strong>as root</strong>) to format the newly created partition with the
+ext4 filesystem. Note the <code class="docutils literal notranslate"><span class="pre">-L</span></code> option used to provide the label:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>mkfs.ext4 -L &lt;label&gt; /dev/sdb1 <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>If you omit the label or want to change it, you can run later:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>e2label /dev/sdb1 &lt;label&gt; <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>To show the label, just do:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>e2label /dev/sdb1 <span class="c1"># As root.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="fat32-formatting">
+<h2>
+<a class="toc-backref" href="#id6">FAT32 formatting</a><a class="headerlink" href="#fat32-formatting" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-2">For a FAT32 formatting instead of a ext4 formatting, the procedure is similar.
+The differences are:</p>
+<ul class="simple">
+<li>In fdisk, choose partition type 0c;</li>
+<li>Format with <code class="docutils literal notranslate"><span class="pre">mkfs.vfat</span> <span class="pre">-F</span> <span class="pre">32</span> <span class="pre">-n</span> <span class="pre">&lt;label&gt;</span> <span class="pre">/dev/sdb1</span></code>;</li>
+<li>Change label with <code class="docutils literal notranslate"><span class="pre">mlabel</span> <span class="pre">-i</span> <span class="pre">/dev/sdb1</span> <span class="pre">::&lt;label&gt;</span></code> (<code class="docutils literal notranslate"><span class="pre">mlabel</span> <span class="pre">-i</span> <span class="pre">/dev/sdb1</span>
+<span class="pre">-s</span></code> to show the label).</li>
+</ul>
+<p>On Debian GNU/Linux, <code class="docutils literal notranslate"><span class="pre">mkfs.vfat</span></code> is in package <code class="docutils literal notranslate"><span class="pre">dosfstools</span></code> and <code class="docutils literal notranslate"><span class="pre">mlabel</span></code>
+is in package <code class="docutils literal notranslate"><span class="pre">mtools</span></code>. You can install them with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install dosfstools mtools <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>Chances are that <code class="docutils literal notranslate"><span class="pre">dosfstools</span></code> is already installed.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li>
+<a class="reference internal" href="#">External (USB) drives</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li>
+<a class="reference internal" href="#recreating-the-partition-table">Recreating the partition table</a><ul>
+<li><a class="reference internal" href="#device-identification">Device identification</a></li>
+<li><a class="reference internal" href="#deletion-of-existing-partitions-and-creation-of-the-new-partition">Deletion of existing partitions and creation of the new partition</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#formatting-the-new-partition">Formatting the new partition</a></li>
+<li><a class="reference internal" href="#fat32-formatting">FAT32 formatting</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="debian_apps_install.html" title="previous chapter">Debian applications installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="git.html" title="next chapter">Git</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q">
+      <input type="submit" value="Go">
+      <input type="hidden" name="check_keywords" value="yes">
+      <input type="hidden" name="area" value="default">
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="git.html" title="Git">next</a> |</li>
+        <li class="right">
+          <a href="debian_apps_install.html" title="Debian applications installation">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     <title>Git — Personal Notes</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css">
@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="genindex.html">
     <link rel="search" title="Search" href="search.html">
     <link rel="next" title="Sphinx" href="sphinx.html">
-    <link rel="prev" title="Debian base installation" href="debian_base_install.html"> 
+    <link rel="prev" title="External (USB) drives" href="external_usb_drives.html"> 
   </head>
 <body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -30,7 +30,7 @@
         <li class="right">
           <a href="sphinx.html" title="Sphinx" accesskey="N">next</a> |</li>
         <li class="right">
-          <a href="debian_base_install.html" title="Debian base installation" accesskey="P">previous</a> |</li>
+          <a href="external_usb_drives.html" title="External (USB) drives" accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0">
 <a href="index.html">Personal Notes</a> »</li> 
       </ul>
@@ -320,20 +320,22 @@ directory to be ignored, except:</p>
 </li>
 <li>file <code class="docutils literal notranslate"><span class="pre">file_1</span></code>;</li>
 <li>file <code class="docutils literal notranslate"><span class="pre">file_2</span></code>;</li>
-<li>file <code class="docutils literal notranslate"><span class="pre">dir/subdir/file_3</span></code>;</li>
-<li>file <code class="docutils literal notranslate"><span class="pre">dir/subdir/file_4</span></code>.</li>
+<li>file <code class="docutils literal notranslate"><span class="pre">dir_a/subdir/file_3</span></code>;</li>
+<li>file <code class="docutils literal notranslate"><span class="pre">dir_a/subdir/file_4</span></code>.</li>
+<li>all files and directories in directory <code class="docutils literal notranslate"><span class="pre">dir_b</span></code> with infinite depth.</li>
 </ul>
 <div class="line-block">
 <div class="line">/*</div>
 <div class="line">!.gitignore</div>
 <div class="line">!file_1</div>
 <div class="line">!file_2</div>
-<div class="line">dir/*</div>
-<div class="line">!dir</div>
-<div class="line">dir/subdir/*</div>
-<div class="line">!dir/subdir</div>
-<div class="line">!dir/subdir/file_3</div>
-<div class="line">!dir/subdir/file_4</div>
+<div class="line">dir_a/*</div>
+<div class="line">!dir_a</div>
+<div class="line">dir_a/subdir/*</div>
+<div class="line">!dir_a/subdir</div>
+<div class="line">!dir_a/subdir/file_3</div>
+<div class="line">!dir_a/subdir/file_4</div>
+<div class="line">!dir_b</div>
 </div>
 </div>
 <div class="section" id="showing-changes">
@@ -897,7 +899,7 @@ variables instead:</p>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="debian_base_install.html" title="previous chapter">Debian base installation</a></p>
+  <p class="topless"><a href="external_usb_drives.html" title="previous chapter">External (USB) drives</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="sphinx.html" title="next chapter">Sphinx</a></p>
 <div id="searchbox" style="display: none" role="search">
@@ -925,13 +927,13 @@ variables instead:</p>
         <li class="right">
           <a href="sphinx.html" title="Sphinx">next</a> |</li>
         <li class="right">
-          <a href="debian_base_install.html" title="Debian base installation">previous</a> |</li>
+          <a href="external_usb_drives.html" title="External (USB) drives">previous</a> |</li>
         <li class="nav-item nav-item-0">
 <a href="index.html">Personal Notes</a> »</li> 
       </ul>
     </div>
   <div class="footer" role="contentinfo">
-        © Copyright 2018-2019, Thierry Rascle.<br>
+        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
     Work licensed under a
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>

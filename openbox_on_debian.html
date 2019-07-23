@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <title>Installation of Openbox on Debian — Personal Notes</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="Debian applications installation" href="debian_apps_install.html">
+    <link rel="prev" title="Debian base installation" href="debian_base_install.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="debian_apps_install.html" title="Debian applications installation" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="debian_base_install.html" title="Debian base installation" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="installation-of-openbox-on-debian">
+<h1>Installation of Openbox on Debian<a class="headerlink" href="#installation-of-openbox-on-debian" title="Permalink to this headline">¶</a>
+</h1>
+<div class="contents local topic" id="page-content">
+<p class="topic-title first">Page content</p>
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id1">Introduction</a></li>
+<li><a class="reference internal" href="#installation" id="id2">Installation</a></li>
+<li><a class="reference internal" href="#thunar-for-file-archive-and-removable-media-management" id="id3">Thunar for file, archive and removable media management</a></li>
+<li><a class="reference internal" href="#requiring-confirmation-before-exiting" id="id4">Requiring confirmation before exiting</a></li>
+<li><a class="reference internal" href="#theme-and-wallpaper" id="id5">Theme and wallpaper</a></li>
+<li><a class="reference internal" href="#turning-numlock-on-on-openbox-startup" id="id6">Turning NumLock on on Openbox startup</a></li>
+<li><a class="reference internal" href="#binding-menu-key-to-root-menu" id="id7">Binding menu key to root-menu</a></li>
+<li><a class="reference internal" href="#binding-super-e-to-thunar" id="id8">Binding Super-E to Thunar</a></li>
+<li><a class="reference internal" href="#undecorating-and-or-maximizing-windows" id="id9">Undecorating and/or maximizing windows</a></li>
+<li><a class="reference internal" href="#benefiting-from-vim-clipboard-feature" id="id10">Benefiting from Vim clipboard feature</a></li>
+<li><a class="reference internal" href="#other-resources" id="id11">Other resources</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2>
+<a class="toc-backref" href="#id1">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+</h2>
+<p>These are my notes about the installation and configuration of <a class="reference external" href="https://en.wikipedia.org/wiki/Openbox">Openbox</a> on <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a>. I’m doing this installation just after the
+<a class="reference internal" href="debian_base_install.html"><span class="doc">Debian base installation</span></a>.</p>
+</div>
+<div class="section" id="installation">
+<h2>
+<a class="toc-backref" href="#id2">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-0">I install <a class="reference external" href="https://www.x.org">X.Org X Window System</a> and Openbox with the
+following command (<strong>as root</strong>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install xorg openbox obmenu openbox-menu menu <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>Then an unprivileged user can start Openbox with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>startx
+</pre></div>
+</div>
+<p>A right mouse click opens the Openbox root-menu. From there you can launch a
+terminal.</p>
+<p>At this point, I <a class="reference internal" href="debian_apps_install.html"><span class="doc">install and tweak the applications I want on the system</span></a>. Then I proceed with the configuration of
+the Openbox environment and that’s what is described in the rest of this page.</p>
+</div>
+<div class="section" id="thunar-for-file-archive-and-removable-media-management">
+<h2>
+<a class="toc-backref" href="#id3">Thunar for file, archive and removable media management</a><a class="headerlink" href="#thunar-for-file-archive-and-removable-media-management" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-1">By installing Thunar and its extension for volumes management (<a class="reference external" href="https://goodies.xfce.org/projects/thunar-plugins/thunar-volman">thunar-volman</a>), you get a
+graphical file manager with the ability to mount removable medias. With
+<a class="reference external" href="https://goodies.xfce.org/projects/thunar-plugins/thunar-archive-plugin">thunar-archive-plugin</a> you
+also get the ability to easily open and create archives. Do the installation
+(<strong>as root</strong>) with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install thunar thunar-archive-plugin thunar-volman <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://docs.xfce.org/xfce/thunar/using-removable-media#managing_removable_drives_and_media">Follow the link for instructions about how to enable and configure the volume
+management.</a></p>
+</div>
+<div class="section" id="requiring-confirmation-before-exiting">
+<h2>
+<a class="toc-backref" href="#id4">Requiring confirmation before exiting</a><a class="headerlink" href="#requiring-confirmation-before-exiting" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-2">I want to be prompted for confirmation when exiting Openbox via the root-menu.
+The same when shuting down the system or rebooting. I could obtain that with
+entries like the following in <code class="docutils literal notranslate"><span class="pre">~/.config/openbox/menu.xml</span></code>:</p>
+<div class="line-block">
+<div class="line">&lt;item label=”Exit Openbox”&gt;</div>
+<div class="line-block">
+<div class="line">&lt;action name=”Execute”&gt;</div>
+<div class="line-block">
+<div class="line">&lt;prompt&gt;Are you sure you want to exit Openbox?&lt;/prompt&gt;</div>
+<div class="line">&lt;execute&gt;openbox –exit&lt;/execute&gt;</div>
+</div>
+<div class="line">&lt;/action&gt;</div>
+</div>
+<div class="line">&lt;/item&gt;</div>
+<div class="line">&lt;item label=”Reboot the system”&gt;</div>
+<div class="line-block">
+<div class="line">&lt;action name=”Execute”&gt;</div>
+<div class="line-block">
+<div class="line">&lt;prompt&gt;Are you sure you want to reboot the system?&lt;/prompt&gt;</div>
+<div class="line">&lt;execute&gt;systemctl reboot&lt;/execute&gt;</div>
+</div>
+<div class="line">&lt;/action&gt;</div>
+</div>
+<div class="line">&lt;/item&gt;</div>
+<div class="line">&lt;item label=”Shutdown the system”&gt;</div>
+<div class="line-block">
+<div class="line">&lt;action name=”Execute”&gt;</div>
+<div class="line-block">
+<div class="line">&lt;prompt&gt;Are you sure you want to shutdown the system?&lt;/prompt&gt;</div>
+<div class="line">&lt;execute&gt;systemctl poweroff&lt;/execute&gt;</div>
+</div>
+<div class="line">&lt;/action&gt;</div>
+</div>
+<div class="line">&lt;/item&gt;</div>
+</div>
+</div>
+<div class="section" id="theme-and-wallpaper">
+<h2>
+<a class="toc-backref" href="#id5">Theme and wallpaper</a><a class="headerlink" href="#theme-and-wallpaper" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-3">I launch obconf from a terminal window and choose the Syscrash theme:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>obconf <span class="p">&amp;</span>
+</pre></div>
+</div>
+<p>for the wallpaper, I install <code class="docutils literal notranslate"><span class="pre">feh</span></code> <strong>as root</strong>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install feh <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>Then I “install” the wallpaper with commands like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>feh --bg-fill path/to/image.jpg <span class="c1"># See https://wiki.archlinux.org/index.php/feh</span>
+<span class="nb">echo</span> <span class="s2">"~/.fehbg &amp;"</span> &gt;&gt; ~/.config/openbox/autostart
+</pre></div>
+</div>
+</div>
+<div class="section" id="turning-numlock-on-on-openbox-startup">
+<h2>
+<a class="toc-backref" href="#id6">Turning NumLock on on Openbox startup</a><a class="headerlink" href="#turning-numlock-on-on-openbox-startup" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-4">You can install numlockx (<strong>as root</strong>) with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install numlockx <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>Adding the command <code class="docutils literal notranslate"><span class="pre">numlockx</span> <span class="pre">on</span> <span class="pre">&amp;</span></code> to <code class="docutils literal notranslate"><span class="pre">~/.config/openbox/autostart</span></code> ensures
+that numlockx turns on NumLock on Openbox startup:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">"numlockx on &amp;"</span> &gt;&gt; ~/.config/openbox/autostart
+</pre></div>
+</div>
+</div>
+<div class="section" id="binding-menu-key-to-root-menu">
+<h2>
+<a class="toc-backref" href="#id7">Binding menu key to root-menu</a><a class="headerlink" href="#binding-menu-key-to-root-menu" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-5">If your machine has a <a class="reference external" href="https://en.wikipedia.org/wiki/Menu_key">menu key</a>, you
+may want to bind it to the Openbox root-menu. Make sure your
+<code class="docutils literal notranslate"><span class="pre">~/.config/openbox/rc.xml</span></code> contains something like:</p>
+<div class="line-block">
+<div class="line">&lt;/keyboard&gt;</div>
+<div class="line-block">
+<div class="line">…</div>
+<div class="line">&lt;keybind key=”Menu”&gt;</div>
+<div class="line-block">
+<div class="line">&lt;action name=”ShowMenu”&gt;</div>
+<div class="line-block">
+<div class="line">&lt;menu&gt;root-menu&lt;/menu&gt;</div>
+</div>
+<div class="line">&lt;/action&gt;</div>
+</div>
+<div class="line">&lt;/keybind&gt;</div>
+<div class="line">…</div>
+</div>
+<div class="line">&lt;/keyboard&gt;</div>
+</div>
+</div>
+<div class="section" id="binding-super-e-to-thunar">
+<h2>
+<a class="toc-backref" href="#id8">Binding Super-E to Thunar</a><a class="headerlink" href="#binding-super-e-to-thunar" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-6">When working on Windows at the office, I usually open the file manager with the
+Windows-E (a.k.a.
+<a class="reference external" href="https://en.wikipedia.org/wiki/Super_key_(keyboard_button)">Super</a>-E)
+keyboard shortcut. I want the same on Openbox. I have added something like the
+following in my <code class="docutils literal notranslate"><span class="pre">~/.config/openbox/rc.xml</span></code>:</p>
+<div class="line-block">
+<div class="line">&lt;/keyboard&gt;</div>
+<div class="line-block">
+<div class="line">…</div>
+<div class="line">&lt;keybind key=”W-e”&gt;</div>
+<div class="line-block">
+<div class="line">&lt;action name=”Execute”&gt;</div>
+<div class="line-block">
+<div class="line">&lt;command&gt;thunar&lt;/command&gt;</div>
+</div>
+<div class="line">&lt;/action&gt;</div>
+</div>
+<div class="line">&lt;/keybind&gt;</div>
+<div class="line">…</div>
+</div>
+<div class="line">&lt;/keyboard&gt;</div>
+</div>
+</div>
+<div class="section" id="undecorating-and-or-maximizing-windows">
+<h2>
+<a class="toc-backref" href="#id9">Undecorating and/or maximizing windows</a><a class="headerlink" href="#undecorating-and-or-maximizing-windows" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-7">I want that <a class="reference external" href="https://www.mozilla.org/firefox">Firefox</a>, <a class="reference external" href="https://www.claws-mail.org">Claws Mail</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Xterm">xterm</a> open with Window maximized. I also want
+the xterm window to be undecorated (to get rid of the title bar).</p>
+<p>I could achieve that by adding something like the following in my
+<code class="docutils literal notranslate"><span class="pre">~/.config/openbox/rc.xml</span></code>:</p>
+<div class="line-block">
+<div class="line">&lt;/applications&gt;</div>
+<div class="line-block">
+<div class="line">…</div>
+<div class="line">&lt;application class=”XTerm”&gt;</div>
+<div class="line-block">
+<div class="line">&lt;decor&gt;no&lt;/decor&gt;</div>
+<div class="line">&lt;maximized&gt;yes&lt;/maximized&gt;</div>
+</div>
+<div class="line">&lt;/application&gt;</div>
+<div class="line">&lt;application class=”Firefox-esr”&gt;</div>
+<div class="line-block">
+<div class="line">&lt;maximized&gt;yes&lt;/maximized&gt;</div>
+</div>
+<div class="line">&lt;/application&gt;</div>
+<div class="line">&lt;application class=”Claws-mail”&gt;</div>
+<div class="line-block">
+<div class="line">&lt;maximized&gt;yes&lt;/maximized&gt;</div>
+</div>
+<div class="line">&lt;/application&gt;</div>
+<div class="line">&lt;application type=”dialog”&gt;</div>
+<div class="line-block">
+<div class="line">&lt;maximized&gt;no&lt;/maximized&gt;</div>
+</div>
+<div class="line">&lt;/application&gt;</div>
+<div class="line">…</div>
+</div>
+<div class="line">&lt;/applications&gt;</div>
+</div>
+<p>Note the <code class="docutils literal notranslate"><span class="pre">&lt;application</span> <span class="pre">type="dialog"&gt;</span></code> markup for dialog boxes. It prevents
+the dialog boxes from being maximized.</p>
+</div>
+<div class="section" id="benefiting-from-vim-clipboard-feature">
+<h2>
+<a class="toc-backref" href="#id10">Benefiting from Vim clipboard feature</a><a class="headerlink" href="#benefiting-from-vim-clipboard-feature" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-8">Even if using Vim only in a terminal and not as a graphical application, it is
+useful to install the <code class="docutils literal notranslate"><span class="pre">vim-gtk</span></code> package instead of just the <code class="docutils literal notranslate"><span class="pre">vim</span></code> package,
+to benefit from the clipboard feature:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install vim-gtk <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://vi.stackexchange.com/questions/13564/why-is-vim-for-debian-compiled-without-clipboard">Follow the link for an interesting discussion on that topic on
+vi.stackexchange.com</a>.</p>
+</div>
+<div class="section" id="other-resources">
+<h2>
+<a class="toc-backref" href="#id11">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+</h2>
+<ul class="simple">
+<li><a class="reference external" href="https://defkey.com/openbox-shortcuts">Openbox default keyboard shortcuts</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li>
+<a class="reference internal" href="#">Installation of Openbox on Debian</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#thunar-for-file-archive-and-removable-media-management">Thunar for file, archive and removable media management</a></li>
+<li><a class="reference internal" href="#requiring-confirmation-before-exiting">Requiring confirmation before exiting</a></li>
+<li><a class="reference internal" href="#theme-and-wallpaper">Theme and wallpaper</a></li>
+<li><a class="reference internal" href="#turning-numlock-on-on-openbox-startup">Turning NumLock on on Openbox startup</a></li>
+<li><a class="reference internal" href="#binding-menu-key-to-root-menu">Binding menu key to root-menu</a></li>
+<li><a class="reference internal" href="#binding-super-e-to-thunar">Binding Super-E to Thunar</a></li>
+<li><a class="reference internal" href="#undecorating-and-or-maximizing-windows">Undecorating and/or maximizing windows</a></li>
+<li><a class="reference internal" href="#benefiting-from-vim-clipboard-feature">Benefiting from Vim clipboard feature</a></li>
+<li><a class="reference internal" href="#other-resources">Other resources</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="debian_base_install.html" title="previous chapter">Debian base installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="debian_apps_install.html" title="next chapter">Debian applications installation</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q">
+      <input type="submit" value="Go">
+      <input type="hidden" name="check_keywords" value="yes">
+      <input type="hidden" name="area" value="default">
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="debian_apps_install.html" title="Debian applications installation">next</a> |</li>
+        <li class="right">
+          <a href="debian_base_install.html" title="Debian base installation">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>

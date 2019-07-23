@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <title>Debian applications installation — Personal Notes</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="External (USB) drives" href="external_usb_drives.html">
+    <link rel="prev" title="Installation of Openbox on Debian" href="openbox_on_debian.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="external_usb_drives.html" title="External (USB) drives" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="openbox_on_debian.html" title="Installation of Openbox on Debian" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="debian-applications-installation">
+<h1>Debian applications installation<a class="headerlink" href="#debian-applications-installation" title="Permalink to this headline">¶</a>
+</h1>
+<div class="contents local topic" id="page-content">
+<p class="topic-title first">Page content</p>
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id1">Introduction</a></li>
+<li><a class="reference internal" href="#installation" id="id2">Installation</a></li>
+<li><a class="reference internal" href="#flash-player-plugin-installation" id="id3">Flash player plugin installation</a></li>
+<li>
+<a class="reference internal" href="#configuration-preferences" id="id4">Configuration, preferences</a><ul>
+<li><a class="reference internal" href="#firefox-esr" id="id5">Firefox ESR</a></li>
+<li><a class="reference internal" href="#irssi" id="id6">Irssi</a></li>
+<li><a class="reference internal" href="#claws-mail" id="id7">Claws Mail</a></li>
+<li><a class="reference internal" href="#gimp" id="id8">GIMP</a></li>
+<li><a class="reference internal" href="#music-on-console" id="id9">Music On Console</a></li>
+<li><a class="reference internal" href="#taskwarrior" id="id10">Taskwarrior</a></li>
+<li><a class="reference internal" href="#xzgv" id="id11">xzgv</a></li>
+<li><a class="reference internal" href="#vim" id="id12">Vim</a></li>
+<li><a class="reference internal" href="#sakura" id="id13">Sakura</a></li>
+<li><a class="reference internal" href="#privilege-escalation-for-use-of-ifp-line-libifp" id="id14">Privilege escalation for use of ifp-line-libifp</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2>
+<a class="toc-backref" href="#id1">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+</h2>
+<p>This page gives the packages I install on my <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> machines just after the <a class="reference internal" href="debian_base_install.html"><span class="doc">base installation</span></a> and in my first <a class="reference internal" href="openbox_on_debian.html"><span class="doc">Openbox</span></a>
+session.</p>
+<p>Some packages I install are not mentioned here because I have written dedicated
+pages for them. Please see the <a class="reference internal" href="index.html"><span class="doc">home page</span></a>.</p>
+</div>
+<div class="section" id="installation">
+<h2>
+<a class="toc-backref" href="#id2">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a>
+</h2>
+<p><strong>As root</strong>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install <span class="se">\</span>
+    firefox-esr <span class="se">\</span>
+    webext-ublock-origin <span class="se">\</span>
+    w3m <span class="se">\</span>
+    fonts-inconsolata <span class="se">\</span>
+    ccrypt <span class="se">\</span>
+    rsync <span class="se">\</span>
+    zip unzip <span class="se">\</span>
+    vorbis-tools <span class="se">\</span>
+    alsa-utils <span class="se">\</span>
+    moc <span class="se">\</span>
+    cdtool <span class="se">\</span>
+    cdparanoia <span class="se">\</span>
+    cdrskin <span class="se">\</span>
+    genisoimage <span class="se">\</span>
+    vlc <span class="se">\</span>
+    ffmpeg <span class="se">\</span>
+    wkhtmltopdf <span class="se">\</span>
+    default-jre default-jdk <span class="se">\</span>
+    taskwarrior <span class="se">\</span>
+    gcal <span class="se">\</span>
+    gftp <span class="se">\</span>
+    dlume <span class="se">\</span>
+    xpdf <span class="se">\</span>
+    octave <span class="se">\</span>
+    gnat gnat-gps <span class="se">\</span>
+    ada-reference-manual-2012 <span class="se">\</span>
+    gimp jhead imagemagick <span class="se">\</span>
+    libimage-exiftool-perl <span class="se">\</span>
+    xzgv <span class="se">\</span>
+    rawtherapee <span class="se">\</span>
+    irssi <span class="se">\</span>
+    claws-mail <span class="se">\</span>
+    claws-mail-themes <span class="se">\</span>
+    vim vim-pathogen <span class="se">\</span>
+    ifp-line-libifp <span class="se">\</span>
+    sudo <span class="se">\</span>
+    sakura <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<table>
+
+<tbody>
+<tr class="row-odd">
+<td>firefox-esr</td>
+<td>Graphical Web browser</td>
+</tr>
+<tr class="row-even">
+<td>webext-ublock-origin</td>
+<td>Ads, malware, trackers blocker</td>
+</tr>
+<tr class="row-odd">
+<td>w3m</td>
+<td>Text-based Web browser</td>
+</tr>
+<tr class="row-even">
+<td>fonts-inconsolata</td>
+<td>Monospace font</td>
+</tr>
+<tr class="row-odd">
+<td>ccrypt</td>
+<td>Encryption and decryption tool</td>
+</tr>
+<tr class="row-even">
+<td>rsync</td>
+<td>File-copying tool</td>
+</tr>
+<tr class="row-odd">
+<td>zip, unzip</td>
+<td>Archiver and de-archiver for .zip files</td>
+</tr>
+<tr class="row-even">
+<td>vorbis-tools</td>
+<td>ogg123, vorbiscomment, …</td>
+</tr>
+<tr class="row-odd">
+<td>alsa-utils</td>
+<td>amixer, alsamixer, …</td>
+</tr>
+<tr class="row-even">
+<td>moc</td>
+<td>Music On Console</td>
+</tr>
+<tr class="row-odd">
+<td>cdtool</td>
+<td>Includes cdown (CD tracks info extraction)</td>
+</tr>
+<tr class="row-even">
+<td>cdparanoia</td>
+<td>CD ripper</td>
+</tr>
+<tr class="row-odd">
+<td>cdrskin</td>
+<td>CD writing tool</td>
+</tr>
+<tr class="row-even">
+<td>genisoimage</td>
+<td>ISO-9660 CD-ROM filesystem images creation</td>
+</tr>
+<tr class="row-odd">
+<td>vlc</td>
+<td>Multimedia player</td>
+</tr>
+<tr class="row-even">
+<td>ffmpeg</td>
+<td>Multimedia files transcoding, playing, …</td>
+</tr>
+<tr class="row-odd">
+<td>wkhtmltopdf</td>
+<td>HTML to PDF conversion tool</td>
+</tr>
+<tr class="row-even">
+<td>default-jre, default-jdk</td>
+<td>Java runtime, Java development kit</td>
+</tr>
+<tr class="row-odd">
+<td>taskwarrior</td>
+<td>Console based todo list manager</td>
+</tr>
+<tr class="row-even">
+<td>gcal</td>
+<td>Calendar program</td>
+</tr>
+<tr class="row-odd">
+<td>gftp</td>
+<td>FTP client</td>
+</tr>
+<tr class="row-even">
+<td>dlume</td>
+<td>Address book</td>
+</tr>
+<tr class="row-odd">
+<td>xpdf</td>
+<td>PDF reader</td>
+</tr>
+<tr class="row-even">
+<td>octave</td>
+<td>GNU Octave language (Matlab clone)</td>
+</tr>
+<tr class="row-odd">
+<td>gnat, gnat-gps</td>
+<td>Ada programming tools</td>
+</tr>
+<tr class="row-even">
+<td>ada-reference-manual-2012</td>
+<td>Ada 2012 reference manual</td>
+</tr>
+<tr class="row-odd">
+<td>gimp, jhead, imagemagick</td>
+<td>GNU Manipulation Programs</td>
+</tr>
+<tr class="row-even">
+<td>libimage-exiftool-perl</td>
+<td>Inc. exiftool (image metadata extraction)</td>
+</tr>
+<tr class="row-odd">
+<td>xzgv</td>
+<td>Image viewer</td>
+</tr>
+<tr class="row-even">
+<td>rawtherapee</td>
+<td>Raw image converter</td>
+</tr>
+<tr class="row-odd">
+<td>claws-mail</td>
+<td>Mail client (MH mailbox format)</td>
+</tr>
+<tr class="row-even">
+<td>claws-mail-themes</td>
+<td>Claws Mail themes</td>
+</tr>
+<tr class="row-odd">
+<td>vim, vim-pathogen</td>
+<td>Vim text editor and Pathogen plugin</td>
+</tr>
+<tr class="row-even">
+<td>ifp-line-libifp</td>
+<td>Tool to access iRiver iFP audio players</td>
+</tr>
+<tr class="row-odd">
+<td>sudo</td>
+<td>Privilege escalation</td>
+</tr>
+<tr class="row-even">
+<td>sakura</td>
+<td>Terminal emulator</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="flash-player-plugin-installation">
+<h2>
+<a class="toc-backref" href="#id3">Flash player plugin installation</a><a class="headerlink" href="#flash-player-plugin-installation" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-0">See instructions here: <a class="reference external" href="https://wiki.debian.org/FlashPlayer">https://wiki.debian.org/FlashPlayer</a></p>
+</div>
+<div class="section" id="configuration-preferences">
+<h2>
+<a class="toc-backref" href="#id4">Configuration, preferences</a><a class="headerlink" href="#configuration-preferences" title="Permalink to this headline">¶</a>
+</h2>
+<div class="section" id="firefox-esr">
+<h3>
+<a class="toc-backref" href="#id5">Firefox ESR</a><a class="headerlink" href="#firefox-esr" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-1">At about:config, set browser.showQuitWarning to true.</p>
+<p>At about:preferences#search, set DuckDuckGo as default search engine.</p>
+<p>At about:preferences#privacy, uncheck “Remember logins and passwords for
+websites.</p>
+</div>
+<div class="section" id="irssi">
+<h3>
+<a class="toc-backref" href="#id6">Irssi</a><a class="headerlink" href="#irssi" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-2">Set personal information (real name, user name, nickname) in
+<code class="docutils literal notranslate"><span class="pre">~/.irssi/config</span></code>.</p>
+<p><a class="reference external" href="https://irssi-import.github.io/themes">Many Irssi themes are available</a>. I
+chose the <a class="reference external" href="https://irssi-import.github.io/themes/rolle.theme">rolle theme</a>.</p>
+<p>To install and use the theme, just copy the theme file to <code class="docutils literal notranslate"><span class="pre">~/.irssi</span></code> and
+issue a <code class="docutils literal notranslate"><span class="pre">/SET</span> <span class="pre">theme</span> <span class="pre">&lt;theme_name&gt;</span></code> command in Irssi.</p>
+</div>
+<div class="section" id="claws-mail">
+<h3>
+<a class="toc-backref" href="#id7">Claws Mail</a><a class="headerlink" href="#claws-mail" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-3">Setup MH directory properly, restore files <code class="docutils literal notranslate"><span class="pre">~/.claws-mail/accountrc</span></code> and
+<code class="docutils literal notranslate"><span class="pre">.signature</span></code>.</p>
+<p>In Preferences, Themes: orbit-claws.</p>
+<p>In Preferences, Other, Miscellaneous : Confirm on exit.</p>
+</div>
+<div class="section" id="gimp">
+<h3>
+<a class="toc-backref" href="#id8">GIMP</a><a class="headerlink" href="#gimp" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-4">In Preferences, Interface, Theme: System.</p>
+<p>In Preferences, Interface, Icon Theme: Color.</p>
+<p>In Keyboard Shortcuts, View: Set Zoom in shortcut to ‘=’.</p>
+</div>
+<div class="section" id="music-on-console">
+<h3>
+<a class="toc-backref" href="#id9">Music On Console</a><a class="headerlink" href="#music-on-console" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-5">I use Music On Console in shuffle mode. I’ve set the shuffle mode in the
+<a class="reference external" href="https://github.com/thierr26/thierr26_config_files/blob/master/.moc/config">~/.config/moc file</a>.</p>
+<p>Note also in the same file the <code class="docutils literal notranslate"><span class="pre">ShowTime</span></code> setting. It avoids a huge delay
+when quitting <code class="docutils literal notranslate"><span class="pre">mocp</span></code> (due to the program reading the tags in the files).</p>
+</div>
+<div class="section" id="taskwarrior">
+<h3>
+<a class="toc-backref" href="#id10">Taskwarrior</a><a class="headerlink" href="#taskwarrior" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-6">By default, Taskwarrior stores the data in <code class="docutils literal notranslate"><span class="pre">~/.task</span></code>, but it is possible to
+set another directory. See <a class="reference external" href="https://github.com/thierr26/thierr26_config_files/blob/master/.taskrc">my ~/.taskrc file</a>.</p>
+</div>
+<div class="section" id="xzgv">
+<h3>
+<a class="toc-backref" href="#id11">xzgv</a><a class="headerlink" href="#xzgv" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-7"><a class="reference external" href="https://github.com/thierr26/thierr26_config_files/blob/master/.xzgvrc">Such a ~/.xzgvrc file</a>
+ensure that the program starts in “fit to window” mode for high resolution
+images or in 100% mode for images smaller than the window. For high resolution
+images, switching between “fit to window” mode and 100% mode is possible with
+the Z key.</p>
+</div>
+<div class="section" id="vim">
+<h3>
+<a class="toc-backref" href="#id12">Vim</a><a class="headerlink" href="#vim" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-8">Clone favorite Vim plugins in Pathogen’s bundle directory:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>mkdir -p ~/.vim/bundle
+<span class="nb">cd</span> ~/.vim/bundle
+git clone https://github.com/tomtom/tcomment_vim.git
+git clone https://github.com/kien/ctrlp.vim.git
+git clone https://github.com/vim-scripts/a.vim.git
+git clone https://github.com/dhruvasagar/vim-table-mode.git
+git clone https://github.com/docunext/closetag.vim.git
+git clone https://github.com/jlanzarotta/bufexplorer.git
+git clone https://github.com/easymotion/vim-easymotion.git
+git clone https://github.com/Yggdroot/indentLine.git
+git clone https://github.com/jvirtanen/vim-octave.git
+git clone https://github.com/chriskempson/base16-vim.git
+</pre></div>
+</div>
+<p>Check that <code class="docutils literal notranslate"><span class="pre">/usr/bin/vim.gtk</span></code> is the selected editor in the Debian
+alternatives system with <code class="docutils literal notranslate"><span class="pre">update-alternatives</span> <span class="pre">--display</span> <span class="pre">editor</span></code> (<strong>as
+root</strong>). If not, use <code class="docutils literal notranslate"><span class="pre">update-alternatives</span> <span class="pre">--config</span> <span class="pre">editor</span></code> (<strong>as root</strong>).</p>
+<p>A (see <a class="reference external" href="https://github.com/thierr26/thierr26_config_files/blob/master/.vimrc">my ~/.vimrc file</a>):</p>
+</div>
+<div class="section" id="sakura">
+<h3>
+<a class="toc-backref" href="#id13">Sakura</a><a class="headerlink" href="#sakura" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-9">Set font to Inconsolata Medium 12.</p>
+</div>
+<div class="section" id="privilege-escalation-for-use-of-ifp-line-libifp">
+<h3>
+<a class="toc-backref" href="#id14">Privilege escalation for use of ifp-line-libifp</a><a class="headerlink" href="#privilege-escalation-for-use-of-ifp-line-libifp" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-10">Use <code class="docutils literal notranslate"><span class="pre">visudo</span></code> to add a line in <code class="docutils literal notranslate"><span class="pre">/etc/sudoers</span></code>. This line allows any user to
+execute <code class="docutils literal notranslate"><span class="pre">/usr/bin/ifp</span></code> without password. See <a class="reference external" href="https://github.com/thierr26/thierr26_config_files/blob/master/system_config/etc/sudoers">my /etc/sudoers file</a>.</p>
+<p>Run <code class="docutils literal notranslate"><span class="pre">ifp</span></code> with <code class="docutils literal notranslate"><span class="pre">sudo</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>sudo ifp ls
+</pre></div>
+</div>
+<p>An alias can come in handy (see <a class="reference external" href="https://github.com/thierr26/thierr26_config_files/blob/master/.bash_aliases">my ~/.bash_aliases file</a>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">alias</span> <span class="nv">ifp</span><span class="o">=</span><span class="s1">'sudo ifp'</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li>
+<a class="reference internal" href="#">Debian applications installation</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#flash-player-plugin-installation">Flash player plugin installation</a></li>
+<li>
+<a class="reference internal" href="#configuration-preferences">Configuration, preferences</a><ul>
+<li><a class="reference internal" href="#firefox-esr">Firefox ESR</a></li>
+<li><a class="reference internal" href="#irssi">Irssi</a></li>
+<li><a class="reference internal" href="#claws-mail">Claws Mail</a></li>
+<li><a class="reference internal" href="#gimp">GIMP</a></li>
+<li><a class="reference internal" href="#music-on-console">Music On Console</a></li>
+<li><a class="reference internal" href="#taskwarrior">Taskwarrior</a></li>
+<li><a class="reference internal" href="#xzgv">xzgv</a></li>
+<li><a class="reference internal" href="#vim">Vim</a></li>
+<li><a class="reference internal" href="#sakura">Sakura</a></li>
+<li><a class="reference internal" href="#privilege-escalation-for-use-of-ifp-line-libifp">Privilege escalation for use of ifp-line-libifp</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="openbox_on_debian.html" title="previous chapter">Installation of Openbox on Debian</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="external_usb_drives.html" title="next chapter">External (USB) drives</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q">
+      <input type="submit" value="Go">
+      <input type="hidden" name="check_keywords" value="yes">
+      <input type="hidden" name="area" value="default">
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="external_usb_drives.html" title="External (USB) drives">next</a> |</li>
+        <li class="right">
+          <a href="openbox_on_debian.html" title="Installation of Openbox on Debian">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>

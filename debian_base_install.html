@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     <title>Debian base installation — Personal Notes</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css">
@@ -17,7 +17,7 @@
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
     <link rel="search" title="Search" href="search.html">
-    <link rel="next" title="Git" href="git.html">
+    <link rel="next" title="Installation of Openbox on Debian" href="openbox_on_debian.html">
     <link rel="prev" title="Personal Notes" href="index.html"> 
   </head>
 <body>
@@ -28,7 +28,7 @@
           <a href="genindex.html" title="General Index" accesskey="I">index</a>
 </li>
         <li class="right">
-          <a href="git.html" title="Git" accesskey="N">next</a> |</li>
+          <a href="openbox_on_debian.html" title="Installation of Openbox on Debian" accesskey="N">next</a> |</li>
         <li class="right">
           <a href="index.html" title="Personal Notes" accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0">
@@ -55,19 +55,21 @@
 <li><a class="reference internal" href="#shutting-down-and-rebooting-a-debian-system" id="id6">Shutting down and rebooting a Debian system</a></li>
 <li>
 <a class="reference internal" href="#immediate-post-install-actions" id="id7">Immediate post-install actions</a><ul>
-<li><a class="reference internal" href="#system-update" id="id8">System update</a></li>
-<li><a class="reference internal" href="#preventing-the-system-from-beeping" id="id9">Preventing the system from beeping</a></li>
-<li><a class="reference internal" href="#adding-deb-multimedia-to-the-sources" id="id10">Adding deb-multimedia to the sources</a></li>
-<li><a class="reference internal" href="#checking-the-configured-time-zone" id="id11">Checking the configured time zone</a></li>
-<li><a class="reference internal" href="#synchronizing-the-system-date-with-network-time-servers" id="id12">Synchronizing the system date with network time servers</a></li>
-<li><a class="reference internal" href="#installing-a-console-locker" id="id13">Installing a console locker</a></li>
-<li><a class="reference internal" href="#installing-a-memory-ram-tester" id="id14">Installing a memory (RAM) tester</a></li>
-<li><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool" id="id15">Installing a wireless devices status management tool</a></li>
-<li><a class="reference internal" href="#installing-a-cd-burning-tool" id="id16">Installing a CD burning tool</a></li>
-<li><a class="reference internal" href="#installing-locate-updatedb" id="id17">Installing locate / updatedb</a></li>
+<li><a class="reference internal" href="#fixing-the-slow-boot-issue" id="id8">Fixing the slow boot issue</a></li>
+<li><a class="reference internal" href="#system-update" id="id9">System update</a></li>
+<li><a class="reference internal" href="#preventing-the-system-from-beeping" id="id10">Preventing the system from beeping</a></li>
+<li><a class="reference internal" href="#adding-deb-multimedia-to-the-sources" id="id11">Adding deb-multimedia to the sources</a></li>
+<li><a class="reference internal" href="#installing-firmware-linux-nonfree" id="id12">Installing firmware-linux-nonfree</a></li>
+<li><a class="reference internal" href="#checking-the-configured-time-zone" id="id13">Checking the configured time zone</a></li>
+<li><a class="reference internal" href="#synchronizing-the-system-date-with-network-time-servers" id="id14">Synchronizing the system date with network time servers</a></li>
+<li><a class="reference internal" href="#installing-a-console-locker" id="id15">Installing a console locker</a></li>
+<li><a class="reference internal" href="#installing-a-memory-ram-tester" id="id16">Installing a memory (RAM) tester</a></li>
+<li><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool" id="id17">Installing a wireless devices status management tool</a></li>
+<li><a class="reference internal" href="#installing-a-cd-burning-tool" id="id18">Installing a CD burning tool</a></li>
+<li><a class="reference internal" href="#installing-locate-updatedb" id="id19">Installing locate / updatedb</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#post-install-maintenance" id="id18">Post-install maintenance</a></li>
+<li><a class="reference internal" href="#post-install-maintenance" id="id20">Post-install maintenance</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -245,11 +247,57 @@ systemctl reboot   <span class="c1"># Reboot.</span>
 </h2>
 <p>This section describes what I usually do after booting into the newly installed
 Debian system.</p>
+<div class="section" id="fixing-the-slow-boot-issue">
+<h3>
+<a class="toc-backref" href="#id8">Fixing the slow boot issue</a><a class="headerlink" href="#fixing-the-slow-boot-issue" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-5">One of my machines is affected by the
+<a class="reference external" href="https://en.wikipedia.org/wiki/Toshiba_Samsung_Storage_Technology">TSSTcorp</a>
+CDDVDW <a class="reference external" href="https://www.newegg.com/samsung-model-sh-s223c-dvd-burner/p/N82E16827151192">SH-S223C</a>
+related slow boot issue. You can check if you have this particular CD/DVD-RW
+drive with this command (assuming your optical drive is associated with device
+<code class="docutils literal notranslate"><span class="pre">/dev/sr0</span></code>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>udevadm info -a -p  <span class="k">$(</span>udevadm info -q path -n /dev/sr0<span class="k">)</span> <span class="p">|</span> grep model
+</pre></div>
+</div>
+<p>The fix involves changing file
+<code class="docutils literal notranslate"><span class="pre">/lib/udev/rules.d/60-persistent-storage.rules</span></code> <strong>and then</strong> regenerating the
+initramfs image (<strong>as root</strong> for both operations):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>update-initramfs -u <span class="c1"># As root, regenerates the initramfs image.</span>
+</pre></div>
+</div>
+<p>As for the change to <code class="docutils literal notranslate"><span class="pre">/lib/udev/rules.d/60-persistent-storage.rules</span></code>, the
+internet gives two solutions:</p>
+<ul>
+<li>
+<p class="first">Commenting out entirely the ATAPI device rule, as suggested on <a class="reference external" href="https://paulphilippov.com/articles/how-to-fix-slow-boot-with-ata-errors">Paul
+Philippov’s website</a>,
+with this command:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>sed -i <span class="s1">'/ATAPI/,+1s/^/#/'</span> /lib/udev/rules.d/60-persistent-storage.rules <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>I’ve been doing that for years without any issue.</p>
+</li>
+<li>
+<p class="first">Cancelling the rule for the SH-S223C only, as suggested in <a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=622340#43">Debian bug
+#622340</a>.
+That’s what I’m doing now.</p>
+</li>
+</ul>
+<p>Note that the change to <code class="docutils literal notranslate"><span class="pre">/lib/udev/rules.d/60-persistent-storage.rules</span></code> and
+the regenration of the initramfs image have to be redone after each update of
+the <code class="docutils literal notranslate"><span class="pre">udev</span></code> Debian package (because
+<code class="docutils literal notranslate"><span class="pre">/lib/udev/rules.d/60-persistent-storage.rules</span></code> is overwritten and the
+initramfs image regenerated by the update).</p>
+</div>
 <div class="section" id="system-update">
 <h3>
-<a class="toc-backref" href="#id8">System update</a><a class="headerlink" href="#system-update" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id9">System update</a><a class="headerlink" href="#system-update" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-5">Update the system <strong>as root</strong> with:</p>
+<p id="index-6">Update the system <strong>as root</strong> with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get update       <span class="c1"># As root.</span>
 apt-get dist-upgrade <span class="c1"># As root.</span>
@@ -258,9 +306,9 @@ apt-get dist-upgrade <span class="c1"># As root.</span>
 </div>
 <div class="section" id="preventing-the-system-from-beeping">
 <h3>
-<a class="toc-backref" href="#id9">Preventing the system from beeping</a><a class="headerlink" href="#preventing-the-system-from-beeping" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id10">Preventing the system from beeping</a><a class="headerlink" href="#preventing-the-system-from-beeping" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-6">The newly installed system may emit beeps quiet often (for example when working
+<p id="index-7">The newly installed system may emit beeps quiet often (for example when working
 in a terminal emulator). To stop that, you can blacklist module pcspkr by
 adding a file <strong>as root</strong> in <code class="docutils literal notranslate"><span class="pre">/etc/modprobe.d</span></code> (file name suggestion:
 <code class="docutils literal notranslate"><span class="pre">nobeep.conf</span></code>). The file should contain this line:</p>
@@ -274,9 +322,9 @@ beeps any more.</p>
 </div>
 <div class="section" id="adding-deb-multimedia-to-the-sources">
 <h3>
-<a class="toc-backref" href="#id10">Adding deb-multimedia to the sources</a><a class="headerlink" href="#adding-deb-multimedia-to-the-sources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id11">Adding deb-multimedia to the sources</a><a class="headerlink" href="#adding-deb-multimedia-to-the-sources" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-7">You may want to add deb-multimedia as a source of packages for the newly
+<p id="index-8">You may want to add deb-multimedia as a source of packages for the newly
 installed Debian system (see <a class="reference external" href="https://linuxconfig.org/amp-up-your-multimedia-experience-on-debian-9-stretch-linux">this linuxconfig.org article</a>).</p>
 <p><a class="reference external" href="http://deb-multimedia.org">http://deb-multimedia.org</a> provides some instructions:</p>
 <p>First, add <strong>as root</strong> a line like this one (example for Debian Buster) in your
@@ -293,11 +341,28 @@ apt-get dist-upgrade
 </pre></div>
 </div>
 </div>
+<div class="section" id="installing-firmware-linux-nonfree">
+<h3>
+<a class="toc-backref" href="#id12">Installing firmware-linux-nonfree</a><a class="headerlink" href="#installing-firmware-linux-nonfree" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-9">Depending on your hardware, you may not need the <code class="docutils literal notranslate"><span class="pre">firmware-linux-nonfree</span></code>. On
+my machines, this package makes life easier (most notably with Wi-Fi network
+adapter and/or graphics) and is installed either during installation (if the
+firmware archive has been required) or post-installation, manually:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install firmware-linux-nonfree <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code> file must have the non-free section.
+You can <a class="reference download internal" download="" href="_downloads/ecabdd97c00c58b7de09f81a800aa6c0/sources.list"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">my</span> <span class="pre">/etc/apt/sources.list</span></code></a>.
+Make sure you issue a <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span></code> command after changing
+<code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code>.</p>
+</div>
 <div class="section" id="checking-the-configured-time-zone">
 <h3>
-<a class="toc-backref" href="#id11">Checking the configured time zone</a><a class="headerlink" href="#checking-the-configured-time-zone" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id13">Checking the configured time zone</a><a class="headerlink" href="#checking-the-configured-time-zone" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-8">Check the configured time zone with:</p>
+<p id="index-10">Check the configured time zone with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>cat /etc/timezone
 </pre></div>
@@ -310,9 +375,9 @@ apt-get dist-upgrade
 </div>
 <div class="section" id="synchronizing-the-system-date-with-network-time-servers">
 <h3>
-<a class="toc-backref" href="#id12">Synchronizing the system date with network time servers</a><a class="headerlink" href="#synchronizing-the-system-date-with-network-time-servers" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id14">Synchronizing the system date with network time servers</a><a class="headerlink" href="#synchronizing-the-system-date-with-network-time-servers" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-9">Just install package <code class="docutils literal notranslate"><span class="pre">ntp</span></code>:</p>
+<p id="index-11">Just install package <code class="docutils literal notranslate"><span class="pre">ntp</span></code>:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install ntp <span class="c1"># As root.</span>
 </pre></div>
@@ -321,9 +386,9 @@ apt-get dist-upgrade
 </div>
 <div class="section" id="installing-a-console-locker">
 <h3>
-<a class="toc-backref" href="#id13">Installing a console locker</a><a class="headerlink" href="#installing-a-console-locker" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id15">Installing a console locker</a><a class="headerlink" href="#installing-a-console-locker" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-10">There are many screen and/or console locker programs. I’ve installed <a class="reference external" href="https://github.com/muennich/physlock">physlock</a>:</p>
+<p id="index-12">There are many screen and/or console locker programs. I’ve installed <a class="reference external" href="https://github.com/muennich/physlock">physlock</a>:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install physlock <span class="c1"># As root.</span>
 </pre></div>
@@ -331,9 +396,9 @@ apt-get dist-upgrade
 </div>
 <div class="section" id="installing-a-memory-ram-tester">
 <h3>
-<a class="toc-backref" href="#id14">Installing a memory (RAM) tester</a><a class="headerlink" href="#installing-a-memory-ram-tester" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id16">Installing a memory (RAM) tester</a><a class="headerlink" href="#installing-a-memory-ram-tester" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-11">RAM failures are not so rare in my experience. A tester like <a class="reference external" href="https://www.memtest.org/">Memtest86+</a> can really help diagnosing a RAM failure. The
+<p id="index-13">RAM failures are not so rare in my experience. A tester like <a class="reference external" href="https://www.memtest.org/">Memtest86+</a> can really help diagnosing a RAM failure. The
 <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span></code> command below installs Memtest86+ and adds an entry in the
 <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_GRUB">Grub</a> menu (you have to reboot your
 machine and select the Memtest86+ grub entry to start Memtest86+):</p>
@@ -344,9 +409,9 @@ machine and select the Memtest86+ grub entry to start Memtest86+):</p>
 </div>
 <div class="section" id="installing-a-wireless-devices-status-management-tool">
 <h3>
-<a class="toc-backref" href="#id15">Installing a wireless devices status management tool</a><a class="headerlink" href="#installing-a-wireless-devices-status-management-tool" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id17">Installing a wireless devices status management tool</a><a class="headerlink" href="#installing-a-wireless-devices-status-management-tool" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-12">On a laptop computer, it may be useful to check the status (enabled, hard
+<p id="index-14">On a laptop computer, it may be useful to check the status (enabled, hard
 blocked, soft blocked) of the wireless devices. Package <code class="docutils literal notranslate"><span class="pre">rfkill</span></code> makes that
 possible:</p>
 <div class="highlight-shell notranslate">
@@ -361,9 +426,9 @@ possible:</p>
 </div>
 <div class="section" id="installing-a-cd-burning-tool">
 <h3>
-<a class="toc-backref" href="#id16">Installing a CD burning tool</a><a class="headerlink" href="#installing-a-cd-burning-tool" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id18">Installing a CD burning tool</a><a class="headerlink" href="#installing-a-cd-burning-tool" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-13">I use cdrskin to burn CDs (in particular the Debian installation CDs) on an
+<p id="index-15">I use cdrskin to burn CDs (in particular the Debian installation CDs) on an
 internal or external (USB) CD burning drive:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install cdrskin <span class="c1"># As root.</span>
@@ -372,9 +437,9 @@ internal or external (USB) CD burning drive:</p>
 </div>
 <div class="section" id="installing-locate-updatedb">
 <h3>
-<a class="toc-backref" href="#id17">Installing locate / updatedb</a><a class="headerlink" href="#installing-locate-updatedb" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id19">Installing locate / updatedb</a><a class="headerlink" href="#installing-locate-updatedb" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-14">Command <code class="docutils literal notranslate"><span class="pre">locate</span></code> is a way of finding files on your computer. It is faster
+<p id="index-16">Command <code class="docutils literal notranslate"><span class="pre">locate</span></code> is a way of finding files on your computer. It is faster
 than <code class="docutils literal notranslate"><span class="pre">find</span></code>. It relies on a database (upatedb) which is automatically updated
 now and then.</p>
 <p>Install locate and updatedb with:</p>
@@ -391,9 +456,9 @@ now and then.</p>
 </div>
 <div class="section" id="post-install-maintenance">
 <h2>
-<a class="toc-backref" href="#id18">Post-install maintenance</a><a class="headerlink" href="#post-install-maintenance" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id20">Post-install maintenance</a><a class="headerlink" href="#post-install-maintenance" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-15">I regularly run the following commands to keep the system up to date:</p>
+<p id="index-17">I regularly run the following commands to keep the system up to date:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get update <span class="p">&amp;</span> apt-get dist-upgrade
 apt-get autoremove <span class="c1"># Useful if some packages have become unneeded.</span>
@@ -421,9 +486,11 @@ apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows o
 <li><a class="reference internal" href="#shutting-down-and-rebooting-a-debian-system">Shutting down and rebooting a Debian system</a></li>
 <li>
 <a class="reference internal" href="#immediate-post-install-actions">Immediate post-install actions</a><ul>
+<li><a class="reference internal" href="#fixing-the-slow-boot-issue">Fixing the slow boot issue</a></li>
 <li><a class="reference internal" href="#system-update">System update</a></li>
 <li><a class="reference internal" href="#preventing-the-system-from-beeping">Preventing the system from beeping</a></li>
 <li><a class="reference internal" href="#adding-deb-multimedia-to-the-sources">Adding deb-multimedia to the sources</a></li>
+<li><a class="reference internal" href="#installing-firmware-linux-nonfree">Installing firmware-linux-nonfree</a></li>
 <li><a class="reference internal" href="#checking-the-configured-time-zone">Checking the configured time zone</a></li>
 <li><a class="reference internal" href="#synchronizing-the-system-date-with-network-time-servers">Synchronizing the system date with network time servers</a></li>
 <li><a class="reference internal" href="#installing-a-console-locker">Installing a console locker</a></li>
@@ -441,7 +508,7 @@ apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows o
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html" title="previous chapter">Personal Notes</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="git.html" title="next chapter">Git</a></p>
+  <p class="topless"><a href="openbox_on_debian.html" title="next chapter">Installation of Openbox on Debian</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -465,7 +532,7 @@ apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows o
           <a href="genindex.html" title="General Index">index</a>
 </li>
         <li class="right">
-          <a href="git.html" title="Git">next</a> |</li>
+          <a href="openbox_on_debian.html" title="Installation of Openbox on Debian">next</a> |</li>
         <li class="right">
           <a href="index.html" title="Personal Notes">previous</a> |</li>
         <li class="nav-item nav-item-0">
@@ -473,7 +540,7 @@ apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows o
       </ul>
     </div>
   <div class="footer" role="contentinfo">
-        © Copyright 2018-2019, Thierry Rascle.<br>
+        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
     Work licensed under a
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
