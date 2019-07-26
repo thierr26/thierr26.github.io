@@ -367,7 +367,46 @@ git clone https://github.com/chriskempson/base16-vim.git
 <p>Check that <code class="docutils literal notranslate"><span class="pre">/usr/bin/vim.gtk</span></code> is the selected editor in the Debian
 alternatives system with <code class="docutils literal notranslate"><span class="pre">update-alternatives</span> <span class="pre">--display</span> <span class="pre">editor</span></code> (<strong>as
 root</strong>). If not, use <code class="docutils literal notranslate"><span class="pre">update-alternatives</span> <span class="pre">--config</span> <span class="pre">editor</span></code> (<strong>as root</strong>).</p>
-<p>A (see <a class="reference external" href="https://github.com/thierr26/thierr26_config_files/blob/master/.vimrc">my ~/.vimrc file</a>):</p>
+<p>Restore file <code class="docutils literal notranslate"><span class="pre">~/.vimrc</span></code>.</p>
+<p><a class="reference external" href="https://github.com/thierr26/thierr26_config_files/blob/master/.vimrc">my ~/.vimrc file</a> is
+heavily commented. The most “interesting” thing may be the affectation of the
+<code class="docutils literal notranslate"><span class="pre">backupdir</span></code> and <code class="docutils literal notranslate"><span class="pre">directory</span></code> options (the directories where the backup files
+and the swap files are written respectively). They are affected to
+<code class="docutils literal notranslate"><span class="pre">~/.vim/backup</span></code> and <code class="docutils literal notranslate"><span class="pre">~/.vim/swap</span></code> respectively (assuming <code class="docutils literal notranslate"><span class="pre">~/.vim</span></code> is the
+first entry of the <code class="docutils literal notranslate"><span class="pre">runtimepath</span></code> option and <code class="docutils literal notranslate"><span class="pre">~/.vim/backup</span></code> and
+<code class="docutils literal notranslate"><span class="pre">~/.vim/swap</span></code> are writable directories or can be created as writable
+directories).</p>
+<p>The point of this is to avoid having backup and swap files in the working
+directories and having them in dedicated directories <code class="docutils literal notranslate"><span class="pre">~/.vim/backup</span></code> and
+<code class="docutils literal notranslate"><span class="pre">~/.vim/swap</span></code> instead. You may be interested by <a class="reference external" href="https://medium.com/@Aenon/vim-swap-backup-undo-git-2bf353caa02f">this page by Xilin Sun
+(which also covers the undo files)</a>.</p>
+<p>Here is the code (with comments removed) of my <code class="docutils literal notranslate"><span class="pre">~/.vimrc</span></code> that makes the
+affectation of the <code class="docutils literal notranslate"><span class="pre">backupdir</span></code> and <code class="docutils literal notranslate"><span class="pre">directory</span></code> options:</p>
+<div class="highlight-text notranslate">
+<div class="highlight"><pre><span></span>function s:CanWriteToDir(path_to_dir)
+
+    if !isdirectory(a:path_to_dir) &amp;&amp; exists("*mkdir")
+        silent! call mkdir(a:path_to_dir, "p", 0700)
+    endif
+    return (filewritable(a:path_to_dir) == 2)
+
+endfunction
+
+let s:DotVimPath = split(&amp;runtimepath,",")[0]
+
+let s:BackupDir = s:DotVimPath . "/backup"
+if s:CanWriteToDir(s:BackupDir)
+    set backup
+    let &amp;backupdir = s:BackupDir . "," . &amp;backupdir
+endif
+
+let s:SwapDir = s:DotVimPath . "/swap"
+if s:CanWriteToDir(s:SwapDir)
+    let &amp;directory = s:SwapDir . "//" . "," . &amp;directory
+endif
+</pre></div>
+</div>
+<p>You may also be interested in <a class="reference internal" href="base16_color_schemes_xterm_and_vim.html"><span class="doc">using the Base16 color schemes</span></a>.</p>
 </div>
 <div class="section" id="sakura">
 <h3>
