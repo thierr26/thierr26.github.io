@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <title>Music — Personal Notes</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="Nu HTML Checker" href="nu_html_checker.html">
+    <link rel="prev" title="Wi-Fi" href="wifi.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="nu_html_checker.html" title="Nu HTML Checker" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="wifi.html" title="Wi-Fi" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="music">
+<h1>Music<a class="headerlink" href="#music" title="Permalink to this headline">¶</a>
+</h1>
+<div class="contents local topic" id="page-content">
+<p class="topic-title first">Page content</p>
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
+<li><a class="reference internal" href="#ogg-file-decoding" id="id3">Ogg file decoding</a></li>
+<li><a class="reference internal" href="#wav-files-duration" id="id4">WAV files duration</a></li>
+<li><a class="reference internal" href="#burning-wav-files-to-a-cd-r" id="id5">Burning WAV files to a CD-R</a></li>
+<li><a class="reference internal" href="#building-audio-files-from-a-video" id="id6">Building audio files from a video</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2>
+<a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+</h2>
+<p>This page is where I note the commands I use to manipulate audio files (<a class="reference external" href="https://en.wikipedia.org/wiki/WAV">WAV
+files</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Ogg">Ogg files</a>).</p>
+</div>
+<div class="section" id="ogg-file-decoding">
+<h2>
+<a class="toc-backref" href="#id3">Ogg file decoding</a><a class="headerlink" href="#ogg-file-decoding" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-0">Decode an Ogg file to a WAV file with a command like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>oggdec -o output.wav input.ogg
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">oggdec</span></code> command is provided by package <code class="docutils literal notranslate"><span class="pre">vorbis-tools</span></code> on a <a class="reference external" href="https://www.debian.org">Debian
+GNU/Linux</a> system).</p>
+</div>
+<div class="section" id="wav-files-duration">
+<h2>
+<a class="toc-backref" href="#id4">WAV files duration</a><a class="headerlink" href="#wav-files-duration" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-1">SoX can show (among other things) the duration in seconds of WAV files:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>sox my_wav_file.wav -n stat <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span>grep ^Length
+soxi my_wav_file.wav<span class="p">|</span>grep ^Duration
+</pre></div>
+</div>
+<p>You can specify multiple files (or use wildcards) in the <code class="docutils literal notranslate"><span class="pre">sox</span></code> command to get
+the cumulative duration of the files:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>sox *.wav -n stat <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span>grep ^Length
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">sox</span></code> and <code class="docutils literal notranslate"><span class="pre">soxi</span></code> commands are provided by package <code class="docutils literal notranslate"><span class="pre">sox</span></code> on a <a class="reference external" href="https://www.debian.org">Debian
+GNU/Linux</a> system).</p>
+</div>
+<div class="section" id="burning-wav-files-to-a-cd-r">
+<h2>
+<a class="toc-backref" href="#id5">Burning WAV files to a CD-R</a><a class="headerlink" href="#burning-wav-files-to-a-cd-r" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-2">You can burn some WAV files to a blank CD with a command like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>cdrskin -v -eject -audio -pad *.wav
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-audio-files-from-a-video">
+<h2>
+<a class="toc-backref" href="#id6">Building audio files from a video</a><a class="headerlink" href="#building-audio-files-from-a-video" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-3">I once wanted to make audio files from a nice TV show that I had recorded
+on the hard drive of my <a class="reference external" href="https://en.wikipedia.org/wiki/Freebox">Freebox</a>
+(<a class="reference external" href="https://en.wikipedia.org/wiki/Freebox#V5_generation">V5 generation</a>).</p>
+<p>The TV show was recorded to a <a class="reference external" href="https://en.wikipedia.org/wiki/MPEG_transport_stream">.ts file</a> and could be downloaded
+to the computer from <a class="reference external" href="ftp://hd1.freebox.fr">ftp://hd1.freebox.fr</a>.</p>
+<p>I created the audio files with a shell script. The script is mostly a loop over
+the lines of a <a class="reference external" href="https://en.wikipedia.org/wiki/Here_document">here-document</a>.
+There is one line in the here-document for each audio file that I wanted to
+create. Each line provides the start time of the audio file in the .ts file,
+the duration of the audio file and the title of the audio file.</p>
+<p>The source code is provided below. The here-document contains two lines:</p>
+<div class="line-block">
+<div class="line">00:16:44 00:03:43 The mission (Ennio Morricone)</div>
+<div class="line">00:33:20 00:03:19 Cinema Paradiso (Andrea &amp; Ennio Morricone)</div>
+</div>
+<p>This will cause the creation of two WAV files in the directory denoted by
+script variable <code class="docutils literal notranslate"><span class="pre">INTERMEDIATE_FILES_DIR</span></code>:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">01_-_the_mission__ennio_morricone_.wav</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">02_-_cinema_paradiso__andrea_and_ennio_morricone_.wav</span></code></li>
+</ul>
+<p>You will also get two Ogg files in the directory denoted by script variable
+<code class="docutils literal notranslate"><span class="pre">OUTPUT_DIR</span></code>:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">01_-_the_mission__ennio_morricone_.ogg</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">02_-_cinema_paradiso__andrea_and_ennio_morricone_.ogg</span></code></li>
+</ul>
+<p>The WAV files are created from the .ts file using <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code>, provided by
+package <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code> on a Debian GNU/Linux system. I’m using the version from
+<a class="reference internal" href="debian_base_install.html#add-debmultimedia"><span class="std std-ref">deb-multimedia</span></a>, which is newer than the one in the
+Debian archive. If you are not sure which version you have installed, check
+with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-cache policy ffmpeg
+</pre></div>
+</div>
+<p>The output file names are built from the titles provided in the here-document,
+but with a few changes:</p>
+<ol class="arabic simple">
+<li>Occurrences of ampersand are substituted with “and”.</li>
+<li>Accents, cedillas, tildes, etc… are removed using the <code class="docutils literal notranslate"><span class="pre">unaccent</span></code> command
+(provided by package <code class="docutils literal notranslate"><span class="pre">unaccent</span></code> on a Debian GNU/Linux system).</li>
+<li>Uppercase characters are converted to lowercase.</li>
+<li>Remaining characters that are not letters, digits or hyphen are substituted
+with underscores.</li>
+</ol>
+<p>A triangular (i.e. linear) fade out is created at the end of each file using
+SoX.</p>
+<p>The output Ogg files are encoded with <code class="docutils literal notranslate"><span class="pre">oggenc</span></code>. They contain some comments:</p>
+<ul class="simple">
+<li>“tracknumber” (2-digits track number)</li>
+<li>“title” (title as provided in the here-document)</li>
+<li>“artist” (provided by script variable <code class="docutils literal notranslate"><span class="pre">ARTIST</span></code>)</li>
+<li>“album” (provided by script variable <code class="docutils literal notranslate"><span class="pre">ALBUM</span></code>)</li>
+</ul>
+<p>To list the comments of an Ogg file, use <code class="docutils literal notranslate"><span class="pre">vorbiscomment</span> <span class="pre">-l</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>vorbiscomment -l my_ogg_file.ogg
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">oggenc</span></code> and <code class="docutils literal notranslate"><span class="pre">vorbiscomment</span></code> are provided by package <code class="docutils literal notranslate"><span class="pre">vorbis-tools</span></code> on a
+Debian GNU/Linux system.</p>
+<p>And here is the source code:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="nv">SOURCE_DIR</span><span class="o">=</span>directory/of/ts/file<span class="p">;</span>                     <span class="c1"># Adapt to your needs.</span>
+<span class="nv">SOURCE_FILE</span><span class="o">=</span>ts_file.ts<span class="p">;</span>                              <span class="c1"># Adapt to your needs.</span>
+<span class="nv">SOURCE_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$SOURCE_DIR</span><span class="s2">/</span><span class="nv">$SOURCE_FILE</span><span class="s2">"</span><span class="p">;</span>
+
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span>output/directory<span class="p">;</span>                         <span class="c1"># Adapt to your needs.</span>
+
+<span class="nv">INTERMEDIATE_FILES_DIR</span><span class="o">=</span>intermediate/files/directory<span class="p">;</span> <span class="c1"># Adapt to your needs.</span>
+
+<span class="nv">ARTIST</span><span class="o">=</span><span class="s2">"artist name"</span><span class="p">;</span>                                <span class="c1"># Adapt to your needs.</span>
+<span class="nv">ALBUM</span><span class="o">=</span><span class="s2">"album name"</span><span class="p">;</span>                                  <span class="c1"># Adapt to your needs.</span>
+
+<span class="nv">OGGEXT</span><span class="o">=</span>.ogg<span class="p">;</span>
+<span class="nv">WAVEXT</span><span class="o">=</span>.wav<span class="p">;</span>
+
+<span class="nv">TEMP_SUFF</span><span class="o">=</span>_<span class="p">;</span>
+
+mkdir -p <span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">"</span><span class="p">;</span>
+rm -rf <span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">"</span>/*<span class="p">;</span>
+
+mkdir -p <span class="s2">"</span><span class="nv">$INTERMEDIATE_FILES_DIR</span><span class="s2">"</span><span class="p">;</span>
+rm <span class="s2">"</span><span class="nv">$INTERMEDIATE_FILES_DIR</span><span class="s2">"</span>/*<span class="p">;</span>
+
+<span class="nv">K</span><span class="o">=</span><span class="m">0</span><span class="p">;</span>
+
+<span class="c1"># Loop over the lines of the here-document below.</span>
+<span class="k">while</span> <span class="nv">IFS</span><span class="o">=</span> <span class="nb">read</span> -r LINE<span class="p">;</span> <span class="k">do</span>
+    <span class="nv">START_TIME</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>sed <span class="s2">"s/ .*</span>$<span class="s2">//"</span><span class="k">)</span><span class="p">;</span>
+    <span class="nv">LINE</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>sed <span class="s2">"s/^[^ ]\+ //"</span><span class="k">)</span><span class="p">;</span>
+    <span class="nv">DURATION</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>sed <span class="s2">"s/ .*</span>$<span class="s2">//"</span><span class="k">)</span><span class="p">;</span>
+    <span class="nv">LINE</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>sed <span class="s2">"s/^[^ ]\+ //"</span><span class="k">)</span><span class="p">;</span>
+
+    <span class="nv">TITLE</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="k">)</span><span class="p">;</span>
+
+    <span class="c1"># Substitute occurrences of ampersand with "and".</span>
+    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span><span class="p">|</span>sed <span class="s2">"s/&amp;/and/"</span><span class="k">)</span><span class="p">;</span>
+
+    <span class="c1"># Remove accents, cedillas, tildes, etc...</span>
+    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>unaccent UTF-8<span class="k">)</span><span class="p">;</span>
+
+    <span class="c1"># Convert uppercase characters to lowercase.</span>
+    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>tr <span class="s1">'[:upper:]'</span> <span class="s1">'[:lower:]'</span><span class="k">)</span><span class="p">;</span>
+
+    <span class="c1"># Substitute characters that are not lowercase letters, digits or hyphen</span>
+    <span class="c1"># with underscores.</span>
+    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> -n <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>tr -c <span class="s2">"a-z0-9-"</span> <span class="o">[</span>_*<span class="o">]</span><span class="k">)</span><span class="p">;</span>
+
+    <span class="c1"># Prepend track number (2 digits).</span>
+    <span class="nv">K</span><span class="o">=</span><span class="k">$((</span>K <span class="o">+</span> <span class="m">1</span><span class="k">))</span><span class="p">;</span>
+    <span class="nv">K_STR</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span> <span class="s2">"%02d"</span> <span class="nv">$K</span><span class="k">)</span><span class="p">;</span>
+    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">K_STR</span><span class="si">}</span><span class="s2">_-_</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">;</span>
+
+    <span class="nv">WAV_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$INTERMEDIATE_FILES_DIR</span><span class="s2">/</span><span class="nv">$OUTPUT_PATH$WAVEXT</span><span class="s2">"</span><span class="p">;</span>
+    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="nv">$OUTPUT_PATH$OGGEXT</span><span class="s2">"</span><span class="p">;</span>
+
+    <span class="nb">echo</span> <span class="s2">"Creating </span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">;</span>
+
+    <span class="c1"># Create a WAV file. The -nostdin option is needed to prevent ffmpeg from</span>
+    <span class="c1"># "eating" parts of the here-document.</span>
+    ffmpeg -nostdin -loglevel quiet -ss <span class="s2">"</span><span class="nv">$START_TIME</span><span class="s2">"</span> -t <span class="s2">"</span><span class="nv">$DURATION</span><span class="s2">"</span> <span class="se">\</span>
+        -i <span class="s2">"</span><span class="nv">$SOURCE_PATH</span><span class="s2">"</span> -ar <span class="m">44100</span> <span class="s2">"</span><span class="nv">$WAV_PATH</span><span class="s2">"</span><span class="p">;</span>
+
+    <span class="c1"># Fade out the WAV file.</span>
+    mv <span class="s2">"</span><span class="nv">$WAV_PATH</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$WAV_PATH$TEMP_SUFF</span><span class="s2">"</span><span class="p">;</span>
+    sox <span class="s2">"</span><span class="nv">$WAV_PATH$TEMP_SUFF</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$WAV_PATH</span><span class="s2">"</span> fade t <span class="m">0</span> -0 <span class="m">7</span><span class="p">;</span>
+    rm <span class="s2">"</span><span class="nv">$WAV_PATH$TEMP_SUFF</span><span class="s2">"</span><span class="p">;</span>
+
+    <span class="c1"># Encode to Ogg format.</span>
+    oggenc -a <span class="s2">"</span><span class="nv">$ARTIST</span><span class="s2">"</span> -t <span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span> -l <span class="s2">"</span><span class="nv">$ALBUM</span><span class="s2">"</span> -c <span class="s2">"tracknumber=</span><span class="nv">$K_STR</span><span class="s2">"</span> <span class="se">\</span>
+        -o <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$WAV_PATH</span><span class="s2">"</span><span class="p">;</span>
+<span class="k">done</span><span class="s">&lt;&lt;HEREDOC</span>
+<span class="s">00:16:44 00:03:43 The mission (Ennio Morricone)</span>
+<span class="s">00:33:20 00:03:19 Cinema Paradiso (Andrea &amp; Ennio Morricone)</span>
+<span class="s">HEREDOC</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li>
+<a class="reference internal" href="#">Music</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#ogg-file-decoding">Ogg file decoding</a></li>
+<li><a class="reference internal" href="#wav-files-duration">WAV files duration</a></li>
+<li><a class="reference internal" href="#burning-wav-files-to-a-cd-r">Burning WAV files to a CD-R</a></li>
+<li><a class="reference internal" href="#building-audio-files-from-a-video">Building audio files from a video</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="wifi.html" title="previous chapter">Wi-Fi</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nu_html_checker.html" title="next chapter">Nu HTML Checker</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q">
+      <input type="submit" value="Go">
+      <input type="hidden" name="check_keywords" value="yes">
+      <input type="hidden" name="area" value="default">
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="nu_html_checker.html" title="Nu HTML Checker">next</a> |</li>
+        <li class="right">
+          <a href="wifi.html" title="Wi-Fi">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>
