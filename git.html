@@ -802,8 +802,17 @@ git rev-parse --abbrev-ref --branches     <span class="c1"># Same output (but li
 
 git diff-index --quiet HEAD               <span class="c1"># Does not output anything.</span>
                                           <span class="c1"># Terminates with exit status 0</span>
-                                          <span class="c1"># when working tree is clean, with</span>
-                                          <span class="c1"># non zero exit status otherwise.</span>
+                                          <span class="c1"># when working tree is clean (but</span>
+                                          <span class="c1"># possibly with untracked files),</span>
+                                          <span class="c1"># with non zero exit status</span>
+                                          <span class="c1"># otherwise.</span>
+
+git status --porcelain                    <span class="c1"># Outputs nothing if the working</span>
+                                          <span class="c1"># directory is clean (and without</span>
+                                          <span class="c1"># any untracked files), outputs</span>
+                                          <span class="c1"># something if the working</span>
+                                          <span class="c1"># directory is not clean and/or has</span>
+                                          <span class="c1"># untracked files.</span>
 
 git show-ref --heads branch_name          <span class="c1"># Provides the commit hash of the</span>
                                           <span class="c1"># head commit of branch</span>
