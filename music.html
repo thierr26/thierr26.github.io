@@ -52,6 +52,8 @@
 <li><a class="reference internal" href="#wav-files-duration" id="id4">WAV files duration</a></li>
 <li><a class="reference internal" href="#burning-wav-files-to-a-cd-r" id="id5">Burning WAV files to a CD-R</a></li>
 <li><a class="reference internal" href="#building-audio-files-from-a-video" id="id6">Building audio files from a video</a></li>
+<li><a class="reference internal" href="#getting-the-track-list-of-an-audio-cd" id="id7">Getting the track list of an audio CD</a></li>
+<li><a class="reference internal" href="#building-audio-ogg-files-from-an-audio-cd" id="id8">Building audio (Ogg) files from an audio CD</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -101,9 +103,21 @@ GNU/Linux</a> system).</p>
 <div class="highlight"><pre><span></span>cdrskin -v -eject -audio -pad *.wav
 </pre></div>
 </div>
+<p>If you need to specify the device for the optical drive, use the <code class="docutils literal notranslate"><span class="pre">-d</span></code>
+switch:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>cdrskin -d /dev/sr1 -v -eject -audio -pad *.wav
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">cdrskin</span></code> should be able to list the optical drives devices with the
+<code class="docutils literal notranslate"><span class="pre">--devices</span></code> option:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>cdrskin --devices
+</pre></div>
+</div>
 </div>
 <div class="section" id="building-audio-files-from-a-video">
-<h2>
+<span id="audio-files-from-video"></span><h2>
 <a class="toc-backref" href="#id6">Building audio files from a video</a><a class="headerlink" href="#building-audio-files-from-a-video" title="Permalink to this headline">¶</a>
 </h2>
 <p id="index-3">I once wanted to make audio files from a nice TV show that I had recorded
@@ -180,8 +194,8 @@ Debian GNU/Linux system.</p>
 
 <span class="nv">INTERMEDIATE_FILES_DIR</span><span class="o">=</span>intermediate/files/directory<span class="p">;</span> <span class="c1"># Adapt to your needs.</span>
 
-<span class="nv">ARTIST</span><span class="o">=</span><span class="s2">"artist name"</span><span class="p">;</span>                                <span class="c1"># Adapt to your needs.</span>
-<span class="nv">ALBUM</span><span class="o">=</span><span class="s2">"album name"</span><span class="p">;</span>                                  <span class="c1"># Adapt to your needs.</span>
+<span class="nv">ARTIST</span><span class="o">=</span><span class="s2">"Artist name"</span><span class="p">;</span>                                <span class="c1"># Adapt to your needs.</span>
+<span class="nv">ALBUM</span><span class="o">=</span><span class="s2">"Album name"</span><span class="p">;</span>                                  <span class="c1"># Adapt to your needs.</span>
 
 <span class="nv">OGGEXT</span><span class="o">=</span>.ogg<span class="p">;</span>
 <span class="nv">WAVEXT</span><span class="o">=</span>.wav<span class="p">;</span>
@@ -248,6 +262,97 @@ rm <span class="s2">"</span><span class="nv">$INTERMEDIATE_FILES_DIR</span><span
 </pre></div>
 </div>
 </div>
+<div class="section" id="getting-the-track-list-of-an-audio-cd">
+<h2>
+<a class="toc-backref" href="#id7">Getting the track list of an audio CD</a><a class="headerlink" href="#getting-the-track-list-of-an-audio-cd" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-4">The <code class="docutils literal notranslate"><span class="pre">cdown</span></code> command (provided by package <code class="docutils literal notranslate"><span class="pre">cdtool</span></code> on a Debian GNU/Linux
+system) queries the <a class="reference external" href="https://en.wikipedia.org/wiki/CDDB">CDDB</a> database. Just
+insert the Audio CD in your optical drive and run:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>cdown
+</pre></div>
+</div>
+<p>If you need to specify the device for the optical drive, use the <code class="docutils literal notranslate"><span class="pre">-d</span></code>
+switch:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>cdown -d /dev/sr1
+</pre></div>
+</div>
+<p>If you have issues with accented letters, try:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>cdown<span class="p">|</span>iconv -f latin1
+</pre></div>
+</div>
+<p>Alternatively, you can search your audio CD directly on the <a class="reference external" href="http://www.freedb.org">freedb.org</a> website.</p>
+</div>
+<div class="section" id="building-audio-ogg-files-from-an-audio-cd">
+<h2>
+<a class="toc-backref" href="#id8">Building audio (Ogg) files from an audio CD</a><a class="headerlink" href="#building-audio-ogg-files-from-an-audio-cd" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-5">When I want to rip an audio CD, I write a shell script, which has a lot of
+similarities with <a class="reference internal" href="#audio-files-from-video"><span class="std std-ref">the script I use to build audio files from a video</span></a>. The script is also mostly a loop over the lines of a
+here-document. There is one line in the here-document for each track of the
+audio CD. Each line provides the title of the track.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cdparanoia</span></code> is used to extract the audio CD tracks and <code class="docutils literal notranslate"><span class="pre">oggenc</span></code> is used to
+encode to Ogg file.</p>
+<p>You may need to use the <code class="docutils literal notranslate"><span class="pre">-d</span></code> switch off <code class="docutils literal notranslate"><span class="pre">cdparanoia</span></code> to specify the device
+of your optical drive.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">cdparanoia</span></code> has difficulties extracting the audio tracks, try to add the
+<code class="docutils literal notranslate"><span class="pre">-Z</span></code> option. See the manual for more details (<code class="docutils literal notranslate"><span class="pre">man</span> <span class="pre">cdparanoia</span></code>).</p>
+<p>And here is the source code:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span>output/directory<span class="p">;</span>                         <span class="c1"># Adapt to your needs.</span>
+<span class="nv">ARTIST</span><span class="o">=</span><span class="s2">"Artist name"</span><span class="p">;</span>                                <span class="c1"># Adapt to your needs.</span>
+<span class="nv">ALBUM</span><span class="o">=</span><span class="s2">"Album name"</span><span class="p">;</span>                                  <span class="c1"># Adapt to your needs.</span>
+
+<span class="nv">OGGEXT</span><span class="o">=</span>.ogg<span class="p">;</span>
+
+mkdir -p <span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">"</span><span class="p">;</span>
+
+<span class="nv">K</span><span class="o">=</span><span class="m">0</span><span class="p">;</span>
+
+<span class="c1"># Loop over the lines of the here-document below.</span>
+<span class="k">while</span> <span class="nv">IFS</span><span class="o">=</span> <span class="nb">read</span> -r LINE<span class="p">;</span> <span class="k">do</span>
+
+    <span class="nv">TITLE</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="k">)</span><span class="p">;</span>
+
+    <span class="c1"># Substitute occurrences of ampersand with "and".</span>
+    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span><span class="p">|</span>sed <span class="s2">"s/&amp;/and/"</span><span class="k">)</span><span class="p">;</span>
+
+    <span class="c1"># Remove accents, cedillas, tildes, etc...</span>
+    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>unaccent UTF-8<span class="k">)</span><span class="p">;</span>
+
+    <span class="c1"># Convert uppercase characters to lowercase.</span>
+    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>tr <span class="s1">'[:upper:]'</span> <span class="s1">'[:lower:]'</span><span class="k">)</span><span class="p">;</span>
+
+    <span class="c1"># Substitute characters that are not lowercase letters, digits or hyphen</span>
+    <span class="c1"># with underscores.</span>
+    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> -n <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>tr -c <span class="s2">"a-z0-9-"</span> <span class="o">[</span>_*<span class="o">]</span><span class="k">)</span><span class="p">;</span>
+
+    <span class="c1"># Prepend track number (2 digits).</span>
+    <span class="nv">K</span><span class="o">=</span><span class="k">$((</span>K <span class="o">+</span> <span class="m">1</span><span class="k">))</span><span class="p">;</span>
+    <span class="nv">K_STR</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span> <span class="s2">"%02d"</span> <span class="nv">$K</span><span class="k">)</span><span class="p">;</span>
+    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">K_STR</span><span class="si">}</span><span class="s2">_-_</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">;</span>
+
+    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="nv">$OUTPUT_PATH$OGGEXT</span><span class="s2">"</span><span class="p">;</span>
+
+    <span class="nb">echo</span> <span class="s2">"Creating </span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">;</span>
+
+    cdparanoia <span class="nv">$K</span> -<span class="p">|</span>oggenc -a <span class="s2">"</span><span class="nv">$ARTIST</span><span class="s2">"</span> -t <span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span> -l <span class="se">\</span>
+    <span class="s2">"</span><span class="nv">$ALBUM</span><span class="s2">"</span> -c <span class="s2">"tracknumber=</span><span class="nv">$K_STR</span><span class="s2">"</span> -o <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span> -<span class="p">;</span>
+
+<span class="k">done</span><span class="s">&lt;&lt;HEREDOC</span>
+<span class="s">Title for track #1</span>
+<span class="s">Title for track #2</span>
+<span class="s">...</span>
+<span class="s">Title for last track</span>
+<span class="s">HEREDOC</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -265,6 +370,8 @@ rm <span class="s2">"</span><span class="nv">$INTERMEDIATE_FILES_DIR</span><span
 <li><a class="reference internal" href="#wav-files-duration">WAV files duration</a></li>
 <li><a class="reference internal" href="#burning-wav-files-to-a-cd-r">Burning WAV files to a CD-R</a></li>
 <li><a class="reference internal" href="#building-audio-files-from-a-video">Building audio files from a video</a></li>
+<li><a class="reference internal" href="#getting-the-track-list-of-an-audio-cd">Getting the track list of an audio CD</a></li>
+<li><a class="reference internal" href="#building-audio-ogg-files-from-an-audio-cd">Building audio (Ogg) files from an audio CD</a></li>
 </ul>
 </li>
 </ul>
