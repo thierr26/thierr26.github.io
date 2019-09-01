@@ -54,6 +54,7 @@
 <li><a class="reference internal" href="#building-audio-files-from-a-video" id="id6">Building audio files from a video</a></li>
 <li><a class="reference internal" href="#getting-the-track-list-of-an-audio-cd" id="id7">Getting the track list of an audio CD</a></li>
 <li><a class="reference internal" href="#building-audio-ogg-files-from-an-audio-cd" id="id8">Building audio (Ogg) files from an audio CD</a></li>
+<li><a class="reference internal" href="#converting-ogg-files-to-mp3" id="id9">Converting Ogg files to MP3</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -353,6 +354,130 @@ mkdir -p <span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class
 </pre></div>
 </div>
 </div>
+<div class="section" id="converting-ogg-files-to-mp3">
+<h2>
+<a class="toc-backref" href="#id9">Converting Ogg files to MP3</a><a class="headerlink" href="#converting-ogg-files-to-mp3" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-6">Converting an Ogg file to <a class="reference external" href="https://en.wikipedia.org/wiki/MP3">MP3</a> is pretty
+easy with <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>ffmpeg -i my_audio_file.ogg my_audio_file.mp3
+</pre></div>
+</div>
+<p>Metadata can be included in the MP3 output file. Example:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>ffmpeg -i my_audio_file.ogg <span class="se">\</span>
+    -metadata <span class="nv">artist</span><span class="o">=</span><span class="s2">"The artist"</span> <span class="se">\</span>
+    -metadata <span class="nv">album</span><span class="o">=</span><span class="s2">"The album"</span> <span class="se">\</span>
+    -metadata <span class="nv">title</span><span class="o">=</span><span class="s2">"The track title"</span> <span class="se">\</span>
+    my_audio_file.mp3
+</pre></div>
+</div>
+<p>I have a collection of Ogg files, and I need to convert them to MP3 and store
+the MP3 files on a USB stick to be able to listen to them in my car. The Ogg
+files are scattered in various directory trees on my hard drive. The directory
+trees organizations are such that an Ogg file is always in a directory with a
+name that denotes an album, which is in a directory with a name that denotes an
+artist.</p>
+<p>I use a shell script like the following to populate a (<a class="reference internal" href="external_usb_drives.html#fat32-formatting"><span class="std std-ref">FAT32 formatted</span></a>) USB stick with the MP3 files. The tree organization on the
+USB stick is similar to the Ogg files trees organizations since an MP3 file is
+always in a directory with a name that denotes an album, which is in a
+directory with a name that denotes an artist. But all the directories denoting
+artists are directly in the USB stick root tree.</p>
+<p>Here’s the code of the script:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="nv">OGG_TREE_ROOT</span><span class="o">=</span>path/to/root/of/ogg/trees<span class="p">;</span>             <span class="c1"># Adapt to your needs.</span>
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span>path/to/usb/stick/root<span class="p">;</span>                   <span class="c1"># Adapt to your needs.</span>
+<span class="nv">OGGEXT</span><span class="o">=</span>.ogg<span class="p">;</span>
+<span class="nv">MP3EXT</span><span class="o">=</span>.mp3<span class="p">;</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+
+ogg2mp3<span class="o">()</span> <span class="o">{</span>
+
+    <span class="nb">local</span> <span class="nv">SOURCE_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="p">;</span>
+    <span class="nb">local</span> <span class="nv">INTERMEDIATE_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span><span class="p">;</span>
+    <span class="nb">local</span> <span class="nv">TARGET_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$3</span><span class="s2">"</span><span class="p">;</span>
+
+    <span class="c1"># vorbiscomment with -l switch lists the comments in the Ogg file (one line</span>
+    <span class="c1"># per comment, key=value format). The output is piped to a group of</span>
+    <span class="c1"># commands (delimited with curly braces). The whole group is executed in</span>
+    <span class="c1"># one subshell. This makes it possible to initialize variables before the</span>
+    <span class="c1"># while loop, assign the variables in the loop and use them after the loop.</span>
+    vorbiscomment -l <span class="s2">"</span><span class="nv">$SOURCE_FILE</span><span class="s2">"</span><span class="p">|</span>
+    <span class="o">{</span>
+        <span class="nb">local</span> <span class="nv">LINE</span><span class="o">=</span>
+        <span class="nb">local</span> <span class="nv">ARTIST</span><span class="o">=</span>
+        <span class="nb">local</span> <span class="nv">ALBUM</span><span class="o">=</span>
+        <span class="nb">local</span> <span class="nv">TITLE</span><span class="o">=</span>
+        <span class="nb">local</span> <span class="nv">VAL</span><span class="o">=</span>
+        <span class="k">while</span> <span class="nv">IFS</span><span class="o">=</span> <span class="nb">read</span> -r LINE<span class="p">;</span> <span class="k">do</span>
+            <span class="nv">VAL</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>sed <span class="s2">"s/^[^=]\+=//"</span><span class="k">)</span><span class="p">;</span>
+            <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>grep -q ^artist<span class="o">=</span> <span class="o">&amp;&amp;</span> <span class="nv">ARTIST</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VAL</span><span class="s2">"</span><span class="p">;</span>
+            <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>grep -q ^album<span class="o">=</span> <span class="o">&amp;&amp;</span> <span class="nv">ALBUM</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VAL</span><span class="s2">"</span><span class="p">;</span>
+            <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>grep -q ^title<span class="o">=</span> <span class="o">&amp;&amp;</span> <span class="nv">TITLE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VAL</span><span class="s2">"</span><span class="p">;</span>
+        <span class="k">done</span><span class="p">;</span>
+
+        <span class="c1"># Convert Ogg source file to MP3 (INTERMEDIATE_FILE).</span>
+        ffmpeg -nostdin -nostats -loglevel quiet -i <span class="s2">"</span><span class="nv">$SOURCE_FILE</span><span class="s2">"</span> <span class="se">\</span>
+            -metadata <span class="nv">artist</span><span class="o">=</span><span class="s2">"</span><span class="nv">$ARTIST</span><span class="s2">"</span> <span class="se">\</span>
+            -metadata <span class="nv">album</span><span class="o">=</span><span class="s2">"</span><span class="nv">$ALBUM</span><span class="s2">"</span> <span class="se">\</span>
+            -metadata <span class="nv">title</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span> <span class="se">\</span>
+            <span class="s2">"</span><span class="nv">$INTERMEDIATE_FILE</span><span class="s2">"</span><span class="p">;</span>
+    <span class="o">}</span>
+
+    mkdir -p <span class="s2">"</span><span class="si">${</span><span class="nv">TARGET_FILE</span><span class="p">%/*</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span>
+    mv <span class="s2">"</span><span class="nv">$INTERMEDIATE_FILE</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
+<span class="o">}</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+
+process_file<span class="o">()</span> <span class="o">{</span>
+
+    <span class="nb">local</span> <span class="nv">SOURCE_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="p">;</span>
+
+    <span class="c1"># Initialize TEMPO_TARGET_FILE with SOURCE_FILE, but with extension changed</span>
+    <span class="c1"># to MP3 extension.</span>
+    <span class="nb">local</span> <span class="nv">TEMPO_TARGET_FILE</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">SOURCE_FILE</span><span class="p">%</span><span class="nv">$OGGEXT</span><span class="si">}</span><span class="nv">$MP3EXT</span><span class="s2">"</span><span class="p">;</span>
+
+    <span class="c1"># Store a copy of TEMPO_TARGET_FILE initial value, will be useful later.</span>
+    <span class="nb">local</span> <span class="nv">INTERMEDIATE_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TEMPO_TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
+
+    <span class="c1"># Remove the beginning of the path of TEMPO_TARGET_FILE (keep only the</span>
+    <span class="c1"># parent directory, the directory and the basename).</span>
+    <span class="k">while</span> <span class="o">[</span> <span class="s2">"</span><span class="si">${</span><span class="nv">TEMPO_TARGET_FILE</span><span class="p">%/*/*/*</span><span class="si">}</span><span class="s2">"</span> !<span class="o">=</span> <span class="s2">"</span><span class="nv">$TEMPO_TARGET_FILE</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">do</span>
+        <span class="nv">TEMPO_TARGET_FILE</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">TEMPO_TARGET_FILE</span><span class="p">#*/</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span>
+    <span class="k">done</span><span class="p">;</span>
+
+    <span class="nb">local</span> <span class="nv">TARGET_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="nv">$TEMPO_TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="o">[</span> -e <span class="s2">"</span><span class="nv">$TARGET_FILE</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+        <span class="nb">echo</span> <span class="s2">"Already exists in output directory: </span><span class="nv">$TEMPO_TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="nb">echo</span> <span class="s2">"Creating </span><span class="nv">$TEMPO_TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
+        ogg2mp3 <span class="s2">"</span><span class="nv">$SOURCE_FILE</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$INTERMEDIATE_FILE</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
+    <span class="k">fi</span><span class="p">;</span>
+<span class="o">}</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+
+process_dir<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">local</span> <span class="nv">DIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="p">;</span>
+    <span class="k">for</span> OGGFILE in <span class="k">$(</span>find <span class="s2">"</span><span class="nv">$DIR</span><span class="s2">"</span> -maxdepth <span class="m">1</span> -type f -name <span class="s2">"*</span><span class="nv">$OGGEXT</span><span class="s2">"</span><span class="p">|</span>sort<span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+        process_file <span class="s2">"</span><span class="nv">$OGGFILE</span><span class="s2">"</span><span class="p">;</span>
+    <span class="k">done</span><span class="p">;</span>
+<span class="o">}</span>
+
+<span class="c1"># -----------------------------------------------------------------------------</span>
+
+<span class="k">for</span> DIR in <span class="k">$(</span>find <span class="s2">"</span><span class="nv">$OGG_TREE_ROOT</span><span class="s2">"</span> -type d<span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+    process_dir <span class="s2">"</span><span class="nv">$DIR</span><span class="s2">"</span><span class="p">;</span>
+<span class="k">done</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -372,6 +497,7 @@ mkdir -p <span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class
 <li><a class="reference internal" href="#building-audio-files-from-a-video">Building audio files from a video</a></li>
 <li><a class="reference internal" href="#getting-the-track-list-of-an-audio-cd">Getting the track list of an audio CD</a></li>
 <li><a class="reference internal" href="#building-audio-ogg-files-from-an-audio-cd">Building audio (Ogg) files from an audio CD</a></li>
+<li><a class="reference internal" href="#converting-ogg-files-to-mp3">Converting Ogg files to MP3</a></li>
 </ul>
 </li>
 </ul>

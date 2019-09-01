@@ -47,20 +47,20 @@
 <div class="contents local topic" id="page-content">
 <p class="topic-title first">Page content</p>
 <ul class="simple">
-<li><a class="reference internal" href="#introduction" id="id1">Introduction</a></li>
+<li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
 <li>
-<a class="reference internal" href="#recreating-the-partition-table" id="id2">Recreating the partition table</a><ul>
-<li><a class="reference internal" href="#device-identification" id="id3">Device identification</a></li>
-<li><a class="reference internal" href="#deletion-of-existing-partitions-and-creation-of-the-new-partition" id="id4">Deletion of existing partitions and creation of the new partition</a></li>
+<a class="reference internal" href="#recreating-the-partition-table" id="id3">Recreating the partition table</a><ul>
+<li><a class="reference internal" href="#device-identification" id="id4">Device identification</a></li>
+<li><a class="reference internal" href="#deletion-of-existing-partitions-and-creation-of-the-new-partition" id="id5">Deletion of existing partitions and creation of the new partition</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#formatting-the-new-partition" id="id5">Formatting the new partition</a></li>
-<li><a class="reference internal" href="#fat32-formatting" id="id6">FAT32 formatting</a></li>
+<li><a class="reference internal" href="#formatting-the-new-partition" id="id6">Formatting the new partition</a></li>
+<li><a class="reference internal" href="#fat32-formatting" id="id7">FAT32 formatting</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
 <h2>
-<a class="toc-backref" href="#id1">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
 </h2>
 <p>I’m using <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> and I backup my data to
 external (USB) drives. This page describes how I’ve setup those drives, that is
@@ -72,11 +72,11 @@ drive contains precious data that you must preserve and retain!</strong></p>
 </div>
 <div class="section" id="recreating-the-partition-table">
 <h2>
-<a class="toc-backref" href="#id2">Recreating the partition table</a><a class="headerlink" href="#recreating-the-partition-table" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id3">Recreating the partition table</a><a class="headerlink" href="#recreating-the-partition-table" title="Permalink to this headline">¶</a>
 </h2>
 <div class="section" id="device-identification">
 <span id="index-0"></span><h3>
-<a class="toc-backref" href="#id3">Device identification</a><a class="headerlink" href="#device-identification" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id4">Device identification</a><a class="headerlink" href="#device-identification" title="Permalink to this headline">¶</a>
 </h3>
 <p>I’ve plugged in the USB drive and have identified the associated device by
 checking the output of the <code class="docutils literal notranslate"><span class="pre">dmesg</span></code> command (<strong>as root</strong>). The last lines
@@ -87,7 +87,7 @@ all the disk devices on the system.</p>
 </div>
 <div class="section" id="deletion-of-existing-partitions-and-creation-of-the-new-partition">
 <h3>
-<a class="toc-backref" href="#id4">Deletion of existing partitions and creation of the new partition</a><a class="headerlink" href="#deletion-of-existing-partitions-and-creation-of-the-new-partition" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id5">Deletion of existing partitions and creation of the new partition</a><a class="headerlink" href="#deletion-of-existing-partitions-and-creation-of-the-new-partition" title="Permalink to this headline">¶</a>
 </h3>
 <p>Launch fdisk <strong>as root</strong> with the device as argument:</p>
 <div class="highlight-shell notranslate">
@@ -110,7 +110,7 @@ partition.</p>
 </div>
 <div class="section" id="formatting-the-new-partition">
 <h2>
-<a class="toc-backref" href="#id5">Formatting the new partition</a><a class="headerlink" href="#formatting-the-new-partition" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id6">Formatting the new partition</a><a class="headerlink" href="#formatting-the-new-partition" title="Permalink to this headline">¶</a>
 </h2>
 <p id="index-1">Use <code class="docutils literal notranslate"><span class="pre">mkfs.ext4</span></code> (<strong>as root</strong>) to format the newly created partition with the
 ext4 filesystem. Note the <code class="docutils literal notranslate"><span class="pre">-L</span></code> option used to provide the label:</p>
@@ -130,8 +130,8 @@ ext4 filesystem. Note the <code class="docutils literal notranslate"><span class
 </div>
 </div>
 <div class="section" id="fat32-formatting">
-<h2>
-<a class="toc-backref" href="#id6">FAT32 formatting</a><a class="headerlink" href="#fat32-formatting" title="Permalink to this headline">¶</a>
+<span id="id1"></span><h2>
+<a class="toc-backref" href="#id7">FAT32 formatting</a><a class="headerlink" href="#fat32-formatting" title="Permalink to this headline">¶</a>
 </h2>
 <p id="index-2">For a FAT32 formatting instead of a ext4 formatting, the procedure is similar.
 The differences are:</p>
