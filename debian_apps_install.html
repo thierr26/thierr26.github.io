@@ -64,6 +64,7 @@
 <li><a class="reference internal" href="#privilege-escalation-for-use-of-ifp-line-libifp" id="id14">Privilege escalation for use of ifp-line-libifp</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#google-chrome-installation" id="id15">Google Chrome installation</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -469,6 +470,33 @@ execute <code class="docutils literal notranslate"><span class="pre">/usr/bin/if
 </div>
 </div>
 </div>
+<div class="section" id="google-chrome-installation">
+<h2>
+<a class="toc-backref" href="#id15">Google Chrome installation</a><a class="headerlink" href="#google-chrome-installation" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-11">I downloaded the 64 bit .deb Debian package from <a class="reference external" href="https://www.google.com/chrome">https://www.google.com/chrome</a>
+and installed it <strong>as root</strong> with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>dpkg -i google-chrome-stable_current_amd64.deb <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>The installation was not successful. I had to issue the following command to
+fix the system:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt install -f <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>This caused the following packages to be installed:</p>
+<ul class="simple">
+<li>libappindicator3-1</li>
+<li>libdbusmenu-glib4</li>
+<li>libdbusmenu-gtk3-4</li>
+<li>libindicator3-7</li>
+</ul>
+<p>I didn’t want Google Chrome to be the default browser, so I reselected Firefox
+ESR in the Debian alternatives system with <code class="docutils literal notranslate"><span class="pre">update-alternatives</span> <span class="pre">--config</span>
+<span class="pre">x-www-browser</span></code> (<strong>as root</strong>).</p>
+</div>
 </div>
 
 
@@ -498,6 +526,7 @@ execute <code class="docutils literal notranslate"><span class="pre">/usr/bin/if
 <li><a class="reference internal" href="#privilege-escalation-for-use-of-ifp-line-libifp">Privilege escalation for use of ifp-line-libifp</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#google-chrome-installation">Google Chrome installation</a></li>
 </ul>
 </li>
 </ul>
