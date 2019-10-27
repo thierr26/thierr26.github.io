@@ -116,6 +116,12 @@ switch:</p>
 <div class="highlight"><pre><span></span>cdrskin --devices
 </pre></div>
 </div>
+<p>Alternatively, you can use wodim. It may work better than cdrskin on Debian
+Buster:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>wodim -v <span class="nv">dev</span><span class="o">=</span>/dev/sr1 -sao -audio -pad *.wav
+</pre></div>
+</div>
 </div>
 <div class="section" id="building-audio-files-from-a-video">
 <span id="audio-files-from-video"></span><h2>
