@@ -190,8 +190,8 @@ user can read and write it:</p>
 <div class="highlight"><pre><span></span>chmod <span class="m">600</span> ~/.fetchmailrc
 </pre></div>
 </div>
-<p>You can <a class="reference download internal" download="" href="_downloads/5fad7fcb3d70e70646f9dfe1b9ca21a2/.fetchmailrc"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">an</span> <span class="pre">example</span> <span class="pre">.fetchmailrc</span> <span class="pre">file</span> <span class="pre">with</span> <span class="pre">two</span> <span class="pre">POP3</span>
-<span class="pre">connections</span> <span class="pre">defined</span></code></a>.</p>
+<p>You can <a class="reference download internal" download="" href="_downloads/5fad7fcb3d70e70646f9dfe1b9ca21a2/.fetchmailrc"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">an</span> <span class="pre">example</span> <span class="pre">.fetchmailrc</span> <span class="pre">file</span></code></a>. The SSL related options may not be needed in all
+cases (see <a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=922164">Debian bug #922164</a>).</p>
 </div>
 <div class="section" id="nmh-user-installation">
 <h3>
@@ -252,13 +252,6 @@ user can read and write it:</p>
 <div class="highlight"><pre><span></span>fetchmail       <span class="c1"># Retrieves new mails.</span>
 /usr/bin/mh/inc <span class="c1"># Incorporates retrieved mails to the inbox folder of the nmh</span>
                 <span class="c1"># directory.</span>
-</pre></div>
-</div>
-<p>If the <code class="docutils literal notranslate"><span class="pre">fetchmail</span></code> command fails with a “upgrade to TLS failed” error message
-as described in <a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=921450#32">one of messages of Debian bug #921450</a>, use the
-<code class="docutils literal notranslate"><span class="pre">--sslproto=""</span></code> option:</p>
-<div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>fetchmail --sslproto<span class="o">=</span><span class="s2">""</span>
 </pre></div>
 </div>
 </div>
