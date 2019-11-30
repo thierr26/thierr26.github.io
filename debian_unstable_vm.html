@@ -140,17 +140,7 @@ with:</p>
 <a class="toc-backref" href="#id5">For the virtual machine images</a><a class="headerlink" href="#for-the-virtual-machine-images" title="Permalink to this headline">¶</a>
 </h3>
 <p id="index-3">The default location (“storage pool”) for the virtual machines is
-<code class="docutils literal notranslate"><span class="pre">/var/lib/libvirt/images</span></code>. You can see the list of the storage pools managed
-by libvirt with:</p>
-<div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virsh pool-list <span class="c1"># As root.</span>
-</pre></div>
-</div>
-<p>And the details for a pool with for example:</p>
-<div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virsh pool-dumpxml default <span class="c1"># As root.</span>
-</pre></div>
-</div>
+<code class="docutils literal notranslate"><span class="pre">/var/lib/libvirt/images</span></code>.</p>
 <p>On some of my systems, the free space in <code class="docutils literal notranslate"><span class="pre">/var</span></code> is very limited. I want the
 virtual machines to be located in my home directory instead. So I create a
 directory with <code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">~/vm/libvirt/images</span></code>. And then, <strong>as root</strong>, I do:</p>
@@ -161,9 +151,25 @@ directory with <code class="docutils literal notranslate"><span class="pre">mkdi
 chmod <span class="m">711</span> /home/my_user_name/vm/libvirt/images       <span class="c1"># Change permissions (no</span>
                                                      <span class="c1"># read/write permission</span>
                                                      <span class="c1"># for non-root users).</span>
-
-virsh pool-edit default                              <span class="c1"># Edit the path and</span>
-                                                     <span class="c1"># save.</span>
+</pre></div>
+</div>
+<p>You can see the list of the storage pools managed by libvirt with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>virsh pool-list <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>If this list is empty, then I define and start the default storage pool with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>virsh pool-define-as default dir <span class="se">\</span>
+  --target /home/my_user_name/vm/libvirt/images <span class="c1"># As root.</span>
+virsh pool-autostart default                    <span class="c1"># As root.</span>
+virsh pool-start default                        <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>If the default storage pool is already existing, then I check the path with
+<code class="docutils literal notranslate"><span class="pre">virsh</span> <span class="pre">pool-dumpxml</span> <span class="pre">default</span></code> (<strong>as root</strong>) and change it if needed with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>virsh pool-edit default <span class="c1"># Edit the path and save.</span>
 </pre></div>
 </div>
 <p>After a reboot, <code class="docutils literal notranslate"><span class="pre">virsh</span> <span class="pre">pool-dumpxml</span> <span class="pre">default</span></code> (<strong>as root</strong>) shows the new
@@ -175,7 +181,7 @@ path.</p>
 </h3>
 <p id="index-4">Nothing complicated here, I just create a directory as an unprivileged user:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>mkdir ~/vm/installer_iso/debian_testing
+<div class="highlight"><pre><span></span>mkdir -p ~/vm/installer_iso/debian_testing
 </pre></div>
 </div>
 </div>
@@ -201,9 +207,10 @@ osinfo-query os<span class="p">|</span>grep Debian
 (for the small (“netinst”) images at least).
 See the <a class="reference external" href="https://www.debian.org/devel/debian-installer/">Debian installer page of the Debian developers’ corner</a>.</p>
 <p>You can download the “netinst” Debian testing installer image for the “AMD64”
-architecture with this command:</p>
+architecture with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>wget https://cdimage.debian.org/cdimage/daily-builds/daily/arch-latest/amd64/iso-cd/debian-testing-amd64-netinst.iso
+<div class="highlight"><pre><span></span><span class="nb">cd</span> ~/vm/installer_iso/debian_testing
+wget https://cdimage.debian.org/cdimage/daily-builds/daily/arch-latest/amd64/iso-cd/debian-testing-amd64-netinst.iso
 </pre></div>
 </div>
 <p>You might want to verify the authenticity of the ISO image. It is the same
@@ -271,10 +278,14 @@ I lauch <code class="docutils literal notranslate"><span class="pre">virt-viewer
 <h3>
 <a class="toc-backref" href="#id12">Upgrade to Debian unstable</a><a class="headerlink" href="#upgrade-to-debian-unstable" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-9">I then upgrade the virtual machine from Debian testing to Debian unstable by
-just substituting (<strong>as root</strong>) the Debian testing distribution name (which was
-“bullseye”) with “unstable” in the <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code> file and then
-running:</p>
+<p id="index-9">The first step to upgrade to Debian unstable is to edit
+<code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code> (<strong>as root, on the guest</strong>):</p>
+<ul class="simple">
+<li>Substitute the Debian testing distribution name (which was “bullseye”) with
+“unstable”.</li>
+<li>Comment out any line containing <code class="docutils literal notranslate"><span class="pre">security.debian.org</span></code>.</li>
+</ul>
+<p>The second step is to execute:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get update<span class="p">;</span> apt-get dist-upgrade <span class="c1"># As root, on the guest.</span>
 </pre></div>
