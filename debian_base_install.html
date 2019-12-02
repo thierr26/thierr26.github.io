@@ -58,18 +58,19 @@
 <li><a class="reference internal" href="#fixing-the-slow-boot-issue" id="id8">Fixing the slow boot issue</a></li>
 <li><a class="reference internal" href="#system-update" id="id9">System update</a></li>
 <li><a class="reference internal" href="#preventing-the-system-from-beeping" id="id10">Preventing the system from beeping</a></li>
-<li><a class="reference internal" href="#adding-deb-multimedia-to-the-sources" id="id11">Adding deb-multimedia to the sources</a></li>
-<li><a class="reference internal" href="#installing-firmware-linux-nonfree" id="id12">Installing firmware-linux-nonfree</a></li>
-<li><a class="reference internal" href="#checking-the-configured-time-zone" id="id13">Checking the configured time zone</a></li>
-<li><a class="reference internal" href="#synchronizing-the-system-date-with-network-time-servers" id="id14">Synchronizing the system date with network time servers</a></li>
-<li><a class="reference internal" href="#installing-a-console-locker" id="id15">Installing a console locker</a></li>
-<li><a class="reference internal" href="#installing-a-memory-ram-tester" id="id16">Installing a memory (RAM) tester</a></li>
-<li><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool" id="id17">Installing a wireless devices status management tool</a></li>
-<li><a class="reference internal" href="#installing-a-cd-burning-tool" id="id18">Installing a CD burning tool</a></li>
-<li><a class="reference internal" href="#installing-locate-updatedb" id="id19">Installing locate / updatedb</a></li>
+<li><a class="reference internal" href="#adding-support-for-other-languages" id="id11">Adding support for other languages</a></li>
+<li><a class="reference internal" href="#adding-deb-multimedia-to-the-sources" id="id12">Adding deb-multimedia to the sources</a></li>
+<li><a class="reference internal" href="#installing-firmware-linux-nonfree" id="id13">Installing firmware-linux-nonfree</a></li>
+<li><a class="reference internal" href="#checking-the-configured-time-zone" id="id14">Checking the configured time zone</a></li>
+<li><a class="reference internal" href="#synchronizing-the-system-date-with-network-time-servers" id="id15">Synchronizing the system date with network time servers</a></li>
+<li><a class="reference internal" href="#installing-a-console-locker" id="id16">Installing a console locker</a></li>
+<li><a class="reference internal" href="#installing-a-memory-ram-tester" id="id17">Installing a memory (RAM) tester</a></li>
+<li><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool" id="id18">Installing a wireless devices status management tool</a></li>
+<li><a class="reference internal" href="#installing-a-cd-burning-tool" id="id19">Installing a CD burning tool</a></li>
+<li><a class="reference internal" href="#installing-locate-updatedb" id="id20">Installing locate / updatedb</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#post-install-maintenance" id="id20">Post-install maintenance</a></li>
+<li><a class="reference internal" href="#post-install-maintenance" id="id21">Post-install maintenance</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -320,11 +321,32 @@ adding a file <strong>as root</strong> in <code class="docutils literal notransl
 (i.e. <code class="docutils literal notranslate"><span class="pre">lsmod</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">pcspkr</span></code> should output nothing) and you should not hear
 beeps any more.</p>
 </div>
+<div class="section" id="adding-support-for-other-languages">
+<h3>
+<a class="toc-backref" href="#id11">Adding support for other languages</a><a class="headerlink" href="#adding-support-for-other-languages" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-9">When installing the system, I select the English language, but I sometimes want
+to see an application in French. So I run (<strong>as root</strong>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>dpkg-reconfigure locales <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>and select the french language (and don’t unselect anything).</p>
+<p>Then if I occasionally want to run an application (e.g. Gimp) in French, I can
+do (as “normal” user):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">LANG</span><span class="o">=</span>fr_FR.UTF-8
+<span class="nb">export</span> <span class="nv">LANGUAGE</span><span class="o">=</span>fr_FR.UTF-8
+gimp <span class="p">&amp;</span>
+</pre></div>
+</div>
+<p>More details on the locales on the <a class="reference external" href="https://wiki.debian.org/Locale">Debian Wiki locale page</a></p>
+</div>
 <div class="section" id="adding-deb-multimedia-to-the-sources">
 <span id="add-debmultimedia"></span><h3>
-<a class="toc-backref" href="#id11">Adding deb-multimedia to the sources</a><a class="headerlink" href="#adding-deb-multimedia-to-the-sources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id12">Adding deb-multimedia to the sources</a><a class="headerlink" href="#adding-deb-multimedia-to-the-sources" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-9">You may want to add deb-multimedia as a source of packages for the newly
+<p id="index-10">You may want to add deb-multimedia as a source of packages for the newly
 installed Debian system (see <a class="reference external" href="https://linuxconfig.org/amp-up-your-multimedia-experience-on-debian-9-stretch-linux">this linuxconfig.org article</a>).</p>
 <p><a class="reference external" href="http://deb-multimedia.org">http://deb-multimedia.org</a> provides some instructions:</p>
 <p>First, add <strong>as root</strong> a line like this one (example for Debian Buster) in your
@@ -343,9 +365,9 @@ apt-get dist-upgrade
 </div>
 <div class="section" id="installing-firmware-linux-nonfree">
 <h3>
-<a class="toc-backref" href="#id12">Installing firmware-linux-nonfree</a><a class="headerlink" href="#installing-firmware-linux-nonfree" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id13">Installing firmware-linux-nonfree</a><a class="headerlink" href="#installing-firmware-linux-nonfree" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-10">Depending on your hardware, you may not need the <code class="docutils literal notranslate"><span class="pre">firmware-linux-nonfree</span></code>. On
+<p id="index-11">Depending on your hardware, you may not need the <code class="docutils literal notranslate"><span class="pre">firmware-linux-nonfree</span></code>. On
 my machines, this package makes life easier (most notably with Wi-Fi network
 adapter and/or graphics) and is installed either during installation (if the
 firmware archive has been required) or post-installation, manually:</p>
@@ -360,9 +382,9 @@ Make sure you issue a <code class="docutils literal notranslate"><span class="pr
 </div>
 <div class="section" id="checking-the-configured-time-zone">
 <h3>
-<a class="toc-backref" href="#id13">Checking the configured time zone</a><a class="headerlink" href="#checking-the-configured-time-zone" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id14">Checking the configured time zone</a><a class="headerlink" href="#checking-the-configured-time-zone" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-11">Check the configured time zone with:</p>
+<p id="index-12">Check the configured time zone with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>cat /etc/timezone
 </pre></div>
@@ -375,9 +397,9 @@ Make sure you issue a <code class="docutils literal notranslate"><span class="pr
 </div>
 <div class="section" id="synchronizing-the-system-date-with-network-time-servers">
 <h3>
-<a class="toc-backref" href="#id14">Synchronizing the system date with network time servers</a><a class="headerlink" href="#synchronizing-the-system-date-with-network-time-servers" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id15">Synchronizing the system date with network time servers</a><a class="headerlink" href="#synchronizing-the-system-date-with-network-time-servers" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-12">Just install package <code class="docutils literal notranslate"><span class="pre">ntp</span></code>:</p>
+<p id="index-13">Just install package <code class="docutils literal notranslate"><span class="pre">ntp</span></code>:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install ntp <span class="c1"># As root.</span>
 </pre></div>
@@ -386,9 +408,9 @@ Make sure you issue a <code class="docutils literal notranslate"><span class="pr
 </div>
 <div class="section" id="installing-a-console-locker">
 <h3>
-<a class="toc-backref" href="#id15">Installing a console locker</a><a class="headerlink" href="#installing-a-console-locker" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id16">Installing a console locker</a><a class="headerlink" href="#installing-a-console-locker" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-13">There are many screen and/or console locker programs. I’ve installed <a class="reference external" href="https://github.com/muennich/physlock">physlock</a>:</p>
+<p id="index-14">There are many screen and/or console locker programs. I’ve installed <a class="reference external" href="https://github.com/muennich/physlock">physlock</a>:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install physlock <span class="c1"># As root.</span>
 </pre></div>
@@ -396,9 +418,9 @@ Make sure you issue a <code class="docutils literal notranslate"><span class="pr
 </div>
 <div class="section" id="installing-a-memory-ram-tester">
 <h3>
-<a class="toc-backref" href="#id16">Installing a memory (RAM) tester</a><a class="headerlink" href="#installing-a-memory-ram-tester" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id17">Installing a memory (RAM) tester</a><a class="headerlink" href="#installing-a-memory-ram-tester" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-14">RAM failures are not so rare in my experience. A tester like <a class="reference external" href="https://www.memtest.org/">Memtest86+</a> can really help diagnosing a RAM failure. The
+<p id="index-15">RAM failures are not so rare in my experience. A tester like <a class="reference external" href="https://www.memtest.org/">Memtest86+</a> can really help diagnosing a RAM failure. The
 <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span></code> command below installs Memtest86+ and adds an entry in the
 <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_GRUB">Grub</a> menu (you have to reboot your
 machine and select the Memtest86+ grub entry to start Memtest86+):</p>
@@ -409,9 +431,9 @@ machine and select the Memtest86+ grub entry to start Memtest86+):</p>
 </div>
 <div class="section" id="installing-a-wireless-devices-status-management-tool">
 <h3>
-<a class="toc-backref" href="#id17">Installing a wireless devices status management tool</a><a class="headerlink" href="#installing-a-wireless-devices-status-management-tool" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id18">Installing a wireless devices status management tool</a><a class="headerlink" href="#installing-a-wireless-devices-status-management-tool" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-15">On a laptop computer, it may be useful to check the status (enabled, hard
+<p id="index-16">On a laptop computer, it may be useful to check the status (enabled, hard
 blocked, soft blocked) of the wireless devices. Package <code class="docutils literal notranslate"><span class="pre">rfkill</span></code> makes that
 possible:</p>
 <div class="highlight-shell notranslate">
@@ -426,9 +448,9 @@ possible:</p>
 </div>
 <div class="section" id="installing-a-cd-burning-tool">
 <h3>
-<a class="toc-backref" href="#id18">Installing a CD burning tool</a><a class="headerlink" href="#installing-a-cd-burning-tool" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id19">Installing a CD burning tool</a><a class="headerlink" href="#installing-a-cd-burning-tool" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-16">I use cdrskin to burn CDs (in particular the Debian installation CDs) on an
+<p id="index-17">I use cdrskin to burn CDs (in particular the Debian installation CDs) on an
 internal or external (USB) CD burning drive:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install cdrskin <span class="c1"># As root.</span>
@@ -437,9 +459,9 @@ internal or external (USB) CD burning drive:</p>
 </div>
 <div class="section" id="installing-locate-updatedb">
 <h3>
-<a class="toc-backref" href="#id19">Installing locate / updatedb</a><a class="headerlink" href="#installing-locate-updatedb" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id20">Installing locate / updatedb</a><a class="headerlink" href="#installing-locate-updatedb" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-17">Command <code class="docutils literal notranslate"><span class="pre">locate</span></code> is a way of finding files on your computer. It is faster
+<p id="index-18">Command <code class="docutils literal notranslate"><span class="pre">locate</span></code> is a way of finding files on your computer. It is faster
 than <code class="docutils literal notranslate"><span class="pre">find</span></code>. It relies on a database (upatedb) which is automatically updated
 now and then.</p>
 <p>Install locate and updatedb with:</p>
@@ -462,9 +484,9 @@ has been changed, with:</p>
 </div>
 <div class="section" id="post-install-maintenance">
 <h2>
-<a class="toc-backref" href="#id20">Post-install maintenance</a><a class="headerlink" href="#post-install-maintenance" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id21">Post-install maintenance</a><a class="headerlink" href="#post-install-maintenance" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-18">I regularly run the following commands to keep the system up to date:</p>
+<p id="index-19">I regularly run the following commands to keep the system up to date:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get update <span class="p">&amp;</span> apt-get dist-upgrade
 apt-get autoremove <span class="c1"># Useful if some packages have become unneeded.</span>
@@ -495,6 +517,7 @@ apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows o
 <li><a class="reference internal" href="#fixing-the-slow-boot-issue">Fixing the slow boot issue</a></li>
 <li><a class="reference internal" href="#system-update">System update</a></li>
 <li><a class="reference internal" href="#preventing-the-system-from-beeping">Preventing the system from beeping</a></li>
+<li><a class="reference internal" href="#adding-support-for-other-languages">Adding support for other languages</a></li>
 <li><a class="reference internal" href="#adding-deb-multimedia-to-the-sources">Adding deb-multimedia to the sources</a></li>
 <li><a class="reference internal" href="#installing-firmware-linux-nonfree">Installing firmware-linux-nonfree</a></li>
 <li><a class="reference internal" href="#checking-the-configured-time-zone">Checking the configured time zone</a></li>
