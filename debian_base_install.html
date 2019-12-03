@@ -462,11 +462,19 @@ internal or external (USB) CD burning drive:</p>
 <a class="toc-backref" href="#id20">Installing locate / updatedb</a><a class="headerlink" href="#installing-locate-updatedb" title="Permalink to this headline">¶</a>
 </h3>
 <p id="index-18">Command <code class="docutils literal notranslate"><span class="pre">locate</span></code> is a way of finding files on your computer. It is faster
-than <code class="docutils literal notranslate"><span class="pre">find</span></code>. It relies on a database (upatedb) which is automatically updated
-now and then.</p>
+than <code class="docutils literal notranslate"><span class="pre">find</span></code>. It relies on a database (updatedb) which is automatically
+updated daily via the script <code class="docutils literal notranslate"><span class="pre">/etc/cron.daily/locate</span></code> (directory
+<code class="docutils literal notranslate"><span class="pre">/etc/cron.daily</span></code> should appear in file <code class="docutils literal notranslate"><span class="pre">/etc/crontab</span></code>).</p>
 <p>Install locate and updatedb with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install locate <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>If you don’t leave your machine running all the time, the database update may
+not happen every day if package <code class="docutils literal notranslate"><span class="pre">anacron</span></code> is not installed. So make sure to
+install it:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install anacron <span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>You can force the database update <strong>as root</strong> with:</p>
