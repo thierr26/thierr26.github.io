@@ -115,19 +115,17 @@ with:</p>
 <div class="highlight"><pre><span></span>apt-get install virtinst libvirt-daemon-system libvirt-clients <span class="c1"># As root.</span>
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">libvirt-clients</span></code> package comes with the <code class="docutils literal notranslate"><span class="pre">virsh</span></code> program, to be used to
+manage the virtual machines and get useful information. Examples
+(<strong>as root</strong>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>virsh list --all     <span class="c1"># List the virtual machines.</span>
+virsh net-list --all <span class="c1"># List the virtual networks.</span>
+</pre></div>
+</div>
 <p>The <a class="reference external" href="https://libosinfo.org">osinfo</a> and its querying tools are useful too:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install libosinfo-bin <span class="c1"># As root.</span>
-</pre></div>
-</div>
-<p>I’ll get the status of the virtual machines with:</p>
-<div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virsh list --all <span class="c1"># As root.</span>
-</pre></div>
-</div>
-<p>I can get information about the virtual networks with:</p>
-<div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virsh net-list --all <span class="c1"># As root.</span>
 </pre></div>
 </div>
 </div>
@@ -476,6 +474,12 @@ information) the IP address:</p>
 show (among other information) the IP address:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>ifconfig <span class="c1"># On the guest.</span>
+</pre></div>
+</div>
+<p>Alternatively, you should be able to get the IP address of a guest without
+login into the guest, using <code class="docutils literal notranslate"><span class="pre">virsh</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>virsh net-dhcp-leases default <span class="c1"># As root, on the host.</span>
 </pre></div>
 </div>
 </div>
