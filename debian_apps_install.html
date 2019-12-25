@@ -66,6 +66,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#google-chrome-installation" id="id16">Google Chrome installation</a></li>
+<li><a class="reference internal" href="#signal-instant-messaging-system-installation" id="id17">Signal (instant messaging system) installation</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -111,9 +112,13 @@ pages for them. Please see the <a class="reference internal" href="index.html"><
     gftp <span class="se">\</span>
     dlume <span class="se">\</span>
     xpdf <span class="se">\</span>
+    catdoc <span class="se">\</span>
     octave <span class="se">\</span>
-    gnat gnat-gps <span class="se">\</span>
+    gnat libaunit18-dev gnat-gps <span class="se">\</span>
     ada-reference-manual-2012 <span class="se">\</span>
+    libxmlada-dom8-dev libxmlada-input8-dev libxmlada-sax8-dev <span class="se">\</span>
+    libxmlada-schema8-dev libxmlada-unicode8-dev <span class="se">\</span>
+    libgtkada-bin libgtkada-doc libgtkada18 libgtkada18-dev <span class="se">\</span>
     valgrind <span class="se">\</span>
     lcov <span class="se">\</span>
     libncurses5 <span class="se">\</span>
@@ -243,16 +248,26 @@ smartmontools tutorial by Random Bits</a>)</td>
 <td>PDF reader</td>
 </tr>
 <tr class="row-odd">
+<td>catdoc</td>
+<td>Text extractor for MS-Office files</td>
+</tr>
+<tr class="row-even">
 <td>octave</td>
 <td>GNU Octave language (similar to Matlab)</td>
 </tr>
-<tr class="row-even">
-<td>gnat, gnat-gps</td>
+<tr class="row-odd">
+<td>gnat, libaunit18-dev, gnat-gps</td>
 <td>Ada programming tools</td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td>ada-reference-manual-2012</td>
 <td>Ada 2012 reference manual</td>
+</tr>
+<tr class="row-odd">
+<td>libxmlada-dom8-dev libxmlada-input8-dev libxmlada-sax8-dev
+libxmlada-schema8-dev libxmlada-unicode8-dev libgtkada-bin libgtkada-doc
+libgtkada18 libgtkada18-dev</td>
+<td>Ada libraries (XML/Ada and GtkAda)</td>
 </tr>
 <tr class="row-even">
 <td>valgrind</td>
@@ -533,6 +548,20 @@ ESR in the Debian alternatives system with <code class="docutils literal notrans
 <p>I then tweaked Google Chrome’s settings as for
 <a class="reference internal" href="#chromium-config"><span class="std std-ref">Chromium</span></a>.</p>
 </div>
+<div class="section" id="signal-instant-messaging-system-installation">
+<h2>
+<a class="toc-backref" href="#id17">Signal (instant messaging system) installation</a><a class="headerlink" href="#signal-instant-messaging-system-installation" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-13">Here are the commands I issued (<strong>as root</strong>) to install Signal (you may want to
+check the <a class="reference external" href="https://signal.org/download">Signal official site</a>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>wget https://updates.signal.org/desktop/apt/keys.asc -O - <span class="p">|</span> apt-key add
+<span class="nb">echo</span> <span class="s2">"deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"</span> &gt; /etc/apt/sources.list.d/signal-xenial.list
+apt-get install signal-desktop
+chmod <span class="m">4755</span> /opt/Signal/chrome-sandbox
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -564,6 +593,7 @@ ESR in the Debian alternatives system with <code class="docutils literal notrans
 </ul>
 </li>
 <li><a class="reference internal" href="#google-chrome-installation">Google Chrome installation</a></li>
+<li><a class="reference internal" href="#signal-instant-messaging-system-installation">Signal (instant messaging system) installation</a></li>
 </ul>
 </li>
 </ul>

@@ -315,6 +315,8 @@ of your optical drive.</p>
 <span class="nv">ARTIST</span><span class="o">=</span><span class="s2">"Artist name"</span><span class="p">;</span>                                <span class="c1"># Adapt to your needs.</span>
 <span class="nv">ALBUM</span><span class="o">=</span><span class="s2">"Album name"</span><span class="p">;</span>                                  <span class="c1"># Adapt to your needs.</span>
 
+<span class="nv">DEVICE</span><span class="o">=</span>/dev/cdrom<span class="p">;</span>                                   <span class="c1"># Adapt to your needs.</span>
+
 <span class="nv">OGGEXT</span><span class="o">=</span>.ogg<span class="p">;</span>
 
 mkdir -p <span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">"</span><span class="p">;</span>
@@ -348,7 +350,7 @@ mkdir -p <span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class
 
     <span class="nb">echo</span> <span class="s2">"Creating </span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">;</span>
 
-    cdparanoia <span class="nv">$K</span> -<span class="p">|</span>oggenc -a <span class="s2">"</span><span class="nv">$ARTIST</span><span class="s2">"</span> -t <span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span> -l <span class="se">\</span>
+    cdparanoia -d <span class="s2">"</span><span class="nv">$DEVICE</span><span class="s2">"</span> <span class="nv">$K</span> -<span class="p">|</span>oggenc -a <span class="s2">"</span><span class="nv">$ARTIST</span><span class="s2">"</span> -t <span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span> -l <span class="se">\</span>
     <span class="s2">"</span><span class="nv">$ALBUM</span><span class="s2">"</span> -c <span class="s2">"tracknumber=</span><span class="nv">$K_STR</span><span class="s2">"</span> -o <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span> -<span class="p">;</span>
 
 <span class="k">done</span><span class="s">&lt;&lt;HEREDOC</span>
