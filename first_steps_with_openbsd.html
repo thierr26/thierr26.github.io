@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <title>My first steps with OpenBSD — Personal Notes</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="GPRbuild on OpenBSD" href="gprbuild_on_openbsd.html">
+    <link rel="prev" title="Installing an OpenBSD virtual machine" href="openbsd_vm.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="gprbuild_on_openbsd.html" title="GPRbuild on OpenBSD" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="openbsd_vm.html" title="Installing an OpenBSD virtual machine" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="my-first-steps-with-openbsd">
+<h1>My first steps with OpenBSD<a class="headerlink" href="#my-first-steps-with-openbsd" title="Permalink to this headline">¶</a>
+</h1>
+<div class="contents local topic" id="page-content">
+<p class="topic-title first">Page content</p>
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
+<li><a class="reference internal" href="#shutting-down-openbsd" id="id3">Shutting down OpenBSD</a></li>
+<li><a class="reference internal" href="#setting-the-ksh-history-file" id="id4">Setting the KSH history file</a></li>
+<li><a class="reference internal" href="#installing-vim-and-creating-an-alias" id="id5">Installing Vim (and creating an alias)</a></li>
+<li>
+<a class="reference internal" href="#installed-compilers-just-after-base-installation" id="id6">Installed compilers (just after base installation)</a><ul>
+<li><a class="reference internal" href="#c-compilation-test" id="id7">C compilation test</a></li>
+<li><a class="reference internal" href="#ada-compilation-test-failed" id="id8">Ada compilation test (failed)</a></li>
+</ul>
+</li>
+<li>
+<a class="reference internal" href="#installing-the-gcc-8-3-0p4-package" id="id9">Installing the GCC 8.3.0p4 package</a><ul>
+<li><a class="reference internal" href="#id1" id="id10">Ada compilation test (failed)</a></li>
+</ul>
+</li>
+<li>
+<a class="reference internal" href="#installing-the-gnat-8-3-0p4-package" id="id11">Installing the GNAT 8.3.0p4 package</a><ul>
+<li><a class="reference internal" href="#ada-compilation-test-passed" id="id12">Ada compilation test (passed)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#extraction-of-program-descriptions-from-the-man-pages-shell-script" id="id13">Extraction of program descriptions from the man pages (shell script)</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2>
+<a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+</h2>
+<p>At the end of 2019, I wanted to check whether it was possible to compile <a class="reference external" href="https://www.ada2012.org">Ada
+2012</a> code on <a class="reference external" href="https://www.openbsd.org">OpenBSD</a>
+or not.</p>
+<p>The very first action I took was to <a class="reference internal" href="openbsd_vm.html"><span class="doc">install an OpenBSD 6.6 virtual
+machine</span></a>.</p>
+<p>Then I played a little bit with the system and could get the <a class="reference external" href="https://en.wikipedia.org/wiki/GNAT">GNAT Ada 2012
+compiler</a> installed. This is what is
+described in this page.</p>
+<p>The final step was to build <a class="reference external" href="https://learn.adacore.com/courses/GNAT_Toolchain_Intro/chapters/gprbuild.html">GPRbuild (the project manager of the GNAT
+toolchain)</a>.
+This is described on another page: <a class="reference internal" href="gprbuild_on_openbsd.html"><span class="doc">GPRbuild on OpenBSD</span></a>.</p>
+</div>
+<div class="section" id="shutting-down-openbsd">
+<h2>
+<a class="toc-backref" href="#id3">Shutting down OpenBSD</a><a class="headerlink" href="#shutting-down-openbsd" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-0">You can trigger the OpenBSD shut down and power down with the following command
+(<strong>as root</strong>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>halt -p <span class="c1"># As root.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="setting-the-ksh-history-file">
+<h2>
+<a class="toc-backref" href="#id4">Setting the KSH history file</a><a class="headerlink" href="#setting-the-ksh-history-file" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-1">With OpenBSD, and if you use the default shell (<code class="docutils literal notranslate"><span class="pre">/bin/ksh</span></code>), the command
+history is not stored to file by default. If you want your shell command
+history to be stored to file, you have to set the HISTFILE environment
+variable. The <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code> file seems to be the right place:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">"HISTFILE=~/.shell_history"</span> &gt;&gt; ~/.profile <span class="c1"># As both root and "normal"</span>
+                                               <span class="c1"># user.</span>
+</pre></div>
+</div>
+<p>The HISTSIZE environment variable gives the maximum number of commands stored.
+It defaults to 500.</p>
+</div>
+<div class="section" id="installing-vim-and-creating-an-alias">
+<h2>
+<a class="toc-backref" href="#id5">Installing Vim (and creating an alias)</a><a class="headerlink" href="#installing-vim-and-creating-an-alias" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-2">The vi editor is installed by default, but I have a preference for Vim. Let’s
+check whether a Vim package is available on OpenBSD:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>pkg_info -Q vim                     <span class="c1"># Lists package names containing "vim".</span>
+pkg_info -Q vim <span class="p">|</span> grep <span class="s2">"^vim-[0-9]"</span> <span class="c1"># limits output to names like "vim-8...".</span>
+</pre></div>
+</div>
+<p>As I don’t intend to use the X Window system, I choose to install the “no X11”
+Vim package version (<strong>as root</strong>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>pkg_add vim-8.1.2061-no_x11 <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>The system downloads the package from the location indicated in file
+<code class="docutils literal notranslate"><span class="pre">/etc/installurl</span></code> (this file has been created automatically by the OpenBSD
+installer).</p>
+<p>Now let’s create an alias to the Vim command (the <code class="docutils literal notranslate"><span class="pre">-O</span></code> option causes Vim to
+open one window (i.e. pane) for each file given on the command line):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">"alias e='vim -O'"</span> &gt;&gt; ~/.kshrc <span class="c1"># As both root and "normal" user.</span>
+</pre></div>
+</div>
+<p>Make sure the ENV variable is set to <code class="docutils literal notranslate"><span class="pre">.kshrc</span></code> by <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code> (without
+that, the <code class="docutils literal notranslate"><span class="pre">~/.kshrc</span></code> file is not read on shell startup):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">"ENV=.kshrc"</span> &gt;&gt; ~/.profile <span class="c1"># As both root and "normal" user.</span>
+<span class="nb">echo</span> <span class="s2">"export ENV"</span> &gt;&gt; ~/.profile <span class="c1"># As both root and "normal" user.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="installed-compilers-just-after-base-installation">
+<h2>
+<a class="toc-backref" href="#id6">Installed compilers (just after base installation)</a><a class="headerlink" href="#installed-compilers-just-after-base-installation" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-3">I’ve written a <a class="reference internal" href="#man-page-descr-extraction"><span class="std std-ref">shell script that extracts the descriptions (as provided by the
+man pages) of the installed programs</span></a>.</p>
+<p>After piping the output to grep (actually <code class="docutils literal notranslate"><span class="pre">egrep</span> <span class="pre">-i</span>
+<span class="pre">"build|compil|link|bind|profil"</span></code>) and manually filtering again, here are the
+compilers (and other related tools) I’ve found:</p>
+<table>
+
+<tbody>
+<tr class="row-odd">
+<td>/usr/bin/c++</td>
+<td>clang, clang++, clang-cpp - the Clang C, C++, and Objective-C compiler</td>
+</tr>
+<tr class="row-even">
+<td>/usr/bin/cc</td>
+<td>clang, clang++, clang-cpp - the Clang C, C++, and Objective-C compiler</td>
+</tr>
+<tr class="row-odd">
+<td>/usr/bin/clang</td>
+<td>clang, clang++, clang-cpp - the Clang C, C++, and Objective-C compiler</td>
+</tr>
+<tr class="row-even">
+<td>/usr/bin/clang++</td>
+<td>clang, clang++, clang-cpp - the Clang C, C++, and Objective-C compiler</td>
+</tr>
+<tr class="row-odd">
+<td>/usr/bin/clang-cpp</td>
+<td>clang, clang++, clang-cpp - the Clang C, C++, and Objective-C compiler</td>
+</tr>
+<tr class="row-even">
+<td>/usr/bin/cpp</td>
+<td>clang, clang++, clang-cpp - the Clang C, C++, and Objective-C compiler</td>
+</tr>
+<tr class="row-odd">
+<td>/usr/bin/g++</td>
+<td>gcc, g++, cc, c++ - GNU project C and C++ compiler</td>
+</tr>
+<tr class="row-even">
+<td>/usr/bin/gcc</td>
+<td>gcc, g++, cc, c++ - GNU project C and C++ compiler</td>
+</tr>
+<tr class="row-odd">
+<td>/usr/bin/ld</td>
+<td>ld.lld - ELF linker from the LLVM project</td>
+</tr>
+<tr class="row-even">
+<td>/usr/bin/ld.bfd</td>
+<td>ld - Using LD, the GNU linker</td>
+</tr>
+<tr class="row-odd">
+<td>/usr/bin/ld.lld</td>
+<td>ld.lld - ELF linker from the LLVM project</td>
+</tr>
+<tr class="row-even">
+<td>/usr/bin/libtool</td>
+<td>libtool - compile and link complex libraries</td>
+</tr>
+<tr class="row-odd">
+<td>/usr/bin/llvm-config</td>
+<td>llvm-config - Print LLVM compilation options</td>
+</tr>
+</tbody>
+</table>
+<p>To see the version numbers of <a class="reference external" href="https://gcc.gnu.org/">GCC</a> and <a class="reference external" href="https://clang.llvm.org/">Clang</a>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>gcc --version<span class="p">;</span> clang --version<span class="p">;</span>
+</pre></div>
+</div>
+<p>which gives:</p>
+<div class="line-block">
+<div class="line">gcc (GCC) 4.2.1 20070719</div>
+<div class="line">Copyright (C) 2007 Free Software Foundation, Inc.</div>
+<div class="line">This is free software; see the source for copying conditions.  There is NO</div>
+<div class="line">warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</div>
+</div>
+<div class="line-block">
+<div class="line">OpenBSD clang version 8.0.1 (tags/RELEASE_801/final) (based on LLVM 8.0.1)</div>
+<div class="line">Target: amd64-unknown-openbsd6.6</div>
+<div class="line">Thread model: posix</div>
+<div class="line">InstalledDir: /usr/bin</div>
+</div>
+<div class="section" id="c-compilation-test">
+<h3>
+<a class="toc-backref" href="#id7">C compilation test</a><a class="headerlink" href="#c-compilation-test" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-4">The commands suggested on the <a class="reference external" href="https://riptutorial.com/c/example/795/hello-world">RIP Tutorial C Language Hello World page</a> for GCC and Clang both
+work:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>gcc hello.c -o hello
+clang -Wall -Wextra -Werror -o hello hello.c
+</pre></div>
+</div>
+</div>
+<div class="section" id="ada-compilation-test-failed">
+<h3>
+<a class="toc-backref" href="#id8">Ada compilation test (failed)</a><a class="headerlink" href="#ada-compilation-test-failed" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-5">At this point, an attempt to compile an <a class="reference external" href="https://riptutorial.com/ada/example/15002/hello-world">Hello World Ada program</a> fails with both the
+<code class="docutils literal notranslate"><span class="pre">gcc</span></code> and <code class="docutils literal notranslate"><span class="pre">clang</span></code> commands. And <code class="docutils literal notranslate"><span class="pre">gnatmake</span></code> is not installed.</p>
+</div>
+</div>
+<div class="section" id="installing-the-gcc-8-3-0p4-package">
+<h2>
+<a class="toc-backref" href="#id9">Installing the GCC 8.3.0p4 package</a><a class="headerlink" href="#installing-the-gcc-8-3-0p4-package" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-6">Command <code class="docutils literal notranslate"><span class="pre">pkg_info</span> <span class="pre">-Q</span> <span class="pre">gcc</span></code> shows the existence of a <code class="docutils literal notranslate"><span class="pre">gcc-8.3.0p4</span></code> package.
+The <a class="reference external" href="http://openports.se/lang/gcc/8">openports.se page for this GCC package</a>
+shows that the package has two flavors: no_ada and full.</p>
+<p>Let’s install the package (<strong>as root</strong>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>pkg_add gcc-8.3.0p4 <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>The installation has added some programs in <code class="docutils literal notranslate"><span class="pre">/usr/local/bin</span></code>:</p>
+<table>
+
+<tbody>
+<tr class="row-odd">
+<td>/usr/local/bin/ecpp</td>
+<td>cpp - The C Preprocessor</td>
+</tr>
+<tr class="row-even">
+<td>/usr/local/bin/egcc</td>
+<td>gcc - GNU project C and C++ compiler</td>
+</tr>
+<tr class="row-odd">
+<td>/usr/local/bin/egcov</td>
+<td>gcov - coverage testing tool</td>
+</tr>
+<tr class="row-even">
+<td>/usr/local/bin/egcov-dump</td>
+<td>gcov-dump - offline gcda and gcno profile dump tool</td>
+</tr>
+<tr class="row-odd">
+<td>/usr/local/bin/egcov-tool</td>
+<td>gcov-tool - offline gcda profile processing tool</td>
+</tr>
+<tr class="row-even">
+<td>/usr/local/bin/envsubst</td>
+<td>envsubst - substitutes environment variables in shell format strings</td>
+</tr>
+<tr class="row-odd">
+<td>/usr/local/bin/gettext</td>
+<td>gettext - translate message</td>
+</tr>
+<tr class="row-even">
+<td>/usr/local/bin/iconv</td>
+<td>iconv - character set conversion</td>
+</tr>
+<tr class="row-odd">
+<td>/usr/local/bin/ngettext</td>
+<td>ngettext - translate message and choose plural form</td>
+</tr>
+<tr class="row-even">
+<td>/usr/local/bin/vim</td>
+<td>vim - Vi IMproved, a programmer’s text editor</td>
+</tr>
+<tr class="row-odd">
+<td>/usr/local/bin/vimtutor</td>
+<td>vimtutor - the Vim tutor</td>
+</tr>
+<tr class="row-even">
+<td>/usr/local/bin/xxd</td>
+<td>xxd - make a hexdump or do the reverse.</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s check the version of <code class="docutils literal notranslate"><span class="pre">egcc</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>egcc --version
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">egcc (GCC) 8.3.0</div>
+<div class="line">Copyright (C) 2018 Free Software Foundation, Inc.</div>
+<div class="line">This is free software; see the source for copying conditions.  There is NO</div>
+<div class="line">warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</div>
+</div>
+<p>It’s worth noting that the target machine designation has changed between GCC
+4.2.1 and GCC 8.3.0.</p>
+<p>For 4.2.1:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>gcc -dumpmachine <span class="c1"># GCC 4.2.1</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">amd64-unknown-openbsd6.6</div>
+</div>
+<p>For 8.3.0:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>egcc -dumpmachine <span class="c1"># GCC 8.3.0</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">x86_64-unknown-openbsd6.6</div>
+</div>
+<div class="section" id="id1">
+<h3>
+<a class="toc-backref" href="#id10">Ada compilation test (failed)</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-7">Compiling an Ada program is still not possible. No <code class="docutils literal notranslate"><span class="pre">gnatmake</span></code> is installed
+and an <code class="docutils literal notranslate"><span class="pre">egcc</span> <span class="pre">-c</span> <span class="pre">hello.adb</span></code> command fails:</p>
+<div class="line-block">
+<div class="line">egcc: error trying to exec ‘gnat1’: execvp: No such file or directory</div>
+</div>
+</div>
+</div>
+<div class="section" id="installing-the-gnat-8-3-0p4-package">
+<h2>
+<a class="toc-backref" href="#id11">Installing the GNAT 8.3.0p4 package</a><a class="headerlink" href="#installing-the-gnat-8-3-0p4-package" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-8">Command <code class="docutils literal notranslate"><span class="pre">pkg_info</span> <span class="pre">-Q</span> <span class="pre">gnat</span></code> shows the existence of a <code class="docutils literal notranslate"><span class="pre">gnat-8.3.0p4</span></code> package.</p>
+<p>Let’s install the package (<strong>as root</strong>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>pkg_add gnat-8.3.0p4 <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>There are now some GNAT tools in <code class="docutils literal notranslate"><span class="pre">/usr/local/bin</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>ls -1 /usr/local/bin/gnat*
+</pre></div>
+</div>
+<p>gives:</p>
+<div class="line-block">
+<div class="line">/usr/local/bin/gnat</div>
+<div class="line">/usr/local/bin/gnatbind</div>
+<div class="line">/usr/local/bin/gnatchop</div>
+<div class="line">/usr/local/bin/gnatclean</div>
+<div class="line">/usr/local/bin/gnatfind</div>
+<div class="line">/usr/local/bin/gnatkr</div>
+<div class="line">/usr/local/bin/gnatlink</div>
+<div class="line">/usr/local/bin/gnatls</div>
+<div class="line">/usr/local/bin/gnatmake</div>
+<div class="line">/usr/local/bin/gnatname</div>
+<div class="line">/usr/local/bin/gnatprep</div>
+<div class="line">/usr/local/bin/gnatxref</div>
+</div>
+<p>Note that the tools needed to work with project files (<code class="docutils literal notranslate"><span class="pre">gprbuild</span></code>,
+<code class="docutils literal notranslate"><span class="pre">gprconfig</span></code>, <code class="docutils literal notranslate"><span class="pre">gprclean</span></code>, …) are not installed. A way of obtaining those
+tools on OpenBSD is described in another page <a class="reference internal" href="gprbuild_on_openbsd.html"><span class="doc">GPRbuild on OpenBSD</span></a>.</p>
+<div class="section" id="ada-compilation-test-passed">
+<h3>
+<a class="toc-backref" href="#id12">Ada compilation test (passed)</a><a class="headerlink" href="#ada-compilation-test-passed" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-9">Compiling an Ada program is now possible:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>gnatmake hello.adb
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">egcc -c hello.adb</div>
+<div class="line">gnatbind -x hello.ali</div>
+<div class="line">gnatlink hello.ali</div>
+</div>
+</div>
+</div>
+<div class="section" id="extraction-of-program-descriptions-from-the-man-pages-shell-script">
+<span id="man-page-descr-extraction"></span><h2>
+<a class="toc-backref" href="#id13">Extraction of program descriptions from the man pages (shell script)</a><a class="headerlink" href="#extraction-of-program-descriptions-from-the-man-pages-shell-script" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-10">The code of the script is:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="c1"># Extract the names (as provided by the man pages) of the installed programs.</span>
+<span class="c1">#</span>
+<span class="c1"># Called with no argument, the script explores /usr/bin (recursively). To</span>
+<span class="c1"># explore other directories, provide those directories as argument.</span>
+
+arg_list_sorted_no_dup<span class="o">()</span> <span class="o">{</span>
+
+    <span class="c1"># Output the argument list, sorted and without duplicates.</span>
+
+    <span class="o">{</span>
+        <span class="k">for</span> ARG in <span class="nv">$@</span><span class="p">;</span> <span class="k">do</span>
+            <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="p">;</span>
+        <span class="k">done</span><span class="p">;</span>
+    <span class="o">}</span> <span class="p">|</span> sort -u<span class="p">;</span>
+
+<span class="o">}</span>
+
+subdirs_added<span class="o">()</span> <span class="o">{</span>
+
+    <span class="c1"># Output argument list (file and/or directory names) with subdirectories of</span>
+    <span class="c1"># directories added (no depth limit). The output list has no duplicates.</span>
+    <span class="c1"># Standard error is redirected to /dev/null. Objects other than directories</span>
+    <span class="c1"># and files (e.g. symbolic links) are ignored.</span>
+
+    <span class="o">{</span>
+        <span class="k">for</span> ARG in <span class="nv">$@</span><span class="p">;</span> <span class="k">do</span>
+            <span class="k">if</span> <span class="o">[</span> -d <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+                find <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span> -type d <span class="m">2</span>&gt;/dev/null<span class="p">;</span>
+            <span class="k">elif</span> <span class="o">[</span> -f <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+                <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="p">;</span>
+            <span class="k">fi</span><span class="p">;</span>
+        <span class="k">done</span><span class="p">;</span>
+    <span class="o">}</span> <span class="p">|</span> sort -u<span class="p">;</span>
+
+<span class="o">}</span>
+
+files_list<span class="o">()</span> <span class="o">{</span>
+
+    <span class="c1"># Output the list of all files (without duplicates) contained in</span>
+    <span class="c1"># directories passed as the arguments. Individual file names can be passed</span>
+    <span class="c1"># as well. Other kind of objects (e.g. symbolic links) are ignored.</span>
+
+    <span class="o">{</span>
+        <span class="k">for</span> ARG in <span class="nv">$@</span><span class="p">;</span> <span class="k">do</span>
+            <span class="k">if</span> <span class="o">[</span> -d <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+                find <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span> -type f<span class="p">;</span>
+            <span class="k">elif</span> <span class="o">[</span> -f <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+                <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="p">;</span>
+            <span class="k">fi</span><span class="p">;</span>
+        <span class="k">done</span><span class="p">;</span>
+    <span class="o">}</span> <span class="p">|</span> sort -u<span class="p">;</span>
+
+<span class="o">}</span>
+
+executables_list<span class="o">()</span> <span class="o">{</span>
+
+    <span class="c1"># Output the list of arguments, with non-executable elements removed.</span>
+
+    <span class="k">for</span> ARG in <span class="nv">$@</span><span class="p">;</span> <span class="k">do</span>
+        <span class="o">[</span> -x <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="p">;</span>
+    <span class="k">done</span><span class="p">;</span>
+
+<span class="o">}</span>
+
+arg_max_char_length<span class="o">()</span> <span class="o">{</span>
+
+    <span class="c1"># Output the length of the longest string provided as argument.</span>
+
+    <span class="nv">MX</span><span class="o">=</span><span class="m">0</span><span class="p">;</span>
+
+    <span class="k">for</span> ARG in <span class="nv">$@</span><span class="p">;</span> <span class="k">do</span>
+        <span class="k">if</span> <span class="o">[</span> <span class="si">${#</span><span class="nv">ARG</span><span class="si">}</span> -gt <span class="nv">$MX</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+            <span class="nv">MX</span><span class="o">=</span><span class="si">${#</span><span class="nv">ARG</span><span class="si">}</span><span class="p">;</span>
+        <span class="k">fi</span><span class="p">;</span>
+    <span class="k">done</span><span class="p">;</span>
+
+    <span class="nb">echo</span> <span class="nv">$MX</span><span class="p">;</span>
+
+<span class="o">}</span>
+
+main_function<span class="o">()</span> <span class="o">{</span>
+
+    <span class="c1"># Get list of executable files.</span>
+    <span class="nv">PROG_LIST</span><span class="o">=</span><span class="k">$(</span>executables_list <span class="se">\</span>
+        <span class="k">$(</span>files_list <span class="se">\</span>
+        <span class="k">$(</span>subdirs_added <span class="se">\</span>
+        <span class="k">$(</span>arg_list_sorted_no_dup <span class="nv">$@</span><span class="k">))))</span><span class="p">;</span>
+
+    <span class="c1"># Get longest path of all executable files.</span>
+    <span class="nv">PROG_PATH_MAX_LEN</span><span class="o">=</span><span class="k">$(</span>arg_max_char_length <span class="nv">$PROG_LIST</span><span class="k">)</span><span class="p">;</span>
+
+    <span class="c1"># Traverse executable files list.</span>
+    <span class="k">for</span> PROG in <span class="nv">$PROG_LIST</span><span class="p">;</span> <span class="k">do</span>
+
+        <span class="c1"># Extract the content of the "NAME" section of the man page (if any) of</span>
+        <span class="c1"># the executable.</span>
+        <span class="nv">MAN_PAGE_NAME_SECTION</span><span class="o">=</span><span class="k">$(</span>man <span class="s2">"</span><span class="si">${</span><span class="nv">PROG</span><span class="p">##*/</span><span class="si">}</span><span class="s2">"</span> <span class="m">2</span>&gt;/dev/null <span class="se">\</span>
+            <span class="p">|</span> col -b <span class="se">\</span>
+            <span class="p">|</span> grep -A1 <span class="s2">"^NAME</span>$<span class="s2">"</span> <span class="se">\</span>
+            <span class="p">|</span> tail -1 <span class="se">\</span>
+            <span class="p">|</span> sed <span class="s2">"s/^ *//"</span><span class="k">)</span><span class="p">;</span>
+
+        <span class="c1"># Output one line containing the executable path and the content of the</span>
+        <span class="c1"># "NAME" section of the man page (if non empty).</span>
+        <span class="k">if</span> <span class="o">[</span> -n <span class="s2">"</span><span class="nv">$MAN_PAGE_NAME_SECTION</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+            <span class="nb">printf</span> %<span class="si">${</span><span class="nv">PROG_PATH_MAX_LEN</span><span class="si">}</span>s <span class="s2">"</span><span class="nv">$PROG</span><span class="s2">"</span><span class="p">;</span>
+            <span class="nb">echo</span> <span class="s2">" - </span><span class="nv">$MAN_PAGE_NAME_SECTION</span><span class="s2">"</span><span class="p">;</span>
+        <span class="k">fi</span><span class="p">;</span>
+
+    <span class="k">done</span><span class="p">;</span>
+
+<span class="o">}</span>
+
+<span class="c1"># Call main_function with argument "/usr/bin" if no argument has been provided,</span>
+<span class="c1"># otherwise call main_function with all arguments.</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+    main_function /usr/bin<span class="p">;</span>
+<span class="k">else</span>
+    main_function <span class="nv">$@</span><span class="p">;</span>
+<span class="k">fi</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li>
+<a class="reference internal" href="#">My first steps with OpenBSD</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#shutting-down-openbsd">Shutting down OpenBSD</a></li>
+<li><a class="reference internal" href="#setting-the-ksh-history-file">Setting the KSH history file</a></li>
+<li><a class="reference internal" href="#installing-vim-and-creating-an-alias">Installing Vim (and creating an alias)</a></li>
+<li>
+<a class="reference internal" href="#installed-compilers-just-after-base-installation">Installed compilers (just after base installation)</a><ul>
+<li><a class="reference internal" href="#c-compilation-test">C compilation test</a></li>
+<li><a class="reference internal" href="#ada-compilation-test-failed">Ada compilation test (failed)</a></li>
+</ul>
+</li>
+<li>
+<a class="reference internal" href="#installing-the-gcc-8-3-0p4-package">Installing the GCC 8.3.0p4 package</a><ul>
+<li><a class="reference internal" href="#id1">Ada compilation test (failed)</a></li>
+</ul>
+</li>
+<li>
+<a class="reference internal" href="#installing-the-gnat-8-3-0p4-package">Installing the GNAT 8.3.0p4 package</a><ul>
+<li><a class="reference internal" href="#ada-compilation-test-passed">Ada compilation test (passed)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#extraction-of-program-descriptions-from-the-man-pages-shell-script">Extraction of program descriptions from the man pages (shell script)</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="openbsd_vm.html" title="previous chapter">Installing an OpenBSD virtual machine</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="gprbuild_on_openbsd.html" title="next chapter">GPRbuild on OpenBSD</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q">
+      <input type="submit" value="Go">
+      <input type="hidden" name="check_keywords" value="yes">
+      <input type="hidden" name="area" value="default">
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="gprbuild_on_openbsd.html" title="GPRbuild on OpenBSD">next</a> |</li>
+        <li class="right">
+          <a href="openbsd_vm.html" title="Installing an OpenBSD virtual machine">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>
