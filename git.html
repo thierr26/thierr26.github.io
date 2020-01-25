@@ -81,7 +81,8 @@
 <li><a class="reference internal" href="#creating-an-archive-of-the-latest-commit-without-any-history" id="id30">Creating an archive of the latest commit (without any history)</a></li>
 <li><a class="reference internal" href="#scripting" id="id31">Scripting</a></li>
 <li><a class="reference internal" href="#hooks" id="id32">Hooks</a></li>
-<li><a class="reference internal" href="#other-resources" id="id33">Other resources</a></li>
+<li><a class="reference internal" href="#submodules" id="id33">Submodules</a></li>
+<li><a class="reference internal" href="#other-resources" id="id34">Other resources</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -161,6 +162,9 @@ git config --global <span class="se">\</span>
                                                    <span class="c1"># output.</span>
 </pre></div>
 </div>
+<p>Alternatively, you can edit the aliases directly in file <code class="docutils literal notranslate"><span class="pre">~/.gitconfig</span></code>.</p>
+<p>Some aliases can invoke shell commands. See for example the “release” alias in
+<a class="reference external" href="https://github.com/thierr26/thierr26_config_files/blob/master/.gitconfig">my ~/.gitconfig file</a>.</p>
 </div>
 <div class="section" id="splitting-the-configuration-file">
 <h3>
@@ -255,6 +259,12 @@ supplementary argument:</p>
 <p>It is also possible to clone and check out a specific branch:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git clone -b branch_name repository_url
+</pre></div>
+</div>
+<p>Use option “–recurse-submodules” to also initialize and clone all the
+submodules:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git clone --recurse-submodules repository_url
 </pre></div>
 </div>
 <p>You can also clone without checking out anything:</p>
@@ -509,6 +519,16 @@ merges the changes into the local repository:</p>
 <div class="highlight"><pre><span></span>git pull origin master
 </pre></div>
 </div>
+<p>You can list the URLs for remote “origin” with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git remote get-url --all origin
+</pre></div>
+</div>
+<p>You can change the URL for remote “origin” with a command like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git remote set-url origin url
+</pre></div>
+</div>
 </div>
 <div class="section" id="working-with-branches">
 <h2>
@@ -574,6 +594,11 @@ git stash push -m <span class="s2">"Description"</span> <span class="c1"># Provi
 option:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git stash push --keep-index
+</pre></div>
+</div>
+<p>Use option “–include-untracked” to also stash the untracked files:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git stash --include-untracked
 </pre></div>
 </div>
 <p>Each <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span> <span class="pre">push</span></code> command creates a new entry in the stash stack.</p>
@@ -876,9 +901,25 @@ variables instead:</p>
 <li><a class="reference external" href="https://longair.net/blog/2011/04/09/missing-git-hooks-documentation/">https://longair.net/blog/2011/04/09/missing-git-hooks-documentation/</a></li>
 </ul>
 </div>
+<div class="section" id="submodules">
+<h2>
+<a class="toc-backref" href="#id33">Submodules</a><a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-25">You can add a repository as a submodule to your repository with a command
+like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git submodule add submodule_repository_url subdirectory
+</pre></div>
+</div>
+<p>Update the submodules with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git submodule update --remote
+</pre></div>
+</div>
+</div>
 <div class="section" id="other-resources">
 <h2>
-<a class="toc-backref" href="#id33">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id34">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
 </h2>
 <ul class="simple">
 <li><a class="reference external" href="https://git-scm.com/docs">Git documentation</a></li>
@@ -938,6 +979,7 @@ variables instead:</p>
 <li><a class="reference internal" href="#creating-an-archive-of-the-latest-commit-without-any-history">Creating an archive of the latest commit (without any history)</a></li>
 <li><a class="reference internal" href="#scripting">Scripting</a></li>
 <li><a class="reference internal" href="#hooks">Hooks</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#other-resources">Other resources</a></li>
 </ul>
 </li>
