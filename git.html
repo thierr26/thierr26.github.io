@@ -434,14 +434,18 @@ git diff 42b9c3b a92c02a -- path/to/files <span class="c1"># Shows changes for t
 </h2>
 <p id="index-13">The following commands commit the staged changes to the repository:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>git commit                                <span class="c1"># Opens a text editor for commit</span>
-                                          <span class="c1"># message edition.</span>
+<div class="highlight"><pre><span></span>git commit                                 <span class="c1"># Opens a text editor for commit</span>
+                                           <span class="c1"># message edition.</span>
 
-git commit -m <span class="s2">"Commit message"</span>            <span class="c1"># Takes the commit message from the</span>
-                                          <span class="c1"># command line.</span>
+git commit -m <span class="s2">"Commit message"</span>             <span class="c1"># Takes the commit message from</span>
+                                           <span class="c1"># the command line.</span>
 
-git commit -F path/to/commit/message/file <span class="c1"># Reads the commit message from a</span>
-                                          <span class="c1"># file.</span>
+git commit -F path/to/commit/message/file  <span class="c1"># Reads the commit message from a</span>
+                                           <span class="c1"># file.</span>
+
+git commit -eF path/to/commit/message/file <span class="c1"># Reads the commit message from a</span>
+                                           <span class="c1"># file and opens the text editor</span>
+                                           <span class="c1"># for commit message edition.</span>
 </pre></div>
 </div>
 <p>With the <code class="docutils literal notranslate"><span class="pre">-a</span></code> switch, all the changes (except file addition) are staged
