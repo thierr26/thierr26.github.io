@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <title>HP USB printer — Personal Notes</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="Installing an OpenBSD virtual machine" href="openbsd_vm.html">
+    <link rel="prev" title="Nu HTML Checker" href="nu_html_checker.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="openbsd_vm.html" title="Installing an OpenBSD virtual machine" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="nu_html_checker.html" title="Nu HTML Checker" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="hp-usb-printer">
+<h1>HP USB printer<a class="headerlink" href="#hp-usb-printer" title="Permalink to this headline">¶</a>
+</h1>
+<div class="contents local topic" id="page-content">
+<p class="topic-title first">Page content</p>
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id1">Introduction</a></li>
+<li><a class="reference internal" href="#installing-hplip-and-cups" id="id2">Installing HPLIP and CUPS</a></li>
+<li><a class="reference internal" href="#installing-the-printer" id="id3">Installing the printer</a></li>
+<li><a class="reference internal" href="#printing-pdf-documents" id="id4">Printing PDF documents</a></li>
+<li><a class="reference internal" href="#other-resources" id="id5">Other resources</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2>
+<a class="toc-backref" href="#id1">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-0">This page describes the steps I had to take be able to print on a
+<a class="reference external" href="https://support.hp.com/us-en/product/hp-laserjet-p4014-printer-series/3558788/model/3558799/manuals">HP LaserJet P4014n monochrome printer</a>
+from my <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> computer.</p>
+<p>It was pretty easy because the HP LaserJet P4014n printer is supported by the
+<a class="reference external" href="https://developers.hp.com/hp-linux-imaging-and-printing">HPLIP driver</a>,
+which is available in Debian (package <code class="docutils literal notranslate"><span class="pre">hplip</span></code>). And
+<a class="reference external" href="https://www.cups.org/">CUPS</a> (package <code class="docutils literal notranslate"><span class="pre">cups</span></code> in Debian) provides a
+browser-based interface to install the printer. The hardest part was moving
+the printer, because it’s quite heavy (26.5kg)!</p>
+<p>I used the USB connection only. I did not use the network connection.</p>
+</div>
+<div class="section" id="installing-hplip-and-cups">
+<h2>
+<a class="toc-backref" href="#id2">Installing HPLIP and CUPS</a><a class="headerlink" href="#installing-hplip-and-cups" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-1">Chances are that HPLIP and CUPS are already installed on your Debian system, as
+the Debian installer proposes to install packages related to printing:</p>
+<img alt="_images/debian_install_screenshot_tasksel_first_0.png" src="_images/debian_install_screenshot_tasksel_first_0.png">
+<p>Selecting “print server” in this Debian installer screen would result in
+package <code class="docutils literal notranslate"><span class="pre">task-printer-server</span></code> being installed and <code class="docutils literal notranslate"><span class="pre">cups</span></code> and <code class="docutils literal notranslate"><span class="pre">hplip</span></code> are
+dependencies for <code class="docutils literal notranslate"><span class="pre">task-printer-server</span></code> (well, <code class="docutils literal notranslate"><span class="pre">hplip</span></code> is a recommended
+dependency).</p>
+<p>If HPLIP and CUPS are not already installed, you can install them with (note
+that <code class="docutils literal notranslate"><span class="pre">cups</span></code> is a dependency of <code class="docutils literal notranslate"><span class="pre">hplip</span></code>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install hplip <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>If you want to be able to install a printer as an unprivilged user, you need to
+add yourself to group <code class="docutils literal notranslate"><span class="pre">lpadmin</span></code> with a command like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>usermod -a -G lpadmin my_user_name <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>After logging out and in again, check that you are a member of group
+<code class="docutils literal notranslate"><span class="pre">lpadmin</span></code> with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>groups my_user_name
+</pre></div>
+</div>
+</div>
+<div class="section" id="installing-the-printer">
+<h2>
+<a class="toc-backref" href="#id3">Installing the printer</a><a class="headerlink" href="#installing-the-printer" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-2">Connect the printer to the computer using the USB cable and point your browser
+to the CUPS interface at <a class="reference external" href="http://localhost:631/admin">http://localhost:631/admin</a>.</p>
+<p>Click the “Add Printer” button and login with a user name and password. (It can
+be your normal user name if you’re a member of group <code class="docutils literal notranslate"><span class="pre">lpadmin</span></code>, see above.)</p>
+<p>The printer is listed twice:</p>
+<ul class="simple">
+<li>HP LaserJet P4014 USB CNFX408861 HPLIP (HP LaserJet P4014)</li>
+<li>HP LaserJet P4014 (HP LaserJet P4014)</li>
+</ul>
+<p>I selected the first item (the one containing “HPLIP”).</p>
+<p>A few other screens require information. Here is what I provided:</p>
+<table>
+
+<tbody>
+<tr class="row-odd">
+<td>Name</td>
+<td>HP_LaserJet_P4014</td>
+</tr>
+<tr class="row-even">
+<td>Description</td>
+<td>HP LaserJet P4014n</td>
+</tr>
+<tr class="row-odd">
+<td>Location</td>
+<td>Home</td>
+</tr>
+<tr class="row-even">
+<td>Model</td>
+<td>HP LaserJet p4014n, hpcups 3.18.12 (en)</td>
+</tr>
+</tbody>
+</table>
+<p>The final screen is to set the default options. I took the default values
+except for paper size (I chose A4).</p>
+</div>
+<div class="section" id="printing-pdf-documents">
+<h2>
+<a class="toc-backref" href="#id4">Printing PDF documents</a><a class="headerlink" href="#printing-pdf-documents" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-3">You can use the command line program <code class="docutils literal notranslate"><span class="pre">lp</span></code> to print a PDF document with a
+commande like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>lp -d HP_LaserJet_P4014 my_pdf_file.pdf
+</pre></div>
+</div>
+<p>But accented characters may not be rendered properly.</p>
+<p>Importing the PDF file in Gimp (package <code class="docutils literal notranslate"><span class="pre">gimp</span></code> in Debian) and printing from
+Gimp seems to be a better option (although I haven’t tried yet with documents
+of more than one page…).</p>
+</div>
+<div class="section" id="other-resources">
+<h2>
+<a class="toc-backref" href="#id5">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+</h2>
+<ul class="simple">
+<li><a class="reference external" href="https://wiki.debian.org/SystemPrinting">SystemPrinting Debian Wiki page</a></li>
+<li><a class="reference external" href="https://developers.hp.com/hp-linux-imaging-and-printing/supported_devices/index">HPLIP supported printer models</a></li>
+<li><a class="reference external" href="http://www.openprinting.org/printers/">Open Printing printer listing</a></li>
+<li><a class="reference external" href="http://www.openprinting.org/drivers/">Open Printing printer driver listings</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li>
+<a class="reference internal" href="#">HP USB printer</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#installing-hplip-and-cups">Installing HPLIP and CUPS</a></li>
+<li><a class="reference internal" href="#installing-the-printer">Installing the printer</a></li>
+<li><a class="reference internal" href="#printing-pdf-documents">Printing PDF documents</a></li>
+<li><a class="reference internal" href="#other-resources">Other resources</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nu_html_checker.html" title="previous chapter">Nu HTML Checker</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="openbsd_vm.html" title="next chapter">Installing an OpenBSD virtual machine</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q">
+      <input type="submit" value="Go">
+      <input type="hidden" name="check_keywords" value="yes">
+      <input type="hidden" name="area" value="default">
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="openbsd_vm.html" title="Installing an OpenBSD virtual machine">next</a> |</li>
+        <li class="right">
+          <a href="nu_html_checker.html" title="Nu HTML Checker">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>
