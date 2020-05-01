@@ -162,11 +162,15 @@ Community Edition installation).</p>
 </h2>
 <p><a class="reference external" href="https://wiki.octave.org/GNU_Octave_Wiki">GNU Octave</a> is an interpreted
 language, similar to <a class="reference external" href="https://en.wikipedia.org/wiki/MATLAB">Matlab</a>.</p>
-<p>Download the Zip archive for the latest version (octave-5.1.0-w64-64.zip at the
+<p>Download the Zip archive for the latest version (octave-5.2.0-w64-64.zip at the
 time of this writing) from <a class="reference external" href="https://ftp.gnu.org/gnu/octave/windows">https://ftp.gnu.org/gnu/octave/windows</a>, unzip it and
 run the <code class="docutils literal notranslate"><span class="pre">post-install.bat</span></code> file.</p>
 <p>Once more, update your <code class="docutils literal notranslate"><span class="pre">Path</span></code> variable (add the directory containing the
 <code class="docutils literal notranslate"><span class="pre">octave.vbs</span></code> file).</p>
+<p>If you want to be able to use Octave in text mode in the Windows console, make
+sure to also add to the path the subdirectory (<code class="docutils literal notranslate"><span class="pre">mingw64\bin</span></code>) that contains
+<code class="docutils literal notranslate"><span class="pre">octave-cli.exe</span></code>. <code class="docutils literal notranslate"><span class="pre">octave-cli.exe</span></code> launches Octave without graphical user
+interface.</p>
 <p>If you see a warning about a failure to set locale, you need to add the Perl
 executable directory to your path (Perl comes with Octave for Windows in
 subdirectory usr/bin) and set environment variable LC_ALL to a valid value (“C”
@@ -176,6 +180,9 @@ your current directory is the one containing the <code class="docutils literal n
 <div class="highlight"><pre><span></span>set PATH=%PATH%;%CD%\usr\bin &amp; set "LC_ALL=C" &amp; octave.vbs
 </pre></div>
 </div>
+<p>An Octave icon file is available in the Octave installation:
+<code class="docutils literal notranslate"><span class="pre">mingw64\share\octave\5.2.0\imagelib\octave-logo.ico</span></code>. That’s good to have
+for the case where you want a shortcut on the destop.</p>
 <p>GNU Octave for Windows comes with <a class="reference external" href="https://www.msys2.org">MSYS2</a>, and that is
 another solution (beside <a class="reference internal" href="#unxutils-win"><span class="std std-ref">UnxUtils</span></a>) to use the GNU
 commands on Windows. Launch <code class="docutils literal notranslate"><span class="pre">msys2_shell.cmd</span></code>.</p>

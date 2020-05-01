@@ -67,8 +67,8 @@ use a machine with GNOME 3.28.2 for some kind of work. I actually use the
 <a class="reference external" href="https://help.gnome.org/users/gnome-help/stable/gnome-classic.html">GNOME Classic</a> flavor.</p>
 <p>I haven’t done much tweaking in this environment and haven’t much to say here,
 but I felt the need to keep track of the <a class="reference external" href="https://en.wikipedia.org/wiki/Dconf">dconf</a> commands I learned. GNOME uses a binary
-database to store the settings and the <cite>dconf</cite> command is a way of manipulating
-the settings. <a class="reference external" href="https://bgstack15.wordpress.com/2017/10/04/dconf-save-and-load-from-file/">This link made me aware of dconf</a>.</p>
+database to store the settings and the <code class="docutils literal notranslate"><span class="pre">dconf</span></code> command is a way of
+manipulating the settings. <a class="reference external" href="https://bgstack15.wordpress.com/2017/10/04/dconf-save-and-load-from-file/">This link made me aware of dconf</a>.</p>
 </div>
 <div class="section" id="list-the-keys-related-to-the-gnome-terminal-profiles">
 <h2>
@@ -126,7 +126,7 @@ dconf load /org/gnome/terminal/legacy/profiles:/ &lt; output_file
 <h2>
 <a class="toc-backref" href="#id5">Reset (i.e. erase) a particular key</a><a class="headerlink" href="#reset-i-e-erase-a-particular-key" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-3">If you want to erase a particular key (for example the <cite>foreground-color</cite> key
+<p id="index-3">If you want to erase a particular key (for example the <code class="docutils literal notranslate"><span class="pre">foreground-color</span></code> key
 of a GNOME terminal profile), use a command like:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>dconf reset /org/gnome/terminal/legacy/profiles:/foreground-color
@@ -137,7 +137,8 @@ of a GNOME terminal profile), use a command like:</p>
 <h2>
 <a class="toc-backref" href="#id6">Finding the GNOME version</a><a class="headerlink" href="#finding-the-gnome-version" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-4">You can find the GNOME 3 version in file <cite>/usr/share/gnome/gnome-version.xml</cite>.</p>
+<p id="index-4">You can find the GNOME 3 version in file
+<code class="docutils literal notranslate"><span class="pre">/usr/share/gnome/gnome-version.xml</span></code>.</p>
 </div>
 <div class="section" id="closing-the-gnome-session-from-the-command-line">
 <h2>
