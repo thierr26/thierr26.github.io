@@ -50,10 +50,11 @@
 <li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
 <li><a class="reference internal" href="#list-the-keys-related-to-the-gnome-terminal-profiles" id="id3">List the keys related to the GNOME terminal profiles</a></li>
 <li><a class="reference internal" href="#dump-load-the-keys-related-to-the-gnome-terminal-profiles" id="id4">Dump / load the keys related to the GNOME terminal profiles</a></li>
-<li><a class="reference internal" href="#reset-i-e-erase-a-particular-key" id="id5">Reset (i.e. erase) a particular key</a></li>
-<li><a class="reference internal" href="#finding-the-gnome-version" id="id6">Finding the GNOME version</a></li>
-<li><a class="reference internal" href="#closing-the-gnome-session-from-the-command-line" id="id7">Closing the GNOME session from the command line</a></li>
-<li><a class="reference internal" href="#other-resources" id="id8">Other resources</a></li>
+<li><a class="reference internal" href="#dump-load-the-keys-related-to-all-gnome-terminal-options" id="id5">Dump / load the keys related to all GNOME terminal options</a></li>
+<li><a class="reference internal" href="#reset-i-e-erase-a-particular-key" id="id6">Reset (i.e. erase) a particular key</a></li>
+<li><a class="reference internal" href="#finding-the-gnome-version" id="id7">Finding the GNOME version</a></li>
+<li><a class="reference internal" href="#closing-the-gnome-session-from-the-command-line" id="id8">Closing the GNOME session from the command line</a></li>
+<li><a class="reference internal" href="#other-resources" id="id9">Other resources</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -74,7 +75,7 @@ manipulating the settings. <a class="reference external" href="https://bgstack15
 <h2>
 <a class="toc-backref" href="#id3">List the keys related to the GNOME terminal profiles</a><a class="headerlink" href="#list-the-keys-related-to-the-gnome-terminal-profiles" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-1">The following command lists the keys related the GNOME terminal:</p>
+<p id="index-1">The following command lists the keys related to the GNOME terminal profiles:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>dconf list /org/gnome/terminal/legacy/profiles:/
 </pre></div>
@@ -122,11 +123,52 @@ dconf load /org/gnome/terminal/legacy/profiles:/ &lt; output_file
 <div class="line">background-color=’rgb(0,0,0)’</div>
 </div>
 </div>
+<div class="section" id="dump-load-the-keys-related-to-all-gnome-terminal-options">
+<h2>
+<a class="toc-backref" href="#id5">Dump / load the keys related to all GNOME terminal options</a><a class="headerlink" href="#dump-load-the-keys-related-to-all-gnome-terminal-options" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-3">Use commands like the following ones to dump the keys to a file and load them:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>dconf dump /org/gnome/terminal/ &gt; output_file
+dconf load /org/gnome/terminal/ &lt; output_file
+</pre></div>
+</div>
+<p>In my case, the output file contains:</p>
+<div class="line-block">
+<div class="line">[legacy]</div>
+<div class="line">menu-accelerator-enabled=false</div>
+<div class="line">schema-version=uint32 3</div>
+<div class="line">default-show-menubar=true</div>
+<div class="line"><br></div>
+<div class="line">[legacy/profiles:]</div>
+<div class="line">list=[‘b1dcc9dd-5262-4d8d-a863-c897e6d979b9’, ‘424cb317-4a79-4a77-be53-86b59ee1e321’]</div>
+<div class="line">default=‘424cb317-4a79-4a77-be53-86b59ee1e321’</div>
+<div class="line"><br></div>
+<div class="line">[legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]</div>
+<div class="line">background-color=’rgb(0,0,0)’</div>
+<div class="line">default-size-columns=161</div>
+<div class="line">use-theme-colors=false</div>
+<div class="line">default-size-rows=52</div>
+<div class="line">use-system-font=false</div>
+<div class="line">visible-name=’Large’</div>
+<div class="line">font=’Liberation Mono 11’</div>
+<div class="line"><br></div>
+<div class="line">[legacy/profiles:/:424cb317-4a79-4a77-be53-86b59ee1e321]</div>
+<div class="line">foreground-color=’rgb(211,215,207)’</div>
+<div class="line">visible-name=’Narrow’</div>
+<div class="line">default-size-columns=74</div>
+<div class="line">default-size-rows=70</div>
+<div class="line">use-system-font=false</div>
+<div class="line">use-theme-colors=false</div>
+<div class="line">font=’Liberation Mono 8’</div>
+<div class="line">background-color=’rgb(0,0,0)’</div>
+</div>
+</div>
 <div class="section" id="reset-i-e-erase-a-particular-key">
 <h2>
-<a class="toc-backref" href="#id5">Reset (i.e. erase) a particular key</a><a class="headerlink" href="#reset-i-e-erase-a-particular-key" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id6">Reset (i.e. erase) a particular key</a><a class="headerlink" href="#reset-i-e-erase-a-particular-key" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-3">If you want to erase a particular key (for example the <code class="docutils literal notranslate"><span class="pre">foreground-color</span></code> key
+<p id="index-4">If you want to erase a particular key (for example the <code class="docutils literal notranslate"><span class="pre">foreground-color</span></code> key
 of a GNOME terminal profile), use a command like:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>dconf reset /org/gnome/terminal/legacy/profiles:/foreground-color
@@ -135,16 +177,16 @@ of a GNOME terminal profile), use a command like:</p>
 </div>
 <div class="section" id="finding-the-gnome-version">
 <h2>
-<a class="toc-backref" href="#id6">Finding the GNOME version</a><a class="headerlink" href="#finding-the-gnome-version" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id7">Finding the GNOME version</a><a class="headerlink" href="#finding-the-gnome-version" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-4">You can find the GNOME 3 version in file
+<p id="index-5">You can find the GNOME 3 version in file
 <code class="docutils literal notranslate"><span class="pre">/usr/share/gnome/gnome-version.xml</span></code>.</p>
 </div>
 <div class="section" id="closing-the-gnome-session-from-the-command-line">
 <h2>
-<a class="toc-backref" href="#id7">Closing the GNOME session from the command line</a><a class="headerlink" href="#closing-the-gnome-session-from-the-command-line" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id8">Closing the GNOME session from the command line</a><a class="headerlink" href="#closing-the-gnome-session-from-the-command-line" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-5">You can close the GNOME session from a terminal with:</p>
+<p id="index-6">You can close the GNOME session from a terminal with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>gnome-session-quit
 </pre></div>
@@ -152,7 +194,7 @@ of a GNOME terminal profile), use a command like:</p>
 </div>
 <div class="section" id="other-resources">
 <h2>
-<a class="toc-backref" href="#id8">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id9">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
 </h2>
 <ul class="simple">
 <li><a class="reference external" href="https://www.pcworld.com/article/2691192/how-gnome-3-14-is-winning-back-disillusioned-linux-users.html">How GNOME 3.14 is winning back disillusioned Linux users</a></li>
@@ -174,6 +216,7 @@ of a GNOME terminal profile), use a command like:</p>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#list-the-keys-related-to-the-gnome-terminal-profiles">List the keys related to the GNOME terminal profiles</a></li>
 <li><a class="reference internal" href="#dump-load-the-keys-related-to-the-gnome-terminal-profiles">Dump / load the keys related to the GNOME terminal profiles</a></li>
+<li><a class="reference internal" href="#dump-load-the-keys-related-to-all-gnome-terminal-options">Dump / load the keys related to all GNOME terminal options</a></li>
 <li><a class="reference internal" href="#reset-i-e-erase-a-particular-key">Reset (i.e. erase) a particular key</a></li>
 <li><a class="reference internal" href="#finding-the-gnome-version">Finding the GNOME version</a></li>
 <li><a class="reference internal" href="#closing-the-gnome-session-from-the-command-line">Closing the GNOME session from the command line</a></li>
