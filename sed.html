@@ -3,7 +3,7 @@
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
-    <title>Base16 color schemes (xterm and Vim) — Personal Notes</title>
+    <title>Sed — Personal Notes</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css">
     <link rel="stylesheet" href="_static/pygments.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
@@ -17,8 +17,8 @@
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
     <link rel="search" title="Search" href="search.html">
-    <link rel="next" title="tmux" href="tmux.html">
-    <link rel="prev" title="Reminder" href="reminder.html"> 
+    <link rel="next" title="Sphinx" href="sphinx.html">
+    <link rel="prev" title="Git" href="git.html"> 
   </head>
 <body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -28,9 +28,9 @@
           <a href="genindex.html" title="General Index" accesskey="I">index</a>
 </li>
         <li class="right">
-          <a href="tmux.html" title="tmux" accesskey="N">next</a> |</li>
+          <a href="sphinx.html" title="Sphinx" accesskey="N">next</a> |</li>
         <li class="right">
-          <a href="reminder.html" title="Reminder" accesskey="P">previous</a> |</li>
+          <a href="git.html" title="Git" accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0">
 <a href="index.html">Personal Notes</a> »</li> 
       </ul>
@@ -41,33 +41,48 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="base16-color-schemes-xterm-and-vim">
-<h1>Base16 color schemes (xterm and Vim)<a class="headerlink" href="#base16-color-schemes-xterm-and-vim" title="Permalink to this headline">¶</a>
+  <div class="section" id="sed">
+<h1>Sed<a class="headerlink" href="#sed" title="Permalink to this headline">¶</a>
 </h1>
-<p id="index-0">Base16 is a set of color schemes, available for various applications. I like
-that it makes it possible to have the same color scheme in my terminals (<a class="reference external" href="https://en.wikipedia.org/wiki/Xterm">xterm</a>) and in <a class="reference external" href="https://en.wikipedia.org/wiki/Vim_(text_editor)">Vim</a> and to switch color scheme
-very easily (by issuing a single command in the terminal like
-<code class="docutils literal notranslate"><span class="pre">base16_classic-dark</span></code>).</p>
-<p>I just followed the instructions in Scott Pierce’s
-<a class="reference external" href="https://ddrscott.github.io/blog/2017/base16-shell">Base16 Shell blog post</a>.</p>
-<p>I also have this line in my <code class="docutils literal notranslate"><span class="pre">~/.Xresources</span></code>:</p>
+<div class="contents local topic" id="page-content">
+<p class="topic-title first">Page content</p>
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
+<li><a class="reference internal" href="#left-padding-numbers-with-zeros" id="id3">Left-padding numbers with zeros</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<span id="index-0"></span><h2>
+<a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+</h2>
+<p>This page is where I note the <a class="reference external" href="https://en.wikipedia.org/wiki/Sed">sed</a>
+commands I found difficult to elaborate.</p>
+</div>
+<div class="section" id="left-padding-numbers-with-zeros">
+<h2>
+<a class="toc-backref" href="#id3">Left-padding numbers with zeros</a><a class="headerlink" href="#left-padding-numbers-with-zeros" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-1">Let’s say we have a file called “numbers” containing integer numbers (without
+any sign):</p>
 <div class="line-block">
-<div class="line">XTerm*termName: xterm-256color</div>
+<div class="line">123</div>
+<div class="line">4</div>
+<div class="line">5678</div>
+<div class="line">99999</div>
 </div>
-<p>Base16_pop and base16_pico are two of my favorite Base16 schemes.</p>
-<p>You can see the list of the base16 schemes with this command:</p>
-<div class="highlight-default notranslate">
-<div class="highlight"><pre><span></span><span class="n">alias</span> <span class="o">|</span> <span class="n">grep</span> <span class="s2">"^alias base16_"</span><span class="o">|</span><span class="n">sed</span> <span class="s2">"s/=.\+$//"</span>
+<p>The following Bash command line outputs the same numbers, but with leading
+zeros (for the numbers having less than 4 digits):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nv">N</span><span class="o">=</span><span class="m">4</span><span class="p">;</span> cat numbers <span class="se">\</span>
+    <span class="p">|</span> sed -e <span class="s2">":loop;s/^\([^:]\+\):\([0-9]\{1,</span><span class="k">$((</span><span class="nv">$N</span><span class="o">-</span><span class="m">1</span><span class="k">))</span><span class="s2">\}\):/\1:0\2:/;t loop"</span>
 </pre></div>
 </div>
-<p>As far as base16-vim is concerned, if it’s the only color plugin you want
-installed and you don’t use any plugin manager like <a class="reference external" href="https://github.com/tpope/vim-pathogen">Pathogen</a> or <a class="reference external" href="https://github.com/VundleVim/Vundle.vim">Vundle</a>, you may install it with the
-following commands:</p>
-<div class="highlight-default notranslate">
-<div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/.</span><span class="n">vim</span>
-<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">chriskempson</span><span class="o">/</span><span class="n">base16</span><span class="o">-</span><span class="n">vim</span>
-<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="n">base16</span><span class="o">-</span><span class="n">vim</span><span class="o">/</span><span class="n">colors</span> <span class="n">colors</span>
-</pre></div>
+<div class="line-block">
+<div class="line">0123</div>
+<div class="line">0004</div>
+<div class="line">5678</div>
+<div class="line">99999</div>
+</div>
 </div>
 </div>
 
@@ -77,10 +92,20 @@ following commands:</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li>
+<a class="reference internal" href="#">Sed</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#left-padding-numbers-with-zeros">Left-padding numbers with zeros</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
-  <p class="topless"><a href="reminder.html" title="previous chapter">Reminder</a></p>
+  <p class="topless"><a href="git.html" title="previous chapter">Git</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="tmux.html" title="next chapter">tmux</a></p>
+  <p class="topless"><a href="sphinx.html" title="next chapter">Sphinx</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -104,9 +129,9 @@ following commands:</p>
           <a href="genindex.html" title="General Index">index</a>
 </li>
         <li class="right">
-          <a href="tmux.html" title="tmux">next</a> |</li>
+          <a href="sphinx.html" title="Sphinx">next</a> |</li>
         <li class="right">
-          <a href="reminder.html" title="Reminder">previous</a> |</li>
+          <a href="git.html" title="Git">previous</a> |</li>
         <li class="nav-item nav-item-0">
 <a href="index.html">Personal Notes</a> »</li> 
       </ul>

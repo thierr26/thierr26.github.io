@@ -17,7 +17,7 @@
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
     <link rel="search" title="Search" href="search.html">
-    <link rel="next" title="Sphinx" href="sphinx.html">
+    <link rel="next" title="Sed" href="sed.html">
     <link rel="prev" title="External (USB) drives" href="external_usb_drives.html"> 
   </head>
 <body>
@@ -28,7 +28,7 @@
           <a href="genindex.html" title="General Index" accesskey="I">index</a>
 </li>
         <li class="right">
-          <a href="sphinx.html" title="Sphinx" accesskey="N">next</a> |</li>
+          <a href="sed.html" title="Sed" accesskey="N">next</a> |</li>
         <li class="right">
           <a href="external_usb_drives.html" title="External (USB) drives" accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0">
@@ -65,24 +65,27 @@
 <li><a class="reference internal" href="#cloning-in-an-existing-directory" id="id16">Cloning in an existing directory</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#staging-changes" id="id17">Staging changes</a></li>
-<li><a class="reference internal" href="#unstaging-changes" id="id18">Unstaging changes</a></li>
-<li><a class="reference internal" href="#ignoring-files-and-directories" id="id19">Ignoring files and directories</a></li>
-<li><a class="reference internal" href="#showing-changes" id="id20">Showing changes</a></li>
-<li><a class="reference internal" href="#committing" id="id21">Committing</a></li>
-<li><a class="reference internal" href="#viewing-the-commit-log" id="id22">Viewing the commit log</a></li>
-<li><a class="reference internal" href="#working-with-remote-repositories" id="id23">Working with remote repositories</a></li>
-<li><a class="reference internal" href="#working-with-branches" id="id24">Working with branches</a></li>
-<li><a class="reference internal" href="#stashing-changes" id="id25">Stashing changes</a></li>
-<li><a class="reference internal" href="#finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree" id="id26">Finding text patterns in the indexed files (or in any directory tree)</a></li>
-<li><a class="reference internal" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file" id="id27">Find the last modification date and author of any line of a file</a></li>
-<li><a class="reference internal" href="#reverting-the-index-and-working-directory-to-a-previous-commit" id="id28">Reverting the index and working directory to a previous commit</a></li>
-<li><a class="reference internal" href="#maintaining-a-difference-between-working-and-committed-trees" id="id29">Maintaining a difference between working and committed trees</a></li>
-<li><a class="reference internal" href="#creating-an-archive-of-the-latest-commit-without-any-history" id="id30">Creating an archive of the latest commit (without any history)</a></li>
-<li><a class="reference internal" href="#scripting" id="id31">Scripting</a></li>
-<li><a class="reference internal" href="#hooks" id="id32">Hooks</a></li>
-<li><a class="reference internal" href="#submodules" id="id33">Submodules</a></li>
-<li><a class="reference internal" href="#other-resources" id="id34">Other resources</a></li>
+<li><a class="reference internal" href="#making-a-repository-shareable" id="id17">Making a repository shareable</a></li>
+<li><a class="reference internal" href="#staging-changes" id="id18">Staging changes</a></li>
+<li><a class="reference internal" href="#unstaging-changes" id="id19">Unstaging changes</a></li>
+<li><a class="reference internal" href="#ignoring-files-and-directories" id="id20">Ignoring files and directories</a></li>
+<li><a class="reference internal" href="#showing-changes" id="id21">Showing changes</a></li>
+<li><a class="reference internal" href="#committing" id="id22">Committing</a></li>
+<li><a class="reference internal" href="#tagging" id="id23">Tagging</a></li>
+<li><a class="reference internal" href="#viewing-the-commit-log" id="id24">Viewing the commit log</a></li>
+<li><a class="reference internal" href="#working-with-remote-repositories" id="id25">Working with remote repositories</a></li>
+<li><a class="reference internal" href="#working-with-branches" id="id26">Working with branches</a></li>
+<li><a class="reference internal" href="#stashing-changes" id="id27">Stashing changes</a></li>
+<li><a class="reference internal" href="#exploring-the-repository" id="id28">Exploring the repository</a></li>
+<li><a class="reference internal" href="#finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree" id="id29">Finding text patterns in the indexed files (or in any directory tree)</a></li>
+<li><a class="reference internal" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file" id="id30">Find the last modification date and author of any line of a file</a></li>
+<li><a class="reference internal" href="#cancelling-changes" id="id31">Cancelling changes</a></li>
+<li><a class="reference internal" href="#maintaining-a-difference-between-working-and-committed-trees" id="id32">Maintaining a difference between working and committed trees</a></li>
+<li><a class="reference internal" href="#creating-an-archive-of-the-latest-commit-without-any-history" id="id33">Creating an archive of the latest commit (without any history)</a></li>
+<li><a class="reference internal" href="#scripting" id="id34">Scripting</a></li>
+<li><a class="reference internal" href="#hooks" id="id35">Hooks</a></li>
+<li><a class="reference internal" href="#submodules" id="id36">Submodules</a></li>
+<li><a class="reference internal" href="#other-resources" id="id37">Other resources</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -124,6 +127,12 @@ git config --global user.email <span class="s2">"my.id@example.com"</span>
 argument) command. Value <code class="docutils literal notranslate"><span class="pre">simple</span></code> <a class="reference external" href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault">may be appropriate in most cases</a>:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git config --global push.default simple
+</pre></div>
+</div>
+<p>You may also want to specify the editor to be used for commit messages or tag
+messages editor. Example with editor Vim:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git config --global core.editor <span class="s2">"vim"</span>
 </pre></div>
 </div>
 <p>You can see your Git configuration with:</p>
@@ -291,11 +300,47 @@ local files. If you really want a clone of the remote repository, remove the
 local files and run the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span> <span class="pre">origin</span> <span class="pre">master</span></code> command again.</p>
 </div>
 </div>
+<div class="section" id="making-a-repository-shareable">
+<h2>
+<a class="toc-backref" href="#id17">Making a repository shareable</a><a class="headerlink" href="#making-a-repository-shareable" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-9">I’ve been once in a situation where I had a local repository tracking a <a class="reference external" href="http://www.saintsjd.com/2011/01/what-is-a-bare-git-repository/">bare
+remote repository</a> on the same
+Linux machine. The remote was initialized (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span> <span class="pre">--bare</span> <span class="pre">...</span></code>) by me (as a
+“normal” user). When other users on the machine have tried to push to the
+remote, they couldn’t because they didn’t have the permission and because the
+repository had not been configured to be shareable. We decided to create a
+group (called “develop” in the commands below) and to make sure the members of
+the group had the permission to push to the remote. We could achieve that with
+the following commands.</p>
+<p>As root:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>groupadd develop                       <span class="c1"># Create group.</span>
+</pre></div>
+</div>
+<p>As me (“normal” user):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">cd</span> /path/to/bare/remote/repository
+git config core.sharedRepository group <span class="c1"># Make repository shareable.</span>
+</pre></div>
+</div>
+<p>As root:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">cd</span> /path/to/bare/remote/repository
+chgrp -R develop .                     <span class="c1"># Change files and directories' group.</span>
+chmod -R g+w .                         <span class="c1"># Give write permission to group...</span>
+chmod g-w objects/pack/*               <span class="c1"># Expect for pack files.</span>
+find -type d -exec chmod g+s <span class="o">{}</span> +      <span class="c1"># New files get directory's group id.</span>
+usermod -aG develop my_username        <span class="c1"># Add me to group.</span>
+usermod -aG develop other_user         <span class="c1"># Add another user to group, etc...</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="staging-changes">
 <span id="git-staging"></span><h2>
-<a class="toc-backref" href="#id17">Staging changes</a><a class="headerlink" href="#staging-changes" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id18">Staging changes</a><a class="headerlink" href="#staging-changes" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-9"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-A</span></code> stages all changes (including new files and file removals).
+<p id="index-10"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-A</span></code> stages all changes (including new files and file removals).
 <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">.</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">-A</span></code> (except with Git version 1.x
 (file removals not staged)).</p>
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">add</span> <span class="pre">--ignore-removal</span></code> does not stage file removals.</p>
@@ -328,9 +373,9 @@ correct.</p>
 </div>
 <div class="section" id="unstaging-changes">
 <h2>
-<a class="toc-backref" href="#id18">Unstaging changes</a><a class="headerlink" href="#unstaging-changes" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id19">Unstaging changes</a><a class="headerlink" href="#unstaging-changes" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-10">You can unstage a file that you have just mistakenly staged with a command
+<p id="index-11">You can unstage a file that you have just mistakenly staged with a command
 like:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git reset -- path/to/file
@@ -339,9 +384,9 @@ like:</p>
 </div>
 <div class="section" id="ignoring-files-and-directories">
 <span id="gitignore"></span><h2>
-<a class="toc-backref" href="#id19">Ignoring files and directories</a><a class="headerlink" href="#ignoring-files-and-directories" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id20">Ignoring files and directories</a><a class="headerlink" href="#ignoring-files-and-directories" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-11">Quiet often there are files and/or directories in the working directory that
+<p id="index-12">Quiet often there are files and/or directories in the working directory that
 shouldn’t be tracked by the version control system. Such files and/or
 directories must be mentioned in file <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> or in file
 <code class="docutils literal notranslate"><span class="pre">.git/info/exclude</span></code>. <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> is tracked, <code class="docutils literal notranslate"><span class="pre">.git/info/exclude</span></code> is not.
@@ -377,9 +422,9 @@ directory to be ignored, except:</p>
 </div>
 <div class="section" id="showing-changes">
 <h2>
-<a class="toc-backref" href="#id20">Showing changes</a><a class="headerlink" href="#showing-changes" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id21">Showing changes</a><a class="headerlink" href="#showing-changes" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-12">Show the difference between what is staged (or what is in the last commit if no
+<p id="index-13">Show the difference between what is staged (or what is in the last commit if no
 change is staged) and the working tree with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git diff
@@ -427,12 +472,26 @@ git diff 42b9c3b a92c02a -- path/to/files <span class="c1"># Shows changes for t
                                           <span class="c1"># files only.</span>
 </pre></div>
 </div>
+<p>In some cases, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">-p</span></code> can be a good alternative to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git log -p -1 a92c02a -- path/to/files <span class="c1"># Shows log message and changes made</span>
+                                       <span class="c1"># for commit a92c02a.</span>
+</pre></div>
+</div>
+<p>You sometimes want to filter the output of git diff. The <code class="docutils literal notranslate"><span class="pre">-G</span></code> and <code class="docutils literal notranslate"><span class="pre">-S</span></code>
+options can help.</p>
+<ul class="simple">
+<li>
+<a class="reference external" href="https://git-scm.com/docs/git-diff#Documentation/git-diff.txt--Sltstringgt">Documentation for git diff -S option</a>,</li>
+<li>
+<a class="reference external" href="https://git-scm.com/docs/git-diff#Documentation/git-diff.txt--Gltregexgt">Documentation for git diff -G option</a>.</li>
+</ul>
 </div>
 <div class="section" id="committing">
 <h2>
-<a class="toc-backref" href="#id21">Committing</a><a class="headerlink" href="#committing" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id22">Committing</a><a class="headerlink" href="#committing" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-13">The following commands commit the staged changes to the repository:</p>
+<p id="index-14">The following commands commit the staged changes to the repository:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git commit                                 <span class="c1"># Opens a text editor for commit</span>
                                            <span class="c1"># message edition.</span>
@@ -463,16 +522,52 @@ commit:</p>
 <div class="highlight"><pre><span></span>git commit --amend
 </pre></div>
 </div>
+<p>By default, you can’t do a commit that does not change anything in the tree (an
+“empty” commit) and you can’t do a commit without a commit message. If you
+really want to do one of those things, you have to use the <code class="docutils literal notranslate"><span class="pre">--allow-empty</span></code>
+or <code class="docutils literal notranslate"><span class="pre">--allow-empty-message</span></code> respectively. An empty commit is interesting for
+example as the first commit of a project. Having an empty commit as first
+commit makes it possible to a <a class="reference external" href="https://stackoverflow.com/questions/15034390/how-to-create-a-new-and-empty-root-branch">create an empty new branch if needed</a>.</p>
+<p>When needing to do a commit which is equivalent to commit already done in
+another branch, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">cherry-pick</span></code> comes in handy:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git cherry-pick commit_hash_of_the_existing_commit
+</pre></div>
+</div>
+</div>
+<div class="section" id="tagging">
+<h2>
+<a class="toc-backref" href="#id23">Tagging</a><a class="headerlink" href="#tagging" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-15">Basic tag manipulations (creation, deletion) are done using the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">tag</span></code>
+command and its various option. But there are more things to do with tags
+(cloning, pushing). <a class="reference external" href="https://stackoverflow.com/a/35979751">A Stack Otherflow answer gives many details about tagging
+in Git.</a></p>
+<p>Note also the following commands, useful to find tags and corresponding
+commits:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git log -1 my_tag           <span class="c1"># Show local branch commit for tag "my_tag".</span>
+git ls-remote --tags origin <span class="c1"># List commit hash / tag pairs for remote</span>
+                            <span class="c1"># "origin".</span>
+</pre></div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rev-list</span></code>, you get only the commit hash:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git rev-list -1 my_tag
+</pre></div>
+</div>
 </div>
 <div class="section" id="viewing-the-commit-log">
 <h2>
-<a class="toc-backref" href="#id22">Viewing the commit log</a><a class="headerlink" href="#viewing-the-commit-log" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id24">Viewing the commit log</a><a class="headerlink" href="#viewing-the-commit-log" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-14">Show the commit log with:</p>
+<p id="index-16">Show the commit log with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git log
 </pre></div>
 </div>
+<p>When using a Git version older than 2.13, you need to add option
+<code class="docutils literal notranslate"><span class="pre">--decorate</span></code> to see references names (branch heads and tags) in the log.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">log</span></code> command is extremely configurable. I have
 <a class="reference internal" href="#git-aliases"><span class="std std-ref">aliases</span></a> for those variants:</p>
 <div class="highlight-shell notranslate">
@@ -491,14 +586,37 @@ git log --graph --oneline --all          <span class="c1"># Compact graphical re
 <div class="highlight"><pre><span></span>git log --stat
 </pre></div>
 </div>
+<p>For the record, here are a few more examples for <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> (for commit
+hashes, dates and commit message as raw text):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git log --pretty<span class="o">=</span><span class="s2">"%H"</span> -1     <span class="c1"># Commit hash.</span>
+git log --pretty<span class="o">=</span><span class="s2">"%h"</span> -1     <span class="c1"># Short commit hash.</span>
+git log --pretty<span class="o">=</span><span class="s2">"%ci %H"</span> -1 <span class="c1"># Committer date (ISO 8601 like) and hash.</span>
+git log --pretty<span class="o">=</span><span class="s2">"%cI"</span> -1    <span class="c1"># Committer date (strict ISO 8601 format).</span>
+git log --pretty<span class="o">=</span><span class="s2">"%cD"</span> -1    <span class="c1"># Committer date (RFC2822 style).</span>
+git log --pretty<span class="o">=</span><span class="s2">"%B"</span> -1     <span class="c1"># Commit message as raw text (subject and body).</span>
+git log --pretty<span class="o">=</span><span class="s2">"%b"</span> -1     <span class="c1"># Commit message as raw text (body only).</span>
+</pre></div>
+</div>
+<p>In <code class="docutils literal notranslate"><span class="pre">%ci</span></code> or <code class="docutils literal notranslate"><span class="pre">%cI</span></code>, the letter c stands for “committer date”. Use letter a
+instead of letter c for the “author date”.</p>
+<p>When interested in a specific commit, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">show</span></code> can be used instead of <code class="docutils literal notranslate"><span class="pre">git</span>
+<span class="pre">log</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git show -s git log --pretty<span class="o">=</span><span class="s2">"%ci %h"</span> e66cceb
+</pre></div>
+</div>
 </div>
 <div class="section" id="working-with-remote-repositories">
 <h2>
-<a class="toc-backref" href="#id23">Working with remote repositories</a><a class="headerlink" href="#working-with-remote-repositories" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id25">Working with remote repositories</a><a class="headerlink" href="#working-with-remote-repositories" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-15">Configure a remote named “origin” with:</p>
+<p id="index-17">Configure a remote named “origin” with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git remote add origin remote_repository_url
+git remote add -t branch_name origin remote_repository_url <span class="c1"># Track only</span>
+                                                           <span class="c1"># branch</span>
+                                                           <span class="c1"># branch_name.</span>
 </pre></div>
 </div>
 <p>Check the configured remotes with:</p>
@@ -506,15 +624,28 @@ git log --graph --oneline --all          <span class="c1"># Compact graphical re
 <div class="highlight"><pre><span></span>git remote -v
 </pre></div>
 </div>
+<p>The following commands also show interesting information about remote:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git remote show
+git remote show remote_name
+git branch -vv
+</pre></div>
+</div>
 <p>Push the commits in the “master” branch to “origin” with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git push origin master
 </pre></div>
 </div>
-<p>The following command downloads changes from “origin” (but does not affect the
+<p>The following commands download changes from “origin” (but does not affect the
 history of the local repository):</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git fetch origin
+git fetch        <span class="c1"># "origin" is the default remote.</span>
+</pre></div>
+</div>
+<p>If you have multiple remotes, you can fetch them all with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git fetch --all
 </pre></div>
 </div>
 <p>The following command downloads changes from “origin” for branch “master” and
@@ -533,19 +664,39 @@ merges the changes into the local repository:</p>
 <div class="highlight"><pre><span></span>git remote set-url origin url
 </pre></div>
 </div>
+<p>You can remove a remote with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git remote rm remote_name
+</pre></div>
+</div>
 </div>
 <div class="section" id="working-with-branches">
 <h2>
-<a class="toc-backref" href="#id24">Working with branches</a><a class="headerlink" href="#working-with-branches" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id26">Working with branches</a><a class="headerlink" href="#working-with-branches" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-16"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> shows the current branch (among other things).</p>
+<p id="index-18"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> shows the current branch (among other things).</p>
+<p>To list the branches, use:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git branch    <span class="c1"># List the local branches.</span>
+git branch -a <span class="c1"># Also includes the remote-tracking branches.</span>
+git branch -r <span class="c1"># Includes only the remote-tracking branches.</span>
+</pre></div>
+</div>
+<p>Adding option <code class="docutils literal notranslate"><span class="pre">-v</span></code> causes the commit hash and commit subject line to be shown
+for each branch head.</p>
 <p>Switch to branch named “branch_name” with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git checkout branch_name
 
-git checkout -b branch_name <span class="c1"># Creates the branch named "branch_name".</span>
+git checkout -b branch_name       <span class="c1"># Creates the branch named "branch_name".</span>
+
+git checkout --orphan branch_name <span class="c1"># Creates an orphan branch (Note that the</span>
+                                  <span class="c1"># files of the branch the orphan branch is</span>
+                                  <span class="c1"># started from are automatically staged).</span>
 </pre></div>
 </div>
+<p>This of course raises the question of which naming scheme to use for the
+branches. <a class="reference external" href="https://stackoverflow.com/questions/273695/what-are-some-examples-of-commonly-used-practices-for-naming-git-branches/6065944#6065944">This Stack Overflow answer by Phil Hord helps.</a></p>
 <p>Rebase current branch on the latest commit of branch “master” with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git rebase master
@@ -581,12 +732,22 @@ git branch -D branch_name <span class="c1"># Deletes the branch even if it's not
 <div class="highlight"><pre><span></span>git branch -m old_name new_name
 </pre></div>
 </div>
+<p>Check out a file from another branch with a command like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git checkout branch_name -- path/to/file
+</pre></div>
+</div>
+<p>To find the branch that contains a specific commit:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git branch -a --contains commit_hash
+</pre></div>
+</div>
 </div>
 <div class="section" id="stashing-changes">
 <h2>
-<a class="toc-backref" href="#id25">Stashing changes</a><a class="headerlink" href="#stashing-changes" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id27">Stashing changes</a><a class="headerlink" href="#stashing-changes" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-17">Store the current state of the working tree and the index in the stash stack
+<p id="index-19">Store the current state of the working tree and the index in the stash stack
 and go back to a clean working tree with one of the following commands:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git stash push
@@ -621,14 +782,15 @@ git stash show -p stash@<span class="o">{</span><span class="m">0</span><span cl
 with a command like:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git stash pop stash@<span class="o">{</span><span class="m">0</span><span class="o">}</span>
-git stash pop           <span class="c1"># Equivalent to "git stash pop stash@{0}"</span>
+git stash pop           <span class="c1"># Equivalent to "git stash pop stash@{0}".</span>
 </pre></div>
 </div>
-<p>You can also remove an entry from the stash stack without applying the changes
-to the working tree:</p>
+<p>You can also remove one entry (or even all the entries) from the stash stack
+without applying the changes to the working tree:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git stash drop stash@<span class="o">{</span><span class="m">0</span><span class="o">}</span>
-git stash drop           <span class="c1"># Equivalent to "git stash drop stash@{0}"</span>
+git stash drop           <span class="c1"># Equivalent to "git stash drop stash@{0}".</span>
+git stash clear          <span class="c1"># Remove all the stash entries.</span>
 </pre></div>
 </div>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">--index</span></code> option to also reapply the staging:</p>
@@ -637,11 +799,36 @@ git stash drop           <span class="c1"># Equivalent to "git stash drop stash@
 </pre></div>
 </div>
 </div>
+<div class="section" id="exploring-the-repository">
+<h2>
+<a class="toc-backref" href="#id28">Exploring the repository</a><a class="headerlink" href="#exploring-the-repository" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-20">You can see the list of files and directories under version control in the
+current directory using:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git ls-tree HEAD
+</pre></div>
+</div>
+<p>Add option <code class="docutils literal notranslate"><span class="pre">-r</span></code> to explore recursively the subdirectories, and option
+<code class="docutils literal notranslate"><span class="pre">--name-only</span></code> to see only the file names and hide the other informations:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git ls-tree -r --name-only HEAD
+</pre></div>
+</div>
+<p>Of course, you can use a specific commit hash instead of <code class="docutils literal notranslate"><span class="pre">HEAD</span></code>.</p>
+<p>If you need to search a file based on its file name, you can use a command
+like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git ls-files <span class="s2">"*abc*"</span>
+git ls-files -s <span class="s2">"*abc*"</span> <span class="c1"># Search in staged files.</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree">
 <h2>
-<a class="toc-backref" href="#id26">Finding text patterns in the indexed files (or in any directory tree)</a><a class="headerlink" href="#finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id29">Finding text patterns in the indexed files (or in any directory tree)</a><a class="headerlink" href="#finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-18">Use commands like the following ones to search text patterns:</p>
+<p id="index-21">Use commands like the following ones to search text patterns:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git grep &lt;reg_exp&gt;            <span class="c1"># Search regular expression &lt;reg_exp&gt; in</span>
                               <span class="c1"># indexed file.</span>
@@ -656,23 +843,33 @@ git grep --no-index &lt;reg_exp&gt; <span class="c1"># Useful to search in a dir
                               <span class="c1"># a Git repository.</span>
 </pre></div>
 </div>
+<p>To search text in all branches, an option is to use the <code class="docutils literal notranslate"><span class="pre">-p</span></code> and <code class="docutils literal notranslate"><span class="pre">-G</span></code> (or
+<code class="docutils literal notranslate"><span class="pre">-S</span></code>) options of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code>, as explained in <a class="reference external" href="https://stackoverflow.com/a/26226807">this Stack Overflow answer by
+Edward Anderson</a>. Another option is to
+do something like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git grep pattern <span class="sb">`</span>git <span class="k">for</span>-each-ref --format<span class="o">=</span><span class="s1">'%(refname)'</span> refs/heads<span class="sb">`</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="find-the-last-modification-date-and-author-of-any-line-of-a-file">
 <h2>
-<a class="toc-backref" href="#id27">Find the last modification date and author of any line of a file</a><a class="headerlink" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id30">Find the last modification date and author of any line of a file</a><a class="headerlink" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-19">Use this command to see the last modification date and author of any line of a
+<p id="index-22">Use this command to see the last modification date and author of any line of a
 file:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git blame path/to/file
 </pre></div>
 </div>
 </div>
-<div class="section" id="reverting-the-index-and-working-directory-to-a-previous-commit">
+<div class="section" id="cancelling-changes">
 <h2>
-<a class="toc-backref" href="#id28">Reverting the index and working directory to a previous commit</a><a class="headerlink" href="#reverting-the-index-and-working-directory-to-a-previous-commit" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id31">Cancelling changes</a><a class="headerlink" href="#cancelling-changes" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-20">Revert the index and working directory to the last, penultimate, etc… commit
+<p id="index-23">If you want to cancel changes before they have been pushed, the best option is
+probably <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code>.</p>
+<p>Revert the index and working directory to the last, penultimate, etc… commit
 with commands like:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git reset --hard HEAD^
@@ -681,12 +878,15 @@ git reset --hard HEAD^^^
 </pre></div>
 </div>
 <p>Use with care, <strong>changes to the working directory are discarded</strong>.</p>
+<p>The Pro Git has a section with much more details about <a class="reference external" href="https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified">git reset</a>.</p>
+<p>If you want to cancel changes after they have been pushed, the best option is
+probably <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">revert</span></code>. See the <a class="reference external" href="https://git-scm.com/docs/git-revert">documentation about git revert</a>.</p>
 </div>
 <div class="section" id="maintaining-a-difference-between-working-and-committed-trees">
 <span id="git-maintain-work-commit-diff"></span><h2>
-<a class="toc-backref" href="#id29">Maintaining a difference between working and committed trees</a><a class="headerlink" href="#maintaining-a-difference-between-working-and-committed-trees" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id32">Maintaining a difference between working and committed trees</a><a class="headerlink" href="#maintaining-a-difference-between-working-and-committed-trees" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-21">In some cases, you want a particular file content in your working tree, that
+<p id="index-24">In some cases, you want a particular file content in your working tree, that
 you don’t want to commit.</p>
 <p>For example, this page you are currently reading is part of a <a class="reference external" href="http://www.sphinx-doc.org/en/master">Sphinx</a> project. The page you’re reading is the
 result of Sphinx processing some source files and generating HTML output. On
@@ -782,9 +982,9 @@ root</strong>) with:</p>
 </div>
 <div class="section" id="creating-an-archive-of-the-latest-commit-without-any-history">
 <h2>
-<a class="toc-backref" href="#id30">Creating an archive of the latest commit (without any history)</a><a class="headerlink" href="#creating-an-archive-of-the-latest-commit-without-any-history" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id33">Creating an archive of the latest commit (without any history)</a><a class="headerlink" href="#creating-an-archive-of-the-latest-commit-without-any-history" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-22">The following commands create archives of the working directory in “tar” and
+<p id="index-25">The following commands create archives of the working directory in “tar” and
 “zip” formats:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git archive -o latest.tar HEAD
@@ -794,9 +994,9 @@ git archive -o latest.zip HEAD
 </div>
 <div class="section" id="scripting">
 <h2>
-<a class="toc-backref" href="#id31">Scripting</a><a class="headerlink" href="#scripting" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id34">Scripting</a><a class="headerlink" href="#scripting" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-23">It is sometimes needed to automate a sequence of Git commands and write a
+<p id="index-26">It is sometimes needed to automate a sequence of Git commands and write a
 script (a <a class="reference external" href="https://en.wikipedia.org/wiki/Shell_script">shell script</a> for
 example). Scripting makes it possible to define <a class="reference internal" href="#hooks"><span class="std std-ref">hooks</span></a>.</p>
 <p><a class="reference external" href="https://stackoverflow.com/a/39848551">Git commands are divided into two categories</a>:</p>
@@ -836,6 +1036,11 @@ git diff-index --quiet HEAD               <span class="c1"># Does not output any
                                           <span class="c1"># with non zero exit status</span>
                                           <span class="c1"># otherwise.</span>
 
+git diff-tree --name-only -r HEAD         <span class="c1"># Lists the files changed in the</span>
+                                          <span class="c1"># last commit. Use option</span>
+                                          <span class="c1"># ``--no-commit-id`` to suppress</span>
+                                          <span class="c1"># the first line (commit hash).</span>
+
 git status --porcelain                    <span class="c1"># Outputs nothing if the working</span>
                                           <span class="c1"># directory is clean (and without</span>
                                           <span class="c1"># any untracked files), outputs</span>
@@ -863,9 +1068,9 @@ git merge-base --is-ancestor hash1 hash2  <span class="c1"># Does not output any
 </div>
 <div class="section" id="hooks">
 <span id="id3"></span><h2>
-<a class="toc-backref" href="#id32">Hooks</a><a class="headerlink" href="#hooks" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id35">Hooks</a><a class="headerlink" href="#hooks" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-24">Assuming that:</p>
+<p id="index-27">Assuming that:</p>
 <ul class="simple">
 <li>You have a script “script-name” meant to be used as, say, a post-commit hook,</li>
 <li>This script is located at the top level of the working tree,</li>
@@ -883,7 +1088,7 @@ git merge-base --is-ancestor hash1 hash2  <span class="c1"># Does not output any
 <div class="highlight"><pre><span></span>chmod +x script-name
 </pre></div>
 </div>
-<p>The <a class="reference external" href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">Git hooks documentation</a> lists the possible
+<p>The <a class="reference external" href="https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">Git hooks section of the Pro Git book</a> lists the possible
 hooks.</p>
 <p>One difficulty with Git hooks is that when the hook of a repository operates on
 another Git repository, the <code class="docutils literal notranslate"><span class="pre">-C</span></code> and <code class="docutils literal notranslate"><span class="pre">--git-dir</span></code> options may not be
@@ -907,32 +1112,40 @@ variables instead:</p>
 </div>
 <div class="section" id="submodules">
 <h2>
-<a class="toc-backref" href="#id33">Submodules</a><a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id36">Submodules</a><a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-25">You can add a repository as a submodule to your repository with a command
+<p id="index-28">You can add a repository as a submodule to your repository with a command
 like:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git submodule add submodule_repository_url subdirectory
 </pre></div>
 </div>
-<p>Update the submodules with:</p>
+<p>You may want to specify which branch to track:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>git submodule update --remote
+<div class="highlight"><pre><span></span>git config -f .gitmodules submodule.&lt;submodule_name&gt;.branch &lt;branch_name&gt;
 </pre></div>
 </div>
+<p>Update the submodules with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git submodule init
+git submodule update --remote
+</pre></div>
+</div>
+<p>After cloning a repository with submodules, you also have to run
+<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">submodule</span> <span class="pre">init</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">submodule</span> <span class="pre">update</span> <span class="pre">--remote</span></code>.</p>
 </div>
 <div class="section" id="other-resources">
 <h2>
-<a class="toc-backref" href="#id34">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id37">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
 </h2>
 <ul class="simple">
 <li><a class="reference external" href="https://git-scm.com/docs">Git documentation</a></li>
+<li><a class="reference external" href="https://git-scm.com/book/en/v2">Pro Git book</a></li>
 <li><a class="reference external" href="https://www.git-tower.com/blog/git-cheat-sheet">Git cheat sheet</a></li>
+<li><a class="reference external" href="https://chris.beams.io/posts/git-commit">How to write a Git commit message</a></li>
 <li><a class="reference external" href="https://nvie.com/posts/a-successful-git-branching-model">A Git branching model</a></li>
 <li><a class="reference external" href="https://dev.to/maxwell_dev/the-git-rebase-introduction-i-wish-id-had">The Git Rebase Introduction I Wish I’d Had</a></li>
-<li>
-<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code>: <a class="reference external" href="https://delicious-insights.com/en/posts/getting-solid-at-git-rebase-vs-merge">When to use?</a>
-</li>
+<li><a class="reference external" href="https://delicious-insights.com/en/posts/getting-solid-at-git-rebase-vs-merge">git merge and git rebase: When to use?</a></li>
 <li><a class="reference external" href="https://jamescooke.info/git-to-squash-or-not-to-squash.html">Git: To squash or not to squash?</a></li>
 <li><a class="reference external" href="https://blog.github.com/2016-02-01-working-with-submodules">Git Submodules</a></li>
 </ul>
@@ -967,18 +1180,21 @@ like:</p>
 <li><a class="reference internal" href="#cloning-in-an-existing-directory">Cloning in an existing directory</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#making-a-repository-shareable">Making a repository shareable</a></li>
 <li><a class="reference internal" href="#staging-changes">Staging changes</a></li>
 <li><a class="reference internal" href="#unstaging-changes">Unstaging changes</a></li>
 <li><a class="reference internal" href="#ignoring-files-and-directories">Ignoring files and directories</a></li>
 <li><a class="reference internal" href="#showing-changes">Showing changes</a></li>
 <li><a class="reference internal" href="#committing">Committing</a></li>
+<li><a class="reference internal" href="#tagging">Tagging</a></li>
 <li><a class="reference internal" href="#viewing-the-commit-log">Viewing the commit log</a></li>
 <li><a class="reference internal" href="#working-with-remote-repositories">Working with remote repositories</a></li>
 <li><a class="reference internal" href="#working-with-branches">Working with branches</a></li>
 <li><a class="reference internal" href="#stashing-changes">Stashing changes</a></li>
+<li><a class="reference internal" href="#exploring-the-repository">Exploring the repository</a></li>
 <li><a class="reference internal" href="#finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree">Finding text patterns in the indexed files (or in any directory tree)</a></li>
 <li><a class="reference internal" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file">Find the last modification date and author of any line of a file</a></li>
-<li><a class="reference internal" href="#reverting-the-index-and-working-directory-to-a-previous-commit">Reverting the index and working directory to a previous commit</a></li>
+<li><a class="reference internal" href="#cancelling-changes">Cancelling changes</a></li>
 <li><a class="reference internal" href="#maintaining-a-difference-between-working-and-committed-trees">Maintaining a difference between working and committed trees</a></li>
 <li><a class="reference internal" href="#creating-an-archive-of-the-latest-commit-without-any-history">Creating an archive of the latest commit (without any history)</a></li>
 <li><a class="reference internal" href="#scripting">Scripting</a></li>
@@ -992,7 +1208,7 @@ like:</p>
   <h4>Previous topic</h4>
   <p class="topless"><a href="external_usb_drives.html" title="previous chapter">External (USB) drives</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="sphinx.html" title="next chapter">Sphinx</a></p>
+  <p class="topless"><a href="sed.html" title="next chapter">Sed</a></p>
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <div class="searchformwrapper">
@@ -1016,7 +1232,7 @@ like:</p>
           <a href="genindex.html" title="General Index">index</a>
 </li>
         <li class="right">
-          <a href="sphinx.html" title="Sphinx">next</a> |</li>
+          <a href="sed.html" title="Sed">next</a> |</li>
         <li class="right">
           <a href="external_usb_drives.html" title="External (USB) drives">previous</a> |</li>
         <li class="nav-item nav-item-0">

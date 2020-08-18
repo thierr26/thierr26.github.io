@@ -347,8 +347,8 @@ X.org after a few seconds. We need the <code class="docutils literal notranslate
 by the Debian package <code class="docutils literal notranslate"><span class="pre">psmisc</span></code>:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install psmisc <span class="c1"># As root, on the guest.</span>
-Xorg -verbose <span class="m">6</span> &gt; xlog.txt <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> sleep <span class="m">3</span> <span class="o">&amp;&amp;</span> killall Xorg <span class="c1"># As root, on the</span>
-                                                        <span class="c1"># guest.</span>
+Xorg -verbose <span class="m">6</span> &gt; xlog.txt <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span> sleep <span class="m">3</span> <span class="o">&amp;&amp;</span> killall Xorg <span class="c1"># As root, on the</span>
+                                                          <span class="c1"># guest.</span>
 </pre></div>
 </div>
 <p>In <code class="docutils literal notranslate"><span class="pre">xlog.txt</span></code>, we find lines like the following, which help building the
