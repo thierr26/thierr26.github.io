@@ -254,9 +254,12 @@ repository is <code class="docutils literal notranslate"><span class="pre">.git_
 <h3>
 <a class="toc-backref" href="#id15">Cloning to a new directory</a><a class="headerlink" href="#cloning-to-a-new-directory" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-7">Clone a repository to a new directory with:</p>
+<p id="index-7">Clone a repository to a new directory with commands like:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git clone repository_url
+git clone user_name@repo.host:path/to/repo <span class="c1"># scp-like syntax if you can use</span>
+                                           <span class="c1"># SSH to connect to the repository</span>
+                                           <span class="c1"># host.</span>
 </pre></div>
 </div>
 <p>Force the name of the cloned repository by providing the name as a
@@ -725,6 +728,17 @@ commands:</p>
                           <span class="c1"># merged.</span>
 
 git branch -D branch_name <span class="c1"># Deletes the branch even if it's not fully merged.</span>
+</pre></div>
+</div>
+<p>After a branch deletion on origin, you probably need to do (locally):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git fetch origin --prune
+git branch --unset-upstream
+</pre></div>
+</div>
+<p>To push a branch to origin, do:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git push -u origin branch_name
 </pre></div>
 </div>
 <p>Rename the local branch named “old_name” to “new_name”:</p>
