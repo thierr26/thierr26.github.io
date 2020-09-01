@@ -123,6 +123,12 @@ root</strong>) with:</p>
 git config --global user.email <span class="s2">"my.id@example.com"</span>
 </pre></div>
 </div>
+<p>If unfortunately you have done a commit with a wrong name and/or e-mail
+address, the following command may fix the problem:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git commit --amend --author<span class="o">=</span><span class="s2">"My Name &lt;my.id@example.com&gt;"</span>
+</pre></div>
+</div>
 <p>You should probably also configure the action of the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> (without
 argument) command. Value <code class="docutils literal notranslate"><span class="pre">simple</span></code> <a class="reference external" href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault">may be appropriate in most cases</a>:</p>
 <div class="highlight-shell notranslate">
