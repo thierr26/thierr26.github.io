@@ -56,6 +56,7 @@
 </li>
 <li><a class="reference internal" href="#formatting-the-new-partition" id="id6">Formatting the new partition</a></li>
 <li><a class="reference internal" href="#fat32-formatting" id="id7">FAT32 formatting</a></li>
+<li><a class="reference internal" href="#ntfs-formatting" id="id8">NTFS formatting</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -149,6 +150,26 @@ is in package <code class="docutils literal notranslate"><span class="pre">mtool
 </div>
 <p>Chances are that <code class="docutils literal notranslate"><span class="pre">dosfstools</span></code> is already installed.</p>
 </div>
+<div class="section" id="ntfs-formatting">
+<h2>
+<a class="toc-backref" href="#id8">NTFS formatting</a><a class="headerlink" href="#ntfs-formatting" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-3">For an NTFS formatting, the procedure is similar again.</p>
+<ul class="simple">
+<li>In fdisk, choose partition type 7;</li>
+<li>Format with <code class="docutils literal notranslate"><span class="pre">mkfs.ntfs</span> <span class="pre">-L</span> <span class="pre">&lt;label&gt;</span> <span class="pre">/dev/sdb1</span></code> (it takes a while, but you can
+use option <code class="docutils literal notranslate"><span class="pre">-f</span></code> for faster execution);</li>
+<li>Change label with <code class="docutils literal notranslate"><span class="pre">ntfslabel</span> <span class="pre">/dev/sdb1</span> <span class="pre">&lt;label&gt;</span></code> (<code class="docutils literal notranslate"><span class="pre">ntfslabel</span> <span class="pre">/dev/sdb1</span></code> to
+show the label).</li>
+</ul>
+<p>On Debian GNU/Linux, <code class="docutils literal notranslate"><span class="pre">mkfs.ntfs</span></code> and <code class="docutils literal notranslate"><span class="pre">ntfslabel</span></code> are in package
+<code class="docutils literal notranslate"><span class="pre">ntfs-3g</span></code>. You can install it with the following command but chances are that
+it is already installed:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install ntfs-3g <span class="c1"># As root.</span>
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -170,6 +191,7 @@ is in package <code class="docutils literal notranslate"><span class="pre">mtool
 </li>
 <li><a class="reference internal" href="#formatting-the-new-partition">Formatting the new partition</a></li>
 <li><a class="reference internal" href="#fat32-formatting">FAT32 formatting</a></li>
+<li><a class="reference internal" href="#ntfs-formatting">NTFS formatting</a></li>
 </ul>
 </li>
 </ul>
