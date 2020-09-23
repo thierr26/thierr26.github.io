@@ -54,10 +54,16 @@ very easily (by issuing a single command in the terminal like
 <div class="line-block">
 <div class="line">XTerm*termName: xterm-256color</div>
 </div>
-<p>Base16_pop and base16_pico are two of my favorite Base16 schemes.</p>
+<p>My favorite Base16 schemes are:</p>
+<ul class="simple">
+<li>base16_pico</li>
+<li>base16_atelier-forest</li>
+<li>base16_cupertino</li>
+<li>base16_pop</li>
+</ul>
 <p>You can see the list of the base16 schemes with this command:</p>
 <div class="highlight-default notranslate">
-<div class="highlight"><pre><span></span><span class="n">alias</span> <span class="o">|</span> <span class="n">grep</span> <span class="s2">"^alias base16_"</span><span class="o">|</span><span class="n">sed</span> <span class="s2">"s/=.\+$//"</span>
+<div class="highlight"><pre><span></span><span class="n">alias</span> <span class="o">|</span> <span class="n">grep</span> <span class="s2">"^alias base16_"</span><span class="o">|</span><span class="n">sed</span> <span class="s2">"s/=.\+$//"</span><span class="o">|</span><span class="n">sed</span> <span class="s2">"s/^.\+ //"</span>
 </pre></div>
 </div>
 <p>As far as base16-vim is concerned, if it’s the only color plugin you want
