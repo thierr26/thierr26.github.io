@@ -68,6 +68,7 @@
 </li>
 <li><a class="reference internal" href="#google-chrome-installation" id="id17">Google Chrome installation</a></li>
 <li><a class="reference internal" href="#signal-instant-messaging-system-installation" id="id18">Signal (instant messaging system) installation</a></li>
+<li><a class="reference internal" href="#wireshark-installation" id="id19">Wireshark installation</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -83,7 +84,7 @@ pages for them. Please see the <a class="reference internal" href="index.html"><
 <h2>
 <a class="toc-backref" href="#id2">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a>
 </h2>
-<p><strong>As root</strong>:</p>
+<p id="index-0"><strong>As root</strong>:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install <span class="se">\</span>
     firefox-esr <span class="se">\</span>
@@ -144,6 +145,7 @@ pages for them. Please see the <a class="reference internal" href="index.html"><
     tree <span class="se">\</span>
     openconnect <span class="se">\</span>
     freerdp2-x11 <span class="se">\</span>
+    wireshark <span class="se">\</span>
     sakura <span class="c1"># As root.</span>
 </pre></div>
 </div>
@@ -379,6 +381,10 @@ append options <code class="docutils literal notranslate"><span class="pre">/rel
 <a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=954203#10">https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=954203#10</a>.)</td>
 </tr>
 <tr class="row-even">
+<td>wireshark</td>
+<td>Network traffic analyzer</td>
+</tr>
+<tr class="row-odd">
 <td>sakura</td>
 <td>Terminal emulator</td>
 </tr>
@@ -389,7 +395,7 @@ append options <code class="docutils literal notranslate"><span class="pre">/rel
 <h2>
 <a class="toc-backref" href="#id3">Flash player plugin installation</a><a class="headerlink" href="#flash-player-plugin-installation" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-0">See instructions here: <a class="reference external" href="https://wiki.debian.org/FlashPlayer">https://wiki.debian.org/FlashPlayer</a></p>
+<p id="index-1">See instructions here: <a class="reference external" href="https://wiki.debian.org/FlashPlayer">https://wiki.debian.org/FlashPlayer</a></p>
 </div>
 <div class="section" id="configuration-preferences">
 <h2>
@@ -399,7 +405,7 @@ append options <code class="docutils literal notranslate"><span class="pre">/rel
 <h3>
 <a class="toc-backref" href="#id5">Firefox ESR</a><a class="headerlink" href="#firefox-esr" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-1">At about:config, set browser.showQuitWarning to true.</p>
+<p id="index-2">At about:config, set browser.showQuitWarning to true.</p>
 <p>At about:preferences#search, set DuckDuckGo as default search engine.</p>
 <p>At about:preferences#privacy, uncheck “Remember logins and passwords for
 websites.</p>
@@ -408,7 +414,7 @@ websites.</p>
 <span id="chromium-config"></span><h3>
 <a class="toc-backref" href="#id6">Chromium</a><a class="headerlink" href="#chromium" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-2">In Settings | Search engines, set DuckDuckGo as the search engine used in the
+<p id="index-3">In Settings | Search engines, set DuckDuckGo as the search engine used in the
 adress bar.</p>
 <p>In Settings | Autofill | Passwords, disable “Offer to save passwords” and “Auto
 sign-in”.</p>
@@ -417,7 +423,7 @@ sign-in”.</p>
 <h3>
 <a class="toc-backref" href="#id7">Irssi</a><a class="headerlink" href="#irssi" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-3">Set personal information (real name, user name, nickname) in
+<p id="index-4">Set personal information (real name, user name, nickname) in
 <code class="docutils literal notranslate"><span class="pre">~/.irssi/config</span></code>.</p>
 <p><a class="reference external" href="https://irssi-import.github.io/themes">Many Irssi themes are available</a>. I
 chose the <a class="reference external" href="https://irssi-import.github.io/themes/rolle.theme">rolle theme</a>.</p>
@@ -428,7 +434,7 @@ issue a <code class="docutils literal notranslate"><span class="pre">/SET</span>
 <h3>
 <a class="toc-backref" href="#id8">Claws Mail</a><a class="headerlink" href="#claws-mail" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-4">Setup MH directory properly, restore files <code class="docutils literal notranslate"><span class="pre">~/.claws-mail/accountrc</span></code> and
+<p id="index-5">Setup MH directory properly, restore files <code class="docutils literal notranslate"><span class="pre">~/.claws-mail/accountrc</span></code> and
 <code class="docutils literal notranslate"><span class="pre">.signature</span></code>, and directory <code class="docutils literal notranslate"><span class="pre">~/.claws-mail/addrbook</span></code>.</p>
 <p>In Preferences, Themes: orbit-claws.</p>
 <p>In Preferences, Other, Miscellaneous: Confirm on exit.</p>
@@ -444,7 +450,7 @@ when possible”. Enter external programs as follows:</p>
 <h3>
 <a class="toc-backref" href="#id9">Pan</a><a class="headerlink" href="#pan" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-5">In Edit News Servers, add a news server. I use news.free.fr, with my Free
+<p id="index-6">In Edit News Servers, add a news server. I use news.free.fr, with my Free
 E-Mail login. This works even when connecting through an ISP other than <a class="reference external" href="https://www.free.fr">Free</a>.</p>
 <p>In Edit Preferences, Applications, Web browser: Custom Command: firefox</p>
 <p>The two settings are saved in <code class="docutils literal notranslate"><span class="pre">~/.pan2/servers.xml</span></code> and
@@ -454,7 +460,7 @@ E-Mail login. This works even when connecting through an ISP other than <a class
 <h3>
 <a class="toc-backref" href="#id10">GIMP</a><a class="headerlink" href="#gimp" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-6">In Preferences, Interface, Theme: System.</p>
+<p id="index-7">In Preferences, Interface, Theme: System.</p>
 <p>In Preferences, Interface, Icon Theme: Color.</p>
 <p>In Keyboard Shortcuts, View: Set Zoom in shortcut to ‘=’.</p>
 </div>
@@ -462,7 +468,7 @@ E-Mail login. This works even when connecting through an ISP other than <a class
 <h3>
 <a class="toc-backref" href="#id11">Music On Console</a><a class="headerlink" href="#music-on-console" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-7">I use Music On Console in shuffle mode. I’ve set the shuffle mode in the
+<p id="index-8">I use Music On Console in shuffle mode. I’ve set the shuffle mode in the
 <a class="reference external" href="https://github.com/thierr26/thierr26_config_files/blob/master/.moc/config">~/.moc/config file</a>.</p>
 <p>Note also in the same file the <code class="docutils literal notranslate"><span class="pre">ShowTime</span></code> setting. It avoids a huge delay
 when quitting <code class="docutils literal notranslate"><span class="pre">mocp</span></code> (due to the program reading the tags in the files).</p>
@@ -471,14 +477,14 @@ when quitting <code class="docutils literal notranslate"><span class="pre">mocp<
 <h3>
 <a class="toc-backref" href="#id12">Taskwarrior</a><a class="headerlink" href="#taskwarrior" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-8">By default, Taskwarrior stores the data in <code class="docutils literal notranslate"><span class="pre">~/.task</span></code>, but it is possible to
+<p id="index-9">By default, Taskwarrior stores the data in <code class="docutils literal notranslate"><span class="pre">~/.task</span></code>, but it is possible to
 set another directory. See <a class="reference external" href="https://github.com/thierr26/thierr26_config_files/blob/master/.taskrc">my ~/.taskrc file</a>.</p>
 </div>
 <div class="section" id="xzgv">
 <h3>
 <a class="toc-backref" href="#id13">xzgv</a><a class="headerlink" href="#xzgv" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-9"><a class="reference external" href="https://github.com/thierr26/thierr26_config_files/blob/master/.xzgvrc">Such a ~/.xzgvrc file</a>
+<p id="index-10"><a class="reference external" href="https://github.com/thierr26/thierr26_config_files/blob/master/.xzgvrc">Such a ~/.xzgvrc file</a>
 ensure that the program starts in “fit to window” mode for high resolution
 images or in 100% mode for images smaller than the window. For high resolution
 images, switching between “fit to window” mode and 100% mode is possible with
@@ -488,7 +494,7 @@ the Z key.</p>
 <h3>
 <a class="toc-backref" href="#id14">Vim</a><a class="headerlink" href="#vim" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-10">Clone favorite Vim plugins in Pathogen’s bundle directory:</p>
+<p id="index-11">Clone favorite Vim plugins in Pathogen’s bundle directory:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>mkdir -p ~/.vim/bundle
 <span class="nb">cd</span> ~/.vim/bundle
@@ -552,13 +558,13 @@ endif
 <h3>
 <a class="toc-backref" href="#id15">Sakura</a><a class="headerlink" href="#sakura" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-11">Set font to Inconsolata Medium 12.</p>
+<p id="index-12">Set font to Inconsolata Medium 12.</p>
 </div>
 <div class="section" id="privilege-escalation-for-use-of-ifp-line-libifp">
 <h3>
 <a class="toc-backref" href="#id16">Privilege escalation for use of ifp-line-libifp</a><a class="headerlink" href="#privilege-escalation-for-use-of-ifp-line-libifp" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-12">Use <code class="docutils literal notranslate"><span class="pre">visudo</span></code> to add a line in <code class="docutils literal notranslate"><span class="pre">/etc/sudoers</span></code>. This line allows any user to
+<p id="index-13">Use <code class="docutils literal notranslate"><span class="pre">visudo</span></code> to add a line in <code class="docutils literal notranslate"><span class="pre">/etc/sudoers</span></code>. This line allows any user to
 execute <code class="docutils literal notranslate"><span class="pre">/usr/bin/ifp</span></code> without password. See <a class="reference external" href="https://github.com/thierr26/thierr26_config_files/blob/master/system_config/etc/sudoers">my /etc/sudoers file</a>.</p>
 <p>Run <code class="docutils literal notranslate"><span class="pre">ifp</span></code> with <code class="docutils literal notranslate"><span class="pre">sudo</span></code>:</p>
 <div class="highlight-shell notranslate">
@@ -576,7 +582,7 @@ execute <code class="docutils literal notranslate"><span class="pre">/usr/bin/if
 <h2>
 <a class="toc-backref" href="#id17">Google Chrome installation</a><a class="headerlink" href="#google-chrome-installation" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-13">I downloaded the 64 bit .deb Debian package from <a class="reference external" href="https://www.google.com/chrome">https://www.google.com/chrome</a>
+<p id="index-14">I downloaded the 64 bit .deb Debian package from <a class="reference external" href="https://www.google.com/chrome">https://www.google.com/chrome</a>
 and installed it <strong>as root</strong> with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>dpkg -i google-chrome-stable_current_amd64.deb <span class="c1"># As root.</span>
@@ -605,13 +611,25 @@ ESR in the Debian alternatives system with <code class="docutils literal notrans
 <h2>
 <a class="toc-backref" href="#id18">Signal (instant messaging system) installation</a><a class="headerlink" href="#signal-instant-messaging-system-installation" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-14">Here are the commands I issued (<strong>as root</strong>) to install Signal (you may want to
+<p id="index-15">Here are the commands I issued (<strong>as root</strong>) to install Signal (you may want to
 check the <a class="reference external" href="https://signal.org/download">Signal official site</a>):</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>wget https://updates.signal.org/desktop/apt/keys.asc -O - <span class="p">|</span> apt-key add
 <span class="nb">echo</span> <span class="s2">"deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main"</span> &gt; /etc/apt/sources.list.d/signal-xenial.list
 apt-get install signal-desktop
 chmod <span class="m">4755</span> /opt/Signal/chrome-sandbox
+</pre></div>
+</div>
+</div>
+<div class="section" id="wireshark-installation">
+<h2>
+<a class="toc-backref" href="#id19">Wireshark installation</a><a class="headerlink" href="#wireshark-installation" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-16">When installing Wireshark on Debian, I choose to allow “normal” users that are
+members of the <code class="docutils literal notranslate"><span class="pre">wireshark</span></code> group to capture packets.</p>
+<p>You can add a user to group <code class="docutils literal notranslate"><span class="pre">wireshark</span></code> with a command like (<strong>as root</strong>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>usermod -aG wireshark user_name <span class="c1"># As root.</span>
 </pre></div>
 </div>
 </div>
@@ -648,6 +666,7 @@ chmod <span class="m">4755</span> /opt/Signal/chrome-sandbox
 </li>
 <li><a class="reference internal" href="#google-chrome-installation">Google Chrome installation</a></li>
 <li><a class="reference internal" href="#signal-instant-messaging-system-installation">Signal (instant messaging system) installation</a></li>
+<li><a class="reference internal" href="#wireshark-installation">Wireshark installation</a></li>
 </ul>
 </li>
 </ul>
