@@ -840,7 +840,12 @@ current directory using:</p>
 like:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git ls-files <span class="s2">"*abc*"</span>
-git ls-files -s <span class="s2">"*abc*"</span> <span class="c1"># Search in staged files.</span>
+
+git ls-files  <span class="se">\</span>
+    <span class="k">$(</span>git rev-parse --show-toplevel<span class="k">)</span>/<span class="s2">"*abc*"</span> <span class="c1"># Search from repository top</span>
+                                             <span class="c1"># directory.</span>
+
+git ls-files -s <span class="s2">"*abc*"</span>                      <span class="c1"># Search in staged files.</span>
 </pre></div>
 </div>
 </div>
