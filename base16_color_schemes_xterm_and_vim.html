@@ -66,6 +66,18 @@ very easily (by issuing a single command in the terminal like
 <div class="highlight"><pre><span></span><span class="n">alias</span> <span class="o">|</span> <span class="n">grep</span> <span class="s2">"^alias base16_"</span><span class="o">|</span><span class="n">sed</span> <span class="s2">"s/=.\+$//"</span><span class="o">|</span><span class="n">sed</span> <span class="s2">"s/^.\+ //"</span>
 </pre></div>
 </div>
+<p>The following command is useful to choose a scheme. It traverses the list of
+schemes and switches every 3 seconds:</p>
+<div class="highlight-default notranslate">
+<div class="highlight"><pre><span></span>for SCHEME in $(alias \
+        | grep ^alias\ base16_|sed 's/=.\+$//'|sed "s/^.\+ //"|sed s/_/-/); \
+        do \
+    _base16 ~/.config/base16-shell/scripts/$SCHEME.sh ${SCHEME#base16-}; \
+    echo $SCHEME|sed s/-/_/; \
+    sleep 3; \
+ done;
+</pre></div>
+</div>
 <p>As far as base16-vim is concerned, if it’s the only color plugin you want
 installed and you don’t use any plugin manager like <a class="reference external" href="https://github.com/tpope/vim-pathogen">Pathogen</a> or <a class="reference external" href="https://github.com/VundleVim/Vundle.vim">Vundle</a>, you may install it with the
 following commands:</p>
