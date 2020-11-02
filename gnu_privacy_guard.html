@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    <title>The GNU Privacy Guard (GPG) — Personal Notes</title>
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="Sed" href="sed.html">
+    <link rel="prev" title="Git" href="git.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="sed.html" title="Sed" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="git.html" title="Git" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="the-gnu-privacy-guard-gpg">
+<h1>The GNU Privacy Guard (GPG)<a class="headerlink" href="#the-gnu-privacy-guard-gpg" title="Permalink to this headline">¶</a>
+</h1>
+<div class="contents local topic" id="page-content">
+<p class="topic-title first">Page content</p>
+<ul class="simple">
+<li><a class="reference internal" href="#introduction" id="id1">Introduction</a></li>
+<li><a class="reference internal" href="#selecting-the-pinentry-version" id="id2">Selecting the pinentry version</a></li>
+<li><a class="reference internal" href="#configuring-the-passphrase-caching-time" id="id3">Configuring the passphrase caching time</a></li>
+<li><a class="reference internal" href="#other-resources" id="id4">Other resources</a></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<h2>
+<a class="toc-backref" href="#id1">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+</h2>
+<p>You can find on this page a few notes about the configuration of <a class="reference external" href="https://gnupg.org/">the GNU
+Privacy Guard</a> (the <code class="docutils literal notranslate"><span class="pre">gpg</span></code> command). My main use of this
+software is for encryption of a part of my data on my <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> box. I also happen to use it to verify the
+authenticity of a downloaded Debian installer image, as described in my Debian
+base installation notes (“<a class="reference internal" href="debian_base_install.html#getting-debian-iso-image"><span class="std std-ref">Getting an installation CD</span></a>”).</p>
+<p>There is nothing here about the use the GNU Privacy Guard. You may want to read
+the <a class="reference internal" href="#tutonics-gpg-encryption-guide-links"><span class="std std-ref">good Tutonics guide</span></a>.</p>
+</div>
+<div class="section" id="selecting-the-pinentry-version">
+<h2>
+<a class="toc-backref" href="#id2">Selecting the pinentry version</a><a class="headerlink" href="#selecting-the-pinentry-version" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-0"><a class="reference external" href="https://www.gnupg.org/software/pinentry/index.html">Pinentry</a> is the dialog
+program invoked by GPG to read a passphrase. It exists in multiple versions. On
+my system, two versions are installed: <code class="docutils literal notranslate"><span class="pre">pinentry-curses</span></code> and
+<code class="docutils literal notranslate"><span class="pre">pinentry-gnome3</span></code>. On a Debian system, you can select the pinentry version
+using the <a class="reference external" href="https://wiki.debian.org/DebianAlternatives">Debian alternatives system</a> (<strong>as root</strong>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>update-alternatives --config pinentry <span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>List the pinentry versions available on a Debian system with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-cache search pinentry<span class="p">|</span>grep ^pinentry
+</pre></div>
+</div>
+</div>
+<div class="section" id="configuring-the-passphrase-caching-time">
+<h2>
+<a class="toc-backref" href="#id3">Configuring the passphrase caching time</a><a class="headerlink" href="#configuring-the-passphrase-caching-time" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-1">Depending on the configuration, GPG does not ask again for a passphrase if you
+have already given it a short (configurable) time ago. This is very practical
+in my use case and I even have increased the time by specifying the
+<code class="docutils literal notranslate"><span class="pre">default-cache-ttl</span></code> and <code class="docutils literal notranslate"><span class="pre">max-cache-ttl</span></code> parameters in the
+<code class="docutils literal notranslate"><span class="pre">~/.gnupg/gpg-agent.conf</span></code> file:</p>
+<div class="line-block">
+<div class="line">default-cache-ttl 14400</div>
+<div class="line">max-cache-ttl 28800</div>
+</div>
+<p>Note that you have to stop <code class="docutils literal notranslate"><span class="pre">gpg-agent</span></code> after editing
+<code class="docutils literal notranslate"><span class="pre">~/.gnupg/gpg-agent.conf</span></code>, otherwise your changes are not taken into
+account:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>gpgconf --kill gpg-agent
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">gpg-agent</span></code> is restarted automatically by GPG when needed.</p>
+</div>
+<div class="section" id="other-resources">
+<span id="tutonics-gpg-encryption-guide-links"></span><h2>
+<a class="toc-backref" href="#id4">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+</h2>
+<ul class="simple">
+<li><a class="reference external" href="https://tutonics.com/2012/11/gpg-encryption-guide-part-1.html">Tutonics GPG Encryption Guide - Part 1</a></li>
+<li><a class="reference external" href="https://tutonics.com/2012/11/gpg-encryption-guide-part-2-asymmetric.html">Tutonics GPG Encryption Guide - Part 2</a></li>
+<li><a class="reference external" href="https://tutonics.com/2012/11/gpg-encryption-guide-part-3-digital.html">Tutonics GPG Encryption Guide - Part 3</a></li>
+<li><a class="reference external" href="https://tutonics.com/2012/11/gpg-encryption-guide-part-4-symmetric.html">Tutonics GPG Encryption Guide - Part 4</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li>
+<a class="reference internal" href="#">The GNU Privacy Guard (GPG)</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#selecting-the-pinentry-version">Selecting the pinentry version</a></li>
+<li><a class="reference internal" href="#configuring-the-passphrase-caching-time">Configuring the passphrase caching time</a></li>
+<li><a class="reference internal" href="#other-resources">Other resources</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="git.html" title="previous chapter">Git</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sed.html" title="next chapter">Sed</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q">
+      <input type="submit" value="Go">
+      <input type="hidden" name="check_keywords" value="yes">
+      <input type="hidden" name="area" value="default">
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="sed.html" title="Sed">next</a> |</li>
+        <li class="right">
+          <a href="git.html" title="Git">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>

@@ -166,8 +166,7 @@ wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/buster/curre
 </pre></div>
 </div>
 <p>I’ve checked the SHA512 checksum of <code class="docutils literal notranslate"><span class="pre">firmware.tar.gz</span></code> by issuing a
-<code class="docutils literal notranslate"><span class="pre">sha512sum</span> <span class="pre">firmware.tar.gz</span></code> command and comparing the output with what is in
-SHA512SUMS.</p>
+<code class="docutils literal notranslate"><span class="pre">sha512sum</span> <span class="pre">-c</span> <span class="pre">SHA512SUMS</span></code>.</p>
 <p>The final steps consisted in extracting the files from the firmware archive
 (<code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">xvzf</span> <span class="pre">firmware.tar.gz</span></code>) and copy all the files with <code class="docutils literal notranslate"><span class="pre">.deb</span></code> extension
 to a “firmware” directory located at the root of a USB stick.</p>
@@ -496,7 +495,7 @@ has been changed, with:</p>
 </h2>
 <p id="index-19">I regularly run the following commands to keep the system up to date:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get update <span class="p">&amp;</span> apt-get dist-upgrade
+<div class="highlight"><pre><span></span>apt-get update <span class="o">&amp;&amp;</span> apt-get dist-upgrade
 apt-get autoremove <span class="c1"># Useful if some packages have become unneeded.</span>
 apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows out of control.</span>
 </pre></div>
