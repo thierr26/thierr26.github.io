@@ -315,8 +315,8 @@ local files and run the <code class="docutils literal notranslate"><span class="
 </h2>
 <p id="index-9">I’ve been once in a situation where I had a local repository tracking a <a class="reference external" href="http://www.saintsjd.com/2011/01/what-is-a-bare-git-repository/">bare
 remote repository</a> on the same
-Linux machine. The remote was initialized (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span> <span class="pre">--bare</span> <span class="pre">...</span></code>) by me (as a
-“normal” user). When other users on the machine have tried to push to the
+Linux machine. The remote had been initialized (<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">init</span> <span class="pre">--bare</span> <span class="pre">...</span></code>) by me
+(as a “normal” user). When other users on the machine have tried to push to the
 remote, they couldn’t because they didn’t have the permission and because the
 repository had not been configured to be shareable. We decided to create a
 group (called “develop” in the commands below) and to make sure the members of
