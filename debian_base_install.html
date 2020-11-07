@@ -251,7 +251,7 @@ Debian system.</p>
 <h3>
 <a class="toc-backref" href="#id8">Fixing the slow boot issue</a><a class="headerlink" href="#fixing-the-slow-boot-issue" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-6">One of my machines is affected by the
+<p id="index-6">A former machine of mine was affected by the
 <a class="reference external" href="https://en.wikipedia.org/wiki/Toshiba_Samsung_Storage_Technology">TSSTcorp</a>
 CDDVDW <a class="reference external" href="https://www.newegg.com/samsung-model-sh-s223c-dvd-burner/p/N82E16827151192">SH-S223C</a>
 related slow boot issue. You can check if you have this particular CD/DVD-RW
@@ -279,12 +279,11 @@ with this command:</p>
 <div class="highlight"><pre><span></span>sed -i <span class="s1">'/ATAPI/,+1s/^/#/'</span> /lib/udev/rules.d/60-persistent-storage.rules <span class="c1"># As root.</span>
 </pre></div>
 </div>
-<p>I’ve been doing that for years without any issue.</p>
 </li>
 <li>
 <p class="first">Cancelling the rule for the SH-S223C only, as suggested in <a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=622340#43">Debian bug
-#622340</a>.
-That’s what I’m doing now.</p>
+#622340</a>. This
+is what I was doing.</p>
 </li>
 </ul>
 <p>Note that the change to <code class="docutils literal notranslate"><span class="pre">/lib/udev/rules.d/60-persistent-storage.rules</span></code> and
