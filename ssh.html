@@ -53,11 +53,12 @@
 <a class="reference internal" href="#usage" id="id4">Usage</a><ul>
 <li><a class="reference internal" href="#logging-into-the-remote-machine-and-executing-commands" id="id5">Logging into the remote machine and executing commands</a></li>
 <li><a class="reference internal" href="#copying-files-to-and-from-the-remote-machine" id="id6">Copying files to and from the remote machine</a></li>
+<li><a class="reference internal" href="#synchronizing-directories-over-ssh-with-rsync" id="id7">Synchronizing directories over SSH with rsync</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#server-configuration" id="id7">Server configuration</a></li>
-<li><a class="reference internal" href="#using-public-key-authentication" id="id8">Using public key authentication</a></li>
-<li><a class="reference internal" href="#other-resources" id="id9">Other resources</a></li>
+<li><a class="reference internal" href="#server-configuration" id="id8">Server configuration</a></li>
+<li><a class="reference internal" href="#using-public-key-authentication" id="id9">Using public key authentication</a></li>
+<li><a class="reference internal" href="#other-resources" id="id10">Other resources</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -110,12 +111,30 @@ scp username@192.168.122.250:/path/on/remote/my_file path/on/local
 initialization produces output for non-interactive sessions. See the <a class="reference external" href="http://lira.no-ip.org:8080/doc/openssh-client/faq.html#2.9">OpenSSH
 FAQ (2.9)</a>.</p>
 </div>
+<div class="section" id="synchronizing-directories-over-ssh-with-rsync">
+<h3>
+<a class="toc-backref" href="#id7">Synchronizing directories over SSH with rsync</a><a class="headerlink" href="#synchronizing-directories-over-ssh-with-rsync" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-2">I use a command like the following to synchronize my <code class="docutils literal notranslate"><span class="pre">~/data</span></code> directory on a
+remote machine with my <code class="docutils literal notranslate"><span class="pre">~/data</span></code> directory on the local machine:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>rsync -aAXv --delete ~/data/ <span class="m">192</span>.168.122.250:data
+</pre></div>
+</div>
+<p>For a dry run, use option <code class="docutils literal notranslate"><span class="pre">-n</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>rsync -n -aAXv --delete ~/data/ <span class="m">192</span>.168.122.250:data
+</pre></div>
+</div>
+<p>Check the <a class="reference external" href="https://download.samba.org/pub/rsync/rsync.1">rsync documentation</a>. Rsync has a lot of options.
+You may, for example, prefer to use <code class="docutils literal notranslate"><span class="pre">--update</span></code> rather than <code class="docutils literal notranslate"><span class="pre">--delete</span></code>.</p>
+</div>
 </div>
 <div class="section" id="server-configuration">
 <span id="sshd-configuration"></span><h2>
-<a class="toc-backref" href="#id7">Server configuration</a><a class="headerlink" href="#server-configuration" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id8">Server configuration</a><a class="headerlink" href="#server-configuration" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-2">You may not need to tweak anything in the server configuration.</p>
+<p id="index-3">You may not need to tweak anything in the server configuration.</p>
 <p>If you want to allow root password login, make sure you have the following
 lines in <cite>/etc/ssh/sshd_config</cite>.</p>
 <div class="line-block">
@@ -145,9 +164,9 @@ launching the client:</p>
 </div>
 <div class="section" id="using-public-key-authentication">
 <h2>
-<a class="toc-backref" href="#id8">Using public key authentication</a><a class="headerlink" href="#using-public-key-authentication" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id9">Using public key authentication</a><a class="headerlink" href="#using-public-key-authentication" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-3">Instead of password authentication, you may use public key authentication. For
+<p id="index-4">Instead of password authentication, you may use public key authentication. For
 that you have to first generate your public/private key pair <strong>on your local
 machine</strong> with for example:</p>
 <div class="highlight-shell notranslate">
@@ -166,9 +185,9 @@ use it.</p>
 </div>
 <div class="section" id="other-resources">
 <h2>
-<a class="toc-backref" href="#id9">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id10">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
 </h2>
-<ul class="simple" id="index-4">
+<ul class="simple" id="index-5">
 <li><a class="reference external" href="https://www.techrepublic.com/article/the-4-most-important-files-for-ssh-connections/">The 4 most important files for SSH connections (on techrepublic.com)</a></li>
 </ul>
 </div>
@@ -190,6 +209,7 @@ use it.</p>
 <a class="reference internal" href="#usage">Usage</a><ul>
 <li><a class="reference internal" href="#logging-into-the-remote-machine-and-executing-commands">Logging into the remote machine and executing commands</a></li>
 <li><a class="reference internal" href="#copying-files-to-and-from-the-remote-machine">Copying files to and from the remote machine</a></li>
+<li><a class="reference internal" href="#synchronizing-directories-over-ssh-with-rsync">Synchronizing directories over SSH with rsync</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#server-configuration">Server configuration</a></li>
