@@ -50,7 +50,8 @@
 <li><a class="reference internal" href="#introduction" id="id1">Introduction</a></li>
 <li><a class="reference internal" href="#selecting-the-pinentry-version" id="id2">Selecting the pinentry version</a></li>
 <li><a class="reference internal" href="#configuring-the-passphrase-caching-time" id="id3">Configuring the passphrase caching time</a></li>
-<li><a class="reference internal" href="#other-resources" id="id4">Other resources</a></li>
+<li><a class="reference internal" href="#deleting-a-key-without-confirmation-prompt" id="id4">Deleting a key without confirmation prompt</a></li>
+<li><a class="reference internal" href="#other-resources" id="id5">Other resources</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -106,9 +107,27 @@ account:</p>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">gpg-agent</span></code> is restarted automatically by GPG when needed.</p>
 </div>
+<div class="section" id="deleting-a-key-without-confirmation-prompt">
+<h2>
+<a class="toc-backref" href="#id4">Deleting a key without confirmation prompt</a><a class="headerlink" href="#deleting-a-key-without-confirmation-prompt" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-2">I have once mistakenly imported a whole keyring. The <code class="docutils literal notranslate"><span class="pre">--delete-key</span></code> option of
+GPG makes it possible to delete a key:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>gpg --delete-key &lt;key_id&gt;
+</pre></div>
+</div>
+<p>But this prompts you for confirmation. If you want to run a big number of such
+commands (in a script), you may not want to be prompted for confirmation. Use
+the <code class="docutils literal notranslate"><span class="pre">--batch</span> <span class="pre">--yes</span></code> options for that:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>gpg --batch --yes --delete-key &lt;key_id&gt;
+</pre></div>
+</div>
+</div>
 <div class="section" id="other-resources">
 <span id="tutonics-gpg-encryption-guide-links"></span><h2>
-<a class="toc-backref" href="#id4">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id5">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
 </h2>
 <ul class="simple">
 <li><a class="reference external" href="https://tutonics.com/2012/11/gpg-encryption-guide-part-1.html">Tutonics GPG Encryption Guide - Part 1</a></li>
@@ -132,6 +151,7 @@ account:</p>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#selecting-the-pinentry-version">Selecting the pinentry version</a></li>
 <li><a class="reference internal" href="#configuring-the-passphrase-caching-time">Configuring the passphrase caching time</a></li>
+<li><a class="reference internal" href="#deleting-a-key-without-confirmation-prompt">Deleting a key without confirmation prompt</a></li>
 <li><a class="reference internal" href="#other-resources">Other resources</a></li>
 </ul>
 </li>
