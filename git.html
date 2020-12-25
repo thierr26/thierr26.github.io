@@ -160,6 +160,12 @@ retype them:</p>
 <p>The credentials are stored in <code class="docutils literal notranslate"><span class="pre">~/.git-credentials</span></code>. <strong>They are not
 encrypted</strong>, so check that only you have read permission on that file (if this
 is not the case, issue a <code class="docutils literal notranslate"><span class="pre">chmod</span> <span class="pre">600</span> <span class="pre">~/.git-credentials</span></code> command).</p>
+<p>Alternatively, you can use the “cache” credential helper. The following command
+causes Git to cache the credentials for 20 minutes (1200 seconds):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git config --global credential.helper <span class="s1">'cache --timeout 1200'</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="creating-aliases">
 <span id="git-aliases"></span><h3>
