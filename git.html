@@ -809,6 +809,11 @@ option:</p>
 git stash show -p stash@<span class="o">{</span><span class="m">0</span><span class="o">}</span> <span class="c1"># Produces a patch-like output.</span>
 </pre></div>
 </div>
+<p>Extract changes for a specific files from the stash with a command like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git checkout stash@<span class="o">{</span><span class="m">0</span><span class="o">}</span> -- path/to/file
+</pre></div>
+</div>
 <p>Remove an entry from the stash stack and apply the changes to the working tree
 with a command like:</p>
 <div class="highlight-shell notranslate">
