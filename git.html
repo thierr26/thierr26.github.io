@@ -731,6 +731,16 @@ git merge branch_name         <span class="c1"># Does not create a merge commit 
                               <span class="c1"># resolves as fast-forward.</span>
 </pre></div>
 </div>
+<p>If you want to determine whether the merge of the branch “branch_name” into the
+current branch will resolve as fast-forward or not, you can issue a command
+like the following one and check the exit status (0 means that the merge will
+resolve as fast-forward):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git merge-base --is-ancestor <span class="se">\</span>
+    &lt;current_commit_hash&gt; &lt;commit_hash_of_last_branch_name_commit&gt;
+<span class="nb">echo</span> <span class="nv">$?</span>
+</pre></div>
+</div>
 <p>It is possible to merge all changes on the branch named “branch_name” into the
 current branch without keeping the commit history:</p>
 <div class="highlight-shell notranslate">
