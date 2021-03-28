@@ -69,6 +69,7 @@
 <li><a class="reference internal" href="#google-chrome-installation" id="id18">Google Chrome installation</a></li>
 <li><a class="reference internal" href="#signal-desktop-installation-and-linking-to-a-dumb-phone" id="id19">signal-desktop installation and linking to a “dumb phone”</a></li>
 <li><a class="reference internal" href="#wireshark-installation" id="id20">Wireshark installation</a></li>
+<li><a class="reference internal" href="#session-for-desktop-installation" id="id21">Session for desktop installation</a></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -708,13 +709,33 @@ your phone:</p>
 <h2>
 <a class="toc-backref" href="#id20">Wireshark installation</a><a class="headerlink" href="#wireshark-installation" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-16">When installing Wireshark on Debian, I choose to allow “normal” users that are
-members of the <code class="docutils literal notranslate"><span class="pre">wireshark</span></code> group to capture packets.</p>
+<p id="index-16">When installing Wireshark (Debian package wireshark), I choose to allow
+“normal” users that are members of the <code class="docutils literal notranslate"><span class="pre">wireshark</span></code> group to capture packets.</p>
 <p>You can add a user to group <code class="docutils literal notranslate"><span class="pre">wireshark</span></code> with a command like (<strong>as root</strong>):</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>usermod -aG wireshark user_name <span class="c1"># As root.</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="session-for-desktop-installation">
+<h2>
+<a class="toc-backref" href="#id21">Session for desktop installation</a><a class="headerlink" href="#session-for-desktop-installation" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-17">Here is how I currently install and use Session for desktop. I download the
+Appimage file for Linux from <a class="reference external" href="https://www.getsession.org/linux">https://www.getsession.org/linux</a> and place it
+in my home directory. Then I give the file executable permission with a command
+like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>chmod +x session-desktop-linux-x86_64-1.5.2.AppImage
+</pre></div>
+</div>
+<p>I launch Session for desktop with a command like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>session-desktop-linux-x86_64-1.5.2.AppImage --no-sandbox <span class="p">&amp;</span>
+</pre></div>
+</div>
+<p>(See <a class="reference external" href="https://github.com/oxen-io/session-desktop/issues/1418">https://github.com/oxen-io/session-desktop/issues/1418</a> for a discussion
+about the use of the <code class="docutils literal notranslate"><span class="pre">--no-sandbox</span></code> flag).</p>
 </div>
 </div>
 
@@ -750,6 +771,7 @@ members of the <code class="docutils literal notranslate"><span class="pre">wire
 <li><a class="reference internal" href="#google-chrome-installation">Google Chrome installation</a></li>
 <li><a class="reference internal" href="#signal-desktop-installation-and-linking-to-a-dumb-phone">signal-desktop installation and linking to a “dumb phone”</a></li>
 <li><a class="reference internal" href="#wireshark-installation">Wireshark installation</a></li>
+<li><a class="reference internal" href="#session-for-desktop-installation">Session for desktop installation</a></li>
 </ul>
 </li>
 </ul>
