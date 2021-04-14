@@ -277,18 +277,18 @@ rm <span class="s2">"</span><span class="nv">$INTERMEDIATE_FILES_DIR</span><span
 system) queries the <a class="reference external" href="https://en.wikipedia.org/wiki/CDDB">CDDB</a> database. Just
 insert the Audio CD in your optical drive and run:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>cdown
+<div class="highlight"><pre><span></span>cdown -H gnudb.gnudb.org -P <span class="m">8880</span>
 </pre></div>
 </div>
 <p>If you need to specify the device for the optical drive, use the <code class="docutils literal notranslate"><span class="pre">-d</span></code>
 switch:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>cdown -d /dev/sr1
+<div class="highlight"><pre><span></span>cdown -H gnudb.gnudb.org -P <span class="m">8880</span> -d /dev/sr1
 </pre></div>
 </div>
 <p>If you have issues with accented letters, try:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>cdown<span class="p">|</span>iconv -f latin1
+<div class="highlight"><pre><span></span>cdown -H gnudb.gnudb.org -P <span class="m">8880</span><span class="p">|</span>iconv -f latin1
 </pre></div>
 </div>
 <p>Alternatively, you can search your audio CD directly on the <a class="reference external" href="http://www.freedb.org">freedb.org</a> website.</p>
