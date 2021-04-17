@@ -710,16 +710,33 @@ for each branch head.</p>
 
 git checkout -b branch_name       <span class="c1"># Creates the branch named "branch_name".</span>
 
-git checkout --orphan branch_name <span class="c1"># Creates an orphan branch (Note that the</span>
+git checkout --orphan branch_name <span class="c1"># Creates an orphan branch (note that the</span>
                                   <span class="c1"># files of the branch the orphan branch is</span>
                                   <span class="c1"># started from are automatically staged).</span>
 </pre></div>
 </div>
 <p>This of course raises the question of which naming scheme to use for the
 branches. <a class="reference external" href="https://stackoverflow.com/questions/273695/what-are-some-examples-of-commonly-used-practices-for-naming-git-branches/6065944#6065944">This Stack Overflow answer by Phil Hord helps.</a></p>
-<p>Rebase current branch on the latest commit of branch “master” with:</p>
+<p>Working with branches, you inevitably have to do some merging (using the <code class="docutils literal notranslate"><span class="pre">git</span>
+<span class="pre">merge</span></code> command) or rebasing (using the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> command). Rebasing is
+not always easy. I found <a class="reference external" href="https://www.viget.com/articles/how-to-fix-your-git-branches-after-a-rebase">this article by Chris Jones</a>
+very enlightening, with a clear explanation of the <code class="docutils literal notranslate"><span class="pre">--onto</span></code> option of <code class="docutils literal notranslate"><span class="pre">git</span>
+<span class="pre">rebase</span></code>.</p>
+<p>I usually use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> in commands like the following ones. See
+<a class="reference external" href="https://blog.filippo.io/git-fixup-amending-an-older-commit">Filippo Vasorda’s post</a> for explanations
+about the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--fixup</span></code> / <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> combination):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>git rebase master
+<div class="highlight"><pre><span></span>git rebase branch_name                 <span class="c1"># Rebases the current branch on the</span>
+                                       <span class="c1"># latest commit of branch</span>
+                                       <span class="c1"># "branch_name".</span>
+
+git rebase --onto branch_name old_base <span class="c1"># "Moves" the commits of the current</span>
+                                       <span class="c1"># branch (starting with the commit</span>
+                                       <span class="c1"># following "old_base") to the "top"</span>
+                                       <span class="c1"># of "branch_name".</span>
+
+git commit --fixup<span class="o">=</span>target_commit <span class="se">\</span>
+    <span class="o">&amp;&amp;</span> git rebase -i -autosquash commit_before_target_commit
 </pre></div>
 </div>
 <p>Merge the branch named “branch_name” into the current branch with one of the
@@ -1195,8 +1212,8 @@ git submodule update --remote
 <li><a class="reference external" href="https://www.git-tower.com/blog/git-cheat-sheet">Git cheat sheet</a></li>
 <li><a class="reference external" href="https://chris.beams.io/posts/git-commit">How to write a Git commit message</a></li>
 <li><a class="reference external" href="https://nvie.com/posts/a-successful-git-branching-model">A Git branching model</a></li>
-<li><a class="reference external" href="https://dev.to/maxwell_dev/the-git-rebase-introduction-i-wish-id-had">The Git Rebase Introduction I Wish I’d Had</a></li>
-<li><a class="reference external" href="https://delicious-insights.com/en/posts/getting-solid-at-git-rebase-vs-merge">git merge and git rebase: When to use?</a></li>
+<li><a class="reference external" href="https://www.viget.com/articles/how-to-fix-your-git-branches-after-a-rebase">How to fix your Git branches after a rebase</a></li>
+<li><a class="reference external" href="https://blog.filippo.io/git-fixup-amending-an-older-commit">git fixup: –amend for older commits</a></li>
 <li><a class="reference external" href="https://jamescooke.info/git-to-squash-or-not-to-squash.html">Git: To squash or not to squash?</a></li>
 <li><a class="reference external" href="https://blog.github.com/2016-02-01-working-with-submodules">Git Submodules</a></li>
 </ul>
