@@ -668,10 +668,14 @@ git fetch        <span class="c1"># "origin" is the default remote.</span>
 <div class="highlight"><pre><span></span>git fetch --all
 </pre></div>
 </div>
-<p>The following command downloads changes from “origin” for branch “master” and
-merges the changes into the local repository:</p>
+<p>The following commands fetch changes from the given repository for branch
+“master” and merges the changes into the local repository:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>git pull origin master
+<div class="highlight"><pre><span></span>git pull origin master                   <span class="c1"># Download from remote named</span>
+                                         <span class="c1"># "origin".</span>
+
+git pull &lt;repository_url_or_path&gt; master <span class="c1"># Specify the repository using an</span>
+                                         <span class="c1"># URL or a directory path.</span>
 </pre></div>
 </div>
 <p>You can list the URLs for remote “origin” with:</p>
