@@ -137,7 +137,7 @@ produces a line like</p>
 </div>
 <p>When the burning is done, you might also want to check the integrity of the
 burned CD. Just compare the output of the following command with the checksum
-from the downloaded checksum file:</p>
+from the downloaded checksum file as provided in file SHA512SUMS:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>dd <span class="k">if</span><span class="o">=</span>/dev/&lt;cd_burning_drive_device_file&gt; <span class="nv">bs</span><span class="o">=</span><span class="m">2048</span> <span class="se">\</span>
   <span class="nv">count</span><span class="o">=</span><span class="k">$(($(</span>stat -c %s debian-10.0.0-amd64-netinst.iso<span class="k">)</span><span class="o">/</span><span class="m">2048</span><span class="k">))</span> <span class="se">\</span>
@@ -163,10 +163,13 @@ install, and including the authenticity verification of the archive):</p>
 <span class="c1"># file.</span>
 wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/buster/current/firmware.tar.gz
 wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/buster/current/SHA512SUMS
+wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/buster/current/SHA512SUMS.sign
 </pre></div>
 </div>
 <p>I’ve checked the SHA512 checksum of <code class="docutils literal notranslate"><span class="pre">firmware.tar.gz</span></code> by issuing a
-<code class="docutils literal notranslate"><span class="pre">sha512sum</span> <span class="pre">-c</span> <span class="pre">SHA512SUMS</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">sha512sum</span> <span class="pre">-c</span> <span class="pre">--ignore-missing</span> <span class="pre">SHA512SUMS</span></code>.</p>
+<p>I’ve checked the signature by issuing a <code class="docutils literal notranslate"><span class="pre">gpg</span> <span class="pre">--verify</span> <span class="pre">SHA512SUMS.sign</span></code>
+command.</p>
 <p>The final steps consisted in extracting the files from the firmware archive
 (<code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">xvzf</span> <span class="pre">firmware.tar.gz</span></code>) and copy all the files with <code class="docutils literal notranslate"><span class="pre">.deb</span></code> extension
 to a “firmware” directory located at the root of a USB stick.</p>

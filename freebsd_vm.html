@@ -83,7 +83,7 @@ wget https://download.freebsd.org/ftp/releases/amd64/amd64/ISO-IMAGES/12.1/CHECK
 </div>
 <p>Then I do the verification with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>sha512sum -c CHECKSUM.SHA512-FreeBSD-12.1-RELEASE-amd64 FreeBSD-12.1-RELEASE-amd64-bootonly.iso
+<div class="highlight"><pre><span></span>sha512sum -c --ignore-missing CHECKSUM.SHA512-FreeBSD-12.1-RELEASE-amd64
 </pre></div>
 </div>
 </div>
