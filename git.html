@@ -501,9 +501,28 @@ options can help.</p>
 <li>
 <a class="reference external" href="https://git-scm.com/docs/git-diff#Documentation/git-diff.txt--Gltregexgt">Documentation for git diff -G option</a>.</li>
 </ul>
+<p>If you don’t want to see the lines changed by the addition or the removal of
+whites spaces only, use option <code class="docutils literal notranslate"><span class="pre">-w</span></code> (equivalent to <code class="docutils literal notranslate"><span class="pre">--ignore-all-space</span></code>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git diff -w
+</pre></div>
+</div>
 <p>If you want to see only the names of the changed files, do:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git diff --name-only 42b9c3b a92c02a <span class="c1"># Shows names of changed files only.</span>
+</pre></div>
+</div>
+<p>The output of a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code> command is a patch that can be used as input to
+the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">apply</span></code> command:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git diff &gt; my_patch
+git apply my_patch
+</pre></div>
+</div>
+<p>A patch may be applicable or not. Use the <code class="docutils literal notranslate"><span class="pre">--check</span></code> option of <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">apply</span></code>
+to see if the patch is applicable or not:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git apply --check my_patch
 </pre></div>
 </div>
 </div>
@@ -540,6 +559,7 @@ replaces the previous commit. Use the <code class="docutils literal notranslate"
 commit:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git commit --amend
+git commit --amend --no-edit <span class="c1"># Reuse existing commit message.</span>
 </pre></div>
 </div>
 <p>By default, you can’t do a commit that does not change anything in the tree (an
@@ -1217,6 +1237,7 @@ git submodule update --remote
 <li><a class="reference external" href="https://chris.beams.io/posts/git-commit">How to write a Git commit message</a></li>
 <li><a class="reference external" href="https://nvie.com/posts/a-successful-git-branching-model">A Git branching model</a></li>
 <li><a class="reference external" href="https://www.viget.com/articles/how-to-fix-your-git-branches-after-a-rebase">How to fix your Git branches after a rebase</a></li>
+<li><a class="reference external" href="https://delicious-insights.com/en/posts/getting-solid-at-git-rebase-vs-merge">Getting solid at Git rebase vs. merge</a></li>
 <li><a class="reference external" href="https://blog.filippo.io/git-fixup-amending-an-older-commit">git fixup: –amend for older commits</a></li>
 <li><a class="reference external" href="https://jamescooke.info/git-to-squash-or-not-to-squash.html">Git: To squash or not to squash?</a></li>
 <li><a class="reference external" href="https://blog.github.com/2016-02-01-working-with-submodules">Git Submodules</a></li>
