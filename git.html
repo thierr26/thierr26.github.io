@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
+    
     <title>Git — Personal Notes</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
     <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -32,7 +32,8 @@
         <li class="right">
           <a href="external_usb_drives.html" title="External (USB) drives" accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0">
-<a href="index.html">Personal Notes</a> »</li> 
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Git</a></li> 
       </ul>
     </div>  
 
@@ -45,47 +46,49 @@
 <h1>Git<a class="headerlink" href="#git" title="Permalink to this headline">¶</a>
 </h1>
 <div class="contents local topic" id="page-content">
-<p class="topic-title first">Page content</p>
+<p class="topic-title">Page content</p>
 <ul class="simple">
-<li><a class="reference internal" href="#introduction" id="id5">Introduction</a></li>
-<li><a class="reference internal" href="#installation" id="id6">Installation</a></li>
+<li><p><a class="reference internal" href="#introduction" id="id5">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#installation" id="id6">Installation</a></p></li>
 <li>
-<a class="reference internal" href="#configuration" id="id7">Configuration</a><ul>
-<li><a class="reference internal" href="#minimal-post-install-configuration" id="id8">Minimal post-install configuration</a></li>
-<li><a class="reference internal" href="#creating-aliases" id="id9">Creating aliases</a></li>
-<li><a class="reference internal" href="#splitting-the-configuration-file" id="id10">Splitting the configuration file</a></li>
-<li><a class="reference internal" href="#local-configuration" id="id11">Local configuration</a></li>
+<p><a class="reference internal" href="#configuration" id="id7">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#minimal-post-install-configuration" id="id8">Minimal post-install configuration</a></p></li>
+<li><p><a class="reference internal" href="#creating-aliases" id="id9">Creating aliases</a></p></li>
+<li><p><a class="reference internal" href="#splitting-the-configuration-file" id="id10">Splitting the configuration file</a></p></li>
+<li><p><a class="reference internal" href="#local-configuration" id="id11">Local configuration</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#working-with-a-separate-repository" id="id12">Working with a separate repository</a></li>
-<li><a class="reference internal" href="#working-from-outside-the-working-directory" id="id13">Working from outside the working directory</a></li>
+<li><p><a class="reference internal" href="#working-with-a-separate-repository" id="id12">Working with a separate repository</a></p></li>
+<li><p><a class="reference internal" href="#working-from-outside-the-working-directory" id="id13">Working from outside the working directory</a></p></li>
 <li>
-<a class="reference internal" href="#cloning-an-existing-repository" id="id14">Cloning an existing repository</a><ul>
-<li><a class="reference internal" href="#cloning-to-a-new-directory" id="id15">Cloning to a new directory</a></li>
-<li><a class="reference internal" href="#cloning-in-an-existing-directory" id="id16">Cloning in an existing directory</a></li>
+<p><a class="reference internal" href="#cloning-an-existing-repository" id="id14">Cloning an existing repository</a></p>
+<ul>
+<li><p><a class="reference internal" href="#cloning-to-a-new-directory" id="id15">Cloning to a new directory</a></p></li>
+<li><p><a class="reference internal" href="#cloning-in-an-existing-directory" id="id16">Cloning in an existing directory</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#making-a-repository-shareable" id="id17">Making a repository shareable</a></li>
-<li><a class="reference internal" href="#staging-changes" id="id18">Staging changes</a></li>
-<li><a class="reference internal" href="#unstaging-changes" id="id19">Unstaging changes</a></li>
-<li><a class="reference internal" href="#ignoring-files-and-directories" id="id20">Ignoring files and directories</a></li>
-<li><a class="reference internal" href="#showing-changes" id="id21">Showing changes</a></li>
-<li><a class="reference internal" href="#committing" id="id22">Committing</a></li>
-<li><a class="reference internal" href="#tagging" id="id23">Tagging</a></li>
-<li><a class="reference internal" href="#viewing-the-commit-log" id="id24">Viewing the commit log</a></li>
-<li><a class="reference internal" href="#working-with-remote-repositories" id="id25">Working with remote repositories</a></li>
-<li><a class="reference internal" href="#working-with-branches" id="id26">Working with branches</a></li>
-<li><a class="reference internal" href="#stashing-changes" id="id27">Stashing changes</a></li>
-<li><a class="reference internal" href="#exploring-the-repository" id="id28">Exploring the repository</a></li>
-<li><a class="reference internal" href="#finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree" id="id29">Finding text patterns in the indexed files (or in any directory tree)</a></li>
-<li><a class="reference internal" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file" id="id30">Find the last modification date and author of any line of a file</a></li>
-<li><a class="reference internal" href="#cancelling-changes" id="id31">Cancelling changes</a></li>
-<li><a class="reference internal" href="#maintaining-a-difference-between-working-and-committed-trees" id="id32">Maintaining a difference between working and committed trees</a></li>
-<li><a class="reference internal" href="#creating-an-archive-of-the-latest-commit-without-any-history" id="id33">Creating an archive of the latest commit (without any history)</a></li>
-<li><a class="reference internal" href="#scripting" id="id34">Scripting</a></li>
-<li><a class="reference internal" href="#hooks" id="id35">Hooks</a></li>
-<li><a class="reference internal" href="#submodules" id="id36">Submodules</a></li>
-<li><a class="reference internal" href="#other-resources" id="id37">Other resources</a></li>
+<li><p><a class="reference internal" href="#making-a-repository-shareable" id="id17">Making a repository shareable</a></p></li>
+<li><p><a class="reference internal" href="#staging-changes" id="id18">Staging changes</a></p></li>
+<li><p><a class="reference internal" href="#unstaging-changes" id="id19">Unstaging changes</a></p></li>
+<li><p><a class="reference internal" href="#ignoring-files-and-directories" id="id20">Ignoring files and directories</a></p></li>
+<li><p><a class="reference internal" href="#showing-changes" id="id21">Showing changes</a></p></li>
+<li><p><a class="reference internal" href="#committing" id="id22">Committing</a></p></li>
+<li><p><a class="reference internal" href="#tagging" id="id23">Tagging</a></p></li>
+<li><p><a class="reference internal" href="#viewing-the-commit-log" id="id24">Viewing the commit log</a></p></li>
+<li><p><a class="reference internal" href="#working-with-remote-repositories" id="id25">Working with remote repositories</a></p></li>
+<li><p><a class="reference internal" href="#working-with-branches" id="id26">Working with branches</a></p></li>
+<li><p><a class="reference internal" href="#stashing-changes" id="id27">Stashing changes</a></p></li>
+<li><p><a class="reference internal" href="#exploring-the-repository" id="id28">Exploring the repository</a></p></li>
+<li><p><a class="reference internal" href="#finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree" id="id29">Finding text patterns in the indexed files (or in any directory tree)</a></p></li>
+<li><p><a class="reference internal" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file" id="id30">Find the last modification date and author of any line of a file</a></p></li>
+<li><p><a class="reference internal" href="#cancelling-changes" id="id31">Cancelling changes</a></p></li>
+<li><p><a class="reference internal" href="#maintaining-a-difference-between-working-and-committed-trees" id="id32">Maintaining a difference between working and committed trees</a></p></li>
+<li><p><a class="reference internal" href="#creating-an-archive-of-the-latest-commit-without-any-history" id="id33">Creating an archive of the latest commit (without any history)</a></p></li>
+<li><p><a class="reference internal" href="#scripting" id="id34">Scripting</a></p></li>
+<li><p><a class="reference internal" href="#hooks" id="id35">Hooks</a></p></li>
+<li><p><a class="reference internal" href="#submodules" id="id36">Submodules</a></p></li>
+<li><p><a class="reference internal" href="#other-resources" id="id37">Other resources</a></p></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -129,16 +132,29 @@ address, the following command may fix the problem:</p>
 <div class="highlight"><pre><span></span>git commit --amend --author<span class="o">=</span><span class="s2">"My Name &lt;my.id@example.com&gt;"</span>
 </pre></div>
 </div>
-<p>You should probably also configure the action of the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> (without
-argument) command. Value <code class="docutils literal notranslate"><span class="pre">simple</span></code> <a class="reference external" href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault">may be appropriate in most cases</a>:</p>
-<div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>git config --global push.default simple
-</pre></div>
-</div>
 <p>You may also want to specify the editor to be used for commit messages or tag
 messages editor. Example with editor Vim:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git config --global core.editor <span class="s2">"vim"</span>
+</pre></div>
+</div>
+<p>You should probably also configure the actions of the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> and <code class="docutils literal notranslate"><span class="pre">git</span>
+<span class="pre">pull</span></code> commands, as well as the default branch name.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git config --global push.default simple
+</pre></div>
+</div>
+<p>(See the <a class="reference external" href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault">Git push documentation</a>).</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git config --global pull.ff only
+</pre></div>
+</div>
+<p>(See this <a class="reference external" href="https://salferrarello.com/git-warning-pulling-without-specifying-how-to-reconcile-divergent-branches-is-discouraged">tip by Sal Ferrarello</a>).</p>
+<p>For the default branch name:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git config --global init.defaultBranch master
 </pre></div>
 </div>
 <p>You can see your Git configuration with:</p>
@@ -413,13 +429,12 @@ used in .gitignore</a>.</p>
 <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> file with the following content would cause the whole working
 directory to be ignored, except:</p>
 <ul class="simple">
-<li>file <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code>
-</li>
-<li>file <code class="docutils literal notranslate"><span class="pre">file_1</span></code>;</li>
-<li>file <code class="docutils literal notranslate"><span class="pre">file_2</span></code>;</li>
-<li>file <code class="docutils literal notranslate"><span class="pre">dir_a/subdir/file_3</span></code>;</li>
-<li>file <code class="docutils literal notranslate"><span class="pre">dir_a/subdir/file_4</span></code>.</li>
-<li>all files and directories in directory <code class="docutils literal notranslate"><span class="pre">dir_b</span></code> with infinite depth.</li>
+<li><p>file <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code></p></li>
+<li><p>file <code class="docutils literal notranslate"><span class="pre">file_1</span></code>;</p></li>
+<li><p>file <code class="docutils literal notranslate"><span class="pre">file_2</span></code>;</p></li>
+<li><p>file <code class="docutils literal notranslate"><span class="pre">dir_a/subdir/file_3</span></code>;</p></li>
+<li><p>file <code class="docutils literal notranslate"><span class="pre">dir_a/subdir/file_4</span></code>.</p></li>
+<li><p>all files and directories in directory <code class="docutils literal notranslate"><span class="pre">dir_b</span></code> with infinite depth.</p></li>
 </ul>
 <div class="line-block">
 <div class="line">/*</div>
@@ -496,10 +511,8 @@ git diff 42b9c3b a92c02a -- path/to/files <span class="c1"># Shows changes for t
 <p>You sometimes want to filter the output of git diff. The <code class="docutils literal notranslate"><span class="pre">-G</span></code> and <code class="docutils literal notranslate"><span class="pre">-S</span></code>
 options can help.</p>
 <ul class="simple">
-<li>
-<a class="reference external" href="https://git-scm.com/docs/git-diff#Documentation/git-diff.txt--Sltstringgt">Documentation for git diff -S option</a>,</li>
-<li>
-<a class="reference external" href="https://git-scm.com/docs/git-diff#Documentation/git-diff.txt--Gltregexgt">Documentation for git diff -G option</a>.</li>
+<li><p><a class="reference external" href="https://git-scm.com/docs/git-diff#Documentation/git-diff.txt--Sltstringgt">Documentation for git diff -S option</a>,</p></li>
+<li><p><a class="reference external" href="https://git-scm.com/docs/git-diff#Documentation/git-diff.txt--Gltregexgt">Documentation for git diff -G option</a>.</p></li>
 </ul>
 <p>If you don’t want to see the lines changed by the addition or the removal of
 whites spaces only, use option <code class="docutils literal notranslate"><span class="pre">-w</span></code> (equivalent to <code class="docutils literal notranslate"><span class="pre">--ignore-all-space</span></code>):</p>
@@ -995,7 +1008,7 @@ tabulation character):</p>
       @<span class="k">$(</span>SPHINXBUILD<span class="k">)</span> -M html <span class="s2">"</span><span class="k">$(</span>SOURCEDIR<span class="k">)</span><span class="s2">"</span> <span class="s2">"</span><span class="k">$(</span>BUILDDIR<span class="k">)</span><span class="s2">"</span> <span class="k">$(</span>SPHINXOPTS<span class="k">)</span> <span class="k">$(</span>O<span class="k">)</span>
 </pre></div>
 </div>
-<p>(You can <a class="reference download internal" download="" href="_downloads/5f0934d7d06bc33461d76e0f66a74799/Makefile"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">the</span> <span class="pre">whole</span> <span class="pre">file</span></code></a>.)</p>
+<p>(You can <a class="reference download internal" download="" href="_downloads/e985e6421371eee4f3889efb205c71b4/Makefile"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">the</span> <span class="pre">whole</span> <span class="pre">file</span></code></a>.)</p>
 <p>I think this change could surprise Sphinx users accustomed to the usual
 behaviour of the Sphinx Makefile, so I prefer to commit the file with the
 change commented out:</p>
@@ -1093,8 +1106,8 @@ script (a <a class="reference external" href="https://en.wikipedia.org/wiki/Shel
 example). Scripting makes it possible to define <a class="reference internal" href="#hooks"><span class="std std-ref">hooks</span></a>.</p>
 <p><a class="reference external" href="https://stackoverflow.com/a/39848551">Git commands are divided into two categories</a>:</p>
 <ul class="simple">
-<li>Plumbing commands,</li>
-<li>Porcelain commands.</li>
+<li><p>Plumbing commands,</p></li>
+<li><p>Porcelain commands.</p></li>
 </ul>
 <p>Porcelain commands should be avoided in scripts. They are meant to be used by
 end-users (i.e. human beings, not programs) and produce a user-friendly output
@@ -1164,10 +1177,10 @@ git merge-base --is-ancestor hash1 hash2  <span class="c1"># Does not output any
 </h2>
 <p id="index-27">Assuming that:</p>
 <ul class="simple">
-<li>You have a script “script-name” meant to be used as, say, a post-commit hook,</li>
-<li>This script is located at the top level of the working tree,</li>
-<li>The repository is in the standard <code class="docutils literal notranslate"><span class="pre">.git</span></code> subdirectory,</li>
-<li>The current working directory is the top level of the working tree,</li>
+<li><p>You have a script “script-name” meant to be used as, say, a post-commit hook,</p></li>
+<li><p>This script is located at the top level of the working tree,</p></li>
+<li><p>The repository is in the standard <code class="docutils literal notranslate"><span class="pre">.git</span></code> subdirectory,</p></li>
+<li><p>The current working directory is the top level of the working tree,</p></li>
 </ul>
 <p>you can install the hook with:</p>
 <div class="highlight-shell notranslate">
@@ -1198,8 +1211,8 @@ variables instead:</p>
 </div>
 <p>More details can be found at those locations:</p>
 <ul class="simple">
-<li><a class="reference external" href="https://stackoverflow.com/questions/7645480/why-doesnt-setting-git-work-tree-work-in-a-post-commit-hook">https://stackoverflow.com/questions/7645480/why-doesnt-setting-git-work-tree-work-in-a-post-commit-hook</a></li>
-<li><a class="reference external" href="https://longair.net/blog/2011/04/09/missing-git-hooks-documentation/">https://longair.net/blog/2011/04/09/missing-git-hooks-documentation/</a></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/7645480/why-doesnt-setting-git-work-tree-work-in-a-post-commit-hook">https://stackoverflow.com/questions/7645480/why-doesnt-setting-git-work-tree-work-in-a-post-commit-hook</a></p></li>
+<li><p><a class="reference external" href="https://longair.net/blog/2011/04/09/missing-git-hooks-documentation/">https://longair.net/blog/2011/04/09/missing-git-hooks-documentation/</a></p></li>
 </ul>
 </div>
 <div class="section" id="submodules">
@@ -1231,21 +1244,22 @@ git submodule update --remote
 <a class="toc-backref" href="#id37">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
 </h2>
 <ul class="simple">
-<li><a class="reference external" href="https://git-scm.com/docs">Git documentation</a></li>
-<li><a class="reference external" href="https://git-scm.com/book/en/v2">Pro Git book</a></li>
-<li><a class="reference external" href="https://www.git-tower.com/blog/git-cheat-sheet">Git cheat sheet</a></li>
-<li><a class="reference external" href="https://chris.beams.io/posts/git-commit">How to write a Git commit message</a></li>
-<li><a class="reference external" href="https://nvie.com/posts/a-successful-git-branching-model">A Git branching model</a></li>
-<li><a class="reference external" href="https://www.viget.com/articles/how-to-fix-your-git-branches-after-a-rebase">How to fix your Git branches after a rebase</a></li>
-<li><a class="reference external" href="https://delicious-insights.com/en/posts/getting-solid-at-git-rebase-vs-merge">Getting solid at Git rebase vs. merge</a></li>
-<li><a class="reference external" href="https://blog.filippo.io/git-fixup-amending-an-older-commit">git fixup: –amend for older commits</a></li>
-<li><a class="reference external" href="https://jamescooke.info/git-to-squash-or-not-to-squash.html">Git: To squash or not to squash?</a></li>
-<li><a class="reference external" href="https://blog.github.com/2016-02-01-working-with-submodules">Git Submodules</a></li>
+<li><p><a class="reference external" href="https://git-scm.com/docs">Git documentation</a></p></li>
+<li><p><a class="reference external" href="https://git-scm.com/book/en/v2">Pro Git book</a></p></li>
+<li><p><a class="reference external" href="https://www.git-tower.com/blog/git-cheat-sheet">Git cheat sheet</a></p></li>
+<li><p><a class="reference external" href="https://chris.beams.io/posts/git-commit">How to write a Git commit message</a></p></li>
+<li><p><a class="reference external" href="https://nvie.com/posts/a-successful-git-branching-model">A Git branching model</a></p></li>
+<li><p><a class="reference external" href="https://www.viget.com/articles/how-to-fix-your-git-branches-after-a-rebase">How to fix your Git branches after a rebase</a></p></li>
+<li><p><a class="reference external" href="https://delicious-insights.com/en/posts/getting-solid-at-git-rebase-vs-merge">Getting solid at Git rebase vs. merge</a></p></li>
+<li><p><a class="reference external" href="https://blog.filippo.io/git-fixup-amending-an-older-commit">git fixup: –amend for older commits</a></p></li>
+<li><p><a class="reference external" href="https://jamescooke.info/git-to-squash-or-not-to-squash.html">Git: To squash or not to squash?</a></p></li>
+<li><p><a class="reference external" href="https://blog.github.com/2016-02-01-working-with-submodules">Git Submodules</a></p></li>
 </ul>
 </div>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -1303,13 +1317,11 @@ git submodule update --remote
   <h4>Next topic</h4>
   <p class="topless"><a href="gnu_privacy_guard.html" title="next chapter">The GNU Privacy Guard (GPG)</a></p>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q">
+      <input type="text" name="q" aria-labelledby="searchlabel">
       <input type="submit" value="Go">
-      <input type="hidden" name="check_keywords" value="yes">
-      <input type="hidden" name="area" value="default">
     </form>
     </div>
 </div>
@@ -1329,11 +1341,12 @@ git submodule update --remote
         <li class="right">
           <a href="external_usb_drives.html" title="External (USB) drives">previous</a> |</li>
         <li class="nav-item nav-item-0">
-<a href="index.html">Personal Notes</a> »</li> 
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Git</a></li> 
       </ul>
     </div>
   <div class="footer" role="contentinfo">
-        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+        © Copyright 2018-2021, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
     Work licensed under a
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>

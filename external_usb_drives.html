@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
+    
     <title>External (USB) drives — Personal Notes</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
     <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -32,7 +32,8 @@
         <li class="right">
           <a href="ssh.html" title="SSH" accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0">
-<a href="index.html">Personal Notes</a> »</li> 
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">External (USB) drives</a></li> 
       </ul>
     </div>  
 
@@ -45,18 +46,19 @@
 <h1>External (USB) drives<a class="headerlink" href="#external-usb-drives" title="Permalink to this headline">¶</a>
 </h1>
 <div class="contents local topic" id="page-content">
-<p class="topic-title first">Page content</p>
+<p class="topic-title">Page content</p>
 <ul class="simple">
-<li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
+<li><p><a class="reference internal" href="#introduction" id="id2">Introduction</a></p></li>
 <li>
-<a class="reference internal" href="#recreating-the-partition-table" id="id3">Recreating the partition table</a><ul>
-<li><a class="reference internal" href="#device-identification" id="id4">Device identification</a></li>
-<li><a class="reference internal" href="#deletion-of-existing-partitions-and-creation-of-the-new-partition" id="id5">Deletion of existing partitions and creation of the new partition</a></li>
+<p><a class="reference internal" href="#recreating-the-partition-table" id="id3">Recreating the partition table</a></p>
+<ul>
+<li><p><a class="reference internal" href="#device-identification" id="id4">Device identification</a></p></li>
+<li><p><a class="reference internal" href="#deletion-of-existing-partitions-and-creation-of-the-new-partition" id="id5">Deletion of existing partitions and creation of the new partition</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#formatting-the-new-partition" id="id6">Formatting the new partition</a></li>
-<li><a class="reference internal" href="#fat32-formatting" id="id7">FAT32 formatting</a></li>
-<li><a class="reference internal" href="#ntfs-formatting" id="id8">NTFS formatting</a></li>
+<li><p><a class="reference internal" href="#formatting-the-new-partition" id="id6">Formatting the new partition</a></p></li>
+<li><p><a class="reference internal" href="#fat32-formatting" id="id7">FAT32 formatting</a></p></li>
+<li><p><a class="reference internal" href="#ntfs-formatting" id="id8">NTFS formatting</a></p></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -137,10 +139,10 @@ ext4 filesystem. Note the <code class="docutils literal notranslate"><span class
 <p id="index-2">For a FAT32 formatting instead of a ext4 formatting, the procedure is similar.
 The differences are:</p>
 <ul class="simple">
-<li>In fdisk, choose partition type 0c;</li>
-<li>Format with <code class="docutils literal notranslate"><span class="pre">mkfs.vfat</span> <span class="pre">-F</span> <span class="pre">32</span> <span class="pre">-n</span> <span class="pre">&lt;label&gt;</span> <span class="pre">/dev/sdb1</span></code>;</li>
-<li>Change label with <code class="docutils literal notranslate"><span class="pre">mlabel</span> <span class="pre">-i</span> <span class="pre">/dev/sdb1</span> <span class="pre">::&lt;label&gt;</span></code> (<code class="docutils literal notranslate"><span class="pre">mlabel</span> <span class="pre">-i</span> <span class="pre">/dev/sdb1</span>
-<span class="pre">-s</span></code> to show the label).</li>
+<li><p>In fdisk, choose partition type 0c;</p></li>
+<li><p>Format with <code class="docutils literal notranslate"><span class="pre">mkfs.vfat</span> <span class="pre">-F</span> <span class="pre">32</span> <span class="pre">-n</span> <span class="pre">&lt;label&gt;</span> <span class="pre">/dev/sdb1</span></code>;</p></li>
+<li><p>Change label with <code class="docutils literal notranslate"><span class="pre">mlabel</span> <span class="pre">-i</span> <span class="pre">/dev/sdb1</span> <span class="pre">::&lt;label&gt;</span></code> (<code class="docutils literal notranslate"><span class="pre">mlabel</span> <span class="pre">-i</span> <span class="pre">/dev/sdb1</span>
+<span class="pre">-s</span></code> to show the label).</p></li>
 </ul>
 <p>On Debian GNU/Linux, <code class="docutils literal notranslate"><span class="pre">mkfs.vfat</span></code> is in package <code class="docutils literal notranslate"><span class="pre">dosfstools</span></code> and <code class="docutils literal notranslate"><span class="pre">mlabel</span></code>
 is in package <code class="docutils literal notranslate"><span class="pre">mtools</span></code>. You can install them with:</p>
@@ -156,11 +158,11 @@ is in package <code class="docutils literal notranslate"><span class="pre">mtool
 </h2>
 <p id="index-3">For an NTFS formatting, the procedure is similar again.</p>
 <ul class="simple">
-<li>In fdisk, choose partition type 7;</li>
-<li>Format with <code class="docutils literal notranslate"><span class="pre">mkfs.ntfs</span> <span class="pre">-L</span> <span class="pre">&lt;label&gt;</span> <span class="pre">/dev/sdb1</span></code> (it takes a while, but you can
-use option <code class="docutils literal notranslate"><span class="pre">-f</span></code> for faster execution);</li>
-<li>Change label with <code class="docutils literal notranslate"><span class="pre">ntfslabel</span> <span class="pre">/dev/sdb1</span> <span class="pre">&lt;label&gt;</span></code> (<code class="docutils literal notranslate"><span class="pre">ntfslabel</span> <span class="pre">/dev/sdb1</span></code> to
-show the label).</li>
+<li><p>In fdisk, choose partition type 7;</p></li>
+<li><p>Format with <code class="docutils literal notranslate"><span class="pre">mkfs.ntfs</span> <span class="pre">-L</span> <span class="pre">&lt;label&gt;</span> <span class="pre">/dev/sdb1</span></code> (it takes a while, but you can
+use option <code class="docutils literal notranslate"><span class="pre">-f</span></code> for faster execution);</p></li>
+<li><p>Change label with <code class="docutils literal notranslate"><span class="pre">ntfslabel</span> <span class="pre">/dev/sdb1</span> <span class="pre">&lt;label&gt;</span></code> (<code class="docutils literal notranslate"><span class="pre">ntfslabel</span> <span class="pre">/dev/sdb1</span></code> to
+show the label).</p></li>
 </ul>
 <p>On Debian GNU/Linux, <code class="docutils literal notranslate"><span class="pre">mkfs.ntfs</span></code> and <code class="docutils literal notranslate"><span class="pre">ntfslabel</span></code> are in package
 <code class="docutils literal notranslate"><span class="pre">ntfs-3g</span></code>. You can install it with the following command but chances are that
@@ -173,6 +175,7 @@ it is already installed:</p>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -201,13 +204,11 @@ it is already installed:</p>
   <h4>Next topic</h4>
   <p class="topless"><a href="git.html" title="next chapter">Git</a></p>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q">
+      <input type="text" name="q" aria-labelledby="searchlabel">
       <input type="submit" value="Go">
-      <input type="hidden" name="check_keywords" value="yes">
-      <input type="hidden" name="area" value="default">
     </form>
     </div>
 </div>
@@ -227,11 +228,12 @@ it is already installed:</p>
         <li class="right">
           <a href="ssh.html" title="SSH">previous</a> |</li>
         <li class="nav-item nav-item-0">
-<a href="index.html">Personal Notes</a> »</li> 
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">External (USB) drives</a></li> 
       </ul>
     </div>
   <div class="footer" role="contentinfo">
-        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+        © Copyright 2018-2021, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
     Work licensed under a
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>

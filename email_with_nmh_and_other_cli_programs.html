@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
+    
     <title>Email with nmh and other command-line programs — Personal Notes</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
     <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -32,7 +32,8 @@
         <li class="right">
           <a href="tmux.html" title="tmux" accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0">
-<a href="index.html">Personal Notes</a> »</li> 
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Email with nmh and other command-line programs</a></li> 
       </ul>
     </div>  
 
@@ -45,32 +46,35 @@
 <h1>Email with nmh and other command-line programs<a class="headerlink" href="#email-with-nmh-and-other-command-line-programs" title="Permalink to this headline">¶</a>
 </h1>
 <div class="contents local topic" id="page-content">
-<p class="topic-title first">Page content</p>
+<p class="topic-title">Page content</p>
 <ul class="simple">
-<li><a class="reference internal" href="#introduction" id="id5">Introduction</a></li>
-<li><a class="reference internal" href="#installation" id="id6">Installation</a></li>
+<li><p><a class="reference internal" href="#introduction" id="id5">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#installation" id="id6">Installation</a></p></li>
 <li>
-<a class="reference internal" href="#configuration" id="id7">Configuration</a><ul>
-<li><a class="reference internal" href="#exim4" id="id8">Exim4</a></li>
-<li><a class="reference internal" href="#fetchmail" id="id9">fetchmail</a></li>
-<li><a class="reference internal" href="#nmh-user-installation" id="id10">nmh user installation</a></li>
+<p><a class="reference internal" href="#configuration" id="id7">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#exim4" id="id8">Exim4</a></p></li>
+<li><p><a class="reference internal" href="#fetchmail" id="id9">fetchmail</a></p></li>
+<li><p><a class="reference internal" href="#nmh-user-installation" id="id10">nmh user installation</a></p></li>
 </ul>
 </li>
 <li>
-<a class="reference internal" href="#retrieving-mails" id="id11">Retrieving mails</a><ul>
-<li><a class="reference internal" href="#without-any-filtering" id="id12">Without any filtering</a></li>
-<li><a class="reference internal" href="#with-filtering-by-bogofilter" id="id13">With filtering by Bogofilter</a></li>
+<p><a class="reference internal" href="#retrieving-mails" id="id11">Retrieving mails</a></p>
+<ul>
+<li><p><a class="reference internal" href="#without-any-filtering" id="id12">Without any filtering</a></p></li>
+<li><p><a class="reference internal" href="#with-filtering-by-bogofilter" id="id13">With filtering by Bogofilter</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#sending-a-mail" id="id14">Sending a mail</a></li>
+<li><p><a class="reference internal" href="#sending-a-mail" id="id14">Sending a mail</a></p></li>
 <li>
-<a class="reference internal" href="#message-management" id="id15">Message management</a><ul>
-<li><a class="reference internal" href="#deleting-mails" id="id16">Deleting mails</a></li>
-<li><a class="reference internal" href="#searching-for-recent-messages" id="id17">Searching for recent messages</a></li>
+<p><a class="reference internal" href="#message-management" id="id15">Message management</a></p>
+<ul>
+<li><p><a class="reference internal" href="#deleting-mails" id="id16">Deleting mails</a></p></li>
+<li><p><a class="reference internal" href="#searching-for-recent-messages" id="id17">Searching for recent messages</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#training-bogofilter-anti-spam-filter" id="id18">Training Bogofilter (anti-spam filter)</a></li>
-<li><a class="reference internal" href="#other-resources" id="id19">Other resources</a></li>
+<li><p><a class="reference internal" href="#training-bogofilter-anti-spam-filter" id="id18">Training Bogofilter (anti-spam filter)</a></p></li>
+<li><p><a class="reference internal" href="#other-resources" id="id19">Other resources</a></p></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -135,29 +139,51 @@ to your <code class="docutils literal notranslate"><span class="pre">~/.profile<
 </pre></div>
 </div>
 <p>I gave the following answers:</p>
-<dl class="docutils">
+<dl class="simple">
 <dt>General type of mail configuration:</dt>
-<dd>mail sent by smarthost; received via SMTP or fetchmail</dd>
+<dd>
+<p>mail sent by smarthost; received via SMTP or fetchmail</p>
+</dd>
 <dt>System mail name:</dt>
-<dd>Default value (&lt;my_hostname&gt;.&lt;my_local_domain_name&gt;)</dd>
+<dd>
+<p>Default value (&lt;my_hostname&gt;.&lt;my_local_domain_name&gt;)</p>
+</dd>
 <dt>IP-addresses to listen on for incoming SMTP connections:</dt>
-<dd>Default value (127.0.0.1 ; ::1)</dd>
+<dd>
+<p>Default value (127.0.0.1 ; ::1)</p>
+</dd>
 <dt>Other destinations for which mail is accepted:</dt>
-<dd>Default value (&lt;my_hostname&gt;.&lt;my_local_domain_name&gt;)</dd>
+<dd>
+<p>Default value (&lt;my_hostname&gt;.&lt;my_local_domain_name&gt;)</p>
+</dd>
 <dt>Machine to relay mail for:</dt>
-<dd>Default value (empty)</dd>
+<dd>
+<p>Default value (empty)</p>
+</dd>
 <dt>IP address or host name of the outgoing smarthost:</dt>
-<dd>&lt;smtp_server_host_name&gt; (like “smtp.my_isp.xxx”)</dd>
+<dd>
+<p>&lt;smtp_server_host_name&gt; (like “smtp.my_isp.xxx”)</p>
+</dd>
 <dt>Hide local mail name in outgoing mail:</dt>
-<dd>Yes</dd>
+<dd>
+<p>Yes</p>
+</dd>
 <dt>Visible domain name for local users:</dt>
-<dd>&lt;valid_mail_domain&gt; (like “my_isp.xxx”)</dd>
+<dd>
+<p>&lt;valid_mail_domain&gt; (like “my_isp.xxx”)</p>
+</dd>
 <dt>Keep number of DNS-queries minimal (Dial-on-demand):</dt>
-<dd>Default value (no) (note: I have a permanent internet connection)</dd>
+<dd>
+<p>Default value (no) (note: I have a permanent internet connection)</p>
+</dd>
 <dt>Delivery method for local mail:</dt>
-<dd>mbox format in /var/mail/</dd>
+<dd>
+<p>mbox format in /var/mail/</p>
+</dd>
 <dt>Split configuration into small files:</dt>
-<dd>Default value (no)</dd>
+<dd>
+<p>Default value (no)</p>
+</dd>
 </dl>
 <p>As a test, I issued the following command which is supposed to send a mail
 containing “Test” to a recipient. The -v switch is for verbosity. I notice that
@@ -190,7 +216,7 @@ user can read and write it:</p>
 <div class="highlight"><pre><span></span>chmod <span class="m">600</span> ~/.fetchmailrc
 </pre></div>
 </div>
-<p>You can <a class="reference download internal" download="" href="_downloads/5fad7fcb3d70e70646f9dfe1b9ca21a2/.fetchmailrc"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">an</span> <span class="pre">example</span> <span class="pre">.fetchmailrc</span> <span class="pre">file</span></code></a>. The SSL related options may not be needed in all
+<p>You can <a class="reference download internal" download="" href="_downloads/641821b1c85c4bb5e55f5520c56b9cfc/.fetchmailrc"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">an</span> <span class="pre">example</span> <span class="pre">.fetchmailrc</span> <span class="pre">file</span></code></a>. The SSL related options may not be needed in all
 cases (see <a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=922164">Debian bug #922164</a>).</p>
 </div>
 <div class="section" id="nmh-user-installation">
@@ -201,41 +227,6 @@ cases (see <a class="reference external" href="https://bugs.debian.org/cgi-bin/b
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>/usr/bin/mh/install-mh
 </pre></div>
-</div>
-<p>Here’s the quote of my <code class="docutils literal notranslate"><span class="pre">install-mh</span></code> session:</p>
-<div class="line-block">
-<div class="line">Do you want help? yes</div>
-<div class="line"><br></div>
-<div class="line">Prior to using nmh, it is necessary to have a file in your login</div>
-<div class="line">directory (/home/my_user_name) named .mh_profile which contains information</div>
-<div class="line">to direct certain nmh operations.  The only item which is required</div>
-<div class="line">is the path to use for all nmh folder operations.  The suggested nmh</div>
-<div class="line">path for you is /home/my_user_name/Mail…</div>
-<div class="line"><br></div>
-<div class="line">You already have the standard nmh directory “/home/my_user_name/Mail”.</div>
-<div class="line">Do you want to use it for nmh? yes</div>
-<div class="line">[Using existing directory]</div>
-<div class="line"><br></div>
-<div class="line">Please see the nmh(7) man page for an introduction to nmh.</div>
-<div class="line"><br></div>
-<div class="line">Send bug reports, questions, suggestions, and patches to</div>
-<div class="line">
-<a class="reference external" href="mailto:nmh-workers%40nongnu.org">nmh-workers<span>@</span>nongnu<span>.</span>org</a>.  That mailing list is relatively quiet, so user</div>
-<div class="line">questions are encouraged.  Users are also encouraged to subscribe, and</div>
-<div class="line">view the archives, at <code class="docutils literal notranslate"><span class="pre">http://lists.gnu.org/mailman/listinfo/nmh-workers</span></code>
-</div>
-<div class="line"><br></div>
-<div class="line">If problems are encountered with an nmh program, they should be</div>
-<div class="line">reported to the local maintainers of nmh, if any, or to the mailing</div>
-<div class="line">list noted above.  When doing this, the name of the program should be</div>
-<div class="line">reported, along with the version information for the program.</div>
-<div class="line"><br></div>
-<div class="line">To find out what version of an nmh program is being run, invoke the</div>
-<div class="line">program with the -version switch.  This prints the version of nmh, the</div>
-<div class="line">host it was compiled on, and the date the program was linked.</div>
-<div class="line"><br></div>
-<div class="line">New releases and other information of potential interest are announced</div>
-<div class="line">at <a class="reference external" href="http://www.nongnu.org/nmh/">http://www.nongnu.org/nmh/</a> .</div>
 </div>
 </div>
 </div>
@@ -264,7 +255,7 @@ cases (see <a class="reference external" href="https://bugs.debian.org/cgi-bin/b
 <div class="highlight"><pre><span></span>apt-get install procmail bogofilter <span class="c1"># As root.</span>
 </pre></div>
 </div>
-<p>Create a <code class="docutils literal notranslate"><span class="pre">~/.procmailrc</span></code> like <a class="reference download internal" download="" href="_downloads/702a1ae7d249151978a758f5e08802e0/.procmailrc"><code class="xref download docutils literal notranslate"><span class="pre">this</span> <span class="pre">example</span> <span class="pre">.procmailrc</span> <span class="pre">file</span></code></a> and when invoking fetchmail, use the <code class="docutils literal notranslate"><span class="pre">--mda</span></code>
+<p>Create a <code class="docutils literal notranslate"><span class="pre">~/.procmailrc</span></code> like <a class="reference download internal" download="" href="_downloads/d8aee74183291e3536d2d4d4d7ff156e/.procmailrc"><code class="xref download docutils literal notranslate"><span class="pre">this</span> <span class="pre">example</span> <span class="pre">.procmailrc</span> <span class="pre">file</span></code></a> and when invoking fetchmail, use the <code class="docutils literal notranslate"><span class="pre">--mda</span></code>
 option:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>fetchmail --mda <span class="s2">"procmail -f %F"</span>
@@ -291,7 +282,7 @@ see the list of available commands. One of these commands is “send”.</p>
 <p>By default, <code class="docutils literal notranslate"><span class="pre">/etc/nmh/components</span></code> is used as message template. If your nmh
 directory is <code class="docutils literal notranslate"><span class="pre">/home/my_user_name/Mail</span></code>, you can put a custom <code class="docutils literal notranslate"><span class="pre">components</span></code>
 file there. It will be used automatically by <code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/comp</span></code>. You can
-<a class="reference download internal" download="" href="_downloads/713c4a5251305d5c24c940715e7a00d6/components"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">an</span> <span class="pre">example</span> <span class="pre">components</span> <span class="pre">file</span> <span class="pre">with</span> <span class="pre">sender's</span> <span class="pre">name,</span> <span class="pre">address</span> <span class="pre">and</span>
+<a class="reference download internal" download="" href="_downloads/62e38f31112d6a1c57e70a520478035e/components"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">an</span> <span class="pre">example</span> <span class="pre">components</span> <span class="pre">file</span> <span class="pre">with</span> <span class="pre">sender's</span> <span class="pre">name,</span> <span class="pre">address</span> <span class="pre">and</span>
 <span class="pre">signature</span></code></a>.</p>
 <p>To force <code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/comp</span></code> to use a specific message template, use the
 <code class="docutils literal notranslate"><span class="pre">-form</span></code> switch:</p>
@@ -389,13 +380,13 @@ assumed that the current working directory is the MH mailbox):</p>
 </h2>
 <p id="index-11">Assuming that:</p>
 <ul class="simple">
-<li>Your current working directory is your MH mailbox,</li>
-<li>Your spam messages are in the “Spam” folder,</li>
-<li>Your trash folder (if any) is empty,</li>
-<li>You also have an “Unsure spam” folder that contains only spam messages (which
+<li><p>Your current working directory is your MH mailbox,</p></li>
+<li><p>Your spam messages are in the “Spam” folder,</p></li>
+<li><p>Your trash folder (if any) is empty,</p></li>
+<li><p>You also have an “Unsure spam” folder that contains only spam messages (which
 implies that you have moved any ham (non spam) message away from this folder
 with (for example) commands like
-<code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/refile</span> <span class="pre">1</span> <span class="pre">-src</span> <span class="pre">+'Unsure</span> <span class="pre">spam'</span> <span class="pre">+'Any</span> <span class="pre">ham</span> <span class="pre">folder'</span></code>),</li>
+<code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/refile</span> <span class="pre">1</span> <span class="pre">-src</span> <span class="pre">+'Unsure</span> <span class="pre">spam'</span> <span class="pre">+'Any</span> <span class="pre">ham</span> <span class="pre">folder'</span></code>),</p></li>
 </ul>
 <p>you can move the messages in ‘Unsure spam’ to Spam and (re)train Bogofilter
 with the following commands:</p>
@@ -429,15 +420,16 @@ classifies a message with commands like:</p>
 <a class="toc-backref" href="#id19">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
 </h2>
 <ul class="simple">
-<li><a class="reference external" href="http://www.nongnu.org/nmh">nmh home page</a></li>
-<li><a class="reference external" href="https://rand-mh.sourceforge.io/book/">MH &amp; nmh (book by Jerry Peek)</a></li>
-<li><a class="reference external" href="http://manpages.org/nmh/7">nmh man pages</a></li>
-<li><a class="reference external" href="http://www.exstrom.com/journal/comp/bogofilter.html">Getting bogofilter to work with procmail, fetchmail, and mutt</a></li>
+<li><p><a class="reference external" href="http://www.nongnu.org/nmh">nmh home page</a></p></li>
+<li><p><a class="reference external" href="https://rand-mh.sourceforge.io/book/">MH &amp; nmh (book by Jerry Peek)</a></p></li>
+<li><p><a class="reference external" href="http://manpages.org/nmh/7">nmh man pages</a></p></li>
+<li><p><a class="reference external" href="http://www.exstrom.com/journal/comp/bogofilter.html">Getting bogofilter to work with procmail, fetchmail, and mutt</a></p></li>
 </ul>
 </div>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -480,13 +472,11 @@ classifies a message with commands like:</p>
   <h4>Next topic</h4>
   <p class="topless"><a href="wifi.html" title="next chapter">Wi-Fi</a></p>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q">
+      <input type="text" name="q" aria-labelledby="searchlabel">
       <input type="submit" value="Go">
-      <input type="hidden" name="check_keywords" value="yes">
-      <input type="hidden" name="area" value="default">
     </form>
     </div>
 </div>
@@ -506,11 +496,12 @@ classifies a message with commands like:</p>
         <li class="right">
           <a href="tmux.html" title="tmux">previous</a> |</li>
         <li class="nav-item nav-item-0">
-<a href="index.html">Personal Notes</a> »</li> 
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Email with nmh and other command-line programs</a></li> 
       </ul>
     </div>
   <div class="footer" role="contentinfo">
-        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+        © Copyright 2018-2021, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
     Work licensed under a
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>

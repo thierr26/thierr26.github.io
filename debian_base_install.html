@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
+    
     <title>Debian base installation — Personal Notes</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
     <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -32,7 +32,8 @@
         <li class="right">
           <a href="index.html" title="Personal Notes" accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0">
-<a href="index.html">Personal Notes</a> »</li> 
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Debian base installation</a></li> 
       </ul>
     </div>  
 
@@ -45,32 +46,32 @@
 <h1>Debian base installation<a class="headerlink" href="#debian-base-installation" title="Permalink to this headline">¶</a>
 </h1>
 <div class="contents local topic" id="page-content">
-<p class="topic-title first">Page content</p>
+<p class="topic-title">Page content</p>
 <ul class="simple">
-<li><a class="reference internal" href="#introduction" id="id1">Introduction</a></li>
-<li><a class="reference internal" href="#getting-an-installation-cd" id="id2">Getting an installation CD</a></li>
-<li><a class="reference internal" href="#preparing-a-media-with-firmware-archive-just-in-case" id="id3">Preparing a media with firmware archive, just in case</a></li>
-<li><a class="reference internal" href="#disk-partitioning" id="id4">Disk partitioning</a></li>
-<li><a class="reference internal" href="#postponing-the-installation-of-a-graphical-environment" id="id5">Postponing the installation of a graphical environment</a></li>
-<li><a class="reference internal" href="#shutting-down-and-rebooting-a-debian-system" id="id6">Shutting down and rebooting a Debian system</a></li>
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#getting-an-installation-cd" id="id2">Getting an installation CD</a></p></li>
+<li><p><a class="reference internal" href="#preparing-a-media-with-firmware-archive-just-in-case" id="id3">Preparing a media with firmware archive, just in case</a></p></li>
+<li><p><a class="reference internal" href="#disk-partitioning" id="id4">Disk partitioning</a></p></li>
+<li><p><a class="reference internal" href="#postponing-the-installation-of-a-graphical-environment" id="id5">Postponing the installation of a graphical environment</a></p></li>
+<li><p><a class="reference internal" href="#shutting-down-and-rebooting-a-debian-system" id="id6">Shutting down and rebooting a Debian system</a></p></li>
 <li>
-<a class="reference internal" href="#immediate-post-install-actions" id="id7">Immediate post-install actions</a><ul>
-<li><a class="reference internal" href="#fixing-the-slow-boot-issue" id="id8">Fixing the slow boot issue</a></li>
-<li><a class="reference internal" href="#system-update" id="id9">System update</a></li>
-<li><a class="reference internal" href="#preventing-the-system-from-beeping" id="id10">Preventing the system from beeping</a></li>
-<li><a class="reference internal" href="#adding-support-for-other-languages" id="id11">Adding support for other languages</a></li>
-<li><a class="reference internal" href="#adding-deb-multimedia-to-the-sources" id="id12">Adding deb-multimedia to the sources</a></li>
-<li><a class="reference internal" href="#installing-firmware-linux-nonfree" id="id13">Installing firmware-linux-nonfree</a></li>
-<li><a class="reference internal" href="#checking-the-configured-time-zone" id="id14">Checking the configured time zone</a></li>
-<li><a class="reference internal" href="#synchronizing-the-system-date-with-network-time-servers" id="id15">Synchronizing the system date with network time servers</a></li>
-<li><a class="reference internal" href="#installing-a-console-locker" id="id16">Installing a console locker</a></li>
-<li><a class="reference internal" href="#installing-a-memory-ram-tester" id="id17">Installing a memory (RAM) tester</a></li>
-<li><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool" id="id18">Installing a wireless devices status management tool</a></li>
-<li><a class="reference internal" href="#installing-a-cd-burning-tool" id="id19">Installing a CD burning tool</a></li>
-<li><a class="reference internal" href="#installing-locate-updatedb" id="id20">Installing locate / updatedb</a></li>
+<p><a class="reference internal" href="#immediate-post-install-actions" id="id7">Immediate post-install actions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#fixing-the-slow-boot-issue" id="id8">Fixing the slow boot issue</a></p></li>
+<li><p><a class="reference internal" href="#system-update" id="id9">System update</a></p></li>
+<li><p><a class="reference internal" href="#preventing-the-system-from-beeping" id="id10">Preventing the system from beeping</a></p></li>
+<li><p><a class="reference internal" href="#adding-support-for-other-languages" id="id11">Adding support for other languages</a></p></li>
+<li><p><a class="reference internal" href="#adding-deb-multimedia-to-the-sources" id="id12">Adding deb-multimedia to the sources</a></p></li>
+<li><p><a class="reference internal" href="#installing-firmware-linux-nonfree" id="id13">Installing firmware-linux-nonfree</a></p></li>
+<li><p><a class="reference internal" href="#checking-the-configured-time-zone" id="id14">Checking the configured time zone</a></p></li>
+<li><p><a class="reference internal" href="#installing-a-console-locker" id="id15">Installing a console locker</a></p></li>
+<li><p><a class="reference internal" href="#installing-a-memory-ram-tester" id="id16">Installing a memory (RAM) tester</a></p></li>
+<li><p><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool" id="id17">Installing a wireless devices status management tool</a></p></li>
+<li><p><a class="reference internal" href="#installing-a-cd-burning-tool" id="id18">Installing a CD burning tool</a></p></li>
+<li><p><a class="reference internal" href="#installing-locate-updatedb" id="id19">Installing locate / updatedb</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#post-install-maintenance" id="id21">Post-install maintenance</a></li>
+<li><p><a class="reference internal" href="#post-install-maintenance" id="id20">Post-install maintenance</a></p></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -95,15 +96,15 @@ information about how to download a Debian installer CD image or buy
 installation CDs.</p>
 <p>If you have a fast enough internet connection and a CD burning drive, you can
 download a <a class="reference external" href="https://www.debian.org/distrib/netinst">small (approximately 300MB) installation image</a> and burn it to a blank CD-R.
-Commands like the ones below should do it. The example is for Debian 10.0.0
-(Buster). Note also that it is assumed that you have <a class="reference external" href="http://scdbackup.sourceforge.net/cdrskin_eng.html">cdrskin</a> installed. Run <code class="docutils literal notranslate"><span class="pre">apt-get</span>
+Commands like the ones below should do it. The example is for Debian 11.0.0
+(Bullseye). Note also that it is assumed that you have <a class="reference external" href="http://scdbackup.sourceforge.net/cdrskin_eng.html">cdrskin</a> installed. Run <code class="docutils literal notranslate"><span class="pre">apt-get</span>
 <span class="pre">install</span> <span class="pre">cdrskin</span></code> <strong>as root</strong> if not. Note also that the
 <code class="docutils literal notranslate"><span class="pre">dev=&lt;cd_burning_drive_device_file&gt;</span></code> option is probably not mandatory as
 cdrskin can detect CD burning devices (<code class="docutils literal notranslate"><span class="pre">cdrskin</span> <span class="pre">--devices</span></code> lists the detected
 devices):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>wget https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.0.0-amd64-netinst.iso
-cdrskin <span class="nv">dev</span><span class="o">=</span>&lt;cd_burning_drive_device_file&gt; -eject -v -data debian-10.0.0-amd64-netinst.iso
+<div class="highlight"><pre><span></span>wget https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.0.0-amd64-netinst.iso
+cdrskin <span class="nv">dev</span><span class="o">=</span>&lt;cd_burning_drive_device_file&gt; -eject -v -data debian-11.0.0-amd64-netinst.iso
 </pre></div>
 </div>
 <p>You might want to verify the authenticity of the ISO image. Download the SHA512
@@ -140,7 +141,7 @@ burned CD. Just compare the output of the following command with the checksum
 from the downloaded checksum file as provided in file SHA512SUMS:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>dd <span class="k">if</span><span class="o">=</span>/dev/&lt;cd_burning_drive_device_file&gt; <span class="nv">bs</span><span class="o">=</span><span class="m">2048</span> <span class="se">\</span>
-  <span class="nv">count</span><span class="o">=</span><span class="k">$(($(</span>stat -c %s debian-10.0.0-amd64-netinst.iso<span class="k">)</span><span class="o">/</span><span class="m">2048</span><span class="k">))</span> <span class="se">\</span>
+  <span class="nv">count</span><span class="o">=</span><span class="k">$(($(</span>stat -c %s debian-11.0.0-amd64-netinst.iso<span class="k">)</span><span class="o">/</span><span class="m">2048</span><span class="k">))</span> <span class="se">\</span>
   <span class="nv">conv</span><span class="o">=</span>notrunc,noerror <span class="p">|</span> sha512sum
 </pre></div>
 </div>
@@ -153,17 +154,17 @@ from the downloaded checksum file as provided in file SHA512SUMS:</p>
 firmware</strong> (that is if you have downloaded the image from a subdirectory of
 cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware).</p>
 <p>The <a class="reference external" href="https://wiki.debian.org/Firmware">Debian Wiki</a> provides some
-instructions, but here are the details of what I’ve done (for a Debian Buster
+instructions, but here are the details of what I’ve done (for a Debian Bullseye
 install, and including the authenticity verification of the archive):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>mkdir -p ~/download/debian_buster_firmware <span class="c1"># Create a directory somewhere.</span>
-<span class="nb">cd</span> ~/download/debian_buster_firmware       <span class="c1"># Move to that directory.</span>
+<div class="highlight"><pre><span></span>mkdir -p ~/download/debian_bullseye_firmware <span class="c1"># Create a directory somewhere.</span>
+<span class="nb">cd</span> ~/download/debian_bullseye_firmware       <span class="c1"># Move to that directory.</span>
 
 <span class="c1"># Download the firmware archive, its SHA512 checksum and associated signature</span>
 <span class="c1"># file.</span>
-wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/buster/current/firmware.tar.gz
-wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/buster/current/SHA512SUMS
-wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/buster/current/SHA512SUMS.sign
+wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bullseye/current/firmware.tar.gz
+wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bullseye/current/SHA512SUMS
+wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bullseye/current/SHA512SUMS.sign
 </pre></div>
 </div>
 <p>I’ve checked the SHA512 checksum of <code class="docutils literal notranslate"><span class="pre">firmware.tar.gz</span></code> by issuing a
@@ -183,38 +184,33 @@ kind of screen:</p>
 </h2>
 <p id="index-3">At the disk partitioning stage, two non-trivial questions arise:</p>
 <ul class="simple">
-<li>Which partitioning scheme to choose (in particular on a machine with two hard
+<li><p>Which partitioning scheme to choose (in particular on a machine with two hard
 drives (one <a class="reference external" href="https://en.wikipedia.org/wiki/Solid-state_drive">SSD</a> and one
 <a class="reference external" href="https://en.wikipedia.org/wiki/Hard_disk_drive">traditional spinning hard disk drive</a>)? This link is helpful:
-<a class="reference external" href="https://unix.stackexchange.com/a/89230">https://unix.stackexchange.com/a/89230</a>.</li>
-<li>What’s the right amount of swap space? This article by Abhishek Prakash
-helps: <a class="reference external" href="https://itsfoss.com/swap-size">https://itsfoss.com/swap-size</a>.</li>
+<a class="reference external" href="https://unix.stackexchange.com/a/89230">https://unix.stackexchange.com/a/89230</a>.</p></li>
+<li><p>What’s the right amount of swap space? This article by Abhishek Prakash
+helps: <a class="reference external" href="https://itsfoss.com/swap-size">https://itsfoss.com/swap-size</a>.</p></li>
 </ul>
 <p>I settled on the following partitioning schemes:</p>
 <table>
 
 <thead>
 <tr class="row-odd">
-<th class="head">Machine with spinning HDD only</th>
-<th class="head">Machine with 128GB SDD + spinning HDD</th>
+<th class="head"><p>Machine with spinning HDD only</p></th>
+<th class="head"><p>Machine with 128GB SDD + spinning HDD</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even">
-<td>Single <code class="docutils literal notranslate"><span class="pre">/</span></code> partition + swap</td>
+<td><p>Single <code class="docutils literal notranslate"><span class="pre">/</span></code> partition + swap</p></td>
 <td>
-<ul class="first last simple">
-<li>
-<code class="docutils literal notranslate"><span class="pre">/</span></code> partition on SSD (20GB).</li>
-<li>
-<code class="docutils literal notranslate"><span class="pre">/usr</span></code> partition on SSD.</li>
-<li>
-<code class="docutils literal notranslate"><span class="pre">/var</span></code> partition on spinning HDD (20GB).</li>
-<li>
-<code class="docutils literal notranslate"><span class="pre">/tmp</span></code> partition on spinning HDD (10GB).</li>
-<li>swap partition on spinning HDD.</li>
-<li>
-<code class="docutils literal notranslate"><span class="pre">/home</span></code> partition on spinning HDD.</li>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/</span></code> partition on SSD (20GB).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/usr</span></code> partition on SSD.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/var</span></code> partition on spinning HDD (20GB).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/tmp</span></code> partition on spinning HDD (10GB).</p></li>
+<li><p>swap partition on spinning HDD.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/home</span></code> partition on spinning HDD.</p></li>
 </ul>
 </td>
 </tr>
@@ -275,7 +271,7 @@ initramfs image (<strong>as root</strong> for both operations):</p>
 internet gives two solutions:</p>
 <ul>
 <li>
-<p class="first">Commenting out entirely the ATAPI device rule, as suggested on <a class="reference external" href="https://paulphilippov.com/articles/how-to-fix-slow-boot-with-ata-errors">Paul
+<p>Commenting out entirely the ATAPI device rule, as suggested on <a class="reference external" href="https://paulphilippov.com/articles/how-to-fix-slow-boot-with-ata-errors">Paul
 Philippov’s website</a>,
 with this command:</p>
 <div class="highlight-shell notranslate">
@@ -283,11 +279,9 @@ with this command:</p>
 </pre></div>
 </div>
 </li>
-<li>
-<p class="first">Cancelling the rule for the SH-S223C only, as suggested in <a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=622340#43">Debian bug
+<li><p>Cancelling the rule for the SH-S223C only, as suggested in <a class="reference external" href="https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=622340#43">Debian bug
 #622340</a>. This
-is what I was doing.</p>
-</li>
+is what I was doing.</p></li>
 </ul>
 <p>Note that the change to <code class="docutils literal notranslate"><span class="pre">/lib/udev/rules.d/60-persistent-storage.rules</span></code> and
 the regenration of the initramfs image have to be redone after each update of
@@ -350,10 +344,10 @@ gimp <span class="p">&amp;</span>
 <p id="index-10">You may want to add deb-multimedia as a source of packages for the newly
 installed Debian system (see <a class="reference external" href="https://linuxconfig.org/amp-up-your-multimedia-experience-on-debian-9-stretch-linux">this linuxconfig.org article</a>).</p>
 <p><a class="reference external" href="http://deb-multimedia.org">http://deb-multimedia.org</a> provides some instructions:</p>
-<p>First, add <strong>as root</strong> a line like this one (example for Debian Buster) in your
-<code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code>:</p>
+<p>First, add <strong>as root</strong> a line like this one (example for Debian Bullseye) in
+your <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code>:</p>
 <div class="line-block">
-<div class="line">deb <a class="reference external" href="https://www.deb-multimedia.org">https://www.deb-multimedia.org</a> buster main non-free</div>
+<div class="line">deb <a class="reference external" href="https://www.deb-multimedia.org">https://www.deb-multimedia.org</a> bullseye main non-free</div>
 </div>
 <p>Then, issue <strong>as root</strong> the following commands:</p>
 <div class="highlight-shell notranslate">
@@ -377,7 +371,7 @@ firmware archive has been required) or post-installation, manually:</p>
 </pre></div>
 </div>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code> file must have the non-free section.
-You can <a class="reference download internal" download="" href="_downloads/ecabdd97c00c58b7de09f81a800aa6c0/sources.list"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">my</span> <span class="pre">/etc/apt/sources.list</span></code></a>.
+You can <a class="reference download internal" download="" href="_downloads/1b6a964b4404bf549e2d97ab8de32ceb/sources.list"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">my</span> <span class="pre">/etc/apt/sources.list</span></code></a>.
 Make sure you issue a <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span></code> command after changing
 <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code>.</p>
 </div>
@@ -396,22 +390,11 @@ Make sure you issue a <code class="docutils literal notranslate"><span class="pr
 </pre></div>
 </div>
 </div>
-<div class="section" id="synchronizing-the-system-date-with-network-time-servers">
-<h3>
-<a class="toc-backref" href="#id15">Synchronizing the system date with network time servers</a><a class="headerlink" href="#synchronizing-the-system-date-with-network-time-servers" title="Permalink to this headline">¶</a>
-</h3>
-<p id="index-13">Just install package <code class="docutils literal notranslate"><span class="pre">ntp</span></code>:</p>
-<div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install ntp <span class="c1"># As root.</span>
-</pre></div>
-</div>
-<p>See the <a class="reference external" href="https://wiki.debian.org/NTP">Debian Wiki NTP page</a> for more details.</p>
-</div>
 <div class="section" id="installing-a-console-locker">
 <h3>
-<a class="toc-backref" href="#id16">Installing a console locker</a><a class="headerlink" href="#installing-a-console-locker" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id15">Installing a console locker</a><a class="headerlink" href="#installing-a-console-locker" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-14">There are many screen and/or console locker programs. I’ve installed <a class="reference external" href="https://github.com/muennich/physlock">physlock</a>:</p>
+<p id="index-13">There are many screen and/or console locker programs. I’ve installed <a class="reference external" href="https://github.com/muennich/physlock">physlock</a>:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install physlock <span class="c1"># As root.</span>
 </pre></div>
@@ -419,9 +402,9 @@ Make sure you issue a <code class="docutils literal notranslate"><span class="pr
 </div>
 <div class="section" id="installing-a-memory-ram-tester">
 <h3>
-<a class="toc-backref" href="#id17">Installing a memory (RAM) tester</a><a class="headerlink" href="#installing-a-memory-ram-tester" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id16">Installing a memory (RAM) tester</a><a class="headerlink" href="#installing-a-memory-ram-tester" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-15">RAM failures are not so rare in my experience. A tester like <a class="reference external" href="https://www.memtest.org/">Memtest86+</a> can really help diagnosing a RAM failure. The
+<p id="index-14">RAM failures are not so rare in my experience. A tester like <a class="reference external" href="https://www.memtest.org/">Memtest86+</a> can really help diagnosing a RAM failure. The
 <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span></code> command below installs Memtest86+ and adds an entry in the
 <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_GRUB">Grub</a> menu (you have to reboot your
 machine and select the Memtest86+ grub entry to start Memtest86+):</p>
@@ -432,9 +415,9 @@ machine and select the Memtest86+ grub entry to start Memtest86+):</p>
 </div>
 <div class="section" id="installing-a-wireless-devices-status-management-tool">
 <h3>
-<a class="toc-backref" href="#id18">Installing a wireless devices status management tool</a><a class="headerlink" href="#installing-a-wireless-devices-status-management-tool" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id17">Installing a wireless devices status management tool</a><a class="headerlink" href="#installing-a-wireless-devices-status-management-tool" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-16">On a laptop computer, it may be useful to check the status (enabled, hard
+<p id="index-15">On a laptop computer, it may be useful to check the status (enabled, hard
 blocked, soft blocked) of the wireless devices. Package <code class="docutils literal notranslate"><span class="pre">rfkill</span></code> makes that
 possible:</p>
 <div class="highlight-shell notranslate">
@@ -449,9 +432,9 @@ possible:</p>
 </div>
 <div class="section" id="installing-a-cd-burning-tool">
 <h3>
-<a class="toc-backref" href="#id19">Installing a CD burning tool</a><a class="headerlink" href="#installing-a-cd-burning-tool" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id18">Installing a CD burning tool</a><a class="headerlink" href="#installing-a-cd-burning-tool" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-17">I use cdrskin to burn CDs (in particular the Debian installation CDs) on an
+<p id="index-16">I use cdrskin to burn CDs (in particular the Debian installation CDs) on an
 internal or external (USB) CD burning drive:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install cdrskin <span class="c1"># As root.</span>
@@ -460,9 +443,9 @@ internal or external (USB) CD burning drive:</p>
 </div>
 <div class="section" id="installing-locate-updatedb">
 <h3>
-<a class="toc-backref" href="#id20">Installing locate / updatedb</a><a class="headerlink" href="#installing-locate-updatedb" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id19">Installing locate / updatedb</a><a class="headerlink" href="#installing-locate-updatedb" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-18">Command <code class="docutils literal notranslate"><span class="pre">locate</span></code> is a way of finding files on your computer. It is faster
+<p id="index-17">Command <code class="docutils literal notranslate"><span class="pre">locate</span></code> is a way of finding files on your computer. It is faster
 than <code class="docutils literal notranslate"><span class="pre">find</span></code>. It relies on a database (updatedb) which is automatically
 updated daily via the script <code class="docutils literal notranslate"><span class="pre">/etc/cron.daily/locate</span></code> (directory
 <code class="docutils literal notranslate"><span class="pre">/etc/cron.daily</span></code> should appear in file <code class="docutils literal notranslate"><span class="pre">/etc/crontab</span></code>).</p>
@@ -493,9 +476,9 @@ has been changed, with:</p>
 </div>
 <div class="section" id="post-install-maintenance">
 <h2>
-<a class="toc-backref" href="#id21">Post-install maintenance</a><a class="headerlink" href="#post-install-maintenance" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id20">Post-install maintenance</a><a class="headerlink" href="#post-install-maintenance" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-19">I regularly run the following commands to keep the system up to date:</p>
+<p id="index-18">I regularly run the following commands to keep the system up to date:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get update <span class="o">&amp;&amp;</span> apt-get dist-upgrade
 apt-get autoremove <span class="c1"># Useful if some packages have become unneeded.</span>
@@ -506,6 +489,7 @@ apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows o
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -530,7 +514,6 @@ apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows o
 <li><a class="reference internal" href="#adding-deb-multimedia-to-the-sources">Adding deb-multimedia to the sources</a></li>
 <li><a class="reference internal" href="#installing-firmware-linux-nonfree">Installing firmware-linux-nonfree</a></li>
 <li><a class="reference internal" href="#checking-the-configured-time-zone">Checking the configured time zone</a></li>
-<li><a class="reference internal" href="#synchronizing-the-system-date-with-network-time-servers">Synchronizing the system date with network time servers</a></li>
 <li><a class="reference internal" href="#installing-a-console-locker">Installing a console locker</a></li>
 <li><a class="reference internal" href="#installing-a-memory-ram-tester">Installing a memory (RAM) tester</a></li>
 <li><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool">Installing a wireless devices status management tool</a></li>
@@ -548,13 +531,11 @@ apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows o
   <h4>Next topic</h4>
   <p class="topless"><a href="openbox_on_debian.html" title="next chapter">Installation of Openbox on Debian</a></p>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q">
+      <input type="text" name="q" aria-labelledby="searchlabel">
       <input type="submit" value="Go">
-      <input type="hidden" name="check_keywords" value="yes">
-      <input type="hidden" name="area" value="default">
     </form>
     </div>
 </div>
@@ -574,11 +555,12 @@ apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows o
         <li class="right">
           <a href="index.html" title="Personal Notes">previous</a> |</li>
         <li class="nav-item nav-item-0">
-<a href="index.html">Personal Notes</a> »</li> 
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Debian base installation</a></li> 
       </ul>
     </div>
   <div class="footer" role="contentinfo">
-        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+        © Copyright 2018-2021, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
     Work licensed under a
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>

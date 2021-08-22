@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
+    
     <title>Music — Personal Notes</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
     <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -32,7 +32,8 @@
         <li class="right">
           <a href="wifi.html" title="Wi-Fi" accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0">
-<a href="index.html">Personal Notes</a> »</li> 
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Music</a></li> 
       </ul>
     </div>  
 
@@ -45,16 +46,16 @@
 <h1>Music<a class="headerlink" href="#music" title="Permalink to this headline">¶</a>
 </h1>
 <div class="contents local topic" id="page-content">
-<p class="topic-title first">Page content</p>
+<p class="topic-title">Page content</p>
 <ul class="simple">
-<li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
-<li><a class="reference internal" href="#ogg-file-decoding" id="id3">Ogg file decoding</a></li>
-<li><a class="reference internal" href="#wav-files-duration" id="id4">WAV files duration</a></li>
-<li><a class="reference internal" href="#burning-wav-files-to-a-cd-r" id="id5">Burning WAV files to a CD-R</a></li>
-<li><a class="reference internal" href="#building-audio-files-from-a-video" id="id6">Building audio files from a video</a></li>
-<li><a class="reference internal" href="#getting-the-track-list-of-an-audio-cd" id="id7">Getting the track list of an audio CD</a></li>
-<li><a class="reference internal" href="#building-audio-ogg-files-from-an-audio-cd" id="id8">Building audio (Ogg) files from an audio CD</a></li>
-<li><a class="reference internal" href="#converting-ogg-files-to-mp3" id="id9">Converting Ogg files to MP3</a></li>
+<li><p><a class="reference internal" href="#introduction" id="id2">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#ogg-file-decoding" id="id3">Ogg file decoding</a></p></li>
+<li><p><a class="reference internal" href="#wav-files-duration" id="id4">WAV files duration</a></p></li>
+<li><p><a class="reference internal" href="#burning-wav-files-to-a-cd-r" id="id5">Burning WAV files to a CD-R</a></p></li>
+<li><p><a class="reference internal" href="#building-audio-files-from-a-video" id="id6">Building audio files from a video</a></p></li>
+<li><p><a class="reference internal" href="#getting-the-track-list-of-an-audio-cd" id="id7">Getting the track list of an audio CD</a></p></li>
+<li><p><a class="reference internal" href="#building-audio-ogg-files-from-an-audio-cd" id="id8">Building audio (Ogg) files from an audio CD</a></p></li>
+<li><p><a class="reference internal" href="#converting-ogg-files-to-mp3" id="id9">Converting Ogg files to MP3</a></p></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -145,14 +146,14 @@ the duration of the audio file and the title of the audio file.</p>
 <p>This will cause the creation of two WAV files in the directory denoted by
 script variable <code class="docutils literal notranslate"><span class="pre">INTERMEDIATE_FILES_DIR</span></code>:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">01_-_the_mission__ennio_morricone_.wav</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">02_-_cinema_paradiso__andrea_and_ennio_morricone_.wav</span></code></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">01_-_the_mission__ennio_morricone_.wav</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">02_-_cinema_paradiso__andrea_and_ennio_morricone_.wav</span></code></p></li>
 </ul>
 <p>You will also get two Ogg files in the directory denoted by script variable
 <code class="docutils literal notranslate"><span class="pre">OUTPUT_DIR</span></code>:</p>
 <ul class="simple">
-<li><code class="docutils literal notranslate"><span class="pre">01_-_the_mission__ennio_morricone_.ogg</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">02_-_cinema_paradiso__andrea_and_ennio_morricone_.ogg</span></code></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">01_-_the_mission__ennio_morricone_.ogg</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">02_-_cinema_paradiso__andrea_and_ennio_morricone_.ogg</span></code></p></li>
 </ul>
 <p>The WAV files are created from the .ts file using <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code>, provided by
 package <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code> on a Debian GNU/Linux system. I’m using the version from
@@ -166,21 +167,21 @@ with:</p>
 <p>The output file names are built from the titles provided in the here-document,
 but with a few changes:</p>
 <ol class="arabic simple">
-<li>Occurrences of ampersand are substituted with “and”.</li>
-<li>Accents, cedillas, tildes, etc… are removed using the <code class="docutils literal notranslate"><span class="pre">unaccent</span></code> command
-(provided by package <code class="docutils literal notranslate"><span class="pre">unaccent</span></code> on a Debian GNU/Linux system).</li>
-<li>Uppercase characters are converted to lowercase.</li>
-<li>Remaining characters that are not letters, digits or hyphen are substituted
-with underscores.</li>
+<li><p>Occurrences of ampersand are substituted with “and”.</p></li>
+<li><p>Accents, cedillas, tildes, etc… are removed using the <code class="docutils literal notranslate"><span class="pre">unaccent</span></code> command
+(provided by package <code class="docutils literal notranslate"><span class="pre">unaccent</span></code> on a Debian GNU/Linux system).</p></li>
+<li><p>Uppercase characters are converted to lowercase.</p></li>
+<li><p>Remaining characters that are not letters, digits or hyphen are substituted
+with underscores.</p></li>
 </ol>
 <p>A triangular (i.e. linear) fade out is created at the end of each file using
 SoX.</p>
 <p>The output Ogg files are encoded with <code class="docutils literal notranslate"><span class="pre">oggenc</span></code>. They contain some comments:</p>
 <ul class="simple">
-<li>“tracknumber” (2-digits track number)</li>
-<li>“title” (title as provided in the here-document)</li>
-<li>“artist” (provided by script variable <code class="docutils literal notranslate"><span class="pre">ARTIST</span></code>)</li>
-<li>“album” (provided by script variable <code class="docutils literal notranslate"><span class="pre">ALBUM</span></code>)</li>
+<li><p>“tracknumber” (2-digits track number)</p></li>
+<li><p>“title” (title as provided in the here-document)</p></li>
+<li><p>“artist” (provided by script variable <code class="docutils literal notranslate"><span class="pre">ARTIST</span></code>)</p></li>
+<li><p>“album” (provided by script variable <code class="docutils literal notranslate"><span class="pre">ALBUM</span></code>)</p></li>
 </ul>
 <p>To list the comments of an Ogg file, use <code class="docutils literal notranslate"><span class="pre">vorbiscomment</span> <span class="pre">-l</span></code>:</p>
 <div class="highlight-shell notranslate">
@@ -489,6 +490,7 @@ process_dir<span class="o">()</span> <span class="o">{</span>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -515,13 +517,11 @@ process_dir<span class="o">()</span> <span class="o">{</span>
   <h4>Next topic</h4>
   <p class="topless"><a href="nu_html_checker.html" title="next chapter">Nu HTML Checker</a></p>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q">
+      <input type="text" name="q" aria-labelledby="searchlabel">
       <input type="submit" value="Go">
-      <input type="hidden" name="check_keywords" value="yes">
-      <input type="hidden" name="area" value="default">
     </form>
     </div>
 </div>
@@ -541,11 +541,12 @@ process_dir<span class="o">()</span> <span class="o">{</span>
         <li class="right">
           <a href="wifi.html" title="Wi-Fi">previous</a> |</li>
         <li class="nav-item nav-item-0">
-<a href="index.html">Personal Notes</a> »</li> 
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Music</a></li> 
       </ul>
     </div>
   <div class="footer" role="contentinfo">
-        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+        © Copyright 2018-2021, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
     Work licensed under a
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>

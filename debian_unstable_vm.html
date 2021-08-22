@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
+    
     <title>Installing a Debian unstable virtual machine — Personal Notes</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
     <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -32,7 +32,8 @@
         <li class="right">
           <a href="debian_apps_install.html" title="Debian applications installation" accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0">
-<a href="index.html">Personal Notes</a> »</li> 
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Installing a Debian unstable virtual machine</a></li> 
       </ul>
     </div>  
 
@@ -45,34 +46,36 @@
 <h1>Installing a Debian unstable virtual machine<a class="headerlink" href="#installing-a-debian-unstable-virtual-machine" title="Permalink to this headline">¶</a>
 </h1>
 <div class="contents local topic" id="page-content">
-<p class="topic-title first">Page content</p>
+<p class="topic-title">Page content</p>
 <ul class="simple">
-<li><a class="reference internal" href="#introduction" id="id1">Introduction</a></li>
-<li><a class="reference internal" href="#checking-the-virtualizations-extensions-presence-on-the-cpu" id="id2">Checking the virtualizations extensions presence on the CPU</a></li>
-<li><a class="reference internal" href="#installing-the-libvirt-family-of-tools" id="id3">Installing the libvirt family of tools</a></li>
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#checking-the-virtualizations-extensions-presence-on-the-cpu" id="id2">Checking the virtualizations extensions presence on the CPU</a></p></li>
+<li><p><a class="reference internal" href="#installing-the-libvirt-family-of-tools" id="id3">Installing the libvirt family of tools</a></p></li>
 <li>
-<a class="reference internal" href="#preparing-storage-locations" id="id4">Preparing storage locations</a><ul>
-<li><a class="reference internal" href="#for-the-virtual-machine-images" id="id5">For the virtual machine images</a></li>
-<li><a class="reference internal" href="#for-the-installer-iso-image" id="id6">For the installer ISO image</a></li>
+<p><a class="reference internal" href="#preparing-storage-locations" id="id4">Preparing storage locations</a></p>
+<ul>
+<li><p><a class="reference internal" href="#for-the-virtual-machine-images" id="id5">For the virtual machine images</a></p></li>
+<li><p><a class="reference internal" href="#for-the-installer-iso-image" id="id6">For the installer ISO image</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#searching-operating-systems-in-the-osinfo-database" id="id7">Searching operating systems in the osinfo database</a></li>
-<li><a class="reference internal" href="#getting-a-debian-testing-installer-image" id="id8">Getting a Debian testing installer image</a></li>
+<li><p><a class="reference internal" href="#searching-operating-systems-in-the-osinfo-database" id="id7">Searching operating systems in the osinfo database</a></p></li>
+<li><p><a class="reference internal" href="#getting-a-debian-testing-installer-image" id="id8">Getting a Debian testing installer image</a></p></li>
 <li>
-<a class="reference internal" href="#creating-the-debian-unstable-virtual-machine" id="id9">Creating the Debian unstable virtual machine</a><ul>
-<li><a class="reference internal" href="#start-the-installation" id="id10">Start the installation</a></li>
-<li><a class="reference internal" href="#debian-testing-base-installation" id="id11">Debian testing base installation</a></li>
-<li><a class="reference internal" href="#upgrade-to-debian-unstable" id="id12">Upgrade to Debian unstable</a></li>
-<li><a class="reference internal" href="#install-x-org-and-openbox" id="id13">Install X.org and Openbox</a></li>
-<li><a class="reference internal" href="#enable-copy-n-paste-between-host-and-guest" id="id14">Enable copy’n’paste between host and guest</a></li>
-<li><a class="reference internal" href="#configure-display-resolution" id="id15">Configure display resolution</a></li>
-<li><a class="reference internal" href="#reboot" id="id16">Reboot</a></li>
+<p><a class="reference internal" href="#creating-the-debian-unstable-virtual-machine" id="id9">Creating the Debian unstable virtual machine</a></p>
+<ul>
+<li><p><a class="reference internal" href="#start-the-installation" id="id10">Start the installation</a></p></li>
+<li><p><a class="reference internal" href="#debian-testing-base-installation" id="id11">Debian testing base installation</a></p></li>
+<li><p><a class="reference internal" href="#upgrade-to-debian-unstable" id="id12">Upgrade to Debian unstable</a></p></li>
+<li><p><a class="reference internal" href="#install-x-org-and-openbox" id="id13">Install X.org and Openbox</a></p></li>
+<li><p><a class="reference internal" href="#enable-copy-n-paste-between-host-and-guest" id="id14">Enable copy’n’paste between host and guest</a></p></li>
+<li><p><a class="reference internal" href="#configure-display-resolution" id="id15">Configure display resolution</a></p></li>
+<li><p><a class="reference internal" href="#reboot" id="id16">Reboot</a></p></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#shutting-down-and-restarting-the-virtual-machine" id="id17">Shutting down and restarting the virtual machine</a></li>
-<li><a class="reference internal" href="#finding-the-ip-address-of-the-virtual-machine" id="id18">Finding the IP address of the virtual machine</a></li>
-<li><a class="reference internal" href="#removing-the-virtual-machine" id="id19">Removing the virtual machine</a></li>
-<li><a class="reference internal" href="#other-resources" id="id20">Other resources</a></li>
+<li><p><a class="reference internal" href="#shutting-down-and-restarting-the-virtual-machine" id="id17">Shutting down and restarting the virtual machine</a></p></li>
+<li><p><a class="reference internal" href="#finding-the-ip-address-of-the-virtual-machine" id="id18">Finding the IP address of the virtual machine</a></p></li>
+<li><p><a class="reference internal" href="#removing-the-virtual-machine" id="id19">Removing the virtual machine</a></p></li>
+<li><p><a class="reference internal" href="#other-resources" id="id20">Other resources</a></p></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -279,9 +282,9 @@ I lauch <code class="docutils literal notranslate"><span class="pre">virt-viewer
 <p id="index-9">The first step to upgrade to Debian unstable is to edit
 <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code> (<strong>as root, on the guest</strong>):</p>
 <ul class="simple">
-<li>Substitute the Debian testing distribution name (which was “bullseye”) with
-“unstable”.</li>
-<li>Comment out any line containing <code class="docutils literal notranslate"><span class="pre">security.debian.org</span></code>.</li>
+<li><p>Substitute the Debian testing distribution name (which was “bullseye”) with
+“unstable”.</p></li>
+<li><p>Comment out any line containing <code class="docutils literal notranslate"><span class="pre">security.debian.org</span></code>.</p></li>
 </ul>
 <p>The second step is to execute:</p>
 <div class="highlight-shell notranslate">
@@ -296,8 +299,7 @@ I lauch <code class="docutils literal notranslate"><span class="pre">virt-viewer
 <p id="index-10">I then install X.org and <a class="reference internal" href="openbox_on_debian.html"><span class="doc">Openbox</span></a> on
 the virtual machine:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install xorg openbox obmenu openbox-menu menu <span class="c1"># As root, on the</span>
-                                                      <span class="c1"># guest.</span>
+<div class="highlight"><pre><span></span>apt-get install xorg openbox openbox-menu menu <span class="c1"># As root, on the guest.</span>
 </pre></div>
 </div>
 </div>
@@ -393,7 +395,7 @@ with a test of X.org:</p>
 <div class="highlight"><pre><span></span>cp xorg.conf.new /etc/X11/xorg.conf <span class="c1"># As root, on the guest.</span>
 </pre></div>
 </div>
-<p>You can <a class="reference download internal" download="" href="_downloads/8699e8d5a7ab8446b42b418b6ea6c976/debian_vm_xorg.conf"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">this</span> <span class="pre">xorg.conf</span> <span class="pre">file</span></code></a>.</p>
+<p>You can <a class="reference download internal" download="" href="_downloads/fb3d83562f86c0333deeb6e521106307/debian_vm_xorg.conf"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">this</span> <span class="pre">xorg.conf</span> <span class="pre">file</span></code></a>.</p>
 </div>
 <div class="section" id="reboot">
 <h3>
@@ -500,14 +502,15 @@ virsh vol-delete --pool default debian_unstable.qcow2 <span class="c1"># As root
 <a class="toc-backref" href="#id20">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
 </h2>
 <ul class="simple">
-<li><a class="reference external" href="https://serverfault.com/questions/208693/difference-between-kvm-and-qemu">Difference between KVM and QEMU (on serverfault.com)</a></li>
-<li><a class="reference external" href="https://blog.wikichoon.com/2016/01/qemusystem-vs-qemusession.html">qemu:///system vs qemu:///session (–connect option to virt-install)</a></li>
-<li><a class="reference external" href="https://jamielinux.com/docs/libvirt-networking-handbook/index-full.html">libvirt networking handbook</a></li>
+<li><p><a class="reference external" href="https://serverfault.com/questions/208693/difference-between-kvm-and-qemu">Difference between KVM and QEMU (on serverfault.com)</a></p></li>
+<li><p><a class="reference external" href="https://blog.wikichoon.com/2016/01/qemusystem-vs-qemusession.html">qemu:///system vs qemu:///session (–connect option to virt-install)</a></p></li>
+<li><p><a class="reference external" href="https://jamielinux.com/docs/libvirt-networking-handbook/index-full.html">libvirt networking handbook</a></p></li>
 </ul>
 </div>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -552,13 +555,11 @@ virsh vol-delete --pool default debian_unstable.qcow2 <span class="c1"># As root
   <h4>Next topic</h4>
   <p class="topless"><a href="ssh.html" title="next chapter">SSH</a></p>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q">
+      <input type="text" name="q" aria-labelledby="searchlabel">
       <input type="submit" value="Go">
-      <input type="hidden" name="check_keywords" value="yes">
-      <input type="hidden" name="area" value="default">
     </form>
     </div>
 </div>
@@ -578,11 +579,12 @@ virsh vol-delete --pool default debian_unstable.qcow2 <span class="c1"># As root
         <li class="right">
           <a href="debian_apps_install.html" title="Debian applications installation">previous</a> |</li>
         <li class="nav-item nav-item-0">
-<a href="index.html">Personal Notes</a> »</li> 
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Installing a Debian unstable virtual machine</a></li> 
       </ul>
     </div>
   <div class="footer" role="contentinfo">
-        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+        © Copyright 2018-2021, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
     Work licensed under a
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>

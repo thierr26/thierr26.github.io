@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
+    
     <title>GNOME 3 — Personal Notes</title>
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
     <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/language_data.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -32,7 +32,8 @@
         <li class="right">
           <a href="hp_usb_printer.html" title="HP USB printer" accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0">
-<a href="index.html">Personal Notes</a> »</li> 
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">GNOME 3</a></li> 
       </ul>
     </div>  
 
@@ -45,16 +46,16 @@
 <h1>GNOME 3<a class="headerlink" href="#gnome-3" title="Permalink to this headline">¶</a>
 </h1>
 <div class="contents local topic" id="page-content">
-<p class="topic-title first">Page content</p>
+<p class="topic-title">Page content</p>
 <ul class="simple">
-<li><a class="reference internal" href="#introduction" id="id2">Introduction</a></li>
-<li><a class="reference internal" href="#list-the-keys-related-to-the-gnome-terminal-profiles" id="id3">List the keys related to the GNOME terminal profiles</a></li>
-<li><a class="reference internal" href="#dump-load-the-keys-related-to-the-gnome-terminal-profiles" id="id4">Dump / load the keys related to the GNOME terminal profiles</a></li>
-<li><a class="reference internal" href="#dump-load-the-keys-related-to-all-gnome-terminal-options" id="id5">Dump / load the keys related to all GNOME terminal options</a></li>
-<li><a class="reference internal" href="#reset-i-e-erase-a-particular-key" id="id6">Reset (i.e. erase) a particular key</a></li>
-<li><a class="reference internal" href="#finding-the-gnome-version" id="id7">Finding the GNOME version</a></li>
-<li><a class="reference internal" href="#closing-the-gnome-session-from-the-command-line" id="id8">Closing the GNOME session from the command line</a></li>
-<li><a class="reference internal" href="#other-resources" id="id9">Other resources</a></li>
+<li><p><a class="reference internal" href="#introduction" id="id2">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#list-the-keys-related-to-the-gnome-terminal-profiles" id="id3">List the keys related to the GNOME terminal profiles</a></p></li>
+<li><p><a class="reference internal" href="#dump-load-the-keys-related-to-the-gnome-terminal-profiles" id="id4">Dump / load the keys related to the GNOME terminal profiles</a></p></li>
+<li><p><a class="reference internal" href="#dump-load-the-keys-related-to-all-gnome-terminal-options" id="id5">Dump / load the keys related to all GNOME terminal options</a></p></li>
+<li><p><a class="reference internal" href="#reset-i-e-erase-a-particular-key" id="id6">Reset (i.e. erase) a particular key</a></p></li>
+<li><p><a class="reference internal" href="#finding-the-gnome-version" id="id7">Finding the GNOME version</a></p></li>
+<li><p><a class="reference internal" href="#closing-the-gnome-session-from-the-command-line" id="id8">Closing the GNOME session from the command line</a></p></li>
+<li><p><a class="reference internal" href="#other-resources" id="id9">Other resources</a></p></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -102,7 +103,7 @@ dconf load /org/gnome/terminal/legacy/profiles:/ &lt; output_file
 <div class="line-block">
 <div class="line">[/]</div>
 <div class="line">list=[‘b1dcc9dd-5262-4d8d-a863-c897e6d979b9’, ‘424cb317-4a79-4a77-be53-86b59ee1e321’]</div>
-<div class="line">default=‘424cb317-4a79-4a77-be53-86b59ee1e321’</div>
+<div class="line">default=’424cb317-4a79-4a77-be53-86b59ee1e321’</div>
 <div class="line"><br></div>
 <div class="line">[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]</div>
 <div class="line">background-color=’rgb(0,0,0)’</div>
@@ -142,7 +143,7 @@ dconf load /org/gnome/terminal/ &lt; output_file
 <div class="line"><br></div>
 <div class="line">[legacy/profiles:]</div>
 <div class="line">list=[‘b1dcc9dd-5262-4d8d-a863-c897e6d979b9’, ‘424cb317-4a79-4a77-be53-86b59ee1e321’]</div>
-<div class="line">default=‘424cb317-4a79-4a77-be53-86b59ee1e321’</div>
+<div class="line">default=’424cb317-4a79-4a77-be53-86b59ee1e321’</div>
 <div class="line"><br></div>
 <div class="line">[legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]</div>
 <div class="line">background-color=’rgb(0,0,0)’</div>
@@ -197,13 +198,14 @@ of a GNOME terminal profile), use a command like:</p>
 <a class="toc-backref" href="#id9">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
 </h2>
 <ul class="simple">
-<li><a class="reference external" href="https://www.pcworld.com/article/2691192/how-gnome-3-14-is-winning-back-disillusioned-linux-users.html">How GNOME 3.14 is winning back disillusioned Linux users</a></li>
-<li><a class="reference external" href="https://unix.stackexchange.com/a/73225">How to get GNOME version?</a></li>
+<li><p><a class="reference external" href="https://www.pcworld.com/article/2691192/how-gnome-3-14-is-winning-back-disillusioned-linux-users.html">How GNOME 3.14 is winning back disillusioned Linux users</a></p></li>
+<li><p><a class="reference external" href="https://unix.stackexchange.com/a/73225">How to get GNOME version?</a></p></li>
 </ul>
 </div>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -230,13 +232,11 @@ of a GNOME terminal profile), use a command like:</p>
   <h4>Next topic</h4>
   <p class="topless"><a href="openbsd_vm.html" title="next chapter">Installing an OpenBSD virtual machine</a></p>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q">
+      <input type="text" name="q" aria-labelledby="searchlabel">
       <input type="submit" value="Go">
-      <input type="hidden" name="check_keywords" value="yes">
-      <input type="hidden" name="area" value="default">
     </form>
     </div>
 </div>
@@ -256,11 +256,12 @@ of a GNOME terminal profile), use a command like:</p>
         <li class="right">
           <a href="hp_usb_printer.html" title="HP USB printer">previous</a> |</li>
         <li class="nav-item nav-item-0">
-<a href="index.html">Personal Notes</a> »</li> 
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">GNOME 3</a></li> 
       </ul>
     </div>
   <div class="footer" role="contentinfo">
-        © Copyright 2018-2019, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+        © Copyright 2018-2021, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
     Work licensed under a
     <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
