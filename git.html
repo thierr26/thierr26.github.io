@@ -502,6 +502,13 @@ git diff 42b9c3b a92c02a -- path/to/files <span class="c1"># Shows changes for t
                                           <span class="c1"># files only.</span>
 </pre></div>
 </div>
+<p>You can get a compact overview of the difference using some <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code>
+options:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git diff --stat
+git diff --numstat
+</pre></div>
+</div>
 <p>In some cases, <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span> <span class="pre">-p</span></code> can be a good alternative to <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span></code>:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git log -p -1 a92c02a -- path/to/files <span class="c1"># Shows log message and changes made</span>
@@ -634,9 +641,19 @@ git log --graph --oneline --all          <span class="c1"># Compact graphical re
 <div class="highlight"><pre><span></span>git log -4
 </pre></div>
 </div>
-<p>You can also add a “diffstat”:</p>
+<p>You can limit the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> output to a range of commits using the “double
+dot” syntax (note that <strong>the first hash must be the one of the commit preceding
+the first commit of the range!</strong>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git log 9369edb..1989336
+</pre></div>
+</div>
+<p>You can also add various overviews of the changes done in the commits:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git log --stat
+git log --numstat
+git log --name-only
+git log --name-status
 </pre></div>
 </div>
 <p>For the record, here are a few more examples for <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> (for commit
@@ -921,7 +938,7 @@ like:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git ls-files <span class="s2">"*abc*"</span>
 
-git ls-files  <span class="se">\</span>
+git ls-files <span class="se">\</span>
     <span class="k">$(</span>git rev-parse --show-toplevel<span class="k">)</span>/<span class="s2">"*abc*"</span> <span class="c1"># Search from repository top</span>
                                              <span class="c1"># directory.</span>
 
