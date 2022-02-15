@@ -146,8 +146,8 @@ lines in <cite>/etc/ssh/sshd_config</cite>.</p>
 <p>Note however that enabling root password login is not recommended in the
 general case as it leaves the server root account as a possible target for a
 <a class="reference external" href="https://linuxhint.com/bruteforce_ssh_ftp">brute force attack</a>.</p>
-<p>Let’s mention also X11 forwarding. If you have the following line in
-<cite>/etc/ssh/sshd_config</cite>, then X11 forwarding is enabled:</p>
+<p>If you have the following line in <cite>/etc/ssh/sshd_config</cite>, then X11 forwarding
+is enabled:</p>
 <div class="line-block">
 <div class="line">X11Forwarding yes</div>
 </div>
@@ -158,9 +158,16 @@ launching the client:</p>
 <div class="highlight"><pre><span></span>ssh -X username@192.168.122.250 <span class="c1"># Use server IP address.</span>
 </pre></div>
 </div>
-<p>After modifying file /etc/ssh/sshd_config, make sure you restart the server:</p>
+<p>You may want to allow only some kind of keys to be used for public key
+authentication. Add a “PubkeyAcceptedKeyTypes” line to <cite>/etc/ssh/sshd_config</cite>
+for that (example to allow only “Ed25519” keys):</p>
+<div class="line-block">
+<div class="line">PubkeyAcceptedKeyTypes <a class="reference external" href="mailto:ssh-ed25519-cert-v01%40openssh.com">ssh-ed25519-cert-v01<span>@</span>openssh<span>.</span>com</a>,ssh-ed25519</div>
+</div>
+<p>After modifying file <cite>/etc/ssh/sshd_config</cite>, make sure you reload the
+configuration:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>systemctl restart ssh <span class="c1"># As root, on the remote machine.</span>
+<div class="highlight"><pre><span></span>systemctl reload ssh <span class="c1"># As root, on the remote machine.</span>
 </pre></div>
 </div>
 </div>
@@ -170,9 +177,14 @@ launching the client:</p>
 </h2>
 <p id="index-4">Instead of password authentication, you may use public key authentication. For
 that you have to first generate your public/private key pair <strong>on your local
-machine</strong> with for example:</p>
+machine</strong> with for example a command like:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>ssh-keygen -t rsa -b <span class="m">2048</span>
+<div class="highlight"><pre><span></span>ssh-keygen -t rsa -b <span class="m">2048</span> <span class="c1"># 2048 bits RSA key.</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>ssh-keygen -t ed25519     <span class="c1"># Ed25519 key, recommended.</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">ssh-keygen</span></code> requires a passphrase. It is possible to leave it empty but in
