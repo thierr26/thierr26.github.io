@@ -162,7 +162,7 @@ launching the client:</p>
 authentication. Add a “PubkeyAcceptedKeyTypes” line to <cite>/etc/ssh/sshd_config</cite>
 for that (example to allow only “Ed25519” keys):</p>
 <div class="line-block">
-<div class="line">PubkeyAcceptedKeyTypes <a class="reference external" href="mailto:ssh-ed25519-cert-v01%40openssh.com">ssh-ed25519-cert-v01<span>@</span>openssh<span>.</span>com</a>,ssh-ed25519</div>
+<div class="line">PubkeyAcceptedKeyTypes ssh-ed25519-cert-v01<span>@</span>openssh<span>.</span>com,ssh-ed25519</div>
 </div>
 <p>After modifying file <cite>/etc/ssh/sshd_config</cite>, make sure you reload the
 configuration:</p>
