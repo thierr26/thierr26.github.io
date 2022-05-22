@@ -81,9 +81,10 @@
 <li><p><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool" id="id22">Installing a wireless devices status management tool</a></p></li>
 <li><p><a class="reference internal" href="#installing-a-cd-burning-tool" id="id23">Installing a CD burning tool</a></p></li>
 <li><p><a class="reference internal" href="#installing-locate-updatedb" id="id24">Installing locate / updatedb</a></p></li>
+<li><p><a class="reference internal" href="#creating-new-users" id="id25">Creating new users</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#post-install-maintenance" id="id25">Post-install maintenance</a></p></li>
+<li><p><a class="reference internal" href="#post-install-maintenance" id="id26">Post-install maintenance</a></p></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -520,12 +521,22 @@ has been changed, with:</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="creating-new-users">
+<h3>
+<a class="toc-backref" href="#id25">Creating new users</a><a class="headerlink" href="#creating-new-users" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-21">Just use the <code class="docutils literal notranslate"><span class="pre">adduser</span></code> script:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>adduser new_user_name
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="post-install-maintenance">
 <h2>
-<a class="toc-backref" href="#id25">Post-install maintenance</a><a class="headerlink" href="#post-install-maintenance" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id26">Post-install maintenance</a><a class="headerlink" href="#post-install-maintenance" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-21">I regularly run the following commands to keep the system up to date:</p>
+<p id="index-22">I regularly run the following commands to keep the system up to date:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get update <span class="o">&amp;&amp;</span> apt-get dist-upgrade
 apt-get autoremove <span class="c1"># Useful if some packages have become unneeded.</span>
@@ -576,6 +587,7 @@ apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows o
 <li><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool">Installing a wireless devices status management tool</a></li>
 <li><a class="reference internal" href="#installing-a-cd-burning-tool">Installing a CD burning tool</a></li>
 <li><a class="reference internal" href="#installing-locate-updatedb">Installing locate / updatedb</a></li>
+<li><a class="reference internal" href="#creating-new-users">Creating new users</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#post-install-maintenance">Post-install maintenance</a></li>
