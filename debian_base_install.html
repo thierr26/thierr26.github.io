@@ -82,9 +82,10 @@
 <li><p><a class="reference internal" href="#installing-a-cd-burning-tool" id="id23">Installing a CD burning tool</a></p></li>
 <li><p><a class="reference internal" href="#installing-locate-updatedb" id="id24">Installing locate / updatedb</a></p></li>
 <li><p><a class="reference internal" href="#creating-new-users" id="id25">Creating new users</a></p></li>
+<li><p><a class="reference internal" href="#creating-a-super-user-account-disabling-root-login" id="id26">Creating a “super user” account, disabling root login</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#post-install-maintenance" id="id26">Post-install maintenance</a></p></li>
+<li><p><a class="reference internal" href="#post-install-maintenance" id="id27">Post-install maintenance</a></p></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -525,18 +526,45 @@ has been changed, with:</p>
 <h3>
 <a class="toc-backref" href="#id25">Creating new users</a><a class="headerlink" href="#creating-new-users" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-21">Just use the <code class="docutils literal notranslate"><span class="pre">adduser</span></code> script:</p>
+<p id="index-21">Just use the <code class="docutils literal notranslate"><span class="pre">adduser</span></code> script <strong>as root</strong>:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>adduser new_user_name
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-super-user-account-disabling-root-login">
+<h3>
+<a class="toc-backref" href="#id26">Creating a “super user” account, disabling root login</a><a class="headerlink" href="#creating-a-super-user-account-disabling-root-login" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-22">You may want, for security reasons, to use an account other than root to
+perform administrative tasks (via sudo), and to disable root login.</p>
+<p>Make sure <code class="docutils literal notranslate"><span class="pre">sudo</span></code> is installed:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install sudo
+</pre></div>
+</div>
+<p>Create (<strong>as root</strong>) a new user (the new “super user”):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>adduser super_user_user_name
+</pre></div>
+</div>
+<p>Add (<strong>as root</strong>) the “super user” to the <code class="docutils literal notranslate"><span class="pre">sudo</span></code> group:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>usermod -aG sudo super_user_user_name
+</pre></div>
+</div>
+<p>Disable root login (<strong>as the “super user”</strong>, via <code class="docutils literal notranslate"><span class="pre">sudo</span></code>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>sudo usermod -L root
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="post-install-maintenance">
 <h2>
-<a class="toc-backref" href="#id26">Post-install maintenance</a><a class="headerlink" href="#post-install-maintenance" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id27">Post-install maintenance</a><a class="headerlink" href="#post-install-maintenance" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-22">I regularly run the following commands to keep the system up to date:</p>
+<p id="index-23">I regularly run the following commands to keep the system up to date:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get update <span class="o">&amp;&amp;</span> apt-get dist-upgrade
 apt-get autoremove <span class="c1"># Useful if some packages have become unneeded.</span>
@@ -588,6 +616,7 @@ apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows o
 <li><a class="reference internal" href="#installing-a-cd-burning-tool">Installing a CD burning tool</a></li>
 <li><a class="reference internal" href="#installing-locate-updatedb">Installing locate / updatedb</a></li>
 <li><a class="reference internal" href="#creating-new-users">Creating new users</a></li>
+<li><a class="reference internal" href="#creating-a-super-user-account-disabling-root-login">Creating a “super user” account, disabling root login</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#post-install-maintenance">Post-install maintenance</a></li>

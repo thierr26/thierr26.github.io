@@ -146,6 +146,11 @@ lines in <cite>/etc/ssh/sshd_config</cite>.</p>
 <p>Note however that enabling root password login is not recommended in the
 general case as it leaves the server root account as a possible target for a
 <a class="reference external" href="https://linuxhint.com/bruteforce_ssh_ftp">brute force attack</a>.</p>
+<p>For the same reason, you may want to deny SSH access to the members of group
+<code class="docutils literal notranslate"><span class="pre">sudo</span></code>. Just add this line in <cite>/etc/ssh/sshd_config</cite>:</p>
+<div class="line-block">
+<div class="line">DenyGroups sudo</div>
+</div>
 <p>If you have the following line in <cite>/etc/ssh/sshd_config</cite>, then X11 forwarding
 is enabled:</p>
 <div class="line-block">
