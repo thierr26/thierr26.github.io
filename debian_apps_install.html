@@ -508,16 +508,31 @@ issue a <code class="docutils literal notranslate"><span class="pre">/SET</span>
 <h3>
 <a class="toc-backref" href="#id8">Claws Mail</a><a class="headerlink" href="#claws-mail" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-4">Setup MH directory properly, restore files <code class="docutils literal notranslate"><span class="pre">~/.claws-mail/accountrc</span></code> and
-<code class="docutils literal notranslate"><span class="pre">~/.signature</span></code>, and directory <code class="docutils literal notranslate"><span class="pre">~/.claws-mail/addrbook</span></code>.</p>
-<p>In Preferences, Themes: orbit-claws.</p>
-<p>In Preferences, Other, Miscellaneous: Confirm on exit.</p>
+<p id="index-4">When starting Claws Mail for the first time, you’re welcomed with the setup
+wizard which helps you setting up an E-Mail account asks you in which folder
+the messages should be stored. This is the “Mailbox name” which defaults to
+“Mail” which means that the messages are stored in directory <code class="docutils literal notranslate"><span class="pre">~/Mail</span></code>.</p>
+<p>The “Mailbox name” ends up in configuration file
+<code class="docutils literal notranslate"><span class="pre">~/.claws-mail/folderlist.xml</span></code>.</p>
+<p>The E-Mail account parameters ends up in configuration file
+<code class="docutils literal notranslate"><span class="pre">~/.claws-mail/accountrc</span></code>.</p>
+<p>Claws Mail stores the address book related files in directory
+<code class="docutils literal notranslate"><span class="pre">~/.claws-mail/addrbook</span></code>.</p>
+<p>I keep my signature in <code class="docutils literal notranslate"><span class="pre">~/.signature</span></code>. (You can provide the signature file in
+the “Compose” tab of the “Account preferences” dialog box.)</p>
+<p>Other settings:</p>
+<ul class="simple">
+<li><p>In Preferences, Themes: orbit-claws.</p></li>
+<li><p>In Preferences, Other, Miscellaneous: Confirm on exit.</p></li>
+<li>
 <p>In Preferences, Message View, External Programs: Uncheck “Use system defaults
 when possible”. Enter external programs as follows:</p>
-<ul class="simple">
+<ul>
 <li><p>Web browser: firefox ‘%s’</p></li>
 <li><p>Text editor: gvim ‘%s’</p></li>
 <li><p>Command for ‘Display as text’: gvim ‘%s’</p></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="section" id="pan">
@@ -526,7 +541,9 @@ when possible”. Enter external programs as follows:</p>
 </h3>
 <p id="index-5">In Edit News Servers, add a news server. I use news.free.fr, with my Free
 E-Mail login. This works even when connecting through an ISP other than <a class="reference external" href="https://www.free.fr">Free</a>.</p>
-<p>In Edit Preferences, Applications, Web browser: Custom Command: firefox</p>
+<p>In Edit Preferences, Applications:
+* Web browser: Custom Command: firefox
+* Text editor: gvim</p>
 <p>The two settings are saved in <code class="docutils literal notranslate"><span class="pre">~/.pan2/servers.xml</span></code> and
 <code class="docutils literal notranslate"><span class="pre">~/.pan2/preferences.xml</span></code> respectively.</p>
 </div>
@@ -721,13 +738,18 @@ your phone:</p>
 <h2>
 <a class="toc-backref" href="#id18">Wireshark installation</a><a class="headerlink" href="#wireshark-installation" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-14">When installing Wireshark (Debian package wireshark), I choose to allow
-“normal” users that are members of the <code class="docutils literal notranslate"><span class="pre">wireshark</span></code> group to capture packets.</p>
-<p>You can add a user to group <code class="docutils literal notranslate"><span class="pre">wireshark</span></code> with a command like (<strong>as root</strong>):</p>
+<p id="index-14">When installing Wireshark (Debian package wireshark), you’re prompted to choose
+whether non-superusers should be able to capture packets. I answer “Yes”. It
+causes the <code class="docutils literal notranslate"><span class="pre">wireshark</span></code> group to be created. Then you just have to add a user
+to the <code class="docutils literal notranslate"><span class="pre">wireshark</span></code> group to grant this user the right to capture packets with
+Wireshark. Use a command like the one below (<strong>as root</strong>) to add a user a user
+to the <code class="docutils literal notranslate"><span class="pre">wireshark</span></code> group:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>usermod -aG wireshark user_name <span class="c1"># As root.</span>
 </pre></div>
 </div>
+<p>If you have answered “No” and have changed your mind, run <code class="docutils literal notranslate"><span class="pre">dpkg-reconfigure</span>
+<span class="pre">wireshark-common</span></code>.</p>
 </div>
 <div class="section" id="session-for-desktop-installation">
 <h2>
