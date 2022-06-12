@@ -135,7 +135,7 @@ commands so that applications running as root can connect to the X server</span>
 <p>One precision though: This doesn’t work on one of my PC (one with a AMD Phenom
 II X2 555 CPU). OpenBSD fails to boot (kernel panic). The console says “Fatal
 protection fault in supervisor mode”. It looks very much like the problem
-discussed in this <a class="reference external" href="http://freebsd.1045724.x6.nabble.com/OpenBSD-guest-in-bhyve-on-AMD-CPU-td5987830.html">OpenBSD guest in bhyve on AMD CPU</a>
+discussed in this <a class="reference external" href="https://web.archive.org/web/20170719063441/http://freebsd.1045724.x6.nabble.com/OpenBSD-guest-in-bhyve-on-AMD-CPU-td5987830.html">OpenBSD guest in bhyve on AMD CPU</a>
 thread.</p>
 <p>One solution is to expose a different CPU to the guest (using the <code class="docutils literal notranslate"><span class="pre">--cpu</span></code>
 opton of <code class="docutils literal notranslate"><span class="pre">virt-install</span></code>). The output of <code class="docutils literal notranslate"><span class="pre">virsh</span> <span class="pre">domcapabilities</span></code> helped me
