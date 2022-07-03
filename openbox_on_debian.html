@@ -132,6 +132,10 @@ full screen state is possible with <code class="docutils literal notranslate"><s
 <code class="docutils literal notranslate"><span class="pre">freerdp2-x11</span></code> package.</p>
 <p>Note that on the remote machine, the <code class="docutils literal notranslate"><span class="pre">/etc/X11/Xwrapper.config</span></code> file contains
 the line <code class="docutils literal notranslate"><span class="pre">allowed_users=rootonly</span></code>.</p>
+<p>Let’s also mention that there is no login shell involved when opening a session
+with <code class="docutils literal notranslate"><span class="pre">xfreerdp</span></code>. It implies that the <code class="docutils literal notranslate"><span class="pre">logname</span></code> command does not output your
+user name but outputs “logname: no login name” instead, and your <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code>
+file is not sourced. But <code class="docutils literal notranslate"><span class="pre">~/.xsessionrc</span></code> is sourced.</p>
 </div>
 <div class="section" id="thunar-for-file-archive-and-removable-media-management">
 <h2>
