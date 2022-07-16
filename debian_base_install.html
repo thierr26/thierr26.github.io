@@ -526,9 +526,25 @@ has been changed, with:</p>
 <h3>
 <a class="toc-backref" href="#id25">Creating new users</a><a class="headerlink" href="#creating-new-users" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-21">Just use the <code class="docutils literal notranslate"><span class="pre">adduser</span></code> script <strong>as root</strong>:</p>
+<p id="index-21">Check whether the <code class="docutils literal notranslate"><span class="pre">DIR_MODE</span></code> (default permissions for users home directories)
+setting in file <code class="docutils literal notranslate"><span class="pre">/etc/adduser.conf</span></code> is appropriate for your needs. The
+default value is “0755”. It implies that any unprivileged user have read access
+to the files of other users. You may want to change (<strong>as root</strong>) the value to
+“0750” to avoid that:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>sed -i s/DIR_MODE<span class="o">=</span><span class="m">0755</span>/DIR_MODE<span class="o">=</span><span class="m">0750</span>/ /etc/adduser.conf
+</pre></div>
+</div>
+<p>Then, to create a new user, just use the <code class="docutils literal notranslate"><span class="pre">adduser</span></code> script (<strong>as root</strong>):</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>adduser new_user_name
+</pre></div>
+</div>
+<p>If some users have already been created with inappropriate home directories
+permissions, you can update their home directories permissions with a command
+like (<strong>as root</strong>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>chmod <span class="m">750</span> /home/*
 </pre></div>
 </div>
 </div>
