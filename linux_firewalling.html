@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    
+    <title>Linux firewalling — Personal Notes</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
+    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="Installing a Debian unstable virtual machine" href="debian_unstable_vm.html">
+    <link rel="prev" title="Debian applications installation" href="debian_apps_install.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="debian_unstable_vm.html" title="Installing a Debian unstable virtual machine" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="debian_apps_install.html" title="Debian applications installation" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Linux firewalling</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="linux-firewalling">
+<h1>Linux firewalling<a class="headerlink" href="#linux-firewalling" title="Permalink to this headline">¶</a>
+</h1>
+<div class="contents local topic" id="page-content">
+<p class="topic-title">Page content</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id6">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#disabling-iptables" id="id7">Disabling iptables</a></p></li>
+<li><p><a class="reference internal" href="#finding-the-open-ports-on-the-local-network" id="id8">Finding the open ports on the local network</a></p></li>
+<li>
+<p><a class="reference internal" href="#configuring-nftables" id="id9">Configuring nftables</a></p>
+<ul>
+<li><p><a class="reference internal" href="#nftables-configuration-file" id="id10">nftables configuration file</a></p></li>
+<li><p><a class="reference internal" href="#nft-administration-tool" id="id11">nft administration tool</a></p></li>
+<li><p><a class="reference internal" href="#example-nftables-configuration" id="id12">Example nftables configuration</a></p></li>
+<li><p><a class="reference internal" href="#note-about-dhcp" id="id13">Note about DHCP</a></p></li>
+<li><p><a class="reference internal" href="#updating-etc-nftables-conf" id="id14">Updating /etc/nftables.conf</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#installing-and-configuring-fail2ban" id="id15">Installing and configuring Fail2ban</a></p></li>
+<li><p><a class="reference internal" href="#other-resources" id="id16">Other resources</a></p></li>
+</ul>
+</div>
+<div class="section" id="introduction">
+<span id="index-0"></span><h2>
+<a class="toc-backref" href="#id6">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-1">This page is where I keep track of the few things I know about Linux
+firewalling and port scanning with <a class="reference external" href="https://en.wikipedia.org/wiki/Nftables">nftables</a>, <a class="reference external" href="https://nmap.org">Nmap</a>, <a class="reference external" href="https://linuxhint.com/ss-command-linux">ss</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Fail2ban">Fail2ban</a>.</p>
+<p>Use what you find on this page at your own risk. I’m not a network security
+specialist so the firewall configuration provided on this page may not be the
+best one. And your needs may be different than mine.</p>
+</div>
+<div class="section" id="disabling-iptables">
+<h2>
+<a class="toc-backref" href="#id7">Disabling iptables</a><a class="headerlink" href="#disabling-iptables" title="Permalink to this headline">¶</a>
+</h2>
+<p id="index-2"><a class="reference external" href="https://en.wikipedia.org/wiki/Iptables">iptables</a> is the predecessor of
+nftables, and used to be the default network filtering framework in <a class="reference external" href="https://www.debian.org">Debian
+GNU/Linux</a>. <a class="reference external" href="https://www.debian.org/releases/buster/amd64/release-nojjtes/ch-whats-new.en.html#nftables">Starting with Debian 10 (Buster), the
+default network filtering framework is nftables</a>.</p>
+<p>if iptables is installed on your system, you can list the rules (<strong>as root</strong>)
+with <code class="docutils literal notranslate"><span class="pre">iptables</span> <span class="pre">-L</span></code> (for the IPv4 protocol) and <code class="docutils literal notranslate"><span class="pre">ip6tables</span> <span class="pre">-L</span></code> (for the IPv6
+protocol). Here is the output you get when iptables is not configured:</p>
+<div class="line-block">
+<div class="line">Chain INPUT (policy ACCEPT)</div>
+<div class="line">target     prot opt source               destination</div>
+<div class="line"><br></div>
+<div class="line">Chain FORWARD (policy ACCEPT)</div>
+<div class="line">target     prot opt source               destination</div>
+<div class="line"><br></div>
+<div class="line">Chain OUTPUT (policy ACCEPT)</div>
+<div class="line">target     prot opt source               destination</div>
+</div>
+<p>Alternatively, you can use <code class="docutils literal notranslate"><span class="pre">iptables</span> <span class="pre">-S</span></code> and <code class="docutils literal notranslate"><span class="pre">ip6tables</span> <span class="pre">-S</span></code> (<strong>as root</strong>).
+When iptables is not configured, you get:</p>
+<div class="line-block">
+<div class="line">-P INPUT ACCEPT</div>
+<div class="line">-P FORWARD ACCEPT</div>
+<div class="line">-P OUTPUT ACCEPT</div>
+</div>
+<p>You can flush the iptables rules (<strong>as root</strong>) with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>iptables -F
+ip6tables -F
+</pre></div>
+</div>
+<p>You may also want to uninstall iptables. You can do so (<strong>as root</strong>) with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get remove iptables
+</pre></div>
+</div>
+</div>
+<div class="section" id="finding-the-open-ports-on-the-local-network">
+<h2>
+<a class="toc-backref" href="#id8">Finding the open ports on the local network</a><a class="headerlink" href="#finding-the-open-ports-on-the-local-network" title="Permalink to this headline">¶</a>
+</h2>
+<p>I use <a class="reference external" href="https://nmap.org">Nmap</a> to scan for open ports on hosts of my local
+network. On a <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> system, you can
+install it with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install nmap
+</pre></div>
+</div>
+<p>by default, Nmap scans the 1000 most popular TCP ports (<code class="docutils literal notranslate"><span class="pre">-vv</span></code> is for incresed
+verbosity):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>nmap -vv host_name
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">Starting Nmap 7.80 ( <a class="reference external" href="https://nmap.org">https://nmap.org</a> ) at 2022-06-12 13:56 CEST</div>
+<div class="line">Initiating Ping Scan at 13:56</div>
+<div class="line">Scanning host_name (XXX.XXX.XXX.XXX) [4 ports]</div>
+<div class="line">Completed Ping Scan at 13:56, 0.04s elapsed (1 total hosts)</div>
+<div class="line">Initiating SYN Stealth Scan at 13:56</div>
+<div class="line">Scanning host_name (XXX.XXX.XXX.XXX) [1000 ports]</div>
+<div class="line">Discovered open port 3389/tcp on XXX.XXX.XXX.XXX</div>
+<div class="line">Discovered open port 22/tcp on XXX.XXX.XXX.XXX</div>
+<div class="line">Completed SYN Stealth Scan at 13:56, 1.38s elapsed (1000 total ports)</div>
+<div class="line">Nmap scan report for host_name (XXX.XXX.XXX.XXX)</div>
+<div class="line">Host is up, received echo-reply ttl 55 (0.019s latency).</div>
+<div class="line">Scanned at 2022-06-12 13:56:11 CEST for 1s</div>
+<div class="line">Not shown: 997 closed ports</div>
+<div class="line">Reason: 997 resets</div>
+<div class="line">PORT     STATE    SERVICE       REASON</div>
+<div class="line">22/tcp   open     ssh           syn-ack ttl 55</div>
+<div class="line">25/tcp   filtered smtp          no-response</div>
+<div class="line">3389/tcp open     ms-wbt-server syn-ack ttl 55</div>
+<div class="line">MAC Address: XX:XX:XX:XX:XX:XX</div>
+<div class="line"><br></div>
+<div class="line">Read data files from: /usr/bin/../share/nmap</div>
+<div class="line">Nmap done: 1 IP address (1 host up) scanned in 1.53 seconds</div>
+<div class="line-block">
+<div class="line">Raw packets sent: 1005 (44.196KB) | Rcvd: 1000 (39.996KB)</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">-F</span></code> option is for a fast scan (only the most popular ports are scanned):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>nmap -vv -F host_name
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">Starting Nmap 7.80 ( <a class="reference external" href="https://nmap.org">https://nmap.org</a> ) at 2022-06-06 07:32 CEST</div>
+<div class="line">Initiating ARP Ping Scan at 13:57</div>
+<div class="line">Scanning host_name (XXX.XXX.XXX.XXX) [1 port]</div>
+<div class="line">Completed ARP Ping Scan at 13:57, 0.11s elapsed (1 total hosts)</div>
+<div class="line">Initiating SYN Stealth Scan at 13:57</div>
+<div class="line">Scanning host_name (XXX.XXX.XXX.XXX) [100 ports]</div>
+<div class="line">Discovered open port 22/tcp on XXX.XXX.XXX.XXX</div>
+<div class="line">Completed SYN Stealth Scan at 13:57, 2.42s elapsed (100 total ports)</div>
+<div class="line">Nmap scan report for host_name (XXX.XXX.XXX.XXX)</div>
+<div class="line">Host is up, received arp-response (0.054s latency).</div>
+<div class="line">rDNS record for XXX.XXX.XXX.XXX: host_name.localdomain</div>
+<div class="line">Scanned at 2022-06-12 13:57:31 CEST for 2s</div>
+<div class="line">Not shown: 97 closed ports</div>
+<div class="line">Reason: 97 resets</div>
+<div class="line">PORT     STATE    SERVICE       REASON</div>
+<div class="line">22/tcp   open     ssh           syn-ack ttl 64</div>
+<div class="line">25/tcp   filtered smtp          no-response</div>
+<div class="line">3389/tcp open     ms-wbt-server syn-ack ttl 55</div>
+<div class="line">MAC Address: XX:XX:XX:XX:XX:XX</div>
+<div class="line"><br></div>
+<div class="line">Read data files from: /usr/bin/../share/nmap</div>
+<div class="line">Nmap done: 1 IP address (1 host up) scanned in 0.22 seconds</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">-p</span></code> option is to specify a single port (or a port range, e.g. <code class="docutils literal notranslate"><span class="pre">p22-25</span></code>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>nmap -p3142 host_name
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">Starting Nmap 7.80 ( <a class="reference external" href="https://nmap.org">https://nmap.org</a> ) at 2022-06-06 07:33 CEST</div>
+<div class="line">Nmap scan report for host_name (XXX.XXX.XXX.XXX)</div>
+<div class="line">Host is up (0.0015s latency).</div>
+<div class="line">rDNS record for XXX.XXX.XXX.XXX: host_name.localdomain</div>
+<div class="line"><br></div>
+<div class="line">PORT     STATE SERVICE</div>
+<div class="line">3142/tcp open  apt-cacher</div>
+<div class="line">MAC Address: XX:XX:XX:XX:XX:XX</div>
+<div class="line"><br></div>
+<div class="line">Nmap done: 1 IP address (1 host up) scanned in 0.20 seconds</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">-sU</span></code> is for a UDP scan, <code class="docutils literal notranslate"><span class="pre">--top-ports</span></code> is to scan only the most common
+ports (here the 100 most common ports). Note that <strong>UDP scan requires root
+privileges</strong>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>nmap -vv -sU -top-ports <span class="m">100</span> host_name
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">Starting Nmap 7.80 ( <a class="reference external" href="https://nmap.org">https://nmap.org</a> ) at 2022-06-12 13:58 CEST</div>
+<div class="line">Initiating ARP Ping Scan at 13:58</div>
+<div class="line">Scanning host_name (XXX.XXX.XXX.XXX) [1 port]</div>
+<div class="line">Completed ARP Ping Scan at 13:58, 0.13s elapsed (1 total hosts)</div>
+<div class="line">Initiating UDP Scan at 13:58</div>
+<div class="line">Scanning host_name (XXX.XXX.XXX.XXX) [100 ports]</div>
+<div class="line">Increasing send delay for XXX.XXX.XXX.XXX from 0 to 50 due to max_successful_tryno increase to 4</div>
+<div class="line">Increasing send delay for XXX.XXX.XXX.XXX from 50 to 100 due to max_successful_tryno increase to 5</div>
+<div class="line">Increasing send delay for XXX.XXX.XXX.XXX from 100 to 200 due to max_successful_tryno increase to 6</div>
+<div class="line">Increasing send delay for XXX.XXX.XXX.XXX from 200 to 400 due to max_successful_tryno increase to 7</div>
+<div class="line">Increasing send delay for XXX.XXX.XXX.XXX from 400 to 800 due to max_successful_tryno increase to 8</div>
+<div class="line">Discovered open port 5353/udp on XXX.XXX.XXX.XXX</div>
+<div class="line">UDP Scan Timing: About 41.20% done; ETC: 13:59 (0:00:44 remaining)</div>
+<div class="line">Completed UDP Scan at 14:00, 104.42s elapsed (100 total ports)</div>
+<div class="line">Nmap scan report for host_name (XXX.XXX.XXX.XXX)</div>
+<div class="line">Host is up, received arp-response (0.13s latency).</div>
+<div class="line">rDNS record for XXX.XXX.XXX.XXX: host_name.localdomain</div>
+<div class="line">Scanned at 2022-06-12 13:58:35 CEST for 105s</div>
+<div class="line">Not shown: 98 closed ports</div>
+<div class="line">Reason: 98 port-unreaches</div>
+<div class="line">PORT     STATE         SERVICE  REASON</div>
+<div class="line">68/udp   open|filtered dhcpc    no-response</div>
+<div class="line">5353/udp open          zeroconf udp-response ttl 255</div>
+<div class="line">MAC Address: XX:XX:XX:XX:XX:XX</div>
+<div class="line"><br></div>
+<div class="line">Read data files from: /usr/bin/../share/nmap</div>
+<div class="line">Nmap done: 1 IP address (1 host up) scanned in 104.64 seconds</div>
+<div class="line-block">
+<div class="line">Raw packets sent: 201 (7.040KB) | Rcvd: 111 (6.956KB)</div>
+</div>
+</div>
+<p>Using the command <code class="docutils literal notranslate"><span class="pre">ss</span></code>, you can see which process or service uses a specific
+port. On a <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> system, you can
+install it with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install iproute2
+</pre></div>
+</div>
+<p>For example, to see which services uses the ports that Nmap has found opened,
+you can do something like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>ss -ane<span class="p">|</span>awk <span class="s2">"NR == 1 || /[0-9\]]:(22 |68 |3142 |5353 )/"</span>
+</pre></div>
+</div>
+<p>The output obtained on my Debian machines <a class="reference download internal" download="" href="_downloads/4bb5b08b0a8a4719a64cf18849d4d695/ss_22_68_3142_5353"><code class="xref download docutils literal notranslate"><span class="pre">is</span> <span class="pre">available</span> <span class="pre">for</span> <span class="pre">download</span>
+<span class="pre">(file</span> <span class="pre">ss_22_68_3142_5353)</span></code></a>.</p>
+</div>
+<div class="section" id="configuring-nftables">
+<h2>
+<a class="toc-backref" href="#id9">Configuring nftables</a><a class="headerlink" href="#configuring-nftables" title="Permalink to this headline">¶</a>
+</h2>
+<div class="section" id="nftables-configuration-file">
+<h3>
+<a class="toc-backref" href="#id10">nftables configuration file</a><a class="headerlink" href="#nftables-configuration-file" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-4">The configuration file for nftables is the <code class="docutils literal notranslate"><span class="pre">/etc/nftables.conf</span></code> script. It’s
+not run if the nftables service is not active. You can check the nftables
+service status with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>systemctl status nftables
+</pre></div>
+</div>
+<p>You can start and stop the service <strong>as root</strong> with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>systemctl start nftables
+systemctl stop nftables
+</pre></div>
+</div>
+<p>The service is started automatically when the machine boots only if it is
+“enabled”. You can enable the service <strong>as root</strong> with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>systemctl <span class="nb">enable</span> nftables
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>systemctl <span class="nb">enable</span> nftables --now <span class="c1"># Start and enable the service.</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">/etc/nftables.conf</span></code> has changed, you can take the change into account
+<strong>as root</strong> with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>systemctl reload nftables
+</pre></div>
+</div>
+<p>You can disable the service <strong>as root</strong> with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>systemctl disable nftables
+systemctl disable nftables --now <span class="c1"># Stop and disable the service.</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="nft-administration-tool">
+<h3>
+<a class="toc-backref" href="#id11">nft administration tool</a><a class="headerlink" href="#nft-administration-tool" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-5"><code class="docutils literal notranslate"><span class="pre">nft</span></code> is the command line administration tool of the nftables framework that
+make it possible to add, delete or change packet filtering rules with immediate
+effect.</p>
+<p>One way of managing nftables configuration is to configure it using <code class="docutils literal notranslate"><span class="pre">nft</span></code> and
+then to use <code class="docutils literal notranslate"><span class="pre">nft</span></code> to output the rules (using command <code class="docutils literal notranslate"><span class="pre">nft</span> <span class="pre">list</span> <span class="pre">ruleset</span></code>).
+The output can be used as content for the <code class="docutils literal notranslate"><span class="pre">/etc/nftables.conf</span></code> script. Just
+make sure to prepend the shebang and a flush command:</p>
+<div class="line-block">
+<div class="line">#!/usr/sbin/nft -f</div>
+<div class="line">flush ruleset</div>
+</div>
+<p>Note also that you can check the validity of the commands in the script
+(without actually running them) with the <code class="docutils literal notranslate"><span class="pre">--check</span></code> option:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>nft --check --file /etc/nftables.conf
+</pre></div>
+</div>
+</div>
+<div class="section" id="example-nftables-configuration">
+<h3>
+<a class="toc-backref" href="#id12">Example nftables configuration</a><a class="headerlink" href="#example-nftables-configuration" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-6">Once again, use what you find here at your own risk!</p>
+<p>All the <code class="docutils literal notranslate"><span class="pre">nft</span></code> commands below have to be run <strong>as root</strong>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="c1"># Remove all rules.</span>
+nft flush ruleset
+
+<span class="c1"># Add a table named "firewall" for IPv4 and IPv6.</span>
+nft add table inet firewall
+
+<span class="c1"># Add a chain named "fw_in" in table "firewall" with default policy "drop".</span>
+<span class="c1"># The chain is attached to the input hook.</span>
+nft add chain inet firewall fw_in <span class="o">{</span> <span class="se">\</span>
+  <span class="nb">type</span> filter hook input priority <span class="m">0</span><span class="se">\;</span> <span class="se">\</span>
+  policy drop<span class="se">\;</span> <span class="se">\</span>
+<span class="o">}</span>
+
+<span class="c1"># Similarly, add chains attached to the forward and output hooks.</span>
+nft add chain inet firewall fw_fwd <span class="o">{</span> <span class="se">\</span>
+  <span class="nb">type</span> filter hook forward priority <span class="m">0</span><span class="se">\;</span> <span class="se">\</span>
+  policy drop<span class="se">\;</span> <span class="se">\</span>
+<span class="o">}</span>
+nft add chain inet firewall fw_out <span class="o">{</span> <span class="se">\</span>
+  <span class="nb">type</span> filter hook output priority <span class="m">0</span><span class="se">\;</span> <span class="se">\</span>
+  policy drop<span class="se">\;</span> <span class="se">\</span>
+<span class="o">}</span>
+
+<span class="c1"># Drop invalid state connections.</span>
+nft add rule inet firewall fw_in ct state invalid drop
+
+<span class="c1"># Allow all incoming / outgoing established and related traffic.</span>
+nft add rule inet firewall fw_in ct state established, related accept
+nft add rule inet firewall fw_out ct state established, related accept
+
+<span class="c1"># Allow everything from and to loopback interface.</span>
+nft add rule inet firewall fw_in iif lo accept
+nft add rule inet firewall fw_out oif lo accept
+
+<span class="c1"># Allow some inbound and outbound ICMP types.</span>
+nft add rule inet firewall fw_in icmp <span class="nb">type</span> <span class="o">{</span>destination-unreachable, <span class="se">\</span>
+                                            echo-reply, <span class="se">\</span>
+                                            echo-request, <span class="se">\</span>
+                                            source-quench, <span class="se">\</span>
+                                            time-exceeded<span class="o">}</span> accept
+nft add rule inet firewall fw_in icmpv6 <span class="nb">type</span> <span class="o">{</span>destination-unreachable, <span class="se">\</span>
+                                              echo-reply, <span class="se">\</span>
+                                              echo-request, <span class="se">\</span>
+                                              nd-neighbor-solicit, <span class="se">\</span>
+                                              nd-router-advert, <span class="se">\</span>
+                                              nd-neighbor-advert, <span class="se">\</span>
+                                              packet-too-big, <span class="se">\</span>
+                                              parameter-problem, <span class="se">\</span>
+                                              time-exceeded <span class="o">}</span> accept
+nft add rule inet firewall fw_out icmp <span class="nb">type</span> <span class="o">{</span>destination-unreachable, <span class="se">\</span>
+                                             echo-reply, <span class="se">\</span>
+                                             echo-request, <span class="se">\</span>
+                                             source-quench, <span class="se">\</span>
+                                             time-exceeded<span class="o">}</span> accept
+nft add rule inet firewall fw_out icmpv6 <span class="nb">type</span> <span class="o">{</span>destination-unreachable, <span class="se">\</span>
+                                               echo-reply, <span class="se">\</span>
+                                               echo-request, <span class="se">\</span>
+                                               nd-neighbor-solicit, <span class="se">\</span>
+                                               nd-router-advert, <span class="se">\</span>
+                                               nd-neighbor-advert, <span class="se">\</span>
+                                               packet-too-big, <span class="se">\</span>
+                                               parameter-problem, <span class="se">\</span>
+                                               time-exceeded <span class="o">}</span> accept
+
+<span class="c1"># Allow incoming SSH connections.</span>
+nft add rule inet firewall fw_in tcp dport ssh accept
+
+<span class="c1"># NOTE: If you just need SSH access to the machine, you can stop here.</span>
+
+<span class="c1"># Allow outgoing SSH connections.</span>
+nft add rule inet firewall fw_out tcp dport ssh accept
+
+<span class="c1"># Allow RDP.</span>
+nft add rule inet firewall fw_in tcp dport <span class="m">3389</span> accept
+
+<span class="c1"># Allow outgoing DNS queries.</span>
+nft add rule inet firewall fw_out tcp dport <span class="m">53</span> accept
+nft add rule inet firewall fw_out udp dport <span class="m">53</span> accept
+
+<span class="c1"># Allow outgoing Web (http and https) queries.</span>
+nft add rule inet firewall fw_out tcp dport http accept
+nft add rule inet firewall fw_out tcp dport https accept
+
+<span class="c1"># Allow POP3-SSL client.</span>
+nft add rule inet firewall fw_out tcp dport <span class="m">995</span> accept
+
+<span class="c1"># Allow mDNS.</span>
+nft add rule inet firewall fw_in pkttype multicast udp dport <span class="m">5353</span> accept
+nft add rule inet firewall fw_out udp sport <span class="m">5353</span> accept
+</pre></div>
+</div>
+</div>
+<div class="section" id="note-about-dhcp">
+<h3>
+<a class="toc-backref" href="#id13">Note about DHCP</a><a class="headerlink" href="#note-about-dhcp" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-7">If you have to configure nftables on a machine that is also a <a class="reference external" href="https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol">DHCP</a> server or
+client, read the “Firewall rules” section in <a class="reference external" href="https://github.com/isc-projects/dhcp">the DHCP README file</a>.</p>
+</div>
+<div class="section" id="updating-etc-nftables-conf">
+<h3>
+<a class="toc-backref" href="#id14">Updating /etc/nftables.conf</a><a class="headerlink" href="#updating-etc-nftables-conf" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-8">Once you have configured nftables using <code class="docutils literal notranslate"><span class="pre">nft</span></code> commands, you may want to
+update <code class="docutils literal notranslate"><span class="pre">/etc/nftables.conf</span></code> so that the configuration is preserved on next
+start of nftables. You can do this using the following commands (<strong>as root</strong>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">printf</span> <span class="s1">'#!/usr/sbin/nft -f\n\nflush ruleset\n\n'</span> &gt; /etc/nftables.conf
+nft list ruleset &gt;&gt; /etc/nftables.conf
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="installing-and-configuring-fail2ban">
+<h2>
+<a class="toc-backref" href="#id15">Installing and configuring Fail2ban</a><a class="headerlink" href="#installing-and-configuring-fail2ban" title="Permalink to this headline">¶</a>
+</h2>
+<p>You can install <a class="reference external" href="https://en.wikipedia.org/wiki/Fail2ban">Fail2ban</a> on a
+<a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> system with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get install fail2ban
+</pre></div>
+</div>
+<p>Assuming you have nftables running, and an SSH server listening on port 22,
+creating (<strong>as root</strong>) file <code class="docutils literal notranslate"><span class="pre">/etc/fail2ban/jail.local</span></code> with the following
+content and then starting Fail2ban (<code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">fail2ban</span></code>) should be
+enough to have Fail2ban prevent brute force attacks on the SSH server.</p>
+<div class="line-block">
+<div class="line">[DEFAULT]</div>
+<div class="line">banaction = nftables</div>
+<div class="line">banaction_allports = nftables[type=allports]</div>
+<div class="line"><br></div>
+<div class="line">[sshd]</div>
+<div class="line">enabled = true</div>
+<div class="line">port = ssh</div>
+</div>
+<p>Make sure you enable Fail2ban so that it starts automatically on next reboot:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>systemctl <span class="nb">enable</span> fail2ban
+</pre></div>
+</div>
+<p>You can get some information about the state of Fail2ban using
+<code class="docutils literal notranslate"><span class="pre">fail2ban-client</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>fail2ban-client status
+fail2ban-client status sshd
+</pre></div>
+</div>
+</div>
+<div class="section" id="other-resources">
+<h2>
+<a class="toc-backref" href="#id16">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+</h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://paulgorman.org/technical/linux-nftables.txt.html">Paul Gorman’s technical note about nftables</a></p></li>
+<li><p><a class="reference external" href="https://xdeb.org/post/2019/setting-up-a-server-firewall-with-nftables-that-support-wireguard-vpn">Fredrik Jonsson’s blog post “Setting up a server firewall with nftables that
+support WireGuard VPN”</a></p></li>
+<li><p><a class="reference external" href="https://linux-audit.com/nftables-beginners-guide-to-traffic-filtering">Beginners guide to nftables traffic filtering</a></p></li>
+<li><p><a class="reference external" href="https://www.stationx.net/nmap-cheat-sheet">Nmap cheat sheet</a></p></li>
+</ul>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li>
+<a class="reference internal" href="#">Linux firewalling</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#disabling-iptables">Disabling iptables</a></li>
+<li><a class="reference internal" href="#finding-the-open-ports-on-the-local-network">Finding the open ports on the local network</a></li>
+<li>
+<a class="reference internal" href="#configuring-nftables">Configuring nftables</a><ul>
+<li><a class="reference internal" href="#nftables-configuration-file">nftables configuration file</a></li>
+<li><a class="reference internal" href="#nft-administration-tool">nft administration tool</a></li>
+<li><a class="reference internal" href="#example-nftables-configuration">Example nftables configuration</a></li>
+<li><a class="reference internal" href="#note-about-dhcp">Note about DHCP</a></li>
+<li><a class="reference internal" href="#updating-etc-nftables-conf">Updating /etc/nftables.conf</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installing-and-configuring-fail2ban">Installing and configuring Fail2ban</a></li>
+<li><a class="reference internal" href="#other-resources">Other resources</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="debian_apps_install.html" title="previous chapter">Debian applications installation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="debian_unstable_vm.html" title="next chapter">Installing a Debian unstable virtual machine</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel">
+      <input type="submit" value="Go">
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="debian_unstable_vm.html" title="Installing a Debian unstable virtual machine">next</a> |</li>
+        <li class="right">
+          <a href="debian_apps_install.html" title="Debian applications installation">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Linux firewalling</a></li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2022, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>
