@@ -57,12 +57,14 @@
 <li><p><a class="reference internal" href="#nftables-configuration-file" id="id10">nftables configuration file</a></p></li>
 <li><p><a class="reference internal" href="#nft-administration-tool" id="id11">nft administration tool</a></p></li>
 <li><p><a class="reference internal" href="#example-nftables-configuration" id="id12">Example nftables configuration</a></p></li>
-<li><p><a class="reference internal" href="#note-about-dhcp" id="id13">Note about DHCP</a></p></li>
-<li><p><a class="reference internal" href="#updating-etc-nftables-conf" id="id14">Updating /etc/nftables.conf</a></p></li>
+<li><p><a class="reference internal" href="#allow-outgoing-web-queries-to-a-set-of-specific-servers" id="id13">Allow outgoing Web queries to a set of specific servers</a></p></li>
+<li><p><a class="reference internal" href="#deleting-rules-or-sets" id="id14">Deleting rules or sets</a></p></li>
+<li><p><a class="reference internal" href="#note-about-dhcp" id="id15">Note about DHCP</a></p></li>
+<li><p><a class="reference internal" href="#updating-etc-nftables-conf" id="id16">Updating /etc/nftables.conf</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#installing-and-configuring-fail2ban" id="id15">Installing and configuring Fail2ban</a></p></li>
-<li><p><a class="reference internal" href="#other-resources" id="id16">Other resources</a></p></li>
+<li><p><a class="reference internal" href="#installing-and-configuring-fail2ban" id="id17">Installing and configuring Fail2ban</a></p></li>
+<li><p><a class="reference internal" href="#other-resources" id="id18">Other resources</a></p></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -426,16 +428,78 @@ nft add rule inet firewall fw_out udp sport <span class="m">5353</span> accept
 </pre></div>
 </div>
 </div>
+<div class="section" id="allow-outgoing-web-queries-to-a-set-of-specific-servers">
+<h3>
+<a class="toc-backref" href="#id13">Allow outgoing Web queries to a set of specific servers</a><a class="headerlink" href="#allow-outgoing-web-queries-to-a-set-of-specific-servers" title="Permalink to this headline">¶</a>
+</h3>
+<p>On a remote machine, I initially used the configuration above (stopping after
+allowing incoming SSH connections), and then realized I couldn’t upgrade the
+system anymore (i.e. <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span></code> and of course <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">dist-upgrade</span></code>
+didn’t work any more) because nftables was blocking the DNS queries, and also
+the Web queries to the Debian repositories.</p>
+<p>Obviously, I allowed the outgoing DNS queries with the commands provided above,
+defined a set of addresses for the servers used by the <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span></code> and
+<code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">dist-upgrade</span></code> commands, and allowed outgoing Web (http and https)
+queries.</p>
+<p>Note that the list of servers used depends on your APT configuration.</p>
+<p>I used the following commands (<strong>as root</strong>) to create and populate the set of
+addresses:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="c1"># Create a set named "debian_sources" (in table "firewall") that can store</span>
+<span class="c1"># multiple individual IPv4 addresses.</span>
+nft add <span class="nb">set</span> inet firewall debian_sources <span class="o">{</span> <span class="nb">type</span> ipv4_addr <span class="se">\;</span> <span class="o">}</span>
+
+<span class="c1"># Add some addresses to the set. Both numerical addresses and domain names</span>
+<span class="c1"># are valid.</span>
+nft add element inet firewall debian_sources <span class="o">{</span> XXX.XXX.XXX.XXX, <span class="se">\</span>
+                                               YYY.YYY.YYY.YYY, <span class="se">\</span>
+                                               ZZZ.ZZZ.ZZZ.ZZZ <span class="o">}</span>
+</pre></div>
+</div>
+<p>Finally I used the following commands (<strong>as root</strong>) to allow the Web queries
+(http and https) to the servers in the set:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>nft add rule inet firewall fw_out <span class="se">\</span>
+    ip daddr @debian_sources tcp dport http accept
+nft add rule inet firewall fw_out <span class="se">\</span>
+    ip daddr @debian_sources tcp dport https accept
+</pre></div>
+</div>
+</div>
+<div class="section" id="deleting-rules-or-sets">
+<h3>
+<a class="toc-backref" href="#id14">Deleting rules or sets</a><a class="headerlink" href="#deleting-rules-or-sets" title="Permalink to this headline">¶</a>
+</h3>
+<p>To delete an nftables rule, you first have to find its handle (a numerical
+value). To see the handles of the rules, use option <code class="docutils literal notranslate"><span class="pre">-a</span></code> in the <code class="docutils literal notranslate"><span class="pre">nft</span> <span class="pre">list</span>
+<span class="pre">ruleset</span></code> command:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>nft -a list ruleset
+</pre></div>
+</div>
+<p>Then delete the rule with a command like the following (example of deletion of
+a rule in the “fw_out” chain of the “firewall” table):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>nft delete rule inet firewall fw_out handle &lt;handle_value&gt;
+</pre></div>
+</div>
+<p>To delete a set, use a command like (example of deletion of a set in the table
+“firewall”):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>nft delete <span class="nb">set</span> inet firewall &lt;set_name&gt;
+</pre></div>
+</div>
+</div>
 <div class="section" id="note-about-dhcp">
 <h3>
-<a class="toc-backref" href="#id13">Note about DHCP</a><a class="headerlink" href="#note-about-dhcp" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id15">Note about DHCP</a><a class="headerlink" href="#note-about-dhcp" title="Permalink to this headline">¶</a>
 </h3>
 <p id="index-7">If you have to configure nftables on a machine that is also a <a class="reference external" href="https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol">DHCP</a> server or
 client, read the “Firewall rules” section in <a class="reference external" href="https://github.com/isc-projects/dhcp">the DHCP README file</a>.</p>
 </div>
 <div class="section" id="updating-etc-nftables-conf">
 <h3>
-<a class="toc-backref" href="#id14">Updating /etc/nftables.conf</a><a class="headerlink" href="#updating-etc-nftables-conf" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id16">Updating /etc/nftables.conf</a><a class="headerlink" href="#updating-etc-nftables-conf" title="Permalink to this headline">¶</a>
 </h3>
 <p id="index-8">Once you have configured nftables using <code class="docutils literal notranslate"><span class="pre">nft</span></code> commands, you may want to
 update <code class="docutils literal notranslate"><span class="pre">/etc/nftables.conf</span></code> so that the configuration is preserved on next
@@ -449,7 +513,7 @@ nft list ruleset &gt;&gt; /etc/nftables.conf
 </div>
 <div class="section" id="installing-and-configuring-fail2ban">
 <h2>
-<a class="toc-backref" href="#id15">Installing and configuring Fail2ban</a><a class="headerlink" href="#installing-and-configuring-fail2ban" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id17">Installing and configuring Fail2ban</a><a class="headerlink" href="#installing-and-configuring-fail2ban" title="Permalink to this headline">¶</a>
 </h2>
 <p>You can install <a class="reference external" href="https://en.wikipedia.org/wiki/Fail2ban">Fail2ban</a> on a
 <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> system with:</p>
@@ -485,7 +549,7 @@ fail2ban-client status sshd
 </div>
 <div class="section" id="other-resources">
 <h2>
-<a class="toc-backref" href="#id16">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id18">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
 </h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://paulgorman.org/technical/linux-nftables.txt.html">Paul Gorman’s technical note about nftables</a></p></li>
@@ -516,6 +580,8 @@ support WireGuard VPN”</a></p></li>
 <li><a class="reference internal" href="#nftables-configuration-file">nftables configuration file</a></li>
 <li><a class="reference internal" href="#nft-administration-tool">nft administration tool</a></li>
 <li><a class="reference internal" href="#example-nftables-configuration">Example nftables configuration</a></li>
+<li><a class="reference internal" href="#allow-outgoing-web-queries-to-a-set-of-specific-servers">Allow outgoing Web queries to a set of specific servers</a></li>
+<li><a class="reference internal" href="#deleting-rules-or-sets">Deleting rules or sets</a></li>
 <li><a class="reference internal" href="#note-about-dhcp">Note about DHCP</a></li>
 <li><a class="reference internal" href="#updating-etc-nftables-conf">Updating /etc/nftables.conf</a></li>
 </ul>
