@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="genindex.html">
     <link rel="search" title="Search" href="search.html">
     <link rel="next" title="Sphinx" href="sphinx.html">
-    <link rel="prev" title="hexdump" href="hexdump.html"> 
+    <link rel="prev" title="bc" href="bc.html"> 
   </head>
 <body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -30,7 +30,7 @@
         <li class="right">
           <a href="sphinx.html" title="Sphinx" accesskey="N">next</a> |</li>
         <li class="right">
-          <a href="hexdump.html" title="hexdump" accesskey="P">previous</a> |</li>
+          <a href="bc.html" title="bc" accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0">
 <a href="index.html">Personal Notes</a> »</li>
         <li class="nav-item nav-item-this"><a href="">Sed</a></li> 
@@ -65,16 +65,16 @@ commands I found difficult to elaborate.</p>
 <h2>
 <a class="toc-backref" href="#id2">Left-padding numbers with zeros</a><a class="headerlink" href="#left-padding-numbers-with-zeros" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-1">Let’s say we have a file called <code class="docutils literal notranslate"><span class="pre">numbers</span></code> containing integer numbers (without
-any sign):</p>
+<p id="index-1">Let’s say we have a text file called <code class="docutils literal notranslate"><span class="pre">numbers</span></code> containing integer numbers
+(one per line, and without any sign):</p>
 <div class="line-block">
 <div class="line">123</div>
 <div class="line">4</div>
 <div class="line">5678</div>
 <div class="line">99999</div>
 </div>
-<p>The following Bash command line outputs the same numbers, but with leading
-zeros (for the numbers having less than 4 digits):</p>
+<p>The following command outputs the same numbers, but with leading zeros (for the
+numbers having less than 4 digits):</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>sed -e <span class="s2">":redo;s/^\([0-9]\{1,3\}\)</span>$<span class="s2">/0\1/; t redo"</span> numbers
 </pre></div>
@@ -156,7 +156,7 @@ of line sequence).</p>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="hexdump.html" title="previous chapter">hexdump</a></p>
+  <p class="topless"><a href="bc.html" title="previous chapter">bc</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="sphinx.html" title="next chapter">Sphinx</a></p>
 <div id="searchbox" style="display: none" role="search">
@@ -182,7 +182,7 @@ of line sequence).</p>
         <li class="right">
           <a href="sphinx.html" title="Sphinx">next</a> |</li>
         <li class="right">
-          <a href="hexdump.html" title="hexdump">previous</a> |</li>
+          <a href="bc.html" title="bc">previous</a> |</li>
         <li class="nav-item nav-item-0">
 <a href="index.html">Personal Notes</a> »</li>
         <li class="nav-item nav-item-this"><a href="">Sed</a></li> 
