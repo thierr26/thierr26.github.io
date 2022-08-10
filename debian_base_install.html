@@ -76,16 +76,17 @@
 <li><p><a class="reference internal" href="#adding-deb-multimedia-to-the-sources" id="id17">Adding deb-multimedia to the sources</a></p></li>
 <li><p><a class="reference internal" href="#installing-firmware-linux-nonfree" id="id18">Installing firmware-linux-nonfree</a></p></li>
 <li><p><a class="reference internal" href="#checking-the-configured-time-zone" id="id19">Checking the configured time zone</a></p></li>
-<li><p><a class="reference internal" href="#installing-a-console-locker" id="id20">Installing a console locker</a></p></li>
-<li><p><a class="reference internal" href="#installing-a-memory-ram-tester" id="id21">Installing a memory (RAM) tester</a></p></li>
-<li><p><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool" id="id22">Installing a wireless devices status management tool</a></p></li>
-<li><p><a class="reference internal" href="#installing-a-cd-burning-tool" id="id23">Installing a CD burning tool</a></p></li>
-<li><p><a class="reference internal" href="#creating-new-users" id="id24">Creating new users</a></p></li>
-<li><p><a class="reference internal" href="#creating-a-super-user-account-disabling-root-login" id="id25">Creating a “super user” account, disabling root login</a></p></li>
-<li><p><a class="reference internal" href="#installing-locate-updatedb" id="id26">Installing locate / updatedb</a></p></li>
+<li><p><a class="reference internal" href="#cheking-systemd-timesyncd-service" id="id20">Cheking systemd-timesyncd service</a></p></li>
+<li><p><a class="reference internal" href="#installing-a-console-locker" id="id21">Installing a console locker</a></p></li>
+<li><p><a class="reference internal" href="#installing-a-memory-ram-tester" id="id22">Installing a memory (RAM) tester</a></p></li>
+<li><p><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool" id="id23">Installing a wireless devices status management tool</a></p></li>
+<li><p><a class="reference internal" href="#installing-a-cd-burning-tool" id="id24">Installing a CD burning tool</a></p></li>
+<li><p><a class="reference internal" href="#creating-new-users" id="id25">Creating new users</a></p></li>
+<li><p><a class="reference internal" href="#creating-a-super-user-account-disabling-root-login" id="id26">Creating a “super user” account, disabling root login</a></p></li>
+<li><p><a class="reference internal" href="#installing-locate-updatedb" id="id27">Installing locate / updatedb</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#post-install-maintenance" id="id27">Post-install maintenance</a></p></li>
+<li><p><a class="reference internal" href="#post-install-maintenance" id="id28">Post-install maintenance</a></p></li>
 </ul>
 </div>
 <div class="section" id="introduction">
@@ -427,11 +428,36 @@ Make sure you issue a <code class="docutils literal notranslate"><span class="pr
 </pre></div>
 </div>
 </div>
+<div class="section" id="cheking-systemd-timesyncd-service">
+<h3>
+<a class="toc-backref" href="#id20">Cheking systemd-timesyncd service</a><a class="headerlink" href="#cheking-systemd-timesyncd-service" title="Permalink to this headline">¶</a>
+</h3>
+<p id="index-16">Service systemd-timesyncd (network time synchronization service) should have
+been automatically enabled:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>systemctl status systemd-timesyncd
+</pre></div>
+</div>
+<p>The service logs its initial synchronization to <code class="docutils literal notranslate"><span class="pre">/var/log/syslog</span></code>. Check (<strong>as
+root</strong>) with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>grep systemd-timesyncd /var/log/syslog
+</pre></div>
+</div>
+<p>You can find the lastest synchronization date by checking the modification time
+of file <code class="docutils literal notranslate"><span class="pre">/run/systemd/timesync/synchronized</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>stat /run/systemd/timesync/synchronized<span class="p">|</span>grep ^Modify
+</pre></div>
+</div>
+<p>The configuration file for systemd-timesyncd is
+<code class="docutils literal notranslate"><span class="pre">/etc/systemd/timesyncd.conf</span></code>.</p>
+</div>
 <div class="section" id="installing-a-console-locker">
 <h3>
-<a class="toc-backref" href="#id20">Installing a console locker</a><a class="headerlink" href="#installing-a-console-locker" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id21">Installing a console locker</a><a class="headerlink" href="#installing-a-console-locker" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-16">There are many screen and/or console locker programs. I’ve installed <a class="reference external" href="https://github.com/muennich/physlock">physlock</a>:</p>
+<p id="index-17">There are many screen and/or console locker programs. I’ve installed <a class="reference external" href="https://github.com/muennich/physlock">physlock</a>:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install physlock <span class="c1"># As root.</span>
 </pre></div>
@@ -439,9 +465,9 @@ Make sure you issue a <code class="docutils literal notranslate"><span class="pr
 </div>
 <div class="section" id="installing-a-memory-ram-tester">
 <h3>
-<a class="toc-backref" href="#id21">Installing a memory (RAM) tester</a><a class="headerlink" href="#installing-a-memory-ram-tester" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id22">Installing a memory (RAM) tester</a><a class="headerlink" href="#installing-a-memory-ram-tester" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-17">RAM failures are not so rare in my experience. A tester like <a class="reference external" href="https://www.memtest.org/">Memtest86+</a> can really help diagnosing a RAM failure. The
+<p id="index-18">RAM failures are not so rare in my experience. A tester like <a class="reference external" href="https://www.memtest.org/">Memtest86+</a> can really help diagnosing a RAM failure. The
 <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span></code> command below installs Memtest86+ and adds an entry in the
 <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_GRUB">Grub</a> menu (you have to reboot your
 machine and select the Memtest86+ grub entry to start Memtest86+):</p>
@@ -464,9 +490,9 @@ cdrskin -eject -v -data memtest86-iso.iso
 </div>
 <div class="section" id="installing-a-wireless-devices-status-management-tool">
 <h3>
-<a class="toc-backref" href="#id22">Installing a wireless devices status management tool</a><a class="headerlink" href="#installing-a-wireless-devices-status-management-tool" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id23">Installing a wireless devices status management tool</a><a class="headerlink" href="#installing-a-wireless-devices-status-management-tool" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-18">On a laptop computer, it may be useful to check the status (enabled, hard
+<p id="index-19">On a laptop computer, it may be useful to check the status (enabled, hard
 blocked, soft blocked) of the wireless devices. Package <code class="docutils literal notranslate"><span class="pre">rfkill</span></code> makes that
 possible:</p>
 <div class="highlight-shell notranslate">
@@ -481,9 +507,9 @@ possible:</p>
 </div>
 <div class="section" id="installing-a-cd-burning-tool">
 <h3>
-<a class="toc-backref" href="#id23">Installing a CD burning tool</a><a class="headerlink" href="#installing-a-cd-burning-tool" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id24">Installing a CD burning tool</a><a class="headerlink" href="#installing-a-cd-burning-tool" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-19">I use cdrskin to burn CDs (in particular the Debian installation CDs) on an
+<p id="index-20">I use cdrskin to burn CDs (in particular the Debian installation CDs) on an
 internal or external (USB) CD burning drive:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get install cdrskin <span class="c1"># As root.</span>
@@ -492,9 +518,9 @@ internal or external (USB) CD burning drive:</p>
 </div>
 <div class="section" id="creating-new-users">
 <h3>
-<a class="toc-backref" href="#id24">Creating new users</a><a class="headerlink" href="#creating-new-users" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id25">Creating new users</a><a class="headerlink" href="#creating-new-users" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-20">Check whether the <code class="docutils literal notranslate"><span class="pre">DIR_MODE</span></code> (default permissions for users home directories)
+<p id="index-21">Check whether the <code class="docutils literal notranslate"><span class="pre">DIR_MODE</span></code> (default permissions for users home directories)
 setting in file <code class="docutils literal notranslate"><span class="pre">/etc/adduser.conf</span></code> is appropriate for your needs. The
 default value is “0755”. It implies that any unprivileged user have read access
 to the files of other users. You may want to change (<strong>as root</strong>) the value to
@@ -518,9 +544,9 @@ like (<strong>as root</strong>):</p>
 </div>
 <div class="section" id="creating-a-super-user-account-disabling-root-login">
 <h3>
-<a class="toc-backref" href="#id25">Creating a “super user” account, disabling root login</a><a class="headerlink" href="#creating-a-super-user-account-disabling-root-login" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id26">Creating a “super user” account, disabling root login</a><a class="headerlink" href="#creating-a-super-user-account-disabling-root-login" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-21">You may want, for security reasons, to use an account other than root to
+<p id="index-22">You may want, for security reasons, to use an account other than root to
 perform administrative tasks (via sudo), and to disable root login.</p>
 <p>Make sure <code class="docutils literal notranslate"><span class="pre">sudo</span></code> is installed:</p>
 <div class="highlight-shell notranslate">
@@ -545,9 +571,9 @@ perform administrative tasks (via sudo), and to disable root login.</p>
 </div>
 <div class="section" id="installing-locate-updatedb">
 <h3>
-<a class="toc-backref" href="#id26">Installing locate / updatedb</a><a class="headerlink" href="#installing-locate-updatedb" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id27">Installing locate / updatedb</a><a class="headerlink" href="#installing-locate-updatedb" title="Permalink to this headline">¶</a>
 </h3>
-<p id="index-22">Command <code class="docutils literal notranslate"><span class="pre">locate</span></code> is a way of finding files on your computer. It is faster
+<p id="index-23">Command <code class="docutils literal notranslate"><span class="pre">locate</span></code> is a way of finding files on your computer. It is faster
 than <code class="docutils literal notranslate"><span class="pre">find</span></code>. It relies on a database generated using program <code class="docutils literal notranslate"><span class="pre">updatedb</span></code>.
 The database is updated daily via the script <code class="docutils literal notranslate"><span class="pre">/etc/cron.daily/locate</span></code>
 (directory <code class="docutils literal notranslate"><span class="pre">/etc/cron.daily</span></code> should appear in file <code class="docutils literal notranslate"><span class="pre">/etc/crontab</span></code>).</p>
@@ -595,9 +621,9 @@ entry.</p>
 </div>
 <div class="section" id="post-install-maintenance">
 <h2>
-<a class="toc-backref" href="#id27">Post-install maintenance</a><a class="headerlink" href="#post-install-maintenance" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id28">Post-install maintenance</a><a class="headerlink" href="#post-install-maintenance" title="Permalink to this headline">¶</a>
 </h2>
-<p id="index-23">I regularly run the following commands to keep the system up to date:</p>
+<p id="index-24">I regularly run the following commands to keep the system up to date:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get update <span class="o">&amp;&amp;</span> apt-get dist-upgrade
 apt-get autoremove <span class="c1"># Useful if some packages have become unneeded.</span>
@@ -643,6 +669,7 @@ apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows o
 <li><a class="reference internal" href="#adding-deb-multimedia-to-the-sources">Adding deb-multimedia to the sources</a></li>
 <li><a class="reference internal" href="#installing-firmware-linux-nonfree">Installing firmware-linux-nonfree</a></li>
 <li><a class="reference internal" href="#checking-the-configured-time-zone">Checking the configured time zone</a></li>
+<li><a class="reference internal" href="#cheking-systemd-timesyncd-service">Cheking systemd-timesyncd service</a></li>
 <li><a class="reference internal" href="#installing-a-console-locker">Installing a console locker</a></li>
 <li><a class="reference internal" href="#installing-a-memory-ram-tester">Installing a memory (RAM) tester</a></li>
 <li><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool">Installing a wireless devices status management tool</a></li>
