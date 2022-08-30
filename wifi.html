@@ -87,8 +87,14 @@ the cloned repository:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>mkdir -p ~/local_builds
 <span class="nb">cd</span> ~/local_builds
-git clone https://github.com/jeremyb31/rtl8192eu-linux-driver.git
-<span class="nb">cd</span> rtl8192eu-linux-driver
+
+<span class="c1"># Leads to a compilation failure (2022-08-30).</span>
+<span class="c1"># git clone https://github.com/jeremyb31/rtl8192eu-linux-driver.git</span>
+<span class="c1"># cd rtl8192eu-linux-driver</span>
+
+<span class="c1"># Compiles successfully (2022-08-30).</span>
+git clone https://github.com/drygdryg/RTL8192EU.git
+<span class="nb">cd</span> RTL8192EU
 </pre></div>
 </div>
 <p>Change user to <strong>root</strong>, change directory to the directory you where in as a
@@ -99,7 +105,8 @@ make install <span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>Plug in the Wi-Fi network adapter and restart the computer. After reboot, you
-should see 8192eu in the list of loaded modules:</p>
+should see 8192eu in the list of loaded modules (if not, try <code class="docutils literal notranslate"><span class="pre">modprobe</span>
+<span class="pre">8192eu</span></code> <strong>as root</strong>):</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>lsmod<span class="p">|</span>grep 8192eu
 </pre></div>
