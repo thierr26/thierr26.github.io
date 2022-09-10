@@ -404,17 +404,21 @@ nft add rule inet firewall fw_out icmpv6 <span class="nb">type</span> <span clas
 <span class="c1"># Allow incoming SSH connections.</span>
 nft add rule inet firewall fw_in tcp dport ssh accept
 
-<span class="c1"># NOTE: If you just need SSH access to the machine, you can stop here.</span>
+<span class="c1"># Allow outgoing DNS queries.</span>
+nft add rule inet firewall fw_out tcp dport <span class="m">53</span> accept
+nft add rule inet firewall fw_out udp dport <span class="m">53</span> accept
+
+<span class="c1"># Allow outgoing NTP (Network Time Protocol) client requests.</span>
+nft add rule inet firewall fw_out udp dport <span class="m">123</span> accept
+
+<span class="c1"># NOTE: If you just need SSH access to the machine and time synchronization,</span>
+<span class="c1"># you can stop here.</span>
 
 <span class="c1"># Allow outgoing SSH connections.</span>
 nft add rule inet firewall fw_out tcp dport ssh accept
 
 <span class="c1"># Allow RDP.</span>
 nft add rule inet firewall fw_in tcp dport <span class="m">3389</span> accept
-
-<span class="c1"># Allow outgoing DNS queries.</span>
-nft add rule inet firewall fw_out tcp dport <span class="m">53</span> accept
-nft add rule inet firewall fw_out udp dport <span class="m">53</span> accept
 
 <span class="c1"># Allow outgoing Web (http and https) queries.</span>
 nft add rule inet firewall fw_out tcp dport http accept
