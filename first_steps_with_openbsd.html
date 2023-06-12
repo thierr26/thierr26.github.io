@@ -4,15 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
+
     <title>My first steps with OpenBSD — Personal Notes</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -42,10 +45,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="my-first-steps-with-openbsd">
-<h1>My first steps with OpenBSD<a class="headerlink" href="#my-first-steps-with-openbsd" title="Permalink to this headline">¶</a>
+  <section id="my-first-steps-with-openbsd">
+<h1>My first steps with OpenBSD<a class="headerlink" href="#my-first-steps-with-openbsd" title="Permalink to this heading">¶</a>
 </h1>
-<div class="contents local topic" id="page-content">
+<nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id2">Introduction</a></p></li>
@@ -73,10 +76,10 @@
 </li>
 <li><p><a class="reference internal" href="#extraction-of-program-descriptions-from-the-man-pages-shell-script" id="id13">Extraction of program descriptions from the man pages (shell script)</a></p></li>
 </ul>
-</div>
-<div class="section" id="introduction">
+</nav>
+<section id="introduction">
 <h2>
-<a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p>At the end of 2019, I wanted to check whether it was possible to compile <a class="reference external" href="https://www.ada2012.org">Ada
 2012</a> code on <a class="reference external" href="https://www.openbsd.org">OpenBSD</a>
@@ -89,49 +92,49 @@ described in this page.</p>
 <p>The final step was to build <a class="reference external" href="https://learn.adacore.com/courses/GNAT_Toolchain_Intro/chapters/gprbuild.html">GPRbuild (the project manager of the GNAT
 toolchain)</a>.
 This is described on another page: <a class="reference internal" href="gprbuild_on_openbsd.html"><span class="doc">GPRbuild on OpenBSD</span></a>.</p>
-</div>
-<div class="section" id="shutting-down-openbsd">
+</section>
+<section id="shutting-down-openbsd">
 <h2>
-<a class="toc-backref" href="#id3">Shutting down OpenBSD</a><a class="headerlink" href="#shutting-down-openbsd" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Shutting down OpenBSD</a><a class="headerlink" href="#shutting-down-openbsd" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-0">You can trigger the OpenBSD shut down and power down with the following command
 (<strong>as root</strong>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>halt -p <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>halt<span class="w"> </span>-p<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="setting-the-ksh-history-file">
+</section>
+<section id="setting-the-ksh-history-file">
 <h2>
-<a class="toc-backref" href="#id4">Setting the KSH history file</a><a class="headerlink" href="#setting-the-ksh-history-file" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Setting the KSH history file</a><a class="headerlink" href="#setting-the-ksh-history-file" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-1">With OpenBSD, and if you use the default shell (<code class="docutils literal notranslate"><span class="pre">/bin/ksh</span></code>), the command
 history is not stored to file by default. If you want your shell command
 history to be stored to file, you have to set the HISTFILE environment
 variable. The <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code> file seems to be the right place:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">"HISTFILE=~/.shell_history"</span> &gt;&gt; ~/.profile <span class="c1"># As both root and "normal"</span>
-                                               <span class="c1"># user.</span>
+<div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">"HISTFILE=~/.shell_history"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.profile<span class="w"> </span><span class="c1"># As both root and "normal"</span>
+<span class="w">                                               </span><span class="c1"># user.</span>
 </pre></div>
 </div>
 <p>The HISTSIZE environment variable gives the maximum number of commands stored.
 It defaults to 500.</p>
-</div>
-<div class="section" id="installing-vim-and-creating-an-alias">
+</section>
+<section id="installing-vim-and-creating-an-alias">
 <h2>
-<a class="toc-backref" href="#id5">Installing Vim (and creating an alias)</a><a class="headerlink" href="#installing-vim-and-creating-an-alias" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id5" role="doc-backlink">Installing Vim (and creating an alias)</a><a class="headerlink" href="#installing-vim-and-creating-an-alias" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">The vi editor is installed by default, but I have a preference for Vim. Let’s
 check whether a Vim package is available on OpenBSD:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>pkg_info -Q vim                     <span class="c1"># Lists package names containing "vim".</span>
-pkg_info -Q vim <span class="p">|</span> grep <span class="s2">"^vim-[0-9]"</span> <span class="c1"># limits output to names like "vim-8...".</span>
+<div class="highlight"><pre><span></span>pkg_info<span class="w"> </span>-Q<span class="w"> </span>vim<span class="w">                     </span><span class="c1"># Lists package names containing "vim".</span>
+pkg_info<span class="w"> </span>-Q<span class="w"> </span>vim<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"^vim-[0-9]"</span><span class="w"> </span><span class="c1"># limits output to names like "vim-8...".</span>
 </pre></div>
 </div>
 <p>As I don’t intend to use the X Window system, I choose to install the “no X11”
 Vim package version (<strong>as root</strong>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>pkg_add vim-8.1.2061-no_x11 <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>pkg_add<span class="w"> </span>vim-8.1.2061-no_x11<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>The system downloads the package from the location indicated in file
@@ -140,20 +143,20 @@ installer).</p>
 <p>Now let’s create an alias to the Vim command (the <code class="docutils literal notranslate"><span class="pre">-O</span></code> option causes Vim to
 open one window (i.e. pane) for each file given on the command line):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">"alias e='vim -O'"</span> &gt;&gt; ~/.kshrc <span class="c1"># As both root and "normal" user.</span>
+<div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">"alias e='vim -O'"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.kshrc<span class="w"> </span><span class="c1"># As both root and "normal" user.</span>
 </pre></div>
 </div>
 <p>Make sure the ENV variable is set to <code class="docutils literal notranslate"><span class="pre">.kshrc</span></code> by <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code> (without
 that, the <code class="docutils literal notranslate"><span class="pre">~/.kshrc</span></code> file is not read on shell startup):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">"ENV=.kshrc"</span> &gt;&gt; ~/.profile <span class="c1"># As both root and "normal" user.</span>
-<span class="nb">echo</span> <span class="s2">"export ENV"</span> &gt;&gt; ~/.profile <span class="c1"># As both root and "normal" user.</span>
+<div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">"ENV=.kshrc"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.profile<span class="w"> </span><span class="c1"># As both root and "normal" user.</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"export ENV"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.profile<span class="w"> </span><span class="c1"># As both root and "normal" user.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="installed-compilers-just-after-base-installation">
+</section>
+<section id="installed-compilers-just-after-base-installation">
 <h2>
-<a class="toc-backref" href="#id6">Installed compilers (just after base installation)</a><a class="headerlink" href="#installed-compilers-just-after-base-installation" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">Installed compilers (just after base installation)</a><a class="headerlink" href="#installed-compilers-just-after-base-installation" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-3">I’ve written a <a class="reference internal" href="#man-page-descr-extraction"><span class="std std-ref">shell script that extracts the descriptions (as provided
 by the man pages) of the installed programs</span></a>.</p>
@@ -161,7 +164,6 @@ by the man pages) of the installed programs</span></a>.</p>
 <span class="pre">"build|compil|link|bind|profil"</span></code>) and manually filtering again, here are the
 compilers (and other related tools) I’ve found:</p>
 <table>
-
 <tbody>
 <tr class="row-odd">
 <td><p>/usr/bin/c++</p></td>
@@ -219,7 +221,7 @@ compilers (and other related tools) I’ve found:</p>
 </table>
 <p>To see the version numbers of <a class="reference external" href="https://gcc.gnu.org/">GCC</a> and <a class="reference external" href="https://clang.llvm.org/">Clang</a>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>gcc --version<span class="p">;</span> clang --version<span class="p">;</span>
+<div class="highlight"><pre><span></span>gcc<span class="w"> </span>--version<span class="p">;</span><span class="w"> </span>clang<span class="w"> </span>--version<span class="p">;</span>
 </pre></div>
 </div>
 <p>which gives:</p>
@@ -235,41 +237,40 @@ compilers (and other related tools) I’ve found:</p>
 <div class="line">Thread model: posix</div>
 <div class="line">InstalledDir: /usr/bin</div>
 </div>
-<div class="section" id="c-compilation-test">
+<section id="c-compilation-test">
 <h3>
-<a class="toc-backref" href="#id7">C compilation test</a><a class="headerlink" href="#c-compilation-test" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id7" role="doc-backlink">C compilation test</a><a class="headerlink" href="#c-compilation-test" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-4">The commands suggested on the <a class="reference external" href="https://riptutorial.com/c/example/795/hello-world">RIP Tutorial C Language Hello World page</a> for GCC and Clang both
 work:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>gcc hello.c -o hello
-clang -Wall -Wextra -Werror -o hello hello.c
+<div class="highlight"><pre><span></span>gcc<span class="w"> </span>hello.c<span class="w"> </span>-o<span class="w"> </span>hello
+clang<span class="w"> </span>-Wall<span class="w"> </span>-Wextra<span class="w"> </span>-Werror<span class="w"> </span>-o<span class="w"> </span>hello<span class="w"> </span>hello.c
 </pre></div>
 </div>
-</div>
-<div class="section" id="ada-compilation-test-failed">
+</section>
+<section id="ada-compilation-test-failed">
 <h3>
-<a class="toc-backref" href="#id8">Ada compilation test (failed)</a><a class="headerlink" href="#ada-compilation-test-failed" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id8" role="doc-backlink">Ada compilation test (failed)</a><a class="headerlink" href="#ada-compilation-test-failed" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-5">At this point, an attempt to compile an <a class="reference external" href="https://riptutorial.com/ada/example/15002/hello-world">Hello World Ada program</a> fails with both the
 <code class="docutils literal notranslate"><span class="pre">gcc</span></code> and <code class="docutils literal notranslate"><span class="pre">clang</span></code> commands. And <code class="docutils literal notranslate"><span class="pre">gnatmake</span></code> is not installed.</p>
-</div>
-</div>
-<div class="section" id="installing-the-gcc-8-3-0p4-package">
+</section>
+</section>
+<section id="installing-the-gcc-8-3-0p4-package">
 <h2>
-<a class="toc-backref" href="#id9">Installing the GCC 8.3.0p4 package</a><a class="headerlink" href="#installing-the-gcc-8-3-0p4-package" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id9" role="doc-backlink">Installing the GCC 8.3.0p4 package</a><a class="headerlink" href="#installing-the-gcc-8-3-0p4-package" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-6">Command <code class="docutils literal notranslate"><span class="pre">pkg_info</span> <span class="pre">-Q</span> <span class="pre">gcc</span></code> shows the existence of a <code class="docutils literal notranslate"><span class="pre">gcc-8.3.0p4</span></code> package.
 The <a class="reference external" href="http://openports.se/lang/gcc/8">openports.se page for this GCC package</a>
 shows that the package has two flavors: no_ada and full.</p>
 <p>Let’s install the package (<strong>as root</strong>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>pkg_add gcc-8.3.0p4 <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>pkg_add<span class="w"> </span>gcc-8.3.0p4<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>The installation has added some programs in <code class="docutils literal notranslate"><span class="pre">/usr/local/bin</span></code>:</p>
 <table>
-
 <tbody>
 <tr class="row-odd">
 <td><p>/usr/local/bin/ecpp</p></td>
@@ -323,7 +324,7 @@ shows that the package has two flavors: no_ada and full.</p>
 </table>
 <p>Let’s check the version of <code class="docutils literal notranslate"><span class="pre">egcc</span></code>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>egcc --version
+<div class="highlight"><pre><span></span>egcc<span class="w"> </span>--version
 </pre></div>
 </div>
 <div class="line-block">
@@ -336,7 +337,7 @@ shows that the package has two flavors: no_ada and full.</p>
 4.2.1 and GCC 8.3.0.</p>
 <p>For 4.2.1:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>gcc -dumpmachine <span class="c1"># GCC 4.2.1</span>
+<div class="highlight"><pre><span></span>gcc<span class="w"> </span>-dumpmachine<span class="w"> </span><span class="c1"># GCC 4.2.1</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -344,36 +345,36 @@ shows that the package has two flavors: no_ada and full.</p>
 </div>
 <p>For 8.3.0:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>egcc -dumpmachine <span class="c1"># GCC 8.3.0</span>
+<div class="highlight"><pre><span></span>egcc<span class="w"> </span>-dumpmachine<span class="w"> </span><span class="c1"># GCC 8.3.0</span>
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line">x86_64-unknown-openbsd6.6</div>
 </div>
-<div class="section" id="id1">
+<section id="id1">
 <h3>
-<a class="toc-backref" href="#id10">Ada compilation test (failed)</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id10" role="doc-backlink">Ada compilation test (failed)</a><a class="headerlink" href="#id1" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-7">Compiling an Ada program is still not possible. No <code class="docutils literal notranslate"><span class="pre">gnatmake</span></code> is installed
 and an <code class="docutils literal notranslate"><span class="pre">egcc</span> <span class="pre">-c</span> <span class="pre">hello.adb</span></code> command fails:</p>
 <div class="line-block">
 <div class="line">egcc: error trying to exec ‘gnat1’: execvp: No such file or directory</div>
 </div>
-</div>
-</div>
-<div class="section" id="installing-the-gnat-8-3-0p4-package">
+</section>
+</section>
+<section id="installing-the-gnat-8-3-0p4-package">
 <h2>
-<a class="toc-backref" href="#id11">Installing the GNAT 8.3.0p4 package</a><a class="headerlink" href="#installing-the-gnat-8-3-0p4-package" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id11" role="doc-backlink">Installing the GNAT 8.3.0p4 package</a><a class="headerlink" href="#installing-the-gnat-8-3-0p4-package" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-8">Command <code class="docutils literal notranslate"><span class="pre">pkg_info</span> <span class="pre">-Q</span> <span class="pre">gnat</span></code> shows the existence of a <code class="docutils literal notranslate"><span class="pre">gnat-8.3.0p4</span></code> package.</p>
 <p>Let’s install the package (<strong>as root</strong>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>pkg_add gnat-8.3.0p4 <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>pkg_add<span class="w"> </span>gnat-8.3.0p4<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>There are now some GNAT tools in <code class="docutils literal notranslate"><span class="pre">/usr/local/bin</span></code>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>ls -1 /usr/local/bin/gnat*
+<div class="highlight"><pre><span></span>ls<span class="w"> </span>-1<span class="w"> </span>/usr/local/bin/gnat*
 </pre></div>
 </div>
 <p>gives:</p>
@@ -394,13 +395,13 @@ and an <code class="docutils literal notranslate"><span class="pre">egcc</span> 
 <p>Note that the tools needed to work with project files (<code class="docutils literal notranslate"><span class="pre">gprbuild</span></code>,
 <code class="docutils literal notranslate"><span class="pre">gprconfig</span></code>, <code class="docutils literal notranslate"><span class="pre">gprclean</span></code>, …) are not installed. A way of obtaining those
 tools on OpenBSD is described in another page <a class="reference internal" href="gprbuild_on_openbsd.html"><span class="doc">GPRbuild on OpenBSD</span></a>.</p>
-<div class="section" id="ada-compilation-test-passed">
+<section id="ada-compilation-test-passed">
 <h3>
-<a class="toc-backref" href="#id12">Ada compilation test (passed)</a><a class="headerlink" href="#ada-compilation-test-passed" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id12" role="doc-backlink">Ada compilation test (passed)</a><a class="headerlink" href="#ada-compilation-test-passed" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-9">Compiling an Ada program is now possible:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>gnatmake hello.adb
+<div class="highlight"><pre><span></span>gnatmake<span class="w"> </span>hello.adb
 </pre></div>
 </div>
 <div class="line-block">
@@ -408,11 +409,11 @@ tools on OpenBSD is described in another page <a class="reference internal" href
 <div class="line">gnatbind -x hello.ali</div>
 <div class="line">gnatlink hello.ali</div>
 </div>
-</div>
-</div>
-<div class="section" id="extraction-of-program-descriptions-from-the-man-pages-shell-script">
+</section>
+</section>
+<section id="extraction-of-program-descriptions-from-the-man-pages-shell-script">
 <span id="man-page-descr-extraction"></span><h2>
-<a class="toc-backref" href="#id13">Extraction of program descriptions from the man pages (shell script)</a><a class="headerlink" href="#extraction-of-program-descriptions-from-the-man-pages-shell-script" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id13" role="doc-backlink">Extraction of program descriptions from the man pages (shell script)</a><a class="headerlink" href="#extraction-of-program-descriptions-from-the-man-pages-shell-script" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-10">The code of the script is:</p>
 <div class="highlight-shell notranslate">
@@ -423,125 +424,125 @@ tools on OpenBSD is described in another page <a class="reference internal" href
 <span class="c1"># Called with no argument, the script explores /usr/bin (recursively). To</span>
 <span class="c1"># explore other directories, provide those directories as argument.</span>
 
-arg_list_sorted_no_dup<span class="o">()</span> <span class="o">{</span>
+arg_list_sorted_no_dup<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 
-    <span class="c1"># Output the argument list, sorted and without duplicates.</span>
+<span class="w">    </span><span class="c1"># Output the argument list, sorted and without duplicates.</span>
 
-    <span class="o">{</span>
-        <span class="k">for</span> ARG in <span class="nv">$@</span><span class="p">;</span> <span class="k">do</span>
-            <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="p">;</span>
-        <span class="k">done</span><span class="p">;</span>
-    <span class="o">}</span> <span class="p">|</span> sort -u<span class="p">;</span>
-
-<span class="o">}</span>
-
-subdirs_added<span class="o">()</span> <span class="o">{</span>
-
-    <span class="c1"># Output argument list (file and/or directory names) with subdirectories of</span>
-    <span class="c1"># directories added (no depth limit). The output list has no duplicates.</span>
-    <span class="c1"># Standard error is redirected to /dev/null. Objects other than directories</span>
-    <span class="c1"># and files (e.g. symbolic links) are ignored.</span>
-
-    <span class="o">{</span>
-        <span class="k">for</span> ARG in <span class="nv">$@</span><span class="p">;</span> <span class="k">do</span>
-            <span class="k">if</span> <span class="o">[</span> -d <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-                find <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span> -type d <span class="m">2</span>&gt;/dev/null<span class="p">;</span>
-            <span class="k">elif</span> <span class="o">[</span> -f <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-                <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="p">;</span>
-            <span class="k">fi</span><span class="p">;</span>
-        <span class="k">done</span><span class="p">;</span>
-    <span class="o">}</span> <span class="p">|</span> sort -u<span class="p">;</span>
+<span class="w">    </span><span class="o">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>ARG<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$@</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">        </span><span class="k">done</span><span class="p">;</span>
+<span class="w">    </span><span class="o">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-u<span class="p">;</span>
 
 <span class="o">}</span>
 
-files_list<span class="o">()</span> <span class="o">{</span>
+subdirs_added<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 
-    <span class="c1"># Output the list of all files (without duplicates) contained in</span>
-    <span class="c1"># directories passed as the arguments. Individual file names can be passed</span>
-    <span class="c1"># as well. Other kind of objects (e.g. symbolic links) are ignored.</span>
+<span class="w">    </span><span class="c1"># Output argument list (file and/or directory names) with subdirectories of</span>
+<span class="w">    </span><span class="c1"># directories added (no depth limit). The output list has no duplicates.</span>
+<span class="w">    </span><span class="c1"># Standard error is redirected to /dev/null. Objects other than directories</span>
+<span class="w">    </span><span class="c1"># and files (e.g. symbolic links) are ignored.</span>
 
-    <span class="o">{</span>
-        <span class="k">for</span> ARG in <span class="nv">$@</span><span class="p">;</span> <span class="k">do</span>
-            <span class="k">if</span> <span class="o">[</span> -d <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-                find <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span> -type f<span class="p">;</span>
-            <span class="k">elif</span> <span class="o">[</span> -f <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-                <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="p">;</span>
-            <span class="k">fi</span><span class="p">;</span>
-        <span class="k">done</span><span class="p">;</span>
-    <span class="o">}</span> <span class="p">|</span> sort -u<span class="p">;</span>
-
-<span class="o">}</span>
-
-executables_list<span class="o">()</span> <span class="o">{</span>
-
-    <span class="c1"># Output the list of arguments, with non-executable elements removed.</span>
-
-    <span class="k">for</span> ARG in <span class="nv">$@</span><span class="p">;</span> <span class="k">do</span>
-        <span class="o">[</span> -x <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="p">;</span>
-    <span class="k">done</span><span class="p">;</span>
+<span class="w">    </span><span class="o">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>ARG<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$@</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span>find<span class="w"> </span><span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="p">;</span>
+<span class="w">            </span><span class="k">elif</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">            </span><span class="k">fi</span><span class="p">;</span>
+<span class="w">        </span><span class="k">done</span><span class="p">;</span>
+<span class="w">    </span><span class="o">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-u<span class="p">;</span>
 
 <span class="o">}</span>
 
-arg_max_char_length<span class="o">()</span> <span class="o">{</span>
+files_list<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 
-    <span class="c1"># Output the length of the longest string provided as argument.</span>
+<span class="w">    </span><span class="c1"># Output the list of all files (without duplicates) contained in</span>
+<span class="w">    </span><span class="c1"># directories passed as the arguments. Individual file names can be passed</span>
+<span class="w">    </span><span class="c1"># as well. Other kind of objects (e.g. symbolic links) are ignored.</span>
 
-    <span class="nv">MX</span><span class="o">=</span><span class="m">0</span><span class="p">;</span>
-
-    <span class="k">for</span> ARG in <span class="nv">$@</span><span class="p">;</span> <span class="k">do</span>
-        <span class="k">if</span> <span class="o">[</span> <span class="si">${#</span><span class="nv">ARG</span><span class="si">}</span> -gt <span class="nv">$MX</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-            <span class="nv">MX</span><span class="o">=</span><span class="si">${#</span><span class="nv">ARG</span><span class="si">}</span><span class="p">;</span>
-        <span class="k">fi</span><span class="p">;</span>
-    <span class="k">done</span><span class="p">;</span>
-
-    <span class="nb">echo</span> <span class="nv">$MX</span><span class="p">;</span>
+<span class="w">    </span><span class="o">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>ARG<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$@</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span>find<span class="w"> </span><span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="w"> </span>-type<span class="w"> </span>f<span class="p">;</span>
+<span class="w">            </span><span class="k">elif</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">            </span><span class="k">fi</span><span class="p">;</span>
+<span class="w">        </span><span class="k">done</span><span class="p">;</span>
+<span class="w">    </span><span class="o">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-u<span class="p">;</span>
 
 <span class="o">}</span>
 
-main_function<span class="o">()</span> <span class="o">{</span>
+executables_list<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 
-    <span class="c1"># Get list of executable files.</span>
-    <span class="nv">PROG_LIST</span><span class="o">=</span><span class="k">$(</span>executables_list <span class="se">\</span>
-        <span class="k">$(</span>files_list <span class="se">\</span>
-        <span class="k">$(</span>subdirs_added <span class="se">\</span>
-        <span class="k">$(</span>arg_list_sorted_no_dup <span class="nv">$@</span><span class="k">))))</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Output the list of arguments, with non-executable elements removed.</span>
 
-    <span class="c1"># Get longest path of all executable files.</span>
-    <span class="nv">PROG_PATH_MAX_LEN</span><span class="o">=</span><span class="k">$(</span>arg_max_char_length <span class="nv">$PROG_LIST</span><span class="k">)</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>ARG<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$@</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="o">[</span><span class="w"> </span>-x<span class="w"> </span><span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ARG</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">done</span><span class="p">;</span>
 
-    <span class="c1"># Traverse executable files list.</span>
-    <span class="k">for</span> PROG in <span class="nv">$PROG_LIST</span><span class="p">;</span> <span class="k">do</span>
+<span class="o">}</span>
 
-        <span class="c1"># Extract the content of the "NAME" section of the man page (if any) of</span>
-        <span class="c1"># the executable.</span>
-        <span class="nv">MAN_PAGE_NAME_SECTION</span><span class="o">=</span><span class="k">$(</span>man <span class="s2">"</span><span class="si">${</span><span class="nv">PROG</span><span class="p">##*/</span><span class="si">}</span><span class="s2">"</span> <span class="m">2</span>&gt;/dev/null <span class="se">\</span>
-            <span class="p">|</span> col -b <span class="se">\</span>
-            <span class="p">|</span> grep -A1 <span class="s2">"^NAME</span>$<span class="s2">"</span> <span class="se">\</span>
-            <span class="p">|</span> tail -1 <span class="se">\</span>
-            <span class="p">|</span> sed <span class="s2">"s/^ *//"</span><span class="k">)</span><span class="p">;</span>
+arg_max_char_length<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 
-        <span class="c1"># Output one line containing the executable path and the content of the</span>
-        <span class="c1"># "NAME" section of the man page (if non empty).</span>
-        <span class="k">if</span> <span class="o">[</span> -n <span class="s2">"</span><span class="nv">$MAN_PAGE_NAME_SECTION</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-            <span class="nb">printf</span> %<span class="si">${</span><span class="nv">PROG_PATH_MAX_LEN</span><span class="si">}</span>s <span class="s2">"</span><span class="nv">$PROG</span><span class="s2">"</span><span class="p">;</span>
-            <span class="nb">echo</span> <span class="s2">" - </span><span class="nv">$MAN_PAGE_NAME_SECTION</span><span class="s2">"</span><span class="p">;</span>
-        <span class="k">fi</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Output the length of the longest string provided as argument.</span>
 
-    <span class="k">done</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">MX</span><span class="o">=</span><span class="m">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>ARG<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$@</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="si">${#</span><span class="nv">ARG</span><span class="si">}</span><span class="w"> </span>-gt<span class="w"> </span><span class="nv">$MX</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nv">MX</span><span class="o">=</span><span class="si">${#</span><span class="nv">ARG</span><span class="si">}</span><span class="p">;</span>
+<span class="w">        </span><span class="k">fi</span><span class="p">;</span>
+<span class="w">    </span><span class="k">done</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$MX</span><span class="p">;</span>
+
+<span class="o">}</span>
+
+main_function<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+
+<span class="w">    </span><span class="c1"># Get list of executable files.</span>
+<span class="w">    </span><span class="nv">PROG_LIST</span><span class="o">=</span><span class="k">$(</span>executables_list<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="k">$(</span>files_list<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="k">$(</span>subdirs_added<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="k">$(</span>arg_list_sorted_no_dup<span class="w"> </span><span class="nv">$@</span><span class="k">))))</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1"># Get longest path of all executable files.</span>
+<span class="w">    </span><span class="nv">PROG_PATH_MAX_LEN</span><span class="o">=</span><span class="k">$(</span>arg_max_char_length<span class="w"> </span><span class="nv">$PROG_LIST</span><span class="k">)</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1"># Traverse executable files list.</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>PROG<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$PROG_LIST</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+
+<span class="w">        </span><span class="c1"># Extract the content of the "NAME" section of the man page (if any) of</span>
+<span class="w">        </span><span class="c1"># the executable.</span>
+<span class="w">        </span><span class="nv">MAN_PAGE_NAME_SECTION</span><span class="o">=</span><span class="k">$(</span>man<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">PROG</span><span class="p">##*/</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="p">|</span><span class="w"> </span>col<span class="w"> </span>-b<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A1<span class="w"> </span><span class="s2">"^NAME</span>$<span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-1<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/^ *//"</span><span class="k">)</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1"># Output one line containing the executable path and the content of the</span>
+<span class="w">        </span><span class="c1"># "NAME" section of the man page (if non empty).</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$MAN_PAGE_NAME_SECTION</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">printf</span><span class="w"> </span>%<span class="si">${</span><span class="nv">PROG_PATH_MAX_LEN</span><span class="si">}</span>s<span class="w"> </span><span class="s2">"</span><span class="nv">$PROG</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">" - </span><span class="nv">$MAN_PAGE_NAME_SECTION</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">        </span><span class="k">fi</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">done</span><span class="p">;</span>
 
 <span class="o">}</span>
 
 <span class="c1"># Call main_function with argument "/usr/bin" if no argument has been provided,</span>
 <span class="c1"># otherwise call main_function with all arguments.</span>
-<span class="k">if</span> <span class="o">[</span> <span class="nv">$#</span> -eq <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-    main_function /usr/bin<span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>main_function<span class="w"> </span>/usr/bin<span class="p">;</span>
 <span class="k">else</span>
-    main_function <span class="nv">$@</span><span class="p">;</span>
+<span class="w">    </span>main_function<span class="w"> </span><span class="nv">$@</span><span class="p">;</span>
 <span class="k">fi</span><span class="p">;</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -550,8 +551,9 @@ main_function<span class="o">()</span> <span class="o">{</span>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li>
 <a class="reference internal" href="#">My first steps with OpenBSD</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -579,20 +581,25 @@ main_function<span class="o">()</span> <span class="o">{</span>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="openbsd_vm.html" title="previous chapter">Installing an OpenBSD virtual machine</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="gprbuild_on_openbsd.html" title="next chapter">GPRbuild on OpenBSD</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="openbsd_vm.html" title="previous chapter">Installing an OpenBSD virtual machine</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="gprbuild_on_openbsd.html" title="next chapter">GPRbuild on OpenBSD</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       <input type="submit" value="Go">
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>

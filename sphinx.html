@@ -4,15 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
+
     <title>Sphinx — Personal Notes</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -42,10 +45,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="sphinx">
-<h1>Sphinx<a class="headerlink" href="#sphinx" title="Permalink to this headline">¶</a>
+  <section id="sphinx">
+<h1>Sphinx<a class="headerlink" href="#sphinx" title="Permalink to this heading">¶</a>
 </h1>
-<div class="contents local topic" id="page-content">
+<nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id2">Introduction</a></p></li>
@@ -55,36 +58,36 @@
 <li><p><a class="reference internal" href="#having-make-produce-html-output-by-default" id="id6">Having make produce HTML output by default</a></p></li>
 <li><p><a class="reference internal" href="#other-resources" id="id7">Other resources</a></p></li>
 </ul>
-</div>
-<div class="section" id="introduction">
+</nav>
+<section id="introduction">
 <h2>
-<a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p><a class="reference external" href="http://www.sphinx-doc.org/en/master">Sphinx</a> is the tool I settled on to
 create this static website. Sphinx is primarily designed to create
 documentation for <a class="reference external" href="https://en.wikipedia.org/wiki/Python_(programming_language)">Python</a> projects, but
 it is also appropriate as a <a class="reference external" href="https://www.fullstackpython.com/static-site-generator.html">static website generator</a>.</p>
-</div>
-<div class="section" id="installation">
+</section>
+<section id="installation">
 <h2>
-<a class="toc-backref" href="#id3">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Installation</a><a class="headerlink" href="#installation" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-0">On a <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> system, install Sphinx (<strong>as
 root</strong>) with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install python3-sphinx make <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>python3-sphinx<span class="w"> </span>make<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="starting-a-project">
+</section>
+<section id="starting-a-project">
 <h2>
-<a class="toc-backref" href="#id4">Starting a project</a><a class="headerlink" href="#starting-a-project" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Starting a project</a><a class="headerlink" href="#starting-a-project" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-1">To create a new Sphinx project, create a directory, move to that directory and
 run <code class="docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>mkdir my_sphinx_project
-<span class="nb">cd</span> my_sphinx_project
+<div class="highlight"><pre><span></span>mkdir<span class="w"> </span>my_sphinx_project
+<span class="nb">cd</span><span class="w"> </span>my_sphinx_project
 sphinx-quickstart
 </pre></div>
 </div>
@@ -163,49 +166,49 @@ you are currently reading:</p>
 </div>
 <div class="line">where “builder” is one of the supported builders, e.g. html, latex or linkcheck.</div>
 </div>
-</div>
-<div class="section" id="generating-html-output">
+</section>
+<section id="generating-html-output">
 <h2>
-<a class="toc-backref" href="#id5">Generating HTML output</a><a class="headerlink" href="#generating-html-output" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id5" role="doc-backlink">Generating HTML output</a><a class="headerlink" href="#generating-html-output" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">Assuming <code class="docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code> has created a <a class="reference external" href="http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/">Makefile</a>,  you can
 build the HTML output with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>make html
+<div class="highlight"><pre><span></span>make<span class="w"> </span>html
 </pre></div>
 </div>
 <p>This will write the output in the <code class="docutils literal notranslate"><span class="pre">build/html</span></code> subdirectory.</p>
 <p>If you want the <code class="docutils literal notranslate"><span class="pre">build/html</span></code> subdirectory to be cleaned up before writing the
 output, do:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>make clean html
+<div class="highlight"><pre><span></span>make<span class="w"> </span>clean<span class="w"> </span>html
 </pre></div>
 </div>
 <p>If you also want to find the broken links in your project, add <code class="docutils literal notranslate"><span class="pre">linkcheck</span></code>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>make clean html linkcheck
+<div class="highlight"><pre><span></span>make<span class="w"> </span>clean<span class="w"> </span>html<span class="w"> </span>linkcheck
 </pre></div>
 </div>
-</div>
-<div class="section" id="having-make-produce-html-output-by-default">
+</section>
+<section id="having-make-produce-html-output-by-default">
 <h2>
-<a class="toc-backref" href="#id6">Having make produce HTML output by default</a><a class="headerlink" href="#having-make-produce-html-output-by-default" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">Having make produce HTML output by default</a><a class="headerlink" href="#having-make-produce-html-output-by-default" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-3">The <code class="docutils literal notranslate"><span class="pre">make</span></code> (without argument) command outputs a help message. Substituting
 the Makefile created by <code class="docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code> with <a class="reference download internal" download="" href="_downloads/e985e6421371eee4f3889efb205c71b4/Makefile"><code class="xref download docutils literal notranslate"><span class="pre">this</span> <span class="pre">one</span></code></a> causes <code class="docutils literal notranslate"><span class="pre">make</span></code>
 (without argument) to produce the HTML output.</p>
 <p>If you use Git and don’t want this Makefile change to be committed, see
 <a class="reference internal" href="git.html#git-maintain-work-commit-diff"><span class="std std-ref">Maintaining a difference between working and committed trees</span></a>.</p>
-</div>
-<div class="section" id="other-resources">
+</section>
+<section id="other-resources">
 <h2>
-<a class="toc-backref" href="#id7">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id7" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
 </h2>
 <ul class="simple">
 <li><p><a class="reference external" href="http://www.sphinx-doc.org/en/master">Sphinx documentation</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -214,8 +217,9 @@ the Makefile created by <code class="docutils literal notranslate"><span class="
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li>
 <a class="reference internal" href="#">Sphinx</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -228,20 +232,25 @@ the Makefile created by <code class="docutils literal notranslate"><span class="
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="sed.html" title="previous chapter">Sed</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="reminder.html" title="next chapter">Reminder</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="sed.html" title="previous chapter">Sed</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="reminder.html" title="next chapter">Reminder</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       <input type="submit" value="Go">
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>

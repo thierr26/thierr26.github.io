@@ -4,15 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
+
     <title>My first steps with FreeBSD — Personal Notes</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -42,10 +45,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="my-first-steps-with-freebsd">
-<h1>My first steps with FreeBSD<a class="headerlink" href="#my-first-steps-with-freebsd" title="Permalink to this headline">¶</a>
+  <section id="my-first-steps-with-freebsd">
+<h1>My first steps with FreeBSD<a class="headerlink" href="#my-first-steps-with-freebsd" title="Permalink to this heading">¶</a>
 </h1>
-<div class="contents local topic" id="page-content">
+<nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
@@ -58,45 +61,45 @@
 <li><p><a class="reference internal" href="#making-it-possible-for-a-normal-user-to-change-user-to-root-with-su" id="id8">Making it possible for a “normal” user to change user to root (with <code class="docutils literal notranslate"><span class="pre">su</span> <span class="pre">-</span></code>)</a></p></li>
 <li><p><a class="reference internal" href="#searching-installing-binary-packages" id="id9">Searching / installing binary packages</a></p></li>
 </ul>
-</div>
-<div class="section" id="introduction">
+</nav>
+<section id="introduction">
 <h2>
-<a class="toc-backref" href="#id1">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p>This page describes the few things I’ve done with <a class="reference external" href="https://www.freebsd.org">FreeBSD</a> after <a class="reference internal" href="freebsd_vm.html"><span class="doc">installing a FreeBSD 12.1 virtual
 machine</span></a>.</p>
-</div>
-<div class="section" id="shutting-down-freebsd">
+</section>
+<section id="shutting-down-freebsd">
 <h2>
-<a class="toc-backref" href="#id2">Shutting down FreeBSD</a><a class="headerlink" href="#shutting-down-freebsd" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Shutting down FreeBSD</a><a class="headerlink" href="#shutting-down-freebsd" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-0">You can trigger the FreeBSD shut down and power down with the following command
 (<strong>as root</strong>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>halt -p <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>halt<span class="w"> </span>-p<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="tweaking-ssh-server-configuration">
+</section>
+<section id="tweaking-ssh-server-configuration">
 <h2>
-<a class="toc-backref" href="#id3">Tweaking SSH server configuration</a><a class="headerlink" href="#tweaking-ssh-server-configuration" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Tweaking SSH server configuration</a><a class="headerlink" href="#tweaking-ssh-server-configuration" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-1">You may need to tweak the SSH server configuration, for example to allow root
 password login (although it’s not recommended in the general case).
 Edit <code class="docutils literal notranslate"><span class="pre">/etc/ssh/sshd_config</span></code> as instructed in the <a class="reference internal" href="ssh.html#sshd-configuration"><span class="std std-ref">SSH page</span></a> and restart the <code class="docutils literal notranslate"><span class="pre">sshd</span></code> service (<strong>as root</strong>) with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>service sshd restart    <span class="c1"># If sshd_enable is set to YES in /etc.rc.conf.</span>
+<div class="highlight"><pre><span></span>service<span class="w"> </span>sshd<span class="w"> </span>restart<span class="w">    </span><span class="c1"># If sshd_enable is set to YES in /etc.rc.conf.</span>
 </pre></div>
 </div>
 <p>or:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>service sshd onerestart <span class="c1"># If sshd_enable is not set to YES in /etc.rc.conf.</span>
+<div class="highlight"><pre><span></span>service<span class="w"> </span>sshd<span class="w"> </span>onerestart<span class="w"> </span><span class="c1"># If sshd_enable is not set to YES in /etc.rc.conf.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="fixing-a-slow-boot-issue-unqualified-host-name-sleeping-for-retry">
+</section>
+<section id="fixing-a-slow-boot-issue-unqualified-host-name-sleeping-for-retry">
 <h2>
-<a class="toc-backref" href="#id4">Fixing a slow boot issue (“unqualified host name; sleeping for retry”)</a><a class="headerlink" href="#fixing-a-slow-boot-issue-unqualified-host-name-sleeping-for-retry" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Fixing a slow boot issue (“unqualified host name; sleeping for retry”)</a><a class="headerlink" href="#fixing-a-slow-boot-issue-unqualified-host-name-sleeping-for-retry" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">If you have provided an unqualified host name during the installation, you
 probably have the <a class="reference external" href="http://tuttlem.github.io/2014/07/19/unqualified-host-name-sleeping-for-retry.html">FreeBSD slow boot issue described here</a>.</p>
@@ -107,32 +110,32 @@ probably have the <a class="reference external" href="http://tuttlem.github.io/2
 <div class="highlight"><pre><span></span>hostname
 </pre></div>
 </div>
-</div>
-<div class="section" id="having-root-s-shell-history-stored-to-file">
+</section>
+<section id="having-root-s-shell-history-stored-to-file">
 <h2>
-<a class="toc-backref" href="#id5">Having root’s shell history stored to file</a><a class="headerlink" href="#having-root-s-shell-history-stored-to-file" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id5" role="doc-backlink">Having root’s shell history stored to file</a><a class="headerlink" href="#having-root-s-shell-history-stored-to-file" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-3">On FreeBSD, root’s shell is <a class="reference external" href="https://www.tutorialspoint.com/unix_commands/tcsh.htm">tcsh</a>. The command history
 is not stored to file by default. The following two commands add lines to the
 <code class="docutils literal notranslate"><span class="pre">~/.cshrc</span></code> file which should cause the command history to be stored to file
 <code class="docutils literal notranslate"><span class="pre">~/.shell_history</span></code>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">"set histfile = ~/.shell_history"</span> &gt;&gt; ~/.cshrc       <span class="c1"># As root.</span>
-<span class="nb">echo</span> <span class="s2">"alias precmd 'history -S; history -M'"</span> &gt;&gt; ~/.cshrc <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">"set histfile = ~/.shell_history"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.cshrc<span class="w">       </span><span class="c1"># As root.</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"alias precmd 'history -S; history -M'"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.cshrc<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>(It is assumed that variables <code class="docutils literal notranslate"><span class="pre">history</span></code> and <code class="docutils literal notranslate"><span class="pre">savehist</span></code> were already set by
 <code class="docutils literal notranslate"><span class="pre">.cshrc</span></code>.)</p>
-</div>
-<div class="section" id="installing-bash">
+</section>
+<section id="installing-bash">
 <h2>
-<a class="toc-backref" href="#id6">Installing bash</a><a class="headerlink" href="#installing-bash" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">Installing bash</a><a class="headerlink" href="#installing-bash" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-4">For non root users, the default shell on FreeBSD is <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code>. Linux users
 may feel more comfortable with bash instead.</p>
 <p>The following command shows that bash is available on FreeBSD:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>pkg search bash
+<div class="highlight"><pre><span></span>pkg<span class="w"> </span>search<span class="w"> </span>bash
 </pre></div>
 </div>
 <p>(If you’re running a <code class="docutils literal notranslate"><span class="pre">pkg</span></code> command for the first time, make sure to run it
@@ -140,17 +143,17 @@ may feel more comfortable with bash instead.</p>
 this will fail if you are not root.)</p>
 <p>Install bash <strong>as root</strong> with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>pkg install bash bash-completion <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>pkg<span class="w"> </span>install<span class="w"> </span>bash<span class="w"> </span>bash-completion<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="changing-user-s-shell-to-bash">
+</section>
+<section id="changing-user-s-shell-to-bash">
 <h2>
-<a class="toc-backref" href="#id7">Changing user’s shell to bash</a><a class="headerlink" href="#changing-user-s-shell-to-bash" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id7" role="doc-backlink">Changing user’s shell to bash</a><a class="headerlink" href="#changing-user-s-shell-to-bash" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-5">As a “normal” (non root) user, you can change your shell to bash with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>chsh -s /usr/local/bin/bash
+<div class="highlight"><pre><span></span>chsh<span class="w"> </span>-s<span class="w"> </span>/usr/local/bin/bash
 </pre></div>
 </div>
 <p>Create a <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> file with the following content to enable the bash
@@ -161,41 +164,41 @@ completion library:</p>
 <div class="line">source /usr/local/share/bash-completion/bash-completion.sh</div>
 </div>
 </div>
-</div>
-<div class="section" id="making-it-possible-for-a-normal-user-to-change-user-to-root-with-su">
+</section>
+<section id="making-it-possible-for-a-normal-user-to-change-user-to-root-with-su">
 <h2>
-<a class="toc-backref" href="#id8">Making it possible for a “normal” user to change user to root (with <code class="docutils literal notranslate"><span class="pre">su</span> <span class="pre">-</span></code>)</a><a class="headerlink" href="#making-it-possible-for-a-normal-user-to-change-user-to-root-with-su" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id8" role="doc-backlink">Making it possible for a “normal” user to change user to root (with <code class="docutils literal notranslate"><span class="pre">su</span> <span class="pre">-</span></code>)</a><a class="headerlink" href="#making-it-possible-for-a-normal-user-to-change-user-to-root-with-su" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-6">On FreeBSD, only users who are in the <code class="docutils literal notranslate"><span class="pre">wheel</span></code> are allowed to change user to
 root. You can add (<strong>as root</strong>) a user in the <code class="docutils literal notranslate"><span class="pre">wheel</span></code> group with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>pw usermod &lt;username&gt; -G wheel <span class="c1"># As root</span>
+<div class="highlight"><pre><span></span>pw<span class="w"> </span>usermod<span class="w"> </span>&lt;username&gt;<span class="w"> </span>-G<span class="w"> </span>wheel<span class="w"> </span><span class="c1"># As root</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="searching-installing-binary-packages">
+</section>
+<section id="searching-installing-binary-packages">
 <h2>
-<a class="toc-backref" href="#id9">Searching / installing binary packages</a><a class="headerlink" href="#searching-installing-binary-packages" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id9" role="doc-backlink">Searching / installing binary packages</a><a class="headerlink" href="#searching-installing-binary-packages" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-7">You can install binary packages (for example GNU make and Git) with commands
 like (<strong>as root</strong>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>pkg install gmake git <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>pkg<span class="w"> </span>install<span class="w"> </span>gmake<span class="w"> </span>git<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>After the installation of a package, a message is sometimes displayed. You can
 view this message later with a command like:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>pkg info -D git
+<div class="highlight"><pre><span></span>pkg<span class="w"> </span>info<span class="w"> </span>-D<span class="w"> </span>git
 </pre></div>
 </div>
 <p>You can search the package repository catalogues with commands like:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>pkg search vim
+<div class="highlight"><pre><span></span>pkg<span class="w"> </span>search<span class="w"> </span>vim
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -204,8 +207,9 @@ view this message later with a command like:</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li>
 <a class="reference internal" href="#">My first steps with FreeBSD</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -221,20 +225,25 @@ view this message later with a command like:</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="freebsd_vm.html" title="previous chapter">Installing a FreeBSD virtual machine</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="fs_win_no_privilege.html" title="next chapter">Free Software on Windows (without any privilege)</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="freebsd_vm.html" title="previous chapter">Installing a FreeBSD virtual machine</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="fs_win_no_privilege.html" title="next chapter">Free Software on Windows (without any privilege)</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       <input type="submit" value="Go">
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>

@@ -4,15 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
+
     <title>GPRbuild on OpenBSD — Personal Notes</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -42,10 +45,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="gprbuild-on-openbsd">
-<h1>GPRbuild on OpenBSD<a class="headerlink" href="#gprbuild-on-openbsd" title="Permalink to this headline">¶</a>
+  <section id="gprbuild-on-openbsd">
+<h1>GPRbuild on OpenBSD<a class="headerlink" href="#gprbuild-on-openbsd" title="Permalink to this heading">¶</a>
 </h1>
-<div class="contents local topic" id="page-content">
+<nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
@@ -60,10 +63,10 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="introduction">
+</nav>
+<section id="introduction">
 <span id="index-0"></span><h2>
-<a class="toc-backref" href="#id1">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-1">This page describes how I could build <a class="reference external" href="https://learn.adacore.com/courses/GNAT_Toolchain_Intro/chapters/gprbuild.html">GPRbuild (the project manager of the
 GNAT toolchain)</a>
@@ -78,39 +81,39 @@ not recognised automatically by the building tool.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">f3d62455b02564a4bbdc1ec04f1da788f22702fe</span></code> (2019-12-25) for GPRBuild.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">b50bc2659637695f3a4cf5f0568a537a3e033047</span></code> (2019-11-18) for XML/Ada.</p></li>
 </ul>
-</div>
-<div class="section" id="prerequisites">
+</section>
+<section id="prerequisites">
 <h2>
-<a class="toc-backref" href="#id2">Prerequisites</a><a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Prerequisites</a><a class="headerlink" href="#prerequisites" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">GCC and GNAT 8.3.0p4 must be installed. Please read the <a class="reference internal" href="first_steps_with_openbsd.html"><span class="doc">“My first steps
 with OpenBSD” page</span></a> for more details.</p>
 <p><a class="reference external" href="https://www.gnu.org/software/make">GNU make</a> must also be installed:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>pkg_add gmake <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>pkg_add<span class="w"> </span>gmake<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>Git should be installed as well. It makes cloning the GPRbuild and <a class="reference external" href="https://docs.adacore.com/xmlada-docs/index.html">XML/Ada</a> repositories much easier:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>pkg_add git <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>pkg_add<span class="w"> </span>git<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="building-and-installing-gprbuild">
+</section>
+<section id="building-and-installing-gprbuild">
 <h2>
-<a class="toc-backref" href="#id3">Building and installing GPRbuild</a><a class="headerlink" href="#building-and-installing-gprbuild" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Building and installing GPRbuild</a><a class="headerlink" href="#building-and-installing-gprbuild" title="Permalink to this heading">¶</a>
 </h2>
-<div class="section" id="cloning-the-repositories-and-creating-a-bootstrapped-gprbuild">
+<section id="cloning-the-repositories-and-creating-a-bootstrapped-gprbuild">
 <h3>
-<a class="toc-backref" href="#id4">Cloning the repositories and creating a bootstrapped GPRbuild</a><a class="headerlink" href="#cloning-the-repositories-and-creating-a-bootstrapped-gprbuild" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Cloning the repositories and creating a bootstrapped GPRbuild</a><a class="headerlink" href="#cloning-the-repositories-and-creating-a-bootstrapped-gprbuild" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-3">As a “normal” (non root) user, create a working directory and clone the
 GPRbuild and XML/Ada repositories:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>mkdir ~/bootstrapped_gprbuild
-<span class="nb">cd</span> ~/bootstrapped_gprbuild
-git clone https://github.com/AdaCore/gprbuild.git
-git clone https://github.com/AdaCore/xmlada.git
+<div class="highlight"><pre><span></span>mkdir<span class="w"> </span>~/bootstrapped_gprbuild
+<span class="nb">cd</span><span class="w"> </span>~/bootstrapped_gprbuild
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/AdaCore/gprbuild.git
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/AdaCore/xmlada.git
 </pre></div>
 </div>
 <p>Then move to the <code class="docutils literal notranslate"><span class="pre">gprbuild</span></code> directory and edit the edit the <code class="docutils literal notranslate"><span class="pre">bootstrap.sh</span></code>
@@ -119,18 +122,18 @@ occurrences, near the end of the script). (Because the <code class="docutils lit
 recognized (and not needed) by the OpenBSD <code class="docutils literal notranslate"><span class="pre">install</span></code> program.)</p>
 <p>You can now create the bootsrapped GPRbuild:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>./bootstrap.sh --with-xmlada<span class="o">=</span>../xmlada --prefix<span class="o">=</span>./bootstrap
+<div class="highlight"><pre><span></span>./bootstrap.sh<span class="w"> </span>--with-xmlada<span class="o">=</span>../xmlada<span class="w"> </span>--prefix<span class="o">=</span>./bootstrap
 </pre></div>
 </div>
-</div>
-<div class="section" id="creating-a-gcc-symbolic-link-to-egcc">
+</section>
+<section id="creating-a-gcc-symbolic-link-to-egcc">
 <h3>
-<a class="toc-backref" href="#id5">Creating a <code class="docutils literal notranslate"><span class="pre">gcc</span></code> symbolic link to <code class="docutils literal notranslate"><span class="pre">egcc</span></code></a><a class="headerlink" href="#creating-a-gcc-symbolic-link-to-egcc" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id5" role="doc-backlink">Creating a <code class="docutils literal notranslate"><span class="pre">gcc</span></code> symbolic link to <code class="docutils literal notranslate"><span class="pre">egcc</span></code></a><a class="headerlink" href="#creating-a-gcc-symbolic-link-to-egcc" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-4">As root, create a <code class="docutils literal notranslate"><span class="pre">gcc</span></code> symbolic link to <code class="docutils literal notranslate"><span class="pre">egcc</span></code>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">cd</span> /usr/local/bin <span class="c1"># As root.</span>
-ln -s egcc gcc <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/usr/local/bin<span class="w"> </span><span class="c1"># As root.</span>
+ln<span class="w"> </span>-s<span class="w"> </span>egcc<span class="w"> </span>gcc<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>This makes sure that GPRbuild detects the appropriate GCC version. To verify,
@@ -152,27 +155,27 @@ add the <code class="docutils literal notranslate"><span class="pre">gprbuild</s
 <div class="line">Select or unselect the following compiler (or “s” to save):</div>
 </div>
 <p>(Press Ctrl-c to exit without saving.)</p>
-</div>
-<div class="section" id="configuring-building-and-installing-xml-ada">
+</section>
+<section id="configuring-building-and-installing-xml-ada">
 <h3>
-<a class="toc-backref" href="#id6">Configuring, building and installing XML/Ada</a><a class="headerlink" href="#configuring-building-and-installing-xml-ada" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">Configuring, building and installing XML/Ada</a><a class="headerlink" href="#configuring-building-and-installing-xml-ada" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-5">As a normal user, move to the <code class="docutils literal notranslate"><span class="pre">gprbuild</span></code> directory and create a GPRbuild
 default configuration file (<code class="docutils literal notranslate"><span class="pre">default.cgpr</span></code>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ~/bootstrapped_gprbuild/gprbuild
-gprconfig --batch --config Ada --config C <span class="c1"># Creates the default.cgpr file.</span>
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/bootstrapped_gprbuild/gprbuild
+gprconfig<span class="w"> </span>--batch<span class="w"> </span>--config<span class="w"> </span>Ada<span class="w"> </span>--config<span class="w"> </span>C<span class="w"> </span><span class="c1"># Creates the default.cgpr file.</span>
 </pre></div>
 </div>
 <p>Copy <code class="docutils literal notranslate"><span class="pre">default.cgpr</span></code> to the <code class="docutils literal notranslate"><span class="pre">xmlada</span></code> directory:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>cp default.cgpr ../xmlada
+<div class="highlight"><pre><span></span>cp<span class="w"> </span>default.cgpr<span class="w"> </span>../xmlada
 </pre></div>
 </div>
 <p>Move to the <code class="docutils literal notranslate"><span class="pre">xmlada</span></code> directory and configure the XML/Ada sources:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ../xmlada
-./configure --prefix<span class="o">=</span>/usr/local
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>../xmlada
+./configure<span class="w"> </span>--prefix<span class="o">=</span>/usr/local
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">/usr/local</span></code> is the prefix used for the GNAT installation, as suggested by
@@ -180,38 +183,38 @@ gprconfig --batch --config Ada --config C <span class="c1"># Creates the default
 <p>Then <strong>as root</strong>, add the <code class="docutils literal notranslate"><span class="pre">gprbuild</span></code> directory to the path and build and
 install XML/Ada:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>/home/&lt;username&gt;/bootstrapped_gprbuild/gprbuild:<span class="s2">"</span><span class="nv">$PATH</span><span class="s2">"</span> <span class="c1"># As root.</span>
-<span class="nb">cd</span> /home/&lt;username&gt;/bootstrapped_gprbuild/xmlada                    <span class="c1"># As root.</span>
-gmake all install                                                   <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/home/&lt;username&gt;/bootstrapped_gprbuild/gprbuild:<span class="s2">"</span><span class="nv">$PATH</span><span class="s2">"</span><span class="w"> </span><span class="c1"># As root.</span>
+<span class="nb">cd</span><span class="w"> </span>/home/&lt;username&gt;/bootstrapped_gprbuild/xmlada<span class="w">                    </span><span class="c1"># As root.</span>
+gmake<span class="w"> </span>all<span class="w"> </span>install<span class="w">                                                   </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="configuring-building-and-installing-gprbuild">
+</section>
+<section id="configuring-building-and-installing-gprbuild">
 <h3>
-<a class="toc-backref" href="#id7">Configuring, building and installing GPRBuild</a><a class="headerlink" href="#configuring-building-and-installing-gprbuild" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id7" role="doc-backlink">Configuring, building and installing GPRBuild</a><a class="headerlink" href="#configuring-building-and-installing-gprbuild" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-6">As a normal user, make sure that the <code class="docutils literal notranslate"><span class="pre">gprbuild</span></code> directory is in the path
 (issue a <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">PATH=~/bootstrapped_gprbuild/gprbuild:"$PATH"</span></code> command if
 needed).</p>
 <p>Move to the <code class="docutils literal notranslate"><span class="pre">gprbuild</span></code> directory and configure the GPRbuild sources:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ~/bootstrapped_gprbuild/gprbuild
-gmake <span class="nv">prefix</span><span class="o">=</span>/usr/local setup
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/bootstrapped_gprbuild/gprbuild
+gmake<span class="w"> </span><span class="nv">prefix</span><span class="o">=</span>/usr/local<span class="w"> </span>setup
 </pre></div>
 </div>
 <p>Edit the <code class="docutils literal notranslate"><span class="pre">default.cgpr</span></code> file: for the Ada binder driver, substitute
 <code class="docutils literal notranslate"><span class="pre">libexec/gprbuild/gprbind</span></code> with <code class="docutils literal notranslate"><span class="pre">bootstrap/libexec/gprbuild/gprbind</span></code>.</p>
 <p>Then build GPRbuild:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>gmake all
+<div class="highlight"><pre><span></span>gmake<span class="w"> </span>all
 </pre></div>
 </div>
 <p>Finally as root, make sure that the <code class="docutils literal notranslate"><span class="pre">gprbuild</span></code> directory is in the path
 (issue a <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">PATH=/home/&lt;username&gt;/bootstrapped_gprbuild/gprbuild:"$PATH"</span></code>
 command if needed), move to the <code class="docutils literal notranslate"><span class="pre">gprbuild</span></code> directory and install GPRbuild:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">cd</span> /home/&lt;username&gt;/bootstrapped_gprbuild/gprbuild
-gmake install <span class="nv">TARGET</span><span class="o">=</span><span class="k">$(</span>egcc -dumpmachine<span class="k">)</span>
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/home/&lt;username&gt;/bootstrapped_gprbuild/gprbuild
+gmake<span class="w"> </span>install<span class="w"> </span><span class="nv">TARGET</span><span class="o">=</span><span class="k">$(</span>egcc<span class="w"> </span>-dumpmachine<span class="k">)</span>
 </pre></div>
 </div>
 <p>(The <code class="docutils literal notranslate"><span class="pre">TARGET=$(egcc</span> <span class="pre">-dumpmachine)</span></code> part is needed because by default the
@@ -221,7 +224,7 @@ want the output of <code class="docutils literal notranslate"><span class="pre">
 (“x86_64-unknown-openbsd6.6”).)</p>
 <p>GPRbuild and companion tools should now be installed in <code class="docutils literal notranslate"><span class="pre">/usr/local/bin</span></code>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>ls -1 /usr/local/bin/gpr*
+<div class="highlight"><pre><span></span>ls<span class="w"> </span>-1<span class="w"> </span>/usr/local/bin/gpr*
 </pre></div>
 </div>
 <p>should give:</p>
@@ -234,9 +237,9 @@ want the output of <code class="docutils literal notranslate"><span class="pre">
 <div class="line">/usr/local/bin/gprname</div>
 <div class="line">/usr/local/bin/gprslave</div>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -245,8 +248,9 @@ want the output of <code class="docutils literal notranslate"><span class="pre">
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li>
 <a class="reference internal" href="#">GPRbuild on OpenBSD</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -263,20 +267,25 @@ want the output of <code class="docutils literal notranslate"><span class="pre">
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="first_steps_with_openbsd.html" title="previous chapter">My first steps with OpenBSD</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="freebsd_vm.html" title="next chapter">Installing a FreeBSD virtual machine</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="first_steps_with_openbsd.html" title="previous chapter">My first steps with OpenBSD</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="freebsd_vm.html" title="next chapter">Installing a FreeBSD virtual machine</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       <input type="submit" value="Go">
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>

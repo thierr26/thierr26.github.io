@@ -4,15 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
+
     <title>Installing a Debian unstable virtual machine — Personal Notes</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -42,10 +45,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="installing-a-debian-unstable-virtual-machine">
-<h1>Installing a Debian unstable virtual machine<a class="headerlink" href="#installing-a-debian-unstable-virtual-machine" title="Permalink to this headline">¶</a>
+  <section id="installing-a-debian-unstable-virtual-machine">
+<h1>Installing a Debian unstable virtual machine<a class="headerlink" href="#installing-a-debian-unstable-virtual-machine" title="Permalink to this heading">¶</a>
 </h1>
-<div class="contents local topic" id="page-content">
+<nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
@@ -77,10 +80,10 @@
 <li><p><a class="reference internal" href="#removing-the-virtual-machine" id="id19">Removing the virtual machine</a></p></li>
 <li><p><a class="reference internal" href="#other-resources" id="id20">Other resources</a></p></li>
 </ul>
-</div>
-<div class="section" id="introduction">
+</nav>
+<section id="introduction">
 <span id="index-0"></span><h2>
-<a class="toc-backref" href="#id1">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p>These are my notes about the installation of a <a class="reference external" href="https://www.makeuseof.com/tag/virtual-machine-makeuseof-explains">virtual machine</a> on my
 <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> stable system (“AMD64”
@@ -89,10 +92,10 @@ system, but the <a class="reference external" href="https://www.debian.org/relea
 <p>Debian packages are available in unstable in more recent versions than in
 stable. I wanted a Debian unstable virtual machine to be able to test the new
 version of some packages.</p>
-</div>
-<div class="section" id="checking-the-virtualizations-extensions-presence-on-the-cpu">
+</section>
+<section id="checking-the-virtualizations-extensions-presence-on-the-cpu">
 <h2>
-<a class="toc-backref" href="#id2">Checking the virtualizations extensions presence on the CPU</a><a class="headerlink" href="#checking-the-virtualizations-extensions-presence-on-the-cpu" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Checking the virtualizations extensions presence on the CPU</a><a class="headerlink" href="#checking-the-virtualizations-extensions-presence-on-the-cpu" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-1">If your hardware has virtualization support, then you should enable it <strong>in the
 BIOS</strong>.</p>
@@ -100,45 +103,45 @@ BIOS</strong>.</p>
 command. If it prints something, then your hardware has virtualization
 support:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>grep <span class="s2">"^flags\s*:"</span> /proc/cpuinfo <span class="se">\</span>
-  <span class="p">|</span> head -1 <span class="se">\</span>
-  <span class="p">|</span> sed <span class="s2">"s/^.\+:\s*//"</span> <span class="se">\</span>
-  <span class="p">|</span> sed <span class="s2">"s/ \+/\n/g"</span> <span class="se">\</span>
-  <span class="p">|</span> grep <span class="s2">"vmx\|svm"</span>
+<div class="highlight"><pre><span></span>grep<span class="w"> </span><span class="s2">"^flags\s*:"</span><span class="w"> </span>/proc/cpuinfo<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-1<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/^.\+:\s*//"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/ \+/\n/g"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"vmx\|svm"</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="installing-the-libvirt-family-of-tools">
+</section>
+<section id="installing-the-libvirt-family-of-tools">
 <h2>
-<a class="toc-backref" href="#id3">Installing the libvirt family of tools</a><a class="headerlink" href="#installing-the-libvirt-family-of-tools" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Installing the libvirt family of tools</a><a class="headerlink" href="#installing-the-libvirt-family-of-tools" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">I install the <a class="reference external" href="https://libvirt.org">libvirt</a> family of tools <strong>as root</strong>
 with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install virtinst libvirt-daemon-system libvirt-clients <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>virtinst<span class="w"> </span>libvirt-daemon-system<span class="w"> </span>libvirt-clients<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">libvirt-clients</span></code> package comes with the <code class="docutils literal notranslate"><span class="pre">virsh</span></code> program, to be used to
 manage the virtual machines and get useful information. Examples
 (<strong>as root</strong>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virsh list --all     <span class="c1"># List the virtual machines.</span>
-virsh net-list --all <span class="c1"># List the virtual networks.</span>
+<div class="highlight"><pre><span></span>virsh<span class="w"> </span>list<span class="w"> </span>--all<span class="w">     </span><span class="c1"># List the virtual machines.</span>
+virsh<span class="w"> </span>net-list<span class="w"> </span>--all<span class="w"> </span><span class="c1"># List the virtual networks.</span>
 </pre></div>
 </div>
 <p>The <a class="reference external" href="https://libosinfo.org">osinfo</a> and its querying tools are useful too:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install libosinfo-bin <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>libosinfo-bin<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="preparing-storage-locations">
+</section>
+<section id="preparing-storage-locations">
 <h2>
-<a class="toc-backref" href="#id4">Preparing storage locations</a><a class="headerlink" href="#preparing-storage-locations" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Preparing storage locations</a><a class="headerlink" href="#preparing-storage-locations" title="Permalink to this heading">¶</a>
 </h2>
-<div class="section" id="for-the-virtual-machine-images">
+<section id="for-the-virtual-machine-images">
 <h3>
-<a class="toc-backref" href="#id5">For the virtual machine images</a><a class="headerlink" href="#for-the-virtual-machine-images" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id5" role="doc-backlink">For the virtual machine images</a><a class="headerlink" href="#for-the-virtual-machine-images" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-3">The default location (“storage pool”) for the virtual machines is
 <code class="docutils literal notranslate"><span class="pre">/var/lib/libvirt/images</span></code>.</p>
@@ -146,63 +149,63 @@ virsh net-list --all <span class="c1"># List the virtual networks.</span>
 virtual machines to be located in my home directory instead. So I create a
 directory with <code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">~/vm/libvirt/images</span></code>. And then, <strong>as root</strong>, I do:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>chown root:root /home/my_user_name/vm/libvirt/images <span class="c1"># Change directory</span>
-                                                     <span class="c1"># ownership to root.</span>
+<div class="highlight"><pre><span></span>chown<span class="w"> </span>root:root<span class="w"> </span>/home/my_user_name/vm/libvirt/images<span class="w"> </span><span class="c1"># Change directory</span>
+<span class="w">                                                     </span><span class="c1"># ownership to root.</span>
 
-chmod <span class="m">711</span> /home/my_user_name/vm/libvirt/images       <span class="c1"># Change permissions (no</span>
-                                                     <span class="c1"># read/write permission</span>
-                                                     <span class="c1"># for non-root users).</span>
+chmod<span class="w"> </span><span class="m">711</span><span class="w"> </span>/home/my_user_name/vm/libvirt/images<span class="w">       </span><span class="c1"># Change permissions (no</span>
+<span class="w">                                                     </span><span class="c1"># read/write permission</span>
+<span class="w">                                                     </span><span class="c1"># for non-root users).</span>
 </pre></div>
 </div>
 <p>You can see the list of the storage pools managed by libvirt with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virsh pool-list <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>virsh<span class="w"> </span>pool-list<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>If this list is empty, then I define and start the default storage pool with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virsh pool-define-as default dir <span class="se">\</span>
-  --target /home/my_user_name/vm/libvirt/images <span class="c1"># As root.</span>
-virsh pool-autostart default                    <span class="c1"># As root.</span>
-virsh pool-start default                        <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>virsh<span class="w"> </span>pool-define-as<span class="w"> </span>default<span class="w"> </span>dir<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--target<span class="w"> </span>/home/my_user_name/vm/libvirt/images<span class="w"> </span><span class="c1"># As root.</span>
+virsh<span class="w"> </span>pool-autostart<span class="w"> </span>default<span class="w">                    </span><span class="c1"># As root.</span>
+virsh<span class="w"> </span>pool-start<span class="w"> </span>default<span class="w">                        </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>If the default storage pool is already existing, then I check the path with
 <code class="docutils literal notranslate"><span class="pre">virsh</span> <span class="pre">pool-dumpxml</span> <span class="pre">default</span></code> (<strong>as root</strong>) and change it if needed with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virsh pool-edit default <span class="c1"># Edit the path and save.</span>
+<div class="highlight"><pre><span></span>virsh<span class="w"> </span>pool-edit<span class="w"> </span>default<span class="w"> </span><span class="c1"># Edit the path and save.</span>
 </pre></div>
 </div>
 <p>After a reboot, <code class="docutils literal notranslate"><span class="pre">virsh</span> <span class="pre">pool-dumpxml</span> <span class="pre">default</span></code> (<strong>as root</strong>) shows the new
 path.</p>
-</div>
-<div class="section" id="for-the-installer-iso-image">
+</section>
+<section id="for-the-installer-iso-image">
 <h3>
-<a class="toc-backref" href="#id6">For the installer ISO image</a><a class="headerlink" href="#for-the-installer-iso-image" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">For the installer ISO image</a><a class="headerlink" href="#for-the-installer-iso-image" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-4">Nothing complicated here, I just create a directory as an unprivileged user:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>mkdir -p ~/vm/installer_iso/debian_testing
+<div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/vm/installer_iso/debian_testing
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="searching-operating-systems-in-the-osinfo-database">
+</section>
+</section>
+<section id="searching-operating-systems-in-the-osinfo-database">
 <h2>
-<a class="toc-backref" href="#id7">Searching operating systems in the osinfo database</a><a class="headerlink" href="#searching-operating-systems-in-the-osinfo-database" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id7" role="doc-backlink">Searching operating systems in the osinfo database</a><a class="headerlink" href="#searching-operating-systems-in-the-osinfo-database" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-5">When <a class="reference internal" href="#creating-debian-unstable-vm"><span class="std std-ref">creating the virtual machine with virt-install</span></a>, it is recommended to provide the –os-variant
 option. The possible values for that option are the short IDs provided by
 command <code class="docutils literal notranslate"><span class="pre">osinfo-query</span> <span class="pre">os</span></code>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>osinfo-query os<span class="p">|</span>less
-osinfo-query os<span class="p">|</span>grep Debian
+<div class="highlight"><pre><span></span>osinfo-query<span class="w"> </span>os<span class="p">|</span>less
+osinfo-query<span class="w"> </span>os<span class="p">|</span>grep<span class="w"> </span>Debian
 </pre></div>
 </div>
-</div>
-<div class="section" id="getting-a-debian-testing-installer-image">
+</section>
+<section id="getting-a-debian-testing-installer-image">
 <h2>
-<a class="toc-backref" href="#id8">Getting a Debian testing installer image</a><a class="headerlink" href="#getting-a-debian-testing-installer-image" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id8" role="doc-backlink">Getting a Debian testing installer image</a><a class="headerlink" href="#getting-a-debian-testing-installer-image" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-6">Debian testing installer images are available for download and updated daily
 (for the small (“netinst”) images at least).
@@ -210,59 +213,59 @@ See the <a class="reference external" href="https://www.debian.org/devel/debian-
 <p>You can download the “netinst” Debian testing installer image for the “AMD64”
 architecture with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">cd</span> ~/vm/installer_iso/debian_testing
-wget https://cdimage.debian.org/cdimage/daily-builds/daily/arch-latest/amd64/iso-cd/debian-testing-amd64-netinst.iso
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/vm/installer_iso/debian_testing
+wget<span class="w"> </span>https://cdimage.debian.org/cdimage/daily-builds/daily/arch-latest/amd64/iso-cd/debian-testing-amd64-netinst.iso
 </pre></div>
 </div>
 <p>You might want to verify the authenticity of the ISO image. It is the same
 process as for a
 <a class="reference internal" href="debian_base_install.html#getting-debian-iso-image"><span class="std std-ref">Debian stable installer image</span></a>.</p>
-</div>
-<div class="section" id="creating-the-debian-unstable-virtual-machine">
+</section>
+<section id="creating-the-debian-unstable-virtual-machine">
 <span id="creating-debian-unstable-vm"></span><h2>
-<a class="toc-backref" href="#id9">Creating the Debian unstable virtual machine</a><a class="headerlink" href="#creating-the-debian-unstable-virtual-machine" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id9" role="doc-backlink">Creating the Debian unstable virtual machine</a><a class="headerlink" href="#creating-the-debian-unstable-virtual-machine" title="Permalink to this heading">¶</a>
 </h2>
-<div class="section" id="start-the-installation">
+<section id="start-the-installation">
 <span id="start-debian-unstable-vm-install"></span><h3>
-<a class="toc-backref" href="#id10">Start the installation</a><a class="headerlink" href="#start-the-installation" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id10" role="doc-backlink">Start the installation</a><a class="headerlink" href="#start-the-installation" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-7">I enable the default virtual network <strong>as root</strong> with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virsh net-start default <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>virsh<span class="w"> </span>net-start<span class="w"> </span>default<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>You may want to set the default to start automatically:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virsh net-autostart default <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>virsh<span class="w"> </span>net-autostart<span class="w"> </span>default<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>I make sure the applications running as root can connect to the X server:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>xhost +local: <span class="c1"># As "normal" user.</span>
+<div class="highlight"><pre><span></span>xhost<span class="w"> </span>+local:<span class="w"> </span><span class="c1"># As "normal" user.</span>
 </pre></div>
 </div>
 <p>Then I set and export the <code class="docutils literal notranslate"><span class="pre">DISPLAY</span></code> variable <strong>as root</strong>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">DISPLAY</span><span class="o">=</span>:0.0 <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span>:0.0<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>I create the virtual machine <strong>as root</strong> with the following command (my working
 directory was the one containing the Debian testing installer ISO image):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virt-install --name debian_unstable <span class="se">\</span>
-  --memory <span class="m">1024</span> <span class="se">\</span>
-  --vcpus<span class="o">=</span><span class="m">1</span> <span class="se">\</span>
-  --cdrom debian-testing-amd64-netinst.iso <span class="se">\</span>
-  --disk <span class="nv">pool</span><span class="o">=</span>default,size<span class="o">=</span><span class="m">10</span> <span class="se">\</span>
-  --os-variant debiantesting <span class="se">\</span>
-  --graphics spice <span class="se">\</span>
-  --channel spicevmc <span class="p">&amp;</span> <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>virt-install<span class="w"> </span>--name<span class="w"> </span>debian_unstable<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--memory<span class="w"> </span><span class="m">1024</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--vcpus<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cdrom<span class="w"> </span>debian-testing-amd64-netinst.iso<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--disk<span class="w"> </span><span class="nv">pool</span><span class="o">=</span>default,size<span class="o">=</span><span class="m">10</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--os-variant<span class="w"> </span>debiantesting<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--graphics<span class="w"> </span>spice<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--channel<span class="w"> </span>spicevmc<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="debian-testing-base-installation">
+</section>
+<section id="debian-testing-base-installation">
 <h3>
-<a class="toc-backref" href="#id11">Debian testing base installation</a><a class="headerlink" href="#debian-testing-base-installation" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id11" role="doc-backlink">Debian testing base installation</a><a class="headerlink" href="#debian-testing-base-installation" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-8">I proceed with the installation as I would for a “normal” Debian installation.
 I choose the most simple disk partition scheme (all in a single partition) and
@@ -271,13 +274,13 @@ requires the installation of a SSH server.</p>
 <p>Once the installation is complete, the virtual machine automatically restarts.
 I lauch <code class="docutils literal notranslate"><span class="pre">virt-viewer</span></code> (as root) to get a window to the virtual machine:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virt-viewer debian_unstable <span class="p">&amp;</span> <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>virt-viewer<span class="w"> </span>debian_unstable<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="upgrade-to-debian-unstable">
+</section>
+<section id="upgrade-to-debian-unstable">
 <h3>
-<a class="toc-backref" href="#id12">Upgrade to Debian unstable</a><a class="headerlink" href="#upgrade-to-debian-unstable" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id12" role="doc-backlink">Upgrade to Debian unstable</a><a class="headerlink" href="#upgrade-to-debian-unstable" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-9">The first step to upgrade to Debian unstable is to edit
 <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code> (<strong>as root, on the guest</strong>):</p>
@@ -288,34 +291,34 @@ I lauch <code class="docutils literal notranslate"><span class="pre">virt-viewer
 </ul>
 <p>The second step is to execute:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get update<span class="p">;</span> apt-get dist-upgrade <span class="c1"># As root, on the guest.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>update<span class="p">;</span><span class="w"> </span>apt-get<span class="w"> </span>dist-upgrade<span class="w"> </span><span class="c1"># As root, on the guest.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="install-x-org-and-openbox">
+</section>
+<section id="install-x-org-and-openbox">
 <h3>
-<a class="toc-backref" href="#id13">Install X.org and Openbox</a><a class="headerlink" href="#install-x-org-and-openbox" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id13" role="doc-backlink">Install X.org and Openbox</a><a class="headerlink" href="#install-x-org-and-openbox" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-10">I then install X.org and <a class="reference internal" href="openbox_on_debian.html"><span class="doc">Openbox</span></a> on
 the virtual machine:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install xorg openbox openbox-menu menu <span class="c1"># As root, on the guest.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>xorg<span class="w"> </span>openbox<span class="w"> </span>openbox-menu<span class="w"> </span>menu<span class="w"> </span><span class="c1"># As root, on the guest.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="enable-copy-n-paste-between-host-and-guest">
+</section>
+<section id="enable-copy-n-paste-between-host-and-guest">
 <h3>
-<a class="toc-backref" href="#id14">Enable copy’n’paste between host and guest</a><a class="headerlink" href="#enable-copy-n-paste-between-host-and-guest" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id14" role="doc-backlink">Enable copy’n’paste between host and guest</a><a class="headerlink" href="#enable-copy-n-paste-between-host-and-guest" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-11">The package <code class="docutils literal notranslate"><span class="pre">spice-vdagent</span></code> enables copy’n’paste between host and guest:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install spice-vdagent <span class="c1"># As root, on the guest.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>spice-vdagent<span class="w"> </span><span class="c1"># As root, on the guest.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="configure-display-resolution">
+</section>
+<section id="configure-display-resolution">
 <h3>
-<a class="toc-backref" href="#id15">Configure display resolution</a><a class="headerlink" href="#configure-display-resolution" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id15" role="doc-backlink">Configure display resolution</a><a class="headerlink" href="#configure-display-resolution" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-12">By default, X.org display resolution on the guest is 1024x768. I prefer
 1920x1080 (which is the resolution of my monitor). So I create a specific X.org
@@ -323,7 +326,7 @@ configuration file (<code class="docutils literal notranslate"><span class="pre"
 <p>The starting point is the file (<code class="docutils literal notranslate"><span class="pre">/root/xorg.conf.new</span></code>) that X.org generates
 when this command is issued (<strong>exit X.org first</strong>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>Xorg -configure <span class="c1"># As root, in the guest.</span>
+<div class="highlight"><pre><span></span>Xorg<span class="w"> </span>-configure<span class="w"> </span><span class="c1"># As root, in the guest.</span>
 </pre></div>
 </div>
 <p>In <code class="docutils literal notranslate"><span class="pre">/root/xorg.conf.new</span></code>, there is a <code class="docutils literal notranslate"><span class="pre">Monitor</span></code> section for a monitor with
@@ -337,7 +340,7 @@ identifier <code class="docutils literal notranslate"><span class="pre">Monitor0
 <p>We can find the data that those “Modelines” are made of in a X.org log file
 generated with (in this example, the file is called <code class="docutils literal notranslate"><span class="pre">xlog.txt</span></code>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>Xorg -verbose <span class="m">6</span> &gt; xlog.txt <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="c1"># As root, on the guest.</span>
+<div class="highlight"><pre><span></span>Xorg<span class="w"> </span>-verbose<span class="w"> </span><span class="m">6</span><span class="w"> </span>&gt;<span class="w"> </span>xlog.txt<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="c1"># As root, on the guest.</span>
 </pre></div>
 </div>
 <p>This gets you in Xorg with no way to exit. Use the “Send key” menu item of
@@ -348,9 +351,9 @@ Xorg with a <code class="docutils literal notranslate"><span class="pre">kill</s
 X.org after a few seconds. We need the <code class="docutils literal notranslate"><span class="pre">killall</span></code> command for that, provided
 by the Debian package <code class="docutils literal notranslate"><span class="pre">psmisc</span></code>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install psmisc <span class="c1"># As root, on the guest.</span>
-Xorg -verbose <span class="m">6</span> &gt; xlog.txt <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span> sleep <span class="m">3</span> <span class="o">&amp;&amp;</span> killall Xorg <span class="c1"># As root, on the</span>
-                                                          <span class="c1"># guest.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>psmisc<span class="w"> </span><span class="c1"># As root, on the guest.</span>
+Xorg<span class="w"> </span>-verbose<span class="w"> </span><span class="m">6</span><span class="w"> </span>&gt;<span class="w"> </span>xlog.txt<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>sleep<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>killall<span class="w"> </span>Xorg<span class="w"> </span><span class="c1"># As root, on the</span>
+<span class="w">                                                          </span><span class="c1"># guest.</span>
 </pre></div>
 </div>
 <p>In <code class="docutils literal notranslate"><span class="pre">xlog.txt</span></code>, we find lines like the following, which help building the
@@ -380,31 +383,31 @@ matching the resolution I want:</p>
 <p>You can check that your <code class="docutils literal notranslate"><span class="pre">/root/xorg.conf.new</span></code> is a correct configuration file
 with a test of X.org:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>Xorg -config /root/xorg.conf.new -retro <span class="c1"># As root, on the guest.</span>
+<div class="highlight"><pre><span></span>Xorg<span class="w"> </span>-config<span class="w"> </span>/root/xorg.conf.new<span class="w"> </span>-retro<span class="w"> </span><span class="c1"># As root, on the guest.</span>
 </pre></div>
 </div>
 <p>or:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>Xorg -config /root/xorg.conf.new -retro <span class="p">&amp;</span> sleep <span class="m">3</span> <span class="o">&amp;&amp;</span> killall Xorg <span class="c1"># As root,</span>
-                                                                  <span class="c1"># on the</span>
-                                                                  <span class="c1"># guest.</span>
+<div class="highlight"><pre><span></span>Xorg<span class="w"> </span>-config<span class="w"> </span>/root/xorg.conf.new<span class="w"> </span>-retro<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>sleep<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>killall<span class="w"> </span>Xorg<span class="w"> </span><span class="c1"># As root,</span>
+<span class="w">                                                                  </span><span class="c1"># on the</span>
+<span class="w">                                                                  </span><span class="c1"># guest.</span>
 </pre></div>
 </div>
 <p>The final step is to copy <code class="docutils literal notranslate"><span class="pre">/root/xorg.conf.new</span></code> to <code class="docutils literal notranslate"><span class="pre">/etc/X11/xorg.conf</span></code>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>cp xorg.conf.new /etc/X11/xorg.conf <span class="c1"># As root, on the guest.</span>
+<div class="highlight"><pre><span></span>cp<span class="w"> </span>xorg.conf.new<span class="w"> </span>/etc/X11/xorg.conf<span class="w"> </span><span class="c1"># As root, on the guest.</span>
 </pre></div>
 </div>
 <p>You can <a class="reference download internal" download="" href="_downloads/fb3d83562f86c0333deeb6e521106307/debian_vm_xorg.conf"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">this</span> <span class="pre">xorg.conf</span> <span class="pre">file</span></code></a>.</p>
-</div>
-<div class="section" id="reboot">
+</section>
+<section id="reboot">
 <h3>
-<a class="toc-backref" href="#id16">Reboot</a><a class="headerlink" href="#reboot" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id16" role="doc-backlink">Reboot</a><a class="headerlink" href="#reboot" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-13">At this point, I reboot (or else the keyboard layout in X.org may not be the
 expected one):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>systemctl poweroff <span class="c1"># As root, on the guest.</span>
+<div class="highlight"><pre><span></span>systemctl<span class="w"> </span>poweroff<span class="w"> </span><span class="c1"># As root, on the guest.</span>
 </pre></div>
 </div>
 <p>I then login as a normal user and starts X.org and Openbox with:</p>
@@ -412,55 +415,55 @@ expected one):</p>
 <div class="highlight"><pre><span></span>startx
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="shutting-down-and-restarting-the-virtual-machine">
+</section>
+</section>
+<section id="shutting-down-and-restarting-the-virtual-machine">
 <h2>
-<a class="toc-backref" href="#id17">Shutting down and restarting the virtual machine</a><a class="headerlink" href="#shutting-down-and-restarting-the-virtual-machine" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id17" role="doc-backlink">Shutting down and restarting the virtual machine</a><a class="headerlink" href="#shutting-down-and-restarting-the-virtual-machine" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-14">To shut down the virtual machine, I just do as for a “real” machine. For
 example:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>systemctl poweroff <span class="c1"># As root, on the guest.</span>
+<div class="highlight"><pre><span></span>systemctl<span class="w"> </span>poweroff<span class="w"> </span><span class="c1"># As root, on the guest.</span>
 </pre></div>
 </div>
 <p>Alternatively, this <code class="docutils literal notranslate"><span class="pre">virsh</span></code> command run from the host should also shut down
 the virtual machine:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virsh shutdown debian_unstable <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>virsh<span class="w"> </span>shutdown<span class="w"> </span>debian_unstable<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>If it’s not enough:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virsh destroy debian_unstable <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>virsh<span class="w"> </span>destroy<span class="w"> </span>debian_unstable<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>To restart the virtual machine I do:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virsh start debian_unstable <span class="c1"># As root.</span>
-virt-viewer debian_unstable <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>virsh<span class="w"> </span>start<span class="w"> </span>debian_unstable<span class="w"> </span><span class="c1"># As root.</span>
+virt-viewer<span class="w"> </span>debian_unstable<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>or, if I want the viewer in full screen mode:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virt-viewer -f debian_unstable <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>virt-viewer<span class="w"> </span>-f<span class="w"> </span>debian_unstable<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>Again, you need to make sure the applications running as root can connect to
 the X server, so you may have to do (prior to launching <code class="docutils literal notranslate"><span class="pre">virt-viewer</span></code>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>xhost +local: <span class="c1"># As "normal" user.</span>
+<div class="highlight"><pre><span></span>xhost<span class="w"> </span>+local:<span class="w"> </span><span class="c1"># As "normal" user.</span>
 </pre></div>
 </div>
 <p>and:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">DISPLAY</span><span class="o">=</span>:0.0 <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span>:0.0<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="finding-the-ip-address-of-the-virtual-machine">
+</section>
+<section id="finding-the-ip-address-of-the-virtual-machine">
 <span id="finding-vm-ip"></span><h2>
-<a class="toc-backref" href="#id18">Finding the IP address of the virtual machine</a><a class="headerlink" href="#finding-the-ip-address-of-the-virtual-machine" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id18" role="doc-backlink">Finding the IP address of the virtual machine</a><a class="headerlink" href="#finding-the-ip-address-of-the-virtual-machine" title="Permalink to this heading">¶</a>
 </h2>
 <p>Having the IP address of the virtual machine is useful, for example to connect
 to it from the host via <a class="reference internal" href="ssh.html"><span class="doc">SSH</span></a>.</p>
@@ -468,46 +471,46 @@ to it from the host via <a class="reference internal" href="ssh.html"><span clas
 installed. In this case, the following command should show (among other
 information) the IP address:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>ip addr <span class="c1"># On the guest.</span>
+<div class="highlight"><pre><span></span>ip<span class="w"> </span>addr<span class="w"> </span><span class="c1"># On the guest.</span>
 </pre></div>
 </div>
 <p>If you don’t have the <code class="docutils literal notranslate"><span class="pre">ip</span></code> command, you may have the <code class="docutils literal notranslate"><span class="pre">ifconfig</span></code> command
 (provided by package <code class="docutils literal notranslate"><span class="pre">net-tools</span></code> on a Debian GNU/Linux system) which does
 show (among other information) the IP address:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>ifconfig <span class="c1"># On the guest.</span>
+<div class="highlight"><pre><span></span>ifconfig<span class="w"> </span><span class="c1"># On the guest.</span>
 </pre></div>
 </div>
 <p>Alternatively, you should be able to get the IP address of a guest without
 login into the guest, using <code class="docutils literal notranslate"><span class="pre">virsh</span></code>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virsh net-dhcp-leases default <span class="c1"># As root, on the host.</span>
+<div class="highlight"><pre><span></span>virsh<span class="w"> </span>net-dhcp-leases<span class="w"> </span>default<span class="w"> </span><span class="c1"># As root, on the host.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="removing-the-virtual-machine">
+</section>
+<section id="removing-the-virtual-machine">
 <h2>
-<a class="toc-backref" href="#id19">Removing the virtual machine</a><a class="headerlink" href="#removing-the-virtual-machine" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id19" role="doc-backlink">Removing the virtual machine</a><a class="headerlink" href="#removing-the-virtual-machine" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-15">Once shutdown, the virtual machine can be entirely removed with these
 commands:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virsh undefine debian_unstable <span class="c1"># As root.</span>
-virsh vol-delete --pool default debian_unstable.qcow2 <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>virsh<span class="w"> </span>undefine<span class="w"> </span>debian_unstable<span class="w"> </span><span class="c1"># As root.</span>
+virsh<span class="w"> </span>vol-delete<span class="w"> </span>--pool<span class="w"> </span>default<span class="w"> </span>debian_unstable.qcow2<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="other-resources">
+</section>
+<section id="other-resources">
 <h2>
-<a class="toc-backref" href="#id20">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id20" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
 </h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://serverfault.com/questions/208693/difference-between-kvm-and-qemu">Difference between KVM and QEMU (on serverfault.com)</a></p></li>
 <li><p><a class="reference external" href="https://blog.wikichoon.com/2016/01/qemusystem-vs-qemusession.html">qemu:///system vs qemu:///session (–connect option to virt-install)</a></p></li>
 <li><p><a class="reference external" href="https://jamielinux.com/docs/libvirt-networking-handbook/index-full.html">libvirt networking handbook</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -516,8 +519,9 @@ virsh vol-delete --pool default debian_unstable.qcow2 <span class="c1"># As root
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li>
 <a class="reference internal" href="#">Installing a Debian unstable virtual machine</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -550,20 +554,25 @@ virsh vol-delete --pool default debian_unstable.qcow2 <span class="c1"># As root
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="linux_firewalling.html" title="previous chapter">Linux firewalling</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="ssh.html" title="next chapter">SSH</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="linux_firewalling.html" title="previous chapter">Linux firewalling</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="ssh.html" title="next chapter">SSH</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       <input type="submit" value="Go">
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>

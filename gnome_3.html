@@ -4,15 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
+
     <title>GNOME 3 — Personal Notes</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -42,10 +45,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="gnome-3">
-<h1>GNOME 3<a class="headerlink" href="#gnome-3" title="Permalink to this headline">¶</a>
+  <section id="gnome-3">
+<h1>GNOME 3<a class="headerlink" href="#gnome-3" title="Permalink to this heading">¶</a>
 </h1>
-<div class="contents local topic" id="page-content">
+<nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id2">Introduction</a></p></li>
@@ -57,10 +60,10 @@
 <li><p><a class="reference internal" href="#closing-the-gnome-session-from-the-command-line" id="id8">Closing the GNOME session from the command line</a></p></li>
 <li><p><a class="reference internal" href="#other-resources" id="id9">Other resources</a></p></li>
 </ul>
-</div>
-<div class="section" id="introduction">
+</nav>
+<section id="introduction">
 <span id="index-0"></span><h2>
-<a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p>Although <a class="reference external" href="https://en.wikipedia.org/wiki/GNOME#GNOME_3">GNOME 3</a> is not my
 favorite desktop and I’m happier with the sleek <a class="reference internal" href="openbox_on_debian.html"><span class="doc">Openbox desktop I have on
@@ -71,14 +74,14 @@ use a machine with GNOME 3.28.2 for some kind of work. I actually use the
 but I felt the need to keep track of the <a class="reference external" href="https://en.wikipedia.org/wiki/Dconf">dconf</a> commands I learned. GNOME uses a binary
 database to store the settings and the <code class="docutils literal notranslate"><span class="pre">dconf</span></code> command is a way of
 manipulating the settings. <a class="reference external" href="https://bgstack15.wordpress.com/2017/10/04/dconf-save-and-load-from-file/">This link made me aware of dconf</a>.</p>
-</div>
-<div class="section" id="list-the-keys-related-to-the-gnome-terminal-profiles">
+</section>
+<section id="list-the-keys-related-to-the-gnome-terminal-profiles">
 <h2>
-<a class="toc-backref" href="#id3">List the keys related to the GNOME terminal profiles</a><a class="headerlink" href="#list-the-keys-related-to-the-gnome-terminal-profiles" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">List the keys related to the GNOME terminal profiles</a><a class="headerlink" href="#list-the-keys-related-to-the-gnome-terminal-profiles" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-1">The following command lists the keys related to the GNOME terminal profiles:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>dconf list /org/gnome/terminal/legacy/profiles:/
+<div class="highlight"><pre><span></span>dconf<span class="w"> </span>list<span class="w"> </span>/org/gnome/terminal/legacy/profiles:/
 </pre></div>
 </div>
 <p>In my case, the output of the command is:</p>
@@ -88,15 +91,15 @@ manipulating the settings. <a class="reference external" href="https://bgstack15
 <div class="line">:424cb317-4a79-4a77-be53-86b59ee1e321/</div>
 <div class="line">default</div>
 </div>
-</div>
-<div class="section" id="dump-load-the-keys-related-to-the-gnome-terminal-profiles">
+</section>
+<section id="dump-load-the-keys-related-to-the-gnome-terminal-profiles">
 <h2>
-<a class="toc-backref" href="#id4">Dump / load the keys related to the GNOME terminal profiles</a><a class="headerlink" href="#dump-load-the-keys-related-to-the-gnome-terminal-profiles" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Dump / load the keys related to the GNOME terminal profiles</a><a class="headerlink" href="#dump-load-the-keys-related-to-the-gnome-terminal-profiles" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">Use commands like the following ones to dump the keys to a file and load them:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>dconf dump /org/gnome/terminal/legacy/profiles:/ &gt; output_file
-dconf load /org/gnome/terminal/legacy/profiles:/ &lt; output_file
+<div class="highlight"><pre><span></span>dconf<span class="w"> </span>dump<span class="w"> </span>/org/gnome/terminal/legacy/profiles:/<span class="w"> </span>&gt;<span class="w"> </span>output_file
+dconf<span class="w"> </span>load<span class="w"> </span>/org/gnome/terminal/legacy/profiles:/<span class="w"> </span>&lt;<span class="w"> </span>output_file
 </pre></div>
 </div>
 <p>In my case, the output file contains:</p>
@@ -123,15 +126,15 @@ dconf load /org/gnome/terminal/legacy/profiles:/ &lt; output_file
 <div class="line">font=’Liberation Mono 8’</div>
 <div class="line">background-color=’rgb(0,0,0)’</div>
 </div>
-</div>
-<div class="section" id="dump-load-the-keys-related-to-all-gnome-terminal-options">
+</section>
+<section id="dump-load-the-keys-related-to-all-gnome-terminal-options">
 <h2>
-<a class="toc-backref" href="#id5">Dump / load the keys related to all GNOME terminal options</a><a class="headerlink" href="#dump-load-the-keys-related-to-all-gnome-terminal-options" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id5" role="doc-backlink">Dump / load the keys related to all GNOME terminal options</a><a class="headerlink" href="#dump-load-the-keys-related-to-all-gnome-terminal-options" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-3">Use commands like the following ones to dump the keys to a file and load them:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>dconf dump /org/gnome/terminal/ &gt; output_file
-dconf load /org/gnome/terminal/ &lt; output_file
+<div class="highlight"><pre><span></span>dconf<span class="w"> </span>dump<span class="w"> </span>/org/gnome/terminal/<span class="w"> </span>&gt;<span class="w"> </span>output_file
+dconf<span class="w"> </span>load<span class="w"> </span>/org/gnome/terminal/<span class="w"> </span>&lt;<span class="w"> </span>output_file
 </pre></div>
 </div>
 <p>In my case, the output file contains:</p>
@@ -164,45 +167,45 @@ dconf load /org/gnome/terminal/ &lt; output_file
 <div class="line">font=’Liberation Mono 8’</div>
 <div class="line">background-color=’rgb(0,0,0)’</div>
 </div>
-</div>
-<div class="section" id="reset-i-e-erase-a-particular-key">
+</section>
+<section id="reset-i-e-erase-a-particular-key">
 <h2>
-<a class="toc-backref" href="#id6">Reset (i.e. erase) a particular key</a><a class="headerlink" href="#reset-i-e-erase-a-particular-key" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">Reset (i.e. erase) a particular key</a><a class="headerlink" href="#reset-i-e-erase-a-particular-key" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-4">If you want to erase a particular key (for example the <code class="docutils literal notranslate"><span class="pre">foreground-color</span></code> key
 of a GNOME terminal profile), use a command like:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>dconf reset /org/gnome/terminal/legacy/profiles:/foreground-color
+<div class="highlight"><pre><span></span>dconf<span class="w"> </span>reset<span class="w"> </span>/org/gnome/terminal/legacy/profiles:/foreground-color
 </pre></div>
 </div>
-</div>
-<div class="section" id="finding-the-gnome-version">
+</section>
+<section id="finding-the-gnome-version">
 <h2>
-<a class="toc-backref" href="#id7">Finding the GNOME version</a><a class="headerlink" href="#finding-the-gnome-version" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id7" role="doc-backlink">Finding the GNOME version</a><a class="headerlink" href="#finding-the-gnome-version" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-5">You can find the GNOME 3 version in file
 <code class="docutils literal notranslate"><span class="pre">/usr/share/gnome/gnome-version.xml</span></code>.</p>
-</div>
-<div class="section" id="closing-the-gnome-session-from-the-command-line">
+</section>
+<section id="closing-the-gnome-session-from-the-command-line">
 <h2>
-<a class="toc-backref" href="#id8">Closing the GNOME session from the command line</a><a class="headerlink" href="#closing-the-gnome-session-from-the-command-line" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id8" role="doc-backlink">Closing the GNOME session from the command line</a><a class="headerlink" href="#closing-the-gnome-session-from-the-command-line" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-6">You can close the GNOME session from a terminal with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>gnome-session-quit
 </pre></div>
 </div>
-</div>
-<div class="section" id="other-resources">
+</section>
+<section id="other-resources">
 <h2>
-<a class="toc-backref" href="#id9">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id9" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
 </h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.pcworld.com/article/2691192/how-gnome-3-14-is-winning-back-disillusioned-linux-users.html">How GNOME 3.14 is winning back disillusioned Linux users</a></p></li>
 <li><p><a class="reference external" href="https://unix.stackexchange.com/a/73225">How to get GNOME version?</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -211,8 +214,9 @@ of a GNOME terminal profile), use a command like:</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li>
 <a class="reference internal" href="#">GNOME 3</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -227,20 +231,25 @@ of a GNOME terminal profile), use a command like:</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="hp_usb_printer.html" title="previous chapter">HP USB printer</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="openbsd_vm.html" title="next chapter">Installing an OpenBSD virtual machine</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="hp_usb_printer.html" title="previous chapter">HP USB printer</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="openbsd_vm.html" title="next chapter">Installing an OpenBSD virtual machine</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       <input type="submit" value="Go">
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>

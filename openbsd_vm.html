@@ -4,15 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
+
     <title>Installing an OpenBSD virtual machine — Personal Notes</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -42,10 +45,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="installing-an-openbsd-virtual-machine">
-<h1>Installing an OpenBSD virtual machine<a class="headerlink" href="#installing-an-openbsd-virtual-machine" title="Permalink to this headline">¶</a>
+  <section id="installing-an-openbsd-virtual-machine">
+<h1>Installing an OpenBSD virtual machine<a class="headerlink" href="#installing-an-openbsd-virtual-machine" title="Permalink to this heading">¶</a>
 </h1>
-<div class="contents local topic" id="page-content">
+<nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id2">Introduction</a></p></li>
@@ -59,10 +62,10 @@
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="introduction">
+</nav>
+<section id="introduction">
 <span id="index-0"></span><h2>
-<a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p>These are my notes about the installation of an <a class="reference external" href="https://www.openbsd.org">OpenBSD</a> 6.6 virtual machine on my <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> stable system (“AMD64” architecture).</p>
 <p>The process is very similar to <a class="reference internal" href="debian_unstable_vm.html"><span class="doc">the installation of a Debian GNU/Linux
@@ -70,21 +73,21 @@ virtual machine</span></a> and this page does not repeat all the
 details and mentions only the specific actions.</p>
 <p>If you’re looking for information about the post-install configuration and
 usage of the OpenBSD system, the <a class="reference internal" href="first_steps_with_openbsd.html"><span class="doc">“My first steps with OpenBSD” page</span></a> may be more interesting.</p>
-</div>
-<div class="section" id="installing-the-openbsd-signing-and-verifying-tool">
+</section>
+<section id="installing-the-openbsd-signing-and-verifying-tool">
 <h2>
-<a class="toc-backref" href="#id3">Installing the OpenBSD signing and verifying tool</a><a class="headerlink" href="#installing-the-openbsd-signing-and-verifying-tool" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Installing the OpenBSD signing and verifying tool</a><a class="headerlink" href="#installing-the-openbsd-signing-and-verifying-tool" title="Permalink to this heading">¶</a>
 </h2>
-<p>On a <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> system, you can install the
+<p id="index-1">On a <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> system, you can install the
 OpenBSD signing and verifying tool (<strong>as root</strong>) with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install signify-openbsd <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>signify-openbsd<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="getting-and-verifying-the-openbsd-installer-iso-image">
+</section>
+<section id="getting-and-verifying-the-openbsd-installer-iso-image">
 <h2>
-<a class="toc-backref" href="#id4">Getting and verifying the OpenBSD installer ISO image</a><a class="headerlink" href="#getting-and-verifying-the-openbsd-installer-iso-image" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Getting and verifying the OpenBSD installer ISO image</a><a class="headerlink" href="#getting-and-verifying-the-openbsd-installer-iso-image" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">OpenBSD installer images can be obtained from many servers. I use
 <code class="docutils literal notranslate"><span class="pre">ftp.fr.openbsd.org</span></code>. I choose to download the small ISO image (cd66.iso) and
@@ -92,27 +95,27 @@ let the installer download the file sets from the Internet.</p>
 <p>Here are the commands I use to download the installer image and the other files
 needed for the verification:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>mkdir -p ~/vm/installer_iso/openbsd_6.6
-<span class="nb">cd</span> ~/vm/installer_iso/openbsd_6.6
-wget https://ftp.fr.openbsd.org/pub/OpenBSD/6.6/amd64/cd66.iso
-wget https://ftp.fr.openbsd.org/pub/OpenBSD/6.6/amd64/SHA256
-wget https://ftp.fr.openbsd.org/pub/OpenBSD/6.6/amd64/SHA256.sig
-wget https://ftp.fr.openbsd.org/pub/OpenBSD/6.6/openbsd-66-base.pub
+<div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/vm/installer_iso/openbsd_6.6
+<span class="nb">cd</span><span class="w"> </span>~/vm/installer_iso/openbsd_6.6
+wget<span class="w"> </span>https://ftp.fr.openbsd.org/pub/OpenBSD/6.6/amd64/cd66.iso
+wget<span class="w"> </span>https://ftp.fr.openbsd.org/pub/OpenBSD/6.6/amd64/SHA256
+wget<span class="w"> </span>https://ftp.fr.openbsd.org/pub/OpenBSD/6.6/amd64/SHA256.sig
+wget<span class="w"> </span>https://ftp.fr.openbsd.org/pub/OpenBSD/6.6/openbsd-66-base.pub
 </pre></div>
 </div>
 <p>Then I do the verification with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>signify-openbsd -C -p openbsd-66-base.pub -x SHA256.sig cd66.iso
+<div class="highlight"><pre><span></span>signify-openbsd<span class="w"> </span>-C<span class="w"> </span>-p<span class="w"> </span>openbsd-66-base.pub<span class="w"> </span>-x<span class="w"> </span>SHA256.sig<span class="w"> </span>cd66.iso
 </pre></div>
 </div>
-</div>
-<div class="section" id="creating-the-openbsd-virtual-machine">
+</section>
+<section id="creating-the-openbsd-virtual-machine">
 <h2>
-<a class="toc-backref" href="#id5">Creating the OpenBSD virtual machine</a><a class="headerlink" href="#creating-the-openbsd-virtual-machine" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id5" role="doc-backlink">Creating the OpenBSD virtual machine</a><a class="headerlink" href="#creating-the-openbsd-virtual-machine" title="Permalink to this heading">¶</a>
 </h2>
-<div class="section" id="start-the-installation">
+<section id="start-the-installation">
 <h3>
-<a class="toc-backref" href="#id6">Start the installation</a><a class="headerlink" href="#start-the-installation" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">Start the installation</a><a class="headerlink" href="#start-the-installation" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-3">It consists in running a <code class="docutils literal notranslate"><span class="pre">virt-install</span></code> command, very much like for the
 <a class="reference internal" href="debian_unstable_vm.html#start-debian-unstable-vm-install"><span class="std std-ref">Debian unstable virtual machine creation</span></a>.</p>
@@ -122,14 +125,14 @@ commands so that applications running as root can connect to the X server</span>
 <code class="docutils literal notranslate"><span class="pre">--os-variant</span></code> option (the closest value to the OS you’re installing).</p>
 <p>Here is the exact <code class="docutils literal notranslate"><span class="pre">virt-install</span></code> command I use:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virt-install --name openbsd_6.6 <span class="se">\</span>
-  --memory <span class="m">1024</span> <span class="se">\</span>
-  --vcpus<span class="o">=</span><span class="m">1</span> <span class="se">\</span>
-  --cdrom cd66.iso <span class="se">\</span>
-  --disk <span class="nv">pool</span><span class="o">=</span>default,size<span class="o">=</span><span class="m">10</span> <span class="se">\</span>
-  --os-variant openbsd6.3 <span class="se">\</span>
-  --graphics spice <span class="se">\</span>
-  --channel spicevmc <span class="p">&amp;</span> <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>virt-install<span class="w"> </span>--name<span class="w"> </span>openbsd_6.6<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--memory<span class="w"> </span><span class="m">1024</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--vcpus<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cdrom<span class="w"> </span>cd66.iso<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--disk<span class="w"> </span><span class="nv">pool</span><span class="o">=</span>default,size<span class="o">=</span><span class="m">10</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--os-variant<span class="w"> </span>openbsd6.3<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--graphics<span class="w"> </span>spice<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--channel<span class="w"> </span>spicevmc<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>One precision though: This doesn’t work on one of my PC (one with a AMD Phenom
@@ -143,29 +146,29 @@ find possible values for the <code class="docutils literal notranslate"><span cl
 value.</p>
 <p>So on the PC with the AMD CPU, the exact <code class="docutils literal notranslate"><span class="pre">virt-install</span></code> command I use is:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>virt-install --name openbsd_6.6 <span class="se">\</span>
-  --cpu kvm64 <span class="se">\</span>
-  --memory <span class="m">1024</span> <span class="se">\</span>
-  --vcpus<span class="o">=</span><span class="m">1</span> <span class="se">\</span>
-  --cdrom cd66.iso <span class="se">\</span>
-  --disk <span class="nv">pool</span><span class="o">=</span>default,size<span class="o">=</span><span class="m">10</span> <span class="se">\</span>
-  --os-variant openbsd6.3 <span class="se">\</span>
-  --graphics spice <span class="se">\</span>
-  --channel spicevmc <span class="p">&amp;</span> <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>virt-install<span class="w"> </span>--name<span class="w"> </span>openbsd_6.6<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cpu<span class="w"> </span>kvm64<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--memory<span class="w"> </span><span class="m">1024</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--vcpus<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cdrom<span class="w"> </span>cd66.iso<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--disk<span class="w"> </span><span class="nv">pool</span><span class="o">=</span>default,size<span class="o">=</span><span class="m">10</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--os-variant<span class="w"> </span>openbsd6.3<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--graphics<span class="w"> </span>spice<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--channel<span class="w"> </span>spicevmc<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="openbsd-base-installation">
+</section>
+<section id="openbsd-base-installation">
 <h3>
-<a class="toc-backref" href="#id7">OpenBSD base installation</a><a class="headerlink" href="#openbsd-base-installation" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id7" role="doc-backlink">OpenBSD base installation</a><a class="headerlink" href="#openbsd-base-installation" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-4">Not much to say here. I haven’t had any major difficulty doing the base
 installation.</p>
 <p>Follow <a class="reference external" href="https://unix.stackexchange.com/questions/53238/what-does-do-you-expect-to-run-the-x-windows-system-do-when-installing-openbs">this link if you are surprised to be asked by the installer whether you
 expect to run the X Window system and wants to know why</a>.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -174,8 +177,9 @@ expect to run the X Window system and wants to know why</a>.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li>
 <a class="reference internal" href="#">Installing an OpenBSD virtual machine</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -191,20 +195,25 @@ expect to run the X Window system and wants to know why</a>.</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="gnome_3.html" title="previous chapter">GNOME 3</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="first_steps_with_openbsd.html" title="next chapter">My first steps with OpenBSD</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="gnome_3.html" title="previous chapter">GNOME 3</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="first_steps_with_openbsd.html" title="next chapter">My first steps with OpenBSD</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       <input type="submit" value="Go">
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>

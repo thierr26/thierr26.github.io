@@ -4,15 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
+
     <title>Debian base installation — Personal Notes</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -42,10 +45,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="debian-base-installation">
-<h1>Debian base installation<a class="headerlink" href="#debian-base-installation" title="Permalink to this headline">¶</a>
+  <section id="debian-base-installation">
+<h1>Debian base installation<a class="headerlink" href="#debian-base-installation" title="Permalink to this heading">¶</a>
 </h1>
-<div class="contents local topic" id="page-content">
+<nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id2">Introduction</a></p></li>
@@ -88,10 +91,10 @@
 </li>
 <li><p><a class="reference internal" href="#post-install-maintenance" id="id28">Post-install maintenance</a></p></li>
 </ul>
-</div>
-<div class="section" id="introduction">
+</nav>
+<section id="introduction">
 <span id="index-0"></span><h2>
-<a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p>These are my notes about the installation of a <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> system on a 64-bit (“AMD64” architecture) PC. A
 significant part of these notes describe the preparation of the installation
@@ -101,10 +104,10 @@ download a few hundreds of megabytes). This machine will be used to prepare the
 installation medias for the new system.</p>
 <p>Many software packages are also downloaded during the installation, so the
 target machine should also have a fast enough internet connection.</p>
-</div>
-<div class="section" id="getting-an-installation-cd">
+</section>
+<section id="getting-an-installation-cd">
 <span id="getting-debian-iso-image"></span><h2>
-<a class="toc-backref" href="#id3">Getting an installation CD</a><a class="headerlink" href="#getting-an-installation-cd" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Getting an installation CD</a><a class="headerlink" href="#getting-an-installation-cd" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-1">See the <a class="reference external" href="https://www.debian.org/distrib/">Getting Debian page</a> for
 information about how to download a Debian installer CD image or buy
@@ -118,20 +121,20 @@ Commands like the ones below should do it. The example is for Debian 11.3.0
 cdrskin can detect CD burning devices (<code class="docutils literal notranslate"><span class="pre">cdrskin</span> <span class="pre">--devices</span></code> lists the detected
 devices):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>wget https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.3.0-amd64-netinst.iso
-cdrskin <span class="nv">dev</span><span class="o">=</span>&lt;cd_burning_drive_device_file&gt; -eject -v -data debian-11.3.0-amd64-netinst.iso
+<div class="highlight"><pre><span></span>wget<span class="w"> </span>https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-11.3.0-amd64-netinst.iso
+cdrskin<span class="w"> </span><span class="nv">dev</span><span class="o">=</span>&lt;cd_burning_drive_device_file&gt;<span class="w"> </span>-eject<span class="w"> </span>-v<span class="w"> </span>-data<span class="w"> </span>debian-11.3.0-amd64-netinst.iso
 </pre></div>
 </div>
 <p>You might want to verify the authenticity of the ISO image. Download the SHA512
 checksum and associated signature file:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>wget https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/SHA512SUMS
-wget https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/SHA512SUMS.sign
+<div class="highlight"><pre><span></span>wget<span class="w"> </span>https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/SHA512SUMS
+wget<span class="w"> </span>https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/SHA512SUMS.sign
 </pre></div>
 </div>
 <p>Then, attempt to verify the authenticity of the image:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>gpg --verify SHA512SUMS.sign
+<div class="highlight"><pre><span></span>gpg<span class="w"> </span>--verify<span class="w"> </span>SHA512SUMS.sign
 </pre></div>
 </div>
 <p>If there are lines like the following in the output, it means that you have
@@ -143,7 +146,7 @@ fact that it does not appear in the output of <code class="docutils literal notr
 </div>
 <p>You can import the key with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>gpg --keyserver keyring.debian.org --recv DF9B9C49EAA9298432589D76DA87E80D6294BE9B
+<div class="highlight"><pre><span></span>gpg<span class="w"> </span>--keyserver<span class="w"> </span>keyring.debian.org<span class="w"> </span>--recv<span class="w"> </span>DF9B9C49EAA9298432589D76DA87E80D6294BE9B
 </pre></div>
 </div>
 <p>A new attempt to check the signature with <code class="docutils literal notranslate"><span class="pre">gpg</span> <span class="pre">--verify</span> <span class="pre">SHA512SUMS.sign</span></code> now
@@ -155,31 +158,33 @@ produces a line like</p>
 burned CD. Just compare the output of the following command with the checksum
 from the downloaded checksum file as provided in file SHA512SUMS:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>dd <span class="k">if</span><span class="o">=</span>/dev/&lt;cd_burning_drive_device_file&gt; <span class="nv">bs</span><span class="o">=</span><span class="m">2048</span> <span class="se">\</span>
-  <span class="nv">count</span><span class="o">=</span><span class="k">$(($(</span>stat -c %s debian-11.3.0-amd64-netinst.iso<span class="k">)</span><span class="o">/</span><span class="m">2048</span><span class="k">))</span> <span class="se">\</span>
-  <span class="nv">conv</span><span class="o">=</span>notrunc,noerror <span class="p">|</span> sha512sum
+<div class="highlight"><pre><span></span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/&lt;cd_burning_drive_device_file&gt;<span class="w"> </span><span class="nv">bs</span><span class="o">=</span><span class="m">2048</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">count</span><span class="o">=</span><span class="k">$(($(</span>stat<span class="w"> </span>-c<span class="w"> </span>%s<span class="w"> </span>debian-11.3.0-amd64-netinst.iso<span class="k">)</span><span class="o">/</span><span class="m">2048</span><span class="k">))</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">conv</span><span class="o">=</span>notrunc,noerror<span class="w"> </span><span class="p">|</span><span class="w"> </span>sha512sum
 </pre></div>
 </div>
-</div>
-<div class="section" id="preparing-a-media-with-firmware-archive-just-in-case">
+</section>
+<section id="preparing-a-media-with-firmware-archive-just-in-case">
 <h2>
-<a class="toc-backref" href="#id4">Preparing a media with firmware archive, just in case</a><a class="headerlink" href="#preparing-a-media-with-firmware-archive-just-in-case" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Preparing a media with firmware archive, just in case</a><a class="headerlink" href="#preparing-a-media-with-firmware-archive-just-in-case" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">Note that this step is <strong>not necessary if your installation CD already includes
 firmware</strong> (that is if you have downloaded the image from a subdirectory of
 cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware).</p>
+<p>Note also that this section does not apply any more, starting with Debian 12.
+(Firmware is now included in the normal Debian installer images.)</p>
 <p>The <a class="reference external" href="https://wiki.debian.org/Firmware">Debian Wiki</a> provides some
 instructions, but here are the details of what I’ve done (for a Debian Bullseye
 install, and including the authenticity verification of the archive):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>mkdir -p ~/download/debian_bullseye_firmware <span class="c1"># Create a directory somewhere.</span>
-<span class="nb">cd</span> ~/download/debian_bullseye_firmware       <span class="c1"># Move to that directory.</span>
+<div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/download/debian_bullseye_firmware<span class="w"> </span><span class="c1"># Create a directory somewhere.</span>
+<span class="nb">cd</span><span class="w"> </span>~/download/debian_bullseye_firmware<span class="w">       </span><span class="c1"># Move to that directory.</span>
 
 <span class="c1"># Download the firmware archive, its SHA512 checksum and associated signature</span>
 <span class="c1"># file.</span>
-wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bullseye/current/firmware.tar.gz
-wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bullseye/current/SHA512SUMS
-wget http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bullseye/current/SHA512SUMS.sign
+wget<span class="w"> </span>http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bullseye/current/firmware.tar.gz
+wget<span class="w"> </span>http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bullseye/current/SHA512SUMS
+wget<span class="w"> </span>http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bullseye/current/SHA512SUMS.sign
 </pre></div>
 </div>
 <p>I’ve checked the SHA512 checksum of <code class="docutils literal notranslate"><span class="pre">firmware.tar.gz</span></code> by issuing a
@@ -192,25 +197,25 @@ to a “firmware” directory located at the root of a USB stick.</p>
 <p>During Debian installation, plug in this USB stick when (and if) you get this
 kind of screen:</p>
 <img alt="_images/debian_install_screenshot_hw-detect_load_firmware_0.png" src="_images/debian_install_screenshot_hw-detect_load_firmware_0.png">
-</div>
-<div class="section" id="disk-partitioning">
+</section>
+<section id="disk-partitioning">
 <h2>
-<a class="toc-backref" href="#id5">Disk partitioning</a><a class="headerlink" href="#disk-partitioning" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id5" role="doc-backlink">Disk partitioning</a><a class="headerlink" href="#disk-partitioning" title="Permalink to this heading">¶</a>
 </h2>
-<div class="section" id="choosing-the-amount-of-swap-space">
+<section id="choosing-the-amount-of-swap-space">
 <h3>
-<a class="toc-backref" href="#id6">Choosing the amount of swap space</a><a class="headerlink" href="#choosing-the-amount-of-swap-space" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">Choosing the amount of swap space</a><a class="headerlink" href="#choosing-the-amount-of-swap-space" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-3">I tend to follow the recommendations provided in this article by Abhishek
 Prakash: <a class="reference external" href="https://itsfoss.com/swap-size">https://itsfoss.com/swap-size</a>.</p>
-</div>
-<div class="section" id="choosing-the-partitioning-scheme">
+</section>
+<section id="choosing-the-partitioning-scheme">
 <h3>
-<a class="toc-backref" href="#id7">Choosing the partitioning scheme</a><a class="headerlink" href="#choosing-the-partitioning-scheme" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id7" role="doc-backlink">Choosing the partitioning scheme</a><a class="headerlink" href="#choosing-the-partitioning-scheme" title="Permalink to this heading">¶</a>
 </h3>
-<div class="section" id="when-disk-encryption-is-not-wanted-and-with-legacy-bios-mode-boot">
+<section id="when-disk-encryption-is-not-wanted-and-with-legacy-bios-mode-boot">
 <span id="index-4"></span><h4>
-<a class="toc-backref" href="#id8">When disk encryption is not wanted (and with legacy BIOS mode boot)</a><a class="headerlink" href="#when-disk-encryption-is-not-wanted-and-with-legacy-bios-mode-boot" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id8" role="doc-backlink">When disk encryption is not wanted (and with legacy BIOS mode boot)</a><a class="headerlink" href="#when-disk-encryption-is-not-wanted-and-with-legacy-bios-mode-boot" title="Permalink to this heading">¶</a>
 </h4>
 <p id="index-5">If the machine has only one hard drives, I choose a simple partitioning scheme:
 a single <code class="docutils literal notranslate"><span class="pre">/</span></code> partition plus a swap partition. I find it easy enough to set up
@@ -232,10 +237,10 @@ partitioning scheme:</p>
 </div>
 </blockquote>
 <p>(This link was helpful: <a class="reference external" href="https://unix.stackexchange.com/a/89230">https://unix.stackexchange.com/a/89230</a>).</p>
-</div>
-<div class="section" id="when-disk-encryption-is-wanted-and-with-uefi-mode-boot">
+</section>
+<section id="when-disk-encryption-is-wanted-and-with-uefi-mode-boot">
 <h4>
-<a class="toc-backref" href="#id9">When disk encryption is wanted (and with UEFI mode boot)</a><a class="headerlink" href="#when-disk-encryption-is-wanted-and-with-uefi-mode-boot" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id9" role="doc-backlink">When disk encryption is wanted (and with UEFI mode boot)</a><a class="headerlink" href="#when-disk-encryption-is-wanted-and-with-uefi-mode-boot" title="Permalink to this heading">¶</a>
 </h4>
 <p id="index-6">I’ve setup disk encryption once on a 2022 laptop with a single hard drive. I’ve
 done it using the “Guided - use entire disk and set up encrypted LVM” method
@@ -245,48 +250,48 @@ partition).</p>
 <p>I struggled to set up the wanted swap space size, but eventually understood I
 had to go into “Configure the Logical Volume Manager”, delete the logical
 volumes and create them again with the wanted sizes.</p>
-</div>
-</div>
-</div>
-<div class="section" id="postponing-the-installation-of-a-graphical-environment">
+</section>
+</section>
+</section>
+<section id="postponing-the-installation-of-a-graphical-environment">
 <h2>
-<a class="toc-backref" href="#id10">Postponing the installation of a graphical environment</a><a class="headerlink" href="#postponing-the-installation-of-a-graphical-environment" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id10" role="doc-backlink">Postponing the installation of a graphical environment</a><a class="headerlink" href="#postponing-the-installation-of-a-graphical-environment" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-7">During Debian installation, you arrive at this screen.</p>
 <img alt="_images/debian_install_screenshot_tasksel_first_0.png" src="_images/debian_install_screenshot_tasksel_first_0.png">
 <p>Checking none of the desktop environment results obviously in no desktop
 environment installed. But it is possible to install one (including one that
 was not proposed by the Debian installer) later.</p>
-</div>
-<div class="section" id="shutting-down-and-rebooting-a-debian-system">
+</section>
+<section id="shutting-down-and-rebooting-a-debian-system">
 <h2>
-<a class="toc-backref" href="#id11">Shutting down and rebooting a Debian system</a><a class="headerlink" href="#shutting-down-and-rebooting-a-debian-system" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id11" role="doc-backlink">Shutting down and rebooting a Debian system</a><a class="headerlink" href="#shutting-down-and-rebooting-a-debian-system" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-8">After the installation, you should be able to boot into the newly installed
 system and log in as root or normal user. But it may not be obvious how to
 shutdown or reboot the system:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>systemctl poweroff <span class="c1"># Shut down.</span>
-systemctl reboot   <span class="c1"># Reboot.</span>
+<div class="highlight"><pre><span></span>systemctl<span class="w"> </span>poweroff<span class="w"> </span><span class="c1"># Shut down.</span>
+systemctl<span class="w"> </span>reboot<span class="w">   </span><span class="c1"># Reboot.</span>
 </pre></div>
 </div>
 <p>If you want to shutdown but not immediately, you can use the <code class="docutils literal notranslate"><span class="pre">shutdown</span></code>
 command:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>shutdown    <span class="c1"># Power-off the machine in 1 minute.</span>
-shutdown +2 <span class="c1"># Power-off the machine in 2 minutes.</span>
+<div class="highlight"><pre><span></span>shutdown<span class="w">    </span><span class="c1"># Power-off the machine in 1 minute.</span>
+shutdown<span class="w"> </span>+2<span class="w"> </span><span class="c1"># Power-off the machine in 2 minutes.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="immediate-post-install-actions">
+</section>
+<section id="immediate-post-install-actions">
 <h2>
-<a class="toc-backref" href="#id12">Immediate post-install actions</a><a class="headerlink" href="#immediate-post-install-actions" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id12" role="doc-backlink">Immediate post-install actions</a><a class="headerlink" href="#immediate-post-install-actions" title="Permalink to this heading">¶</a>
 </h2>
 <p>This section describes what I usually do after booting into the newly installed
 Debian system.</p>
-<div class="section" id="fixing-the-slow-boot-issue">
+<section id="fixing-the-slow-boot-issue">
 <h3>
-<a class="toc-backref" href="#id13">Fixing the slow boot issue</a><a class="headerlink" href="#fixing-the-slow-boot-issue" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id13" role="doc-backlink">Fixing the slow boot issue</a><a class="headerlink" href="#fixing-the-slow-boot-issue" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-9">A former machine of mine was affected by the
 <a class="reference external" href="https://en.wikipedia.org/wiki/Toshiba_Samsung_Storage_Technology">TSSTcorp</a>
@@ -295,14 +300,14 @@ related slow boot issue. You can check if you have this particular CD/DVD-RW
 drive with this command (assuming your optical drive is associated with device
 <code class="docutils literal notranslate"><span class="pre">/dev/sr0</span></code>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>udevadm info -a -p  <span class="k">$(</span>udevadm info -q path -n /dev/sr0<span class="k">)</span> <span class="p">|</span> grep model
+<div class="highlight"><pre><span></span>udevadm<span class="w"> </span>info<span class="w"> </span>-a<span class="w"> </span>-p<span class="w">  </span><span class="k">$(</span>udevadm<span class="w"> </span>info<span class="w"> </span>-q<span class="w"> </span>path<span class="w"> </span>-n<span class="w"> </span>/dev/sr0<span class="k">)</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>model
 </pre></div>
 </div>
 <p>The fix involves changing file
 <code class="docutils literal notranslate"><span class="pre">/lib/udev/rules.d/60-persistent-storage.rules</span></code> <strong>and then</strong> regenerating the
 initramfs image (<strong>as root</strong> for both operations):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>update-initramfs -u <span class="c1"># As root, regenerates the initramfs image.</span>
+<div class="highlight"><pre><span></span>update-initramfs<span class="w"> </span>-u<span class="w"> </span><span class="c1"># As root, regenerates the initramfs image.</span>
 </pre></div>
 </div>
 <p>As for the change to <code class="docutils literal notranslate"><span class="pre">/lib/udev/rules.d/60-persistent-storage.rules</span></code>, the
@@ -313,7 +318,7 @@ internet gives two solutions:</p>
 Philippov’s website</a>,
 with this command:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>sed -i <span class="s1">'/ATAPI/,+1s/^/#/'</span> /lib/udev/rules.d/60-persistent-storage.rules <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">'/ATAPI/,+1s/^/#/'</span><span class="w"> </span>/lib/udev/rules.d/60-persistent-storage.rules<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 </li>
@@ -326,58 +331,58 @@ the regenration of the initramfs image have to be redone after each update of
 the <code class="docutils literal notranslate"><span class="pre">udev</span></code> Debian package (because
 <code class="docutils literal notranslate"><span class="pre">/lib/udev/rules.d/60-persistent-storage.rules</span></code> is overwritten and the
 initramfs image regenerated by the update).</p>
-</div>
-<div class="section" id="system-update">
+</section>
+<section id="system-update">
 <h3>
-<a class="toc-backref" href="#id14">System update</a><a class="headerlink" href="#system-update" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id14" role="doc-backlink">System update</a><a class="headerlink" href="#system-update" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-10">Update the system <strong>as root</strong> with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get update       <span class="c1"># As root.</span>
-apt-get dist-upgrade <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>update<span class="w">       </span><span class="c1"># As root.</span>
+apt-get<span class="w"> </span>dist-upgrade<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="preventing-the-system-from-beeping">
+</section>
+<section id="preventing-the-system-from-beeping">
 <h3>
-<a class="toc-backref" href="#id15">Preventing the system from beeping</a><a class="headerlink" href="#preventing-the-system-from-beeping" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id15" role="doc-backlink">Preventing the system from beeping</a><a class="headerlink" href="#preventing-the-system-from-beeping" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-11">The newly installed system may emit beeps quiet often (for example when working
 in a terminal emulator). To stop that, you can blacklist module <code class="docutils literal notranslate"><span class="pre">pcspkr</span></code> by
 adding a file <strong>as root</strong> in <code class="docutils literal notranslate"><span class="pre">/etc/modprobe.d</span></code> (file name suggestion:
 <code class="docutils literal notranslate"><span class="pre">nobeep.conf</span></code>). The file should contain this line:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>blacklist pcspkr
+<div class="highlight"><pre><span></span>blacklist<span class="w"> </span>pcspkr
 </pre></div>
 </div>
 <p>After rebooting the system, module <code class="docutils literal notranslate"><span class="pre">pcspkr</span></code> should not be loaded any more
 (i.e. <code class="docutils literal notranslate"><span class="pre">lsmod</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">pcspkr</span></code> should output nothing) and you should not hear
 beeps any more.</p>
-</div>
-<div class="section" id="adding-support-for-other-languages">
+</section>
+<section id="adding-support-for-other-languages">
 <h3>
-<a class="toc-backref" href="#id16">Adding support for other languages</a><a class="headerlink" href="#adding-support-for-other-languages" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id16" role="doc-backlink">Adding support for other languages</a><a class="headerlink" href="#adding-support-for-other-languages" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-12">When installing the system, I select the English language, but I sometimes want
 to see an application in French. So I run (<strong>as root</strong>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>dpkg-reconfigure locales <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>dpkg-reconfigure<span class="w"> </span>locales<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>and select the french language (and don’t unselect anything).</p>
 <p>Then if I occasionally want to run an application (e.g. Gimp) in French, I can
 do (as “normal” user):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">LANG</span><span class="o">=</span>fr_FR.UTF-8
-<span class="nb">export</span> <span class="nv">LANGUAGE</span><span class="o">=</span>fr_FR.UTF-8
-gimp <span class="p">&amp;</span>
+<div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">LANG</span><span class="o">=</span>fr_FR.UTF-8
+<span class="nb">export</span><span class="w"> </span><span class="nv">LANGUAGE</span><span class="o">=</span>fr_FR.UTF-8
+gimp<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p>More details on the locales on the <a class="reference external" href="https://wiki.debian.org/Locale">Debian Wiki locale page</a></p>
-</div>
-<div class="section" id="adding-deb-multimedia-to-the-sources">
+</section>
+<section id="adding-deb-multimedia-to-the-sources">
 <span id="add-debmultimedia"></span><h3>
-<a class="toc-backref" href="#id17">Adding deb-multimedia to the sources</a><a class="headerlink" href="#adding-deb-multimedia-to-the-sources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id17" role="doc-backlink">Adding deb-multimedia to the sources</a><a class="headerlink" href="#adding-deb-multimedia-to-the-sources" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-13">You may want to add deb-multimedia as a source of packages for the newly
 installed Debian system (see <a class="reference external" href="https://linuxconfig.org/amp-up-your-multimedia-experience-on-debian-9-stretch-linux">this linuxconfig.org article</a>).</p>
@@ -389,90 +394,93 @@ your <code class="docutils literal notranslate"><span class="pre">/etc/apt/sourc
 </div>
 <p>Then, issue <strong>as root</strong> the following commands:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get update -oAcquire::AllowInsecureRepositories<span class="o">=</span><span class="nb">true</span>
-apt-get install deb-multimedia-keyring
-apt-get update
-apt-get dist-upgrade
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>update<span class="w"> </span>-oAcquire::AllowInsecureRepositories<span class="o">=</span><span class="nb">true</span>
+apt-get<span class="w"> </span>install<span class="w"> </span>deb-multimedia-keyring
+apt-get<span class="w"> </span>update
+apt-get<span class="w"> </span>dist-upgrade
 </pre></div>
 </div>
-</div>
-<div class="section" id="installing-firmware-linux-nonfree">
+</section>
+<section id="installing-firmware-linux-nonfree">
 <h3>
-<a class="toc-backref" href="#id18">Installing firmware-linux-nonfree</a><a class="headerlink" href="#installing-firmware-linux-nonfree" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id18" role="doc-backlink">Installing firmware-linux-nonfree</a><a class="headerlink" href="#installing-firmware-linux-nonfree" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-14">Depending on your hardware, you may not need the <code class="docutils literal notranslate"><span class="pre">firmware-linux-nonfree</span></code>. On
 my machines, this package makes life easier (most notably with Wi-Fi network
 adapter and/or graphics) and is installed either during installation (if the
 firmware archive has been required) or post-installation, manually:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install firmware-linux-nonfree <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>firmware-linux-nonfree<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-<p>Note that the <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code> file must have the non-free section.
-You can <a class="reference download internal" download="" href="_downloads/1b6a964b4404bf549e2d97ab8de32ceb/sources.list"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">my</span> <span class="pre">/etc/apt/sources.list</span></code></a>.
-Make sure you issue a <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span></code> command after changing
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code> file must have the non-free section
+(and even <strong>the non-free-firmware section</strong>, starting with Debian 12).</p>
+<p>You can <a class="reference download internal" download="" href="_downloads/1b6a964b4404bf549e2d97ab8de32ceb/sources.list"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">my</span> <span class="pre">/etc/apt/sources.list</span> <span class="pre">for</span> <span class="pre">Debian</span> <span class="pre">11</span></code></a>.</p>
+<p>You can <a class="reference external" href="https://raw.githubusercontent.com/thierr26/thierr26_config_files/master/system_config/etc/apt/sources.list">download my /etc/apt/sources.list for the current Debian
+stable release</a>.</p>
+<p>Make sure you issue a <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span></code> command after changing
 <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code>.</p>
-</div>
-<div class="section" id="checking-the-configured-time-zone">
+</section>
+<section id="checking-the-configured-time-zone">
 <h3>
-<a class="toc-backref" href="#id19">Checking the configured time zone</a><a class="headerlink" href="#checking-the-configured-time-zone" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id19" role="doc-backlink">Checking the configured time zone</a><a class="headerlink" href="#checking-the-configured-time-zone" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-15">Check the configured time zone with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>cat /etc/timezone
+<div class="highlight"><pre><span></span>cat<span class="w"> </span>/etc/timezone
 </pre></div>
 </div>
 <p>If the configuration is not correct, you can change it <strong>as root</strong> with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>dpkg-reconfigure tzdata <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>dpkg-reconfigure<span class="w"> </span>tzdata<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="cheking-systemd-timesyncd-service">
+</section>
+<section id="cheking-systemd-timesyncd-service">
 <h3>
-<a class="toc-backref" href="#id20">Cheking systemd-timesyncd service</a><a class="headerlink" href="#cheking-systemd-timesyncd-service" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id20" role="doc-backlink">Cheking systemd-timesyncd service</a><a class="headerlink" href="#cheking-systemd-timesyncd-service" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-16">Service systemd-timesyncd (network time synchronization service) should have
 been automatically enabled:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>systemctl status systemd-timesyncd
+<div class="highlight"><pre><span></span>systemctl<span class="w"> </span>status<span class="w"> </span>systemd-timesyncd
 </pre></div>
 </div>
 <p>The service logs its initial synchronization to <code class="docutils literal notranslate"><span class="pre">/var/log/syslog</span></code>. Check (<strong>as
 root</strong>) with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>grep systemd-timesyncd /var/log/syslog
+<div class="highlight"><pre><span></span>grep<span class="w"> </span>systemd-timesyncd<span class="w"> </span>/var/log/syslog
 </pre></div>
 </div>
 <p>You can find the lastest synchronization date by checking the modification time
 of file <code class="docutils literal notranslate"><span class="pre">/run/systemd/timesync/synchronized</span></code>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>stat /run/systemd/timesync/synchronized<span class="p">|</span>grep ^Modify
+<div class="highlight"><pre><span></span>stat<span class="w"> </span>/run/systemd/timesync/synchronized<span class="p">|</span>grep<span class="w"> </span>^Modify
 </pre></div>
 </div>
 <p>The configuration file for systemd-timesyncd is
 <code class="docutils literal notranslate"><span class="pre">/etc/systemd/timesyncd.conf</span></code>.</p>
-</div>
-<div class="section" id="installing-a-console-locker">
+</section>
+<section id="installing-a-console-locker">
 <h3>
-<a class="toc-backref" href="#id21">Installing a console locker</a><a class="headerlink" href="#installing-a-console-locker" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id21" role="doc-backlink">Installing a console locker</a><a class="headerlink" href="#installing-a-console-locker" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-17">There are many screen and/or console locker programs. I’ve installed <a class="reference external" href="https://github.com/muennich/physlock">physlock</a>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install physlock <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>physlock<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="installing-a-memory-ram-tester">
+</section>
+<section id="installing-a-memory-ram-tester">
 <h3>
-<a class="toc-backref" href="#id22">Installing a memory (RAM) tester</a><a class="headerlink" href="#installing-a-memory-ram-tester" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id22" role="doc-backlink">Installing a memory (RAM) tester</a><a class="headerlink" href="#installing-a-memory-ram-tester" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-18">RAM failures are not so rare in my experience. A tester like <a class="reference external" href="https://www.memtest.org/">Memtest86+</a> can really help diagnosing a RAM failure. The
 <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span></code> command below installs Memtest86+ and adds an entry in the
 <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_GRUB">Grub</a> menu (you have to reboot your
 machine and select the Memtest86+ grub entry to start Memtest86+):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install memtest86+ <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>memtest86+<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>On one of my machines (a 2022 laptop), Memtest86+ does not work (black screen).
@@ -482,43 +490,43 @@ which worked.</p>
 <p>I downloaded and burned the ISO image to a blank CD-R using the following
 commands:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>wget https://www.memtest86.com/downloads/memtest86-iso.zip
-unzip memtest86-iso.zip
-cdrskin -eject -v -data memtest86-iso.iso
+<div class="highlight"><pre><span></span>wget<span class="w"> </span>https://www.memtest86.com/downloads/memtest86-iso.zip
+unzip<span class="w"> </span>memtest86-iso.zip
+cdrskin<span class="w"> </span>-eject<span class="w"> </span>-v<span class="w"> </span>-data<span class="w"> </span>memtest86-iso.iso
 </pre></div>
 </div>
-</div>
-<div class="section" id="installing-a-wireless-devices-status-management-tool">
+</section>
+<section id="installing-a-wireless-devices-status-management-tool">
 <h3>
-<a class="toc-backref" href="#id23">Installing a wireless devices status management tool</a><a class="headerlink" href="#installing-a-wireless-devices-status-management-tool" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id23" role="doc-backlink">Installing a wireless devices status management tool</a><a class="headerlink" href="#installing-a-wireless-devices-status-management-tool" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-19">On a laptop computer, it may be useful to check the status (enabled, hard
 blocked, soft blocked) of the wireless devices. Package <code class="docutils literal notranslate"><span class="pre">rfkill</span></code> makes that
 possible:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install rfkill <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>rfkill<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>Check the statuses with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>/usr/sbin/rfkill list
+<div class="highlight"><pre><span></span>/usr/sbin/rfkill<span class="w"> </span>list
 </pre></div>
 </div>
-</div>
-<div class="section" id="installing-a-cd-burning-tool">
+</section>
+<section id="installing-a-cd-burning-tool">
 <h3>
-<a class="toc-backref" href="#id24">Installing a CD burning tool</a><a class="headerlink" href="#installing-a-cd-burning-tool" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id24" role="doc-backlink">Installing a CD burning tool</a><a class="headerlink" href="#installing-a-cd-burning-tool" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-20">I use cdrskin to burn CDs (in particular the Debian installation CDs) on an
 internal or external (USB) CD burning drive:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install cdrskin <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>cdrskin<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="creating-new-users">
+</section>
+<section id="creating-new-users">
 <h3>
-<a class="toc-backref" href="#id25">Creating new users</a><a class="headerlink" href="#creating-new-users" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id25" role="doc-backlink">Creating new users</a><a class="headerlink" href="#creating-new-users" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-21">Check whether the <code class="docutils literal notranslate"><span class="pre">DIR_MODE</span></code> (default permissions for users home directories)
 setting in file <code class="docutils literal notranslate"><span class="pre">/etc/adduser.conf</span></code> is appropriate for your needs. The
@@ -526,52 +534,52 @@ default value is “0755”. It implies that any unprivileged user have read acc
 to the files of other users. You may want to change (<strong>as root</strong>) the value to
 “0750” to avoid that:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>sed -i s/DIR_MODE<span class="o">=</span><span class="m">0755</span>/DIR_MODE<span class="o">=</span><span class="m">0750</span>/ /etc/adduser.conf
+<div class="highlight"><pre><span></span>sed<span class="w"> </span>-i<span class="w"> </span>s/DIR_MODE<span class="o">=</span><span class="m">0755</span>/DIR_MODE<span class="o">=</span><span class="m">0750</span>/<span class="w"> </span>/etc/adduser.conf
 </pre></div>
 </div>
 <p>Then, to create a new user, just use the <code class="docutils literal notranslate"><span class="pre">adduser</span></code> script (<strong>as root</strong>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>adduser new_user_name
+<div class="highlight"><pre><span></span>adduser<span class="w"> </span>new_user_name
 </pre></div>
 </div>
 <p>If some users have already been created with inappropriate home directories
 permissions, you can update their home directories permissions with a command
 like (<strong>as root</strong>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>chmod <span class="m">750</span> /home/*
+<div class="highlight"><pre><span></span>chmod<span class="w"> </span><span class="m">750</span><span class="w"> </span>/home/*
 </pre></div>
 </div>
-</div>
-<div class="section" id="creating-a-super-user-account-disabling-root-login">
+</section>
+<section id="creating-a-super-user-account-disabling-root-login">
 <h3>
-<a class="toc-backref" href="#id26">Creating a “super user” account, disabling root login</a><a class="headerlink" href="#creating-a-super-user-account-disabling-root-login" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id26" role="doc-backlink">Creating a “super user” account, disabling root login</a><a class="headerlink" href="#creating-a-super-user-account-disabling-root-login" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-22">You may want, for security reasons, to use an account other than root to
 perform administrative tasks (via sudo), and to disable root login.</p>
 <p>Make sure <code class="docutils literal notranslate"><span class="pre">sudo</span></code> is installed:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install sudo
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>sudo
 </pre></div>
 </div>
 <p>Create (<strong>as root</strong>) a new user (the new “super user”):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>adduser super_user_user_name
+<div class="highlight"><pre><span></span>adduser<span class="w"> </span>super_user_user_name
 </pre></div>
 </div>
 <p>Add (<strong>as root</strong>) the “super user” to the <code class="docutils literal notranslate"><span class="pre">sudo</span></code> group:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>usermod -aG sudo super_user_user_name
+<div class="highlight"><pre><span></span>usermod<span class="w"> </span>-aG<span class="w"> </span>sudo<span class="w"> </span>super_user_user_name
 </pre></div>
 </div>
 <p>Disable root login (<strong>as the “super user”</strong>, via <code class="docutils literal notranslate"><span class="pre">sudo</span></code>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>sudo usermod -L root
+<div class="highlight"><pre><span></span>sudo<span class="w"> </span>usermod<span class="w"> </span>-L<span class="w"> </span>root
 </pre></div>
 </div>
-</div>
-<div class="section" id="installing-locate-updatedb">
+</section>
+<section id="installing-locate-updatedb">
 <h3>
-<a class="toc-backref" href="#id27">Installing locate / updatedb</a><a class="headerlink" href="#installing-locate-updatedb" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id27" role="doc-backlink">Installing locate / updatedb</a><a class="headerlink" href="#installing-locate-updatedb" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-23">Command <code class="docutils literal notranslate"><span class="pre">locate</span></code> is a way of finding files on your computer. It is faster
 than <code class="docutils literal notranslate"><span class="pre">find</span></code>. It relies on a database generated using program <code class="docutils literal notranslate"><span class="pre">updatedb</span></code>.
@@ -579,59 +587,147 @@ The database is updated daily via the script <code class="docutils literal notra
 (directory <code class="docutils literal notranslate"><span class="pre">/etc/cron.daily</span></code> should appear in file <code class="docutils literal notranslate"><span class="pre">/etc/crontab</span></code>).</p>
 <p>Install locate and updatedb with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install locate <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>locate<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>If you don’t leave your machine running all the time, the database update may
 not happen every day if package <code class="docutils literal notranslate"><span class="pre">anacron</span></code> is not installed. You can install
 it (<strong>as root</strong>) with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install anacron <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>anacron<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>You can force the database update <strong>as root</strong> with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>updatedb <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>updatedb<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>You can see various statistics about the database, including the last time it
 has been changed, with option <code class="docutils literal notranslate"><span class="pre">-S</span></code>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>locate -S
+<div class="highlight"><pre><span></span>locate<span class="w"> </span>-S
 </pre></div>
 </div>
 <p>If the users home directories are not world-readable, then the files they
 contained won’t appear in the database. In this case, users may want to
 generate their own database, with a command like:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>updatedb --output<span class="o">=</span>/home/<span class="nv">$USER</span>/.locatedb <span class="m">2</span>&gt;/dev/null
+<div class="highlight"><pre><span></span>updatedb<span class="w"> </span>--output<span class="o">=</span>/home/<span class="nv">$USER</span>/.locatedb<span class="w"> </span><span class="m">2</span>&gt;/dev/null
 </pre></div>
 </div>
 <p>Users can use the <code class="docutils literal notranslate"><span class="pre">-d</span></code> option of command <code class="docutils literal notranslate"><span class="pre">locate</span></code> to search in their
 database. The database contains the files in their home directory and also the
 system files they have permissions to see:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>locate -d ~/.locatedb &lt;search_pattern&gt;
+<div class="highlight"><pre><span></span>locate<span class="w"> </span>-d<span class="w"> </span>~/.locatedb<span class="w"> </span>&lt;search_pattern&gt;
 </pre></div>
 </div>
 <p>Users can add an entry to their <code class="docutils literal notranslate"><span class="pre">crontab</span></code> to automate the generation of their
 database. See the <a class="reference internal" href="reminder.html"><span class="doc">Reminder page</span></a> for an example of <code class="docutils literal notranslate"><span class="pre">crontab</span></code>
 entry.</p>
-</div>
-</div>
-<div class="section" id="post-install-maintenance">
+</section>
+</section>
+<section id="post-install-maintenance">
 <h2>
-<a class="toc-backref" href="#id28">Post-install maintenance</a><a class="headerlink" href="#post-install-maintenance" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id28" role="doc-backlink">Post-install maintenance</a><a class="headerlink" href="#post-install-maintenance" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-24">I regularly run the following commands to keep the system up to date:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get update <span class="o">&amp;&amp;</span> apt-get dist-upgrade
-apt-get autoremove <span class="c1"># Useful if some packages have become unneeded.</span>
-apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows out of control.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>dist-upgrade
+apt-get<span class="w"> </span>autoremove<span class="w"> </span><span class="c1"># Useful if some packages have become unneeded.</span>
+apt-get<span class="w"> </span>autoclean<span class="w">  </span><span class="c1"># Useful to avoid that the APT cache grows out of control.</span>
 </pre></div>
 </div>
+<p>The package management system (<a class="reference external" href="https://en.wikipedia.org/wiki/APT_(software)">APT</a>) logs to files in
+<code class="docutils literal notranslate"><span class="pre">/var/log/apt</span></code>. <code class="docutils literal notranslate"><span class="pre">/var/log/apt/term.log</span></code> is not easy to read due to <code class="docutils literal notranslate"><span class="pre">^M</span></code>
+characters. When I need to read it, I make a copy of it and edit the copy in
+Vim to remove the <code class="docutils literal notranslate"><span class="pre">^M</span></code> characters (<code class="docutils literal notranslate"><span class="pre">:%s/&lt;Crl-V&gt;&lt;Ctrl-M&gt;/\r/g</span></code>).</p>
+<p>After, say, a major upgrade, you might want to find which of your configuration
+files are different from the default configuration files. I wrote the following
+shell script which helps answering the question.</p>
+<p>It’s meant to be run <strong>as root, in an empty directory created for the
+occasion</strong>.</p>
+<p>Here is a short description of the script:</p>
+<p>For every installed package on the system, the script searches the <code class="docutils literal notranslate"><span class="pre">.deb</span></code>
+file (found in <code class="docutils literal notranslate"><span class="pre">/var/cache/apt/archives</span></code>) for the list of configuration files
+for the package (file <code class="docutils literal notranslate"><span class="pre">conffiles</span></code> in the <code class="docutils literal notranslate"><span class="pre">control.tar</span></code> archive of the
+<code class="docutils literal notranslate"><span class="pre">.deb</span></code> file).</p>
+<p>For every configuration file, the default version of the file (as found in the
+<code class="docutils literal notranslate"><span class="pre">data.tar</span></code> archive of the <code class="docutils literal notranslate"><span class="pre">.deb</span></code> file) is compared (using <code class="docutils literal notranslate"><span class="pre">diff</span></code>) with
+the installed version.</p>
+<p>Of course, there are some particular cases which are not handled by the script.
+For example, for the package <code class="docutils literal notranslate"><span class="pre">openssh-server</span></code>, the configuration file
+<code class="docutils literal notranslate"><span class="pre">/etc/ssh/sshd_config</span></code> is not mentionned in <code class="docutils literal notranslate"><span class="pre">conffiles</span></code> (and the default
+version is <code class="docutils literal notranslate"><span class="pre">/usr/share/openssh/sshd_config</span></code>).</p>
+<p>And here is the code:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="nb">set</span><span class="w"> </span>-o<span class="w"> </span>nounset
+<span class="nb">set</span><span class="w"> </span>-o<span class="w"> </span>errexit
+
+<span class="nv">APT_ARCHIVE_DIR</span><span class="o">=</span>/var/cache/apt/archives<span class="p">;</span>
+<span class="nv">CONF_FILE_LIST</span><span class="o">=</span>conffiles<span class="p">;</span>
+<span class="nv">CTRL_ARCHIVE</span><span class="o">=</span>control.tar<span class="p">;</span>
+
+dpkg<span class="w"> </span>-l<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>^ii<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="p">|</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>LINE<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+
+<span class="w">          </span><span class="nv">LINE_TAIL</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/^ii\s\+//"</span><span class="k">)</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">          </span><span class="nv">PACKAGE_NAME</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LINE_TAIL</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/\([^ :]\+\).\+</span>$<span class="s2">/\1/"</span><span class="k">)</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">          </span><span class="nv">LINE_TAIL</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">LINE_TAIL</span><span class="p">#</span><span class="nv">$PACKAGE_NAME</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">          </span><span class="nv">LINE_TAIL</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LINE_TAIL</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/^\(:[^ ]\+\)\?\s\+//"</span><span class="k">)</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">          </span><span class="nv">PACKAGE_VER</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LINE_TAIL</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/\([^ ]\+\).\+</span>$<span class="s2">/\1/"</span><span class="k">)</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">          </span><span class="nv">PACKAGE_VER</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PACKAGE_VER</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/:/%3a/g"</span><span class="k">)</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">          </span><span class="nv">LINE_TAIL</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LINE_TAIL</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/^[^ ]\+\s\+//"</span><span class="k">)</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">          </span><span class="nv">PACKAGE_ARCH</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">LINE_TAIL</span><span class="p">%% *</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">          </span><span class="nv">PACKAGE_DEB</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">PACKAGE_NAME</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">PACKAGE_VER</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">PACKAGE_ARCH</span><span class="si">}</span><span class="s2">.deb"</span><span class="p">;</span>
+
+<span class="w">          </span><span class="nv">PACKAGE_DEB_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$APT_ARCHIVE_DIR</span><span class="s2">/</span><span class="nv">$PACKAGE_DEB</span><span class="s2">"</span><span class="p">;</span>
+
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$PACKAGE_DEB_PATH</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+
+<span class="w">              </span>rm<span class="w"> </span>-rf<span class="w"> </span><span class="s2">"</span><span class="nv">$PACKAGE_NAME</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">              </span>mkdir<span class="w"> </span><span class="s2">"</span><span class="nv">$PACKAGE_NAME</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">              </span><span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="nv">$PACKAGE_NAME</span><span class="s2">"</span><span class="p">;</span>
+
+<span class="w">              </span>cp<span class="w"> </span><span class="s2">"</span><span class="nv">$PACKAGE_DEB_PATH</span><span class="s2">"</span><span class="w"> </span>.<span class="p">;</span>
+<span class="w">              </span>ar<span class="w"> </span>-x<span class="w"> </span><span class="s2">"</span><span class="nv">$PACKAGE_DEB</span><span class="s2">"</span><span class="p">;</span>
+
+<span class="w">              </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$CTRL_ARCHIVE</span><span class="s2">.xz"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                  </span><span class="nv">COMPRESSED_CTRL_ARCHIVE</span><span class="o">=</span>control.tar.xz<span class="p">;</span>
+<span class="w">              </span><span class="k">else</span>
+<span class="w">                  </span><span class="nv">COMPRESSED_CTRL_ARCHIVE</span><span class="o">=</span>control.tar.gz<span class="p">;</span>
+<span class="w">              </span><span class="k">fi</span><span class="p">;</span>
+<span class="w">              </span>tar<span class="w"> </span>-xf<span class="w"> </span><span class="s2">"</span><span class="nv">$COMPRESSED_CTRL_ARCHIVE</span><span class="s2">"</span><span class="p">;</span>
+
+<span class="w">              </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$CONF_FILE_LIST</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+
+<span class="w">                  </span>tar<span class="w"> </span>-xf<span class="w"> </span>data.tar.xz<span class="p">;</span>
+
+<span class="w">                  </span><span class="k">for</span><span class="w"> </span>CONF_FILE<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>cat<span class="w"> </span><span class="s2">"</span><span class="nv">$CONF_FILE_LIST</span><span class="s2">"</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">                      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"*** </span><span class="nv">$PACKAGE_NAME</span><span class="s2"> configuration file </span><span class="nv">$CONF_FILE</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">                      </span><span class="nb">set</span><span class="w"> </span>+o<span class="w"> </span>errexit
+<span class="w">                      </span>diff<span class="w"> </span><span class="s2">"</span><span class="nv">$CONF_FILE</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">CONF_FILE</span><span class="p">#/</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">                      </span><span class="nb">set</span><span class="w"> </span>-o<span class="w"> </span>errexit
+<span class="w">                  </span><span class="k">done</span><span class="p">;</span>
+<span class="w">              </span><span class="k">fi</span><span class="p">;</span>
+
+<span class="w">              </span><span class="nb">cd</span><span class="w"> </span>..<span class="p">;</span>
+<span class="w">              </span>rm<span class="w"> </span>-rf<span class="w"> </span><span class="s2">"</span><span class="nv">$PACKAGE_NAME</span><span class="s2">"</span><span class="p">;</span>
+
+<span class="w">          </span><span class="k">else</span>
+
+<span class="w">              </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Cannot find </span><span class="nv">$PACKAGE_DEB_PATH</span><span class="s2">"</span><span class="w"> </span><span class="m">1</span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span>
+
+<span class="w">          </span><span class="k">fi</span><span class="p">;</span>
+
+<span class="w">      </span><span class="k">done</span><span class="p">;</span>
+</pre></div>
 </div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -640,8 +736,9 @@ apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows o
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li>
 <a class="reference internal" href="#">Debian base installation</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -684,20 +781,25 @@ apt-get autoclean  <span class="c1"># Useful to avoid that the APT cache grows o
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="index.html" title="previous chapter">Personal Notes</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="openbox_on_debian.html" title="next chapter">Installation of Openbox on Debian</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="index.html" title="previous chapter">Personal Notes</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="openbox_on_debian.html" title="next chapter">Installation of Openbox on Debian</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       <input type="submit" value="Go">
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>

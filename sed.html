@@ -4,15 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
+
     <title>Sed — Personal Notes</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -42,10 +45,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="sed">
-<h1>Sed<a class="headerlink" href="#sed" title="Permalink to this headline">¶</a>
+  <section id="sed">
+<h1>Sed<a class="headerlink" href="#sed" title="Permalink to this heading">¶</a>
 </h1>
-<div class="contents local topic" id="page-content">
+<nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
@@ -53,17 +56,17 @@
 <li><p><a class="reference internal" href="#substituting-starting-at-a-specific-line-number" id="id3">Substituting starting at a specific line number</a></p></li>
 <li><p><a class="reference internal" href="#joining-lines-matching-a-pattern" id="id4">Joining lines matching a pattern</a></p></li>
 </ul>
-</div>
-<div class="section" id="introduction">
+</nav>
+<section id="introduction">
 <span id="index-0"></span><h2>
-<a class="toc-backref" href="#id1">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p>This page is where I note the <a class="reference external" href="https://www.gnu.org/software/sed/">GNU sed</a>
 commands I found difficult to elaborate.</p>
-</div>
-<div class="section" id="left-padding-numbers-with-zeros">
+</section>
+<section id="left-padding-numbers-with-zeros">
 <h2>
-<a class="toc-backref" href="#id2">Left-padding numbers with zeros</a><a class="headerlink" href="#left-padding-numbers-with-zeros" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Left-padding numbers with zeros</a><a class="headerlink" href="#left-padding-numbers-with-zeros" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-1">Let’s say we have a text file called <code class="docutils literal notranslate"><span class="pre">numbers</span></code> containing integer numbers
 (one per line, and without any sign):</p>
@@ -76,7 +79,7 @@ commands I found difficult to elaborate.</p>
 <p>The following command outputs the same numbers, but with leading zeros (for the
 numbers having less than 4 digits):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>sed -e <span class="s2">":redo;s/^\([0-9]\{1,3\}\)</span>$<span class="s2">/0\1/; t redo"</span> numbers
+<div class="highlight"><pre><span></span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s2">":redo;s/^\([0-9]\{1,3\}\)</span>$<span class="s2">/0\1/; t redo"</span><span class="w"> </span>numbers
 </pre></div>
 </div>
 <div class="line-block">
@@ -92,18 +95,18 @@ prepended.</p>
 <p>Here is the same command with the parameter (number of digits) set as a bash
 variable:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nv">N</span><span class="o">=</span><span class="m">4</span><span class="p">;</span> sed -e <span class="s2">":redo; s/^\([0-9]\{1,</span><span class="k">$((</span><span class="nv">$N</span><span class="o">-</span><span class="m">1</span><span class="k">))</span><span class="s2">\}\)</span>$<span class="s2">/0\1/; t redo"</span> numbers
+<div class="highlight"><pre><span></span><span class="nv">N</span><span class="o">=</span><span class="m">4</span><span class="p">;</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s2">":redo; s/^\([0-9]\{1,</span><span class="k">$((</span><span class="nv">$N</span><span class="o">-</span><span class="m">1</span><span class="k">))</span><span class="s2">\}\)</span>$<span class="s2">/0\1/; t redo"</span><span class="w"> </span>numbers
 </pre></div>
 </div>
-</div>
-<div class="section" id="substituting-starting-at-a-specific-line-number">
+</section>
+<section id="substituting-starting-at-a-specific-line-number">
 <h2>
-<a class="toc-backref" href="#id3">Substituting starting at a specific line number</a><a class="headerlink" href="#substituting-starting-at-a-specific-line-number" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Substituting starting at a specific line number</a><a class="headerlink" href="#substituting-starting-at-a-specific-line-number" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">Taking the same example file as in the previous section, if you need to add a
 leading minus sign starting at line 3, you can use the following command:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>sed <span class="s2">"3,/\d0/s/^/-/"</span> numbers
+<div class="highlight"><pre><span></span>sed<span class="w"> </span><span class="s2">"3,/\d0/s/^/-/"</span><span class="w"> </span>numbers
 </pre></div>
 </div>
 <p>Here “3” is the first line where the substitution should be done and “/d0/” is
@@ -113,16 +116,16 @@ match any line (well, unless you have null characters in your input), so the
 substitution is done on every remaining line.</p>
 <p>See <a class="reference external" href="https://www.gnu.org/software/sed/manual/html_node/sed-addresses.html#sed-addresses">the “addresses” section of the GNU sed manual</a>
 for all the details about line selection.</p>
-</div>
-<div class="section" id="joining-lines-matching-a-pattern">
+</section>
+<section id="joining-lines-matching-a-pattern">
 <h2>
-<a class="toc-backref" href="#id4">Joining lines matching a pattern</a><a class="headerlink" href="#joining-lines-matching-a-pattern" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Joining lines matching a pattern</a><a class="headerlink" href="#joining-lines-matching-a-pattern" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-3">Still taking the same example file, the following command substitutes the
 preceding end of line line sequence with a space character if the line matches
 a pattern (here pattern “67”):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>sed -e <span class="s1">':redo; N; s/\n\(.*67\)/ \1/; t redo; P; D'</span> numbers
+<div class="highlight"><pre><span></span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s1">':redo; N; s/\n\(.*67\)/ \1/; t redo; P; D'</span><span class="w"> </span>numbers
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">N</span></code> command adds the next input line into the pattern space. The <code class="docutils literal notranslate"><span class="pre">s</span></code>
@@ -133,8 +136,8 @@ exiting the loop, the <code class="docutils literal notranslate"><span class="pr
 the first end of line sequence and the <code class="docutils literal notranslate"><span class="pre">D</span></code> command deletes the pattern space
 up to the first end of line sequence (only if the pattern space contains an end
 of line sequence).</p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -143,8 +146,9 @@ of line sequence).</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li>
 <a class="reference internal" href="#">Sed</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -155,20 +159,25 @@ of line sequence).</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="bc.html" title="previous chapter">bc</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="sphinx.html" title="next chapter">Sphinx</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="bc.html" title="previous chapter">bc</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="sphinx.html" title="next chapter">Sphinx</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       <input type="submit" value="Go">
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>

@@ -4,15 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
+
     <title>Music — Personal Notes</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -42,10 +45,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="music">
-<h1>Music<a class="headerlink" href="#music" title="Permalink to this headline">¶</a>
+  <section id="music">
+<h1>Music<a class="headerlink" href="#music" title="Permalink to this heading">¶</a>
 </h1>
-<div class="contents local topic" id="page-content">
+<nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id2">Introduction</a></p></li>
@@ -57,76 +60,76 @@
 <li><p><a class="reference internal" href="#building-audio-ogg-files-from-an-audio-cd" id="id8">Building audio (Ogg) files from an audio CD</a></p></li>
 <li><p><a class="reference internal" href="#converting-ogg-files-to-mp3" id="id9">Converting Ogg files to MP3</a></p></li>
 </ul>
-</div>
-<div class="section" id="introduction">
+</nav>
+<section id="introduction">
 <h2>
-<a class="toc-backref" href="#id2">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p>This page is where I note the commands I use to manipulate audio files (<a class="reference external" href="https://en.wikipedia.org/wiki/WAV">WAV
 files</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Ogg">Ogg files</a>).</p>
-</div>
-<div class="section" id="ogg-file-decoding">
+</section>
+<section id="ogg-file-decoding">
 <h2>
-<a class="toc-backref" href="#id3">Ogg file decoding</a><a class="headerlink" href="#ogg-file-decoding" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Ogg file decoding</a><a class="headerlink" href="#ogg-file-decoding" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-0">Decode an Ogg file to a WAV file with a command like:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>oggdec -o output.wav input.ogg
+<div class="highlight"><pre><span></span>oggdec<span class="w"> </span>-o<span class="w"> </span>output.wav<span class="w"> </span>input.ogg
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">oggdec</span></code> command is provided by package <code class="docutils literal notranslate"><span class="pre">vorbis-tools</span></code> on a <a class="reference external" href="https://www.debian.org">Debian
 GNU/Linux</a> system).</p>
-</div>
-<div class="section" id="wav-files-duration">
+</section>
+<section id="wav-files-duration">
 <h2>
-<a class="toc-backref" href="#id4">WAV files duration</a><a class="headerlink" href="#wav-files-duration" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">WAV files duration</a><a class="headerlink" href="#wav-files-duration" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-1">SoX can show (among other things) the duration in seconds of WAV files:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>sox my_wav_file.wav -n stat <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span>grep ^Length
-soxi my_wav_file.wav<span class="p">|</span>grep ^Duration
+<div class="highlight"><pre><span></span>sox<span class="w"> </span>my_wav_file.wav<span class="w"> </span>-n<span class="w"> </span>stat<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span>grep<span class="w"> </span>^Length
+soxi<span class="w"> </span>my_wav_file.wav<span class="p">|</span>grep<span class="w"> </span>^Duration
 </pre></div>
 </div>
 <p>You can specify multiple files (or use wildcards) in the <code class="docutils literal notranslate"><span class="pre">sox</span></code> command to get
 the cumulative duration of the files:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>sox *.wav -n stat <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span>grep ^Length
+<div class="highlight"><pre><span></span>sox<span class="w"> </span>*.wav<span class="w"> </span>-n<span class="w"> </span>stat<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span>grep<span class="w"> </span>^Length
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">sox</span></code> and <code class="docutils literal notranslate"><span class="pre">soxi</span></code> commands are provided by package <code class="docutils literal notranslate"><span class="pre">sox</span></code> on a <a class="reference external" href="https://www.debian.org">Debian
 GNU/Linux</a> system).</p>
-</div>
-<div class="section" id="burning-wav-files-to-a-cd-r">
+</section>
+<section id="burning-wav-files-to-a-cd-r">
 <h2>
-<a class="toc-backref" href="#id5">Burning WAV files to a CD-R</a><a class="headerlink" href="#burning-wav-files-to-a-cd-r" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id5" role="doc-backlink">Burning WAV files to a CD-R</a><a class="headerlink" href="#burning-wav-files-to-a-cd-r" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">You can burn some WAV files to a blank CD with a command like:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>cdrskin -v -eject -audio -pad *.wav
+<div class="highlight"><pre><span></span>cdrskin<span class="w"> </span>-v<span class="w"> </span>-eject<span class="w"> </span>-audio<span class="w"> </span>-pad<span class="w"> </span>*.wav
 </pre></div>
 </div>
 <p>If you need to specify the device for the optical drive, use the <code class="docutils literal notranslate"><span class="pre">-d</span></code>
 switch:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>cdrskin -d /dev/sr1 -v -eject -audio -pad *.wav
+<div class="highlight"><pre><span></span>cdrskin<span class="w"> </span>-d<span class="w"> </span>/dev/sr1<span class="w"> </span>-v<span class="w"> </span>-eject<span class="w"> </span>-audio<span class="w"> </span>-pad<span class="w"> </span>*.wav
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">cdrskin</span></code> should be able to list the optical drives devices with the
 <code class="docutils literal notranslate"><span class="pre">--devices</span></code> option:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>cdrskin --devices
+<div class="highlight"><pre><span></span>cdrskin<span class="w"> </span>--devices
 </pre></div>
 </div>
 <p>Alternatively, you can use wodim. It may work better than cdrskin on Debian
 Buster:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>wodim -v <span class="nv">dev</span><span class="o">=</span>/dev/sr1 -sao -audio -pad *.wav
+<div class="highlight"><pre><span></span>wodim<span class="w"> </span>-v<span class="w"> </span><span class="nv">dev</span><span class="o">=</span>/dev/sr1<span class="w"> </span>-sao<span class="w"> </span>-audio<span class="w"> </span>-pad<span class="w"> </span>*.wav
 </pre></div>
 </div>
-</div>
-<div class="section" id="building-audio-files-from-a-video">
+</section>
+<section id="building-audio-files-from-a-video">
 <span id="audio-files-from-video"></span><h2>
-<a class="toc-backref" href="#id6">Building audio files from a video</a><a class="headerlink" href="#building-audio-files-from-a-video" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">Building audio files from a video</a><a class="headerlink" href="#building-audio-files-from-a-video" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-3">I once wanted to make audio files from a nice TV show that I had recorded
 on the hard drive of my <a class="reference external" href="https://en.wikipedia.org/wiki/Freebox">Freebox</a>
@@ -161,7 +164,7 @@ package <code class="docutils literal notranslate"><span class="pre">ffmpeg</spa
 Debian archive. If you are not sure which version you have installed, check
 with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-cache policy ffmpeg
+<div class="highlight"><pre><span></span>apt-cache<span class="w"> </span>policy<span class="w"> </span>ffmpeg
 </pre></div>
 </div>
 <p>The output file names are built from the titles provided in the here-document,
@@ -185,7 +188,7 @@ SoX.</p>
 </ul>
 <p>To list the comments of an Ogg file, use <code class="docutils literal notranslate"><span class="pre">vorbiscomment</span> <span class="pre">-l</span></code>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>vorbiscomment -l my_ogg_file.ogg
+<div class="highlight"><pre><span></span>vorbiscomment<span class="w"> </span>-l<span class="w"> </span>my_ogg_file.ogg
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">oggenc</span></code> and <code class="docutils literal notranslate"><span class="pre">vorbiscomment</span></code> are provided by package <code class="docutils literal notranslate"><span class="pre">vorbis-tools</span></code> on a
@@ -194,109 +197,109 @@ Debian GNU/Linux system.</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
 
-<span class="nv">SOURCE_DIR</span><span class="o">=</span>directory/of/ts/file<span class="p">;</span>                     <span class="c1"># Adapt to your needs.</span>
-<span class="nv">SOURCE_FILE</span><span class="o">=</span>ts_file.ts<span class="p">;</span>                              <span class="c1"># Adapt to your needs.</span>
+<span class="nv">SOURCE_DIR</span><span class="o">=</span>directory/of/ts/file<span class="p">;</span><span class="w">                     </span><span class="c1"># Adapt to your needs.</span>
+<span class="nv">SOURCE_FILE</span><span class="o">=</span>ts_file.ts<span class="p">;</span><span class="w">                              </span><span class="c1"># Adapt to your needs.</span>
 <span class="nv">SOURCE_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$SOURCE_DIR</span><span class="s2">/</span><span class="nv">$SOURCE_FILE</span><span class="s2">"</span><span class="p">;</span>
 
-<span class="nv">OUTPUT_DIR</span><span class="o">=</span>output/directory<span class="p">;</span>                         <span class="c1"># Adapt to your needs.</span>
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span>output/directory<span class="p">;</span><span class="w">                         </span><span class="c1"># Adapt to your needs.</span>
 
-<span class="nv">INTERMEDIATE_FILES_DIR</span><span class="o">=</span>intermediate/files/directory<span class="p">;</span> <span class="c1"># Adapt to your needs.</span>
+<span class="nv">INTERMEDIATE_FILES_DIR</span><span class="o">=</span>intermediate/files/directory<span class="p">;</span><span class="w"> </span><span class="c1"># Adapt to your needs.</span>
 
-<span class="nv">ARTIST</span><span class="o">=</span><span class="s2">"Artist name"</span><span class="p">;</span>                                <span class="c1"># Adapt to your needs.</span>
-<span class="nv">ALBUM</span><span class="o">=</span><span class="s2">"Album name"</span><span class="p">;</span>                                  <span class="c1"># Adapt to your needs.</span>
+<span class="nv">ARTIST</span><span class="o">=</span><span class="s2">"Artist name"</span><span class="p">;</span><span class="w">                                </span><span class="c1"># Adapt to your needs.</span>
+<span class="nv">ALBUM</span><span class="o">=</span><span class="s2">"Album name"</span><span class="p">;</span><span class="w">                                  </span><span class="c1"># Adapt to your needs.</span>
 
 <span class="nv">OGGEXT</span><span class="o">=</span>.ogg<span class="p">;</span>
 <span class="nv">WAVEXT</span><span class="o">=</span>.wav<span class="p">;</span>
 
 <span class="nv">TEMP_SUFF</span><span class="o">=</span>_<span class="p">;</span>
 
-mkdir -p <span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">"</span><span class="p">;</span>
-rm -rf <span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">"</span>/*<span class="p">;</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">"</span><span class="p">;</span>
+rm<span class="w"> </span>-rf<span class="w"> </span><span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">"</span>/*<span class="p">;</span>
 
-mkdir -p <span class="s2">"</span><span class="nv">$INTERMEDIATE_FILES_DIR</span><span class="s2">"</span><span class="p">;</span>
-rm <span class="s2">"</span><span class="nv">$INTERMEDIATE_FILES_DIR</span><span class="s2">"</span>/*<span class="p">;</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$INTERMEDIATE_FILES_DIR</span><span class="s2">"</span><span class="p">;</span>
+rm<span class="w"> </span><span class="s2">"</span><span class="nv">$INTERMEDIATE_FILES_DIR</span><span class="s2">"</span>/*<span class="p">;</span>
 
-<span class="nv">K</span><span class="o">=</span><span class="m">0</span><span class="p">;</span>                <span class="c1"># Implies 1-based track numbering. Adapt to your needs.</span>
+<span class="nv">K</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w">                </span><span class="c1"># Implies 1-based track numbering. Adapt to your needs.</span>
 
 <span class="c1"># Loop over the lines of the here-document below.</span>
-<span class="k">while</span> <span class="nv">IFS</span><span class="o">=</span> <span class="nb">read</span> -r LINE<span class="p">;</span> <span class="k">do</span>
-    <span class="nv">START_TIME</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>sed <span class="s2">"s/ .*</span>$<span class="s2">//"</span><span class="k">)</span><span class="p">;</span>
-    <span class="nv">LINE</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>sed <span class="s2">"s/^[^ ]\+ //"</span><span class="k">)</span><span class="p">;</span>
-    <span class="nv">DURATION</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>sed <span class="s2">"s/ .*</span>$<span class="s2">//"</span><span class="k">)</span><span class="p">;</span>
-    <span class="nv">LINE</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>sed <span class="s2">"s/^[^ ]\+ //"</span><span class="k">)</span><span class="p">;</span>
+<span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>LINE<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">START_TIME</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>sed<span class="w"> </span><span class="s2">"s/ .*</span>$<span class="s2">//"</span><span class="k">)</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">LINE</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>sed<span class="w"> </span><span class="s2">"s/^[^ ]\+ //"</span><span class="k">)</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">DURATION</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>sed<span class="w"> </span><span class="s2">"s/ .*</span>$<span class="s2">//"</span><span class="k">)</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">LINE</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>sed<span class="w"> </span><span class="s2">"s/^[^ ]\+ //"</span><span class="k">)</span><span class="p">;</span>
 
-    <span class="nv">TITLE</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="k">)</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">TITLE</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="k">)</span><span class="p">;</span>
 
-    <span class="c1"># Substitute occurrences of ampersand with "and".</span>
-    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span><span class="p">|</span>sed <span class="s2">"s/&amp;/and/"</span><span class="k">)</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Substitute occurrences of ampersand with "and".</span>
+<span class="w">    </span><span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span><span class="p">|</span>sed<span class="w"> </span><span class="s2">"s/&amp;/and/"</span><span class="k">)</span><span class="p">;</span>
 
-    <span class="c1"># Remove accents, cedillas, tildes, etc...</span>
-    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>unaccent UTF-8<span class="k">)</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Remove accents, cedillas, tildes, etc...</span>
+<span class="w">    </span><span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>unaccent<span class="w"> </span>UTF-8<span class="k">)</span><span class="p">;</span>
 
-    <span class="c1"># Convert uppercase characters to lowercase.</span>
-    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>tr <span class="s1">'[:upper:]'</span> <span class="s1">'[:lower:]'</span><span class="k">)</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Convert uppercase characters to lowercase.</span>
+<span class="w">    </span><span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>tr<span class="w"> </span><span class="s1">'[:upper:]'</span><span class="w"> </span><span class="s1">'[:lower:]'</span><span class="k">)</span><span class="p">;</span>
 
-    <span class="c1"># Substitute characters that are not lowercase letters, digits or hyphen</span>
-    <span class="c1"># with underscores.</span>
-    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> -n <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>tr -c <span class="s2">"a-z0-9-"</span> <span class="o">[</span>_*<span class="o">]</span><span class="k">)</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Substitute characters that are not lowercase letters, digits or hyphen</span>
+<span class="w">    </span><span class="c1"># with underscores.</span>
+<span class="w">    </span><span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>tr<span class="w"> </span>-c<span class="w"> </span><span class="s2">"a-z0-9-"</span><span class="w"> </span><span class="o">[</span>_*<span class="o">]</span><span class="k">)</span><span class="p">;</span>
 
-    <span class="c1"># Prepend track number (2 digits).</span>
-    <span class="nv">K</span><span class="o">=</span><span class="k">$((</span>K <span class="o">+</span> <span class="m">1</span><span class="k">))</span><span class="p">;</span>
-    <span class="nv">K_STR</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span> <span class="s2">"%02d"</span> <span class="nv">$K</span><span class="k">)</span><span class="p">;</span>
-    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">K_STR</span><span class="si">}</span><span class="s2">_-_</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Prepend track number (2 digits).</span>
+<span class="w">    </span><span class="nv">K</span><span class="o">=</span><span class="k">$((</span>K<span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="k">))</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">K_STR</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s2">"%02d"</span><span class="w"> </span><span class="nv">$K</span><span class="k">)</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">K_STR</span><span class="si">}</span><span class="s2">_-_</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">;</span>
 
-    <span class="nv">WAV_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$INTERMEDIATE_FILES_DIR</span><span class="s2">/</span><span class="nv">$OUTPUT_PATH$WAVEXT</span><span class="s2">"</span><span class="p">;</span>
-    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="nv">$OUTPUT_PATH$OGGEXT</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">WAV_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$INTERMEDIATE_FILES_DIR</span><span class="s2">/</span><span class="nv">$OUTPUT_PATH$WAVEXT</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="nv">$OUTPUT_PATH$OGGEXT</span><span class="s2">"</span><span class="p">;</span>
 
-    <span class="nb">echo</span> <span class="s2">"Creating </span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Creating </span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">;</span>
 
-    <span class="c1"># Create a WAV file. The -nostdin option is needed to prevent ffmpeg from</span>
-    <span class="c1"># "eating" parts of the here-document.</span>
-    ffmpeg -nostdin -loglevel quiet -ss <span class="s2">"</span><span class="nv">$START_TIME</span><span class="s2">"</span> -t <span class="s2">"</span><span class="nv">$DURATION</span><span class="s2">"</span> <span class="se">\</span>
-        -i <span class="s2">"</span><span class="nv">$SOURCE_PATH</span><span class="s2">"</span> -ar <span class="m">44100</span> <span class="s2">"</span><span class="nv">$WAV_PATH</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Create a WAV file. The -nostdin option is needed to prevent ffmpeg from</span>
+<span class="w">    </span><span class="c1"># "eating" parts of the here-document.</span>
+<span class="w">    </span>ffmpeg<span class="w"> </span>-nostdin<span class="w"> </span>-loglevel<span class="w"> </span>quiet<span class="w"> </span>-ss<span class="w"> </span><span class="s2">"</span><span class="nv">$START_TIME</span><span class="s2">"</span><span class="w"> </span>-t<span class="w"> </span><span class="s2">"</span><span class="nv">$DURATION</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SOURCE_PATH</span><span class="s2">"</span><span class="w"> </span>-ar<span class="w"> </span><span class="m">44100</span><span class="w"> </span><span class="s2">"</span><span class="nv">$WAV_PATH</span><span class="s2">"</span><span class="p">;</span>
 
-    <span class="c1"># Fade out the WAV file.</span>
-    mv <span class="s2">"</span><span class="nv">$WAV_PATH</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$WAV_PATH$TEMP_SUFF</span><span class="s2">"</span><span class="p">;</span>
-    sox <span class="s2">"</span><span class="nv">$WAV_PATH$TEMP_SUFF</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$WAV_PATH</span><span class="s2">"</span> fade t <span class="m">0</span> -0 <span class="m">7</span><span class="p">;</span>
-    rm <span class="s2">"</span><span class="nv">$WAV_PATH$TEMP_SUFF</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Fade out the WAV file.</span>
+<span class="w">    </span>mv<span class="w"> </span><span class="s2">"</span><span class="nv">$WAV_PATH</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$WAV_PATH$TEMP_SUFF</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span>sox<span class="w"> </span><span class="s2">"</span><span class="nv">$WAV_PATH$TEMP_SUFF</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$WAV_PATH</span><span class="s2">"</span><span class="w"> </span>fade<span class="w"> </span>t<span class="w"> </span><span class="m">0</span><span class="w"> </span>-0<span class="w"> </span><span class="m">7</span><span class="p">;</span>
+<span class="w">    </span>rm<span class="w"> </span><span class="s2">"</span><span class="nv">$WAV_PATH$TEMP_SUFF</span><span class="s2">"</span><span class="p">;</span>
 
-    <span class="c1"># Encode to Ogg format.</span>
-    oggenc -a <span class="s2">"</span><span class="nv">$ARTIST</span><span class="s2">"</span> -t <span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span> -l <span class="s2">"</span><span class="nv">$ALBUM</span><span class="s2">"</span> -c <span class="s2">"tracknumber=</span><span class="nv">$K_STR</span><span class="s2">"</span> <span class="se">\</span>
-        -o <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$WAV_PATH</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Encode to Ogg format.</span>
+<span class="w">    </span>oggenc<span class="w"> </span>-a<span class="w"> </span><span class="s2">"</span><span class="nv">$ARTIST</span><span class="s2">"</span><span class="w"> </span>-t<span class="w"> </span><span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span><span class="w"> </span>-l<span class="w"> </span><span class="s2">"</span><span class="nv">$ALBUM</span><span class="s2">"</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">"tracknumber=</span><span class="nv">$K_STR</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-o<span class="w"> </span><span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$WAV_PATH</span><span class="s2">"</span><span class="p">;</span>
 <span class="k">done</span><span class="s">&lt;&lt;HEREDOC</span>
 <span class="s">00:16:44 00:03:43 The mission (Ennio Morricone)</span>
 <span class="s">00:33:20 00:03:19 Cinema Paradiso (Andrea &amp; Ennio Morricone)</span>
 <span class="s">HEREDOC</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="getting-the-track-list-of-an-audio-cd">
+</section>
+<section id="getting-the-track-list-of-an-audio-cd">
 <h2>
-<a class="toc-backref" href="#id7">Getting the track list of an audio CD</a><a class="headerlink" href="#getting-the-track-list-of-an-audio-cd" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id7" role="doc-backlink">Getting the track list of an audio CD</a><a class="headerlink" href="#getting-the-track-list-of-an-audio-cd" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-4">The <code class="docutils literal notranslate"><span class="pre">cdown</span></code> command (provided by package <code class="docutils literal notranslate"><span class="pre">cdtool</span></code> on a Debian GNU/Linux
 system) queries the <a class="reference external" href="https://en.wikipedia.org/wiki/CDDB">CDDB</a> database. Just
 insert the Audio CD in your optical drive and run:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>cdown -H gnudb.gnudb.org -P <span class="m">8880</span>
+<div class="highlight"><pre><span></span>cdown<span class="w"> </span>-H<span class="w"> </span>gnudb.gnudb.org<span class="w"> </span>-P<span class="w"> </span><span class="m">8880</span>
 </pre></div>
 </div>
 <p>If you need to specify the device for the optical drive, use the <code class="docutils literal notranslate"><span class="pre">-d</span></code>
 switch:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>cdown -H gnudb.gnudb.org -P <span class="m">8880</span> -d /dev/sr1
+<div class="highlight"><pre><span></span>cdown<span class="w"> </span>-H<span class="w"> </span>gnudb.gnudb.org<span class="w"> </span>-P<span class="w"> </span><span class="m">8880</span><span class="w"> </span>-d<span class="w"> </span>/dev/sr1
 </pre></div>
 </div>
 <p>If you have issues with accented letters, try:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>cdown -H gnudb.gnudb.org -P <span class="m">8880</span><span class="p">|</span>iconv -f latin1
+<div class="highlight"><pre><span></span>cdown<span class="w"> </span>-H<span class="w"> </span>gnudb.gnudb.org<span class="w"> </span>-P<span class="w"> </span><span class="m">8880</span><span class="p">|</span>iconv<span class="w"> </span>-f<span class="w"> </span>latin1
 </pre></div>
 </div>
 <p>Alternatively, you can search your audio CD directly on the <a class="reference external" href="http://www.freedb.org">freedb.org</a> website.</p>
-</div>
-<div class="section" id="building-audio-ogg-files-from-an-audio-cd">
+</section>
+<section id="building-audio-ogg-files-from-an-audio-cd">
 <h2>
-<a class="toc-backref" href="#id8">Building audio (Ogg) files from an audio CD</a><a class="headerlink" href="#building-audio-ogg-files-from-an-audio-cd" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id8" role="doc-backlink">Building audio (Ogg) files from an audio CD</a><a class="headerlink" href="#building-audio-ogg-files-from-an-audio-cd" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-5">When I want to rip an audio CD, I write a shell script, which has a lot of
 similarities with <a class="reference internal" href="#audio-files-from-video"><span class="std std-ref">the script I use to build audio files from a video</span></a>. The script is also mostly a loop over the lines of a
@@ -312,49 +315,49 @@ of your optical drive.</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
 
-<span class="nv">OUTPUT_DIR</span><span class="o">=</span>output/directory<span class="p">;</span>                         <span class="c1"># Adapt to your needs.</span>
-<span class="nv">ARTIST</span><span class="o">=</span><span class="s2">"Artist name"</span><span class="p">;</span>                                <span class="c1"># Adapt to your needs.</span>
-<span class="nv">ALBUM</span><span class="o">=</span><span class="s2">"Album name"</span><span class="p">;</span>                                  <span class="c1"># Adapt to your needs.</span>
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span>output/directory<span class="p">;</span><span class="w">                         </span><span class="c1"># Adapt to your needs.</span>
+<span class="nv">ARTIST</span><span class="o">=</span><span class="s2">"Artist name"</span><span class="p">;</span><span class="w">                                </span><span class="c1"># Adapt to your needs.</span>
+<span class="nv">ALBUM</span><span class="o">=</span><span class="s2">"Album name"</span><span class="p">;</span><span class="w">                                  </span><span class="c1"># Adapt to your needs.</span>
 
-<span class="nv">DEVICE</span><span class="o">=</span>/dev/cdrom<span class="p">;</span>                                   <span class="c1"># Adapt to your needs.</span>
+<span class="nv">DEVICE</span><span class="o">=</span>/dev/cdrom<span class="p">;</span><span class="w">                                   </span><span class="c1"># Adapt to your needs.</span>
 
 <span class="nv">OGGEXT</span><span class="o">=</span>.ogg<span class="p">;</span>
 
-mkdir -p <span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">"</span><span class="p">;</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">"</span><span class="p">;</span>
 
-<span class="nv">TRACK_NUM_OFFS</span><span class="o">=</span><span class="m">0</span><span class="p">;</span>   <span class="c1"># Implies 1-based track numbering. Adapt to your needs.</span>
+<span class="nv">TRACK_NUM_OFFS</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w">   </span><span class="c1"># Implies 1-based track numbering. Adapt to your needs.</span>
 
 <span class="nv">K</span><span class="o">=</span><span class="m">0</span><span class="p">;</span>
 
 <span class="c1"># Loop over the lines of the here-document below.</span>
-<span class="k">while</span> <span class="nv">IFS</span><span class="o">=</span> <span class="nb">read</span> -r LINE<span class="p">;</span> <span class="k">do</span>
+<span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>LINE<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 
-    <span class="nv">TITLE</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="k">)</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">TITLE</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="k">)</span><span class="p">;</span>
 
-    <span class="c1"># Substitute occurrences of ampersand with "and".</span>
-    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span><span class="p">|</span>sed <span class="s2">"s/&amp;/and/"</span><span class="k">)</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Substitute occurrences of ampersand with "and".</span>
+<span class="w">    </span><span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span><span class="p">|</span>sed<span class="w"> </span><span class="s2">"s/&amp;/and/"</span><span class="k">)</span><span class="p">;</span>
 
-    <span class="c1"># Remove accents, cedillas, tildes, etc...</span>
-    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>unaccent UTF-8<span class="k">)</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Remove accents, cedillas, tildes, etc...</span>
+<span class="w">    </span><span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>unaccent<span class="w"> </span>UTF-8<span class="k">)</span><span class="p">;</span>
 
-    <span class="c1"># Convert uppercase characters to lowercase.</span>
-    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>tr <span class="s1">'[:upper:]'</span> <span class="s1">'[:lower:]'</span><span class="k">)</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Convert uppercase characters to lowercase.</span>
+<span class="w">    </span><span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>tr<span class="w"> </span><span class="s1">'[:upper:]'</span><span class="w"> </span><span class="s1">'[:lower:]'</span><span class="k">)</span><span class="p">;</span>
 
-    <span class="c1"># Substitute characters that are not lowercase letters, digits or hyphen</span>
-    <span class="c1"># with underscores.</span>
-    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> -n <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>tr -c <span class="s2">"a-z0-9-"</span> <span class="o">[</span>_*<span class="o">]</span><span class="k">)</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Substitute characters that are not lowercase letters, digits or hyphen</span>
+<span class="w">    </span><span class="c1"># with underscores.</span>
+<span class="w">    </span><span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">|</span>tr<span class="w"> </span>-c<span class="w"> </span><span class="s2">"a-z0-9-"</span><span class="w"> </span><span class="o">[</span>_*<span class="o">]</span><span class="k">)</span><span class="p">;</span>
 
-    <span class="c1"># Prepend track number (2 digits).</span>
-    <span class="nv">K</span><span class="o">=</span><span class="k">$((</span>K <span class="o">+</span> <span class="m">1</span><span class="k">))</span><span class="p">;</span>
-    <span class="nv">K_STR</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span> <span class="s2">"%02d"</span> <span class="k">$((</span>K <span class="o">+</span> <span class="nv">$TRACK_NUM_OFFS</span><span class="k">)))</span><span class="p">;</span>
-    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">K_STR</span><span class="si">}</span><span class="s2">_-_</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Prepend track number (2 digits).</span>
+<span class="w">    </span><span class="nv">K</span><span class="o">=</span><span class="k">$((</span>K<span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="k">))</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">K_STR</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s2">"%02d"</span><span class="w"> </span><span class="k">$((</span>K<span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nv">$TRACK_NUM_OFFS</span><span class="k">)))</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">K_STR</span><span class="si">}</span><span class="s2">_-_</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">;</span>
 
-    <span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="nv">$OUTPUT_PATH$OGGEXT</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="nv">OUTPUT_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="nv">$OUTPUT_PATH$OGGEXT</span><span class="s2">"</span><span class="p">;</span>
 
-    <span class="nb">echo</span> <span class="s2">"Creating </span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Creating </span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="p">;</span>
 
-    cdparanoia -d <span class="s2">"</span><span class="nv">$DEVICE</span><span class="s2">"</span> <span class="nv">$K</span> -<span class="p">|</span>oggenc -a <span class="s2">"</span><span class="nv">$ARTIST</span><span class="s2">"</span> -t <span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span> -l <span class="se">\</span>
-    <span class="s2">"</span><span class="nv">$ALBUM</span><span class="s2">"</span> -c <span class="s2">"tracknumber=</span><span class="nv">$K_STR</span><span class="s2">"</span> -o <span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span> -<span class="p">;</span>
+<span class="w">    </span>cdparanoia<span class="w"> </span>-d<span class="w"> </span><span class="s2">"</span><span class="nv">$DEVICE</span><span class="s2">"</span><span class="w"> </span><span class="nv">$K</span><span class="w"> </span>-<span class="p">|</span>oggenc<span class="w"> </span>-a<span class="w"> </span><span class="s2">"</span><span class="nv">$ARTIST</span><span class="s2">"</span><span class="w"> </span>-t<span class="w"> </span><span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span><span class="w"> </span>-l<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s2">"</span><span class="nv">$ALBUM</span><span class="s2">"</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">"tracknumber=</span><span class="nv">$K_STR</span><span class="s2">"</span><span class="w"> </span>-o<span class="w"> </span><span class="s2">"</span><span class="nv">$OUTPUT_PATH</span><span class="s2">"</span><span class="w"> </span>-<span class="p">;</span>
 
 <span class="k">done</span><span class="s">&lt;&lt;HEREDOC</span>
 <span class="s">Title for track #1</span>
@@ -364,24 +367,24 @@ mkdir -p <span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class
 <span class="s">HEREDOC</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="converting-ogg-files-to-mp3">
+</section>
+<section id="converting-ogg-files-to-mp3">
 <h2>
-<a class="toc-backref" href="#id9">Converting Ogg files to MP3</a><a class="headerlink" href="#converting-ogg-files-to-mp3" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id9" role="doc-backlink">Converting Ogg files to MP3</a><a class="headerlink" href="#converting-ogg-files-to-mp3" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-6">Converting an Ogg file to <a class="reference external" href="https://en.wikipedia.org/wiki/MP3">MP3</a> is pretty
 easy with <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>ffmpeg -i my_audio_file.ogg my_audio_file.mp3
+<div class="highlight"><pre><span></span>ffmpeg<span class="w"> </span>-i<span class="w"> </span>my_audio_file.ogg<span class="w"> </span>my_audio_file.mp3
 </pre></div>
 </div>
 <p>Metadata can be included in the MP3 output file. Example:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>ffmpeg -i my_audio_file.ogg <span class="se">\</span>
-    -metadata <span class="nv">artist</span><span class="o">=</span><span class="s2">"The artist"</span> <span class="se">\</span>
-    -metadata <span class="nv">album</span><span class="o">=</span><span class="s2">"The album"</span> <span class="se">\</span>
-    -metadata <span class="nv">title</span><span class="o">=</span><span class="s2">"The track title"</span> <span class="se">\</span>
-    my_audio_file.mp3
+<div class="highlight"><pre><span></span>ffmpeg<span class="w"> </span>-i<span class="w"> </span>my_audio_file.ogg<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-metadata<span class="w"> </span><span class="nv">artist</span><span class="o">=</span><span class="s2">"The artist"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-metadata<span class="w"> </span><span class="nv">album</span><span class="o">=</span><span class="s2">"The album"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-metadata<span class="w"> </span><span class="nv">title</span><span class="o">=</span><span class="s2">"The track title"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>my_audio_file.mp3
 </pre></div>
 </div>
 <p>I have a collection of Ogg files, and I need to convert them to MP3 and store
@@ -399,97 +402,97 @@ artists are directly in the USB stick root tree.</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span><span class="ch">#!/bin/sh</span>
 
-<span class="nv">OGG_TREE_ROOT</span><span class="o">=</span>path/to/root/of/ogg/trees<span class="p">;</span>             <span class="c1"># Adapt to your needs.</span>
-<span class="nv">OUTPUT_DIR</span><span class="o">=</span>path/to/usb/stick/root<span class="p">;</span>                   <span class="c1"># Adapt to your needs.</span>
+<span class="nv">OGG_TREE_ROOT</span><span class="o">=</span>path/to/root/of/ogg/trees<span class="p">;</span><span class="w">             </span><span class="c1"># Adapt to your needs.</span>
+<span class="nv">OUTPUT_DIR</span><span class="o">=</span>path/to/usb/stick/root<span class="p">;</span><span class="w">                   </span><span class="c1"># Adapt to your needs.</span>
 <span class="nv">OGGEXT</span><span class="o">=</span>.ogg<span class="p">;</span>
 <span class="nv">MP3EXT</span><span class="o">=</span>.mp3<span class="p">;</span>
 
 <span class="c1"># -----------------------------------------------------------------------------</span>
 
-ogg2mp3<span class="o">()</span> <span class="o">{</span>
+ogg2mp3<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 
-    <span class="nb">local</span> <span class="nv">SOURCE_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="p">;</span>
-    <span class="nb">local</span> <span class="nv">INTERMEDIATE_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span><span class="p">;</span>
-    <span class="nb">local</span> <span class="nv">TARGET_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$3</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">SOURCE_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">INTERMEDIATE_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">TARGET_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$3</span><span class="s2">"</span><span class="p">;</span>
 
-    <span class="c1"># vorbiscomment with -l switch lists the comments in the Ogg file (one line</span>
-    <span class="c1"># per comment, key=value format). The output is piped to a group of</span>
-    <span class="c1"># commands (delimited with curly braces). The whole group is executed in</span>
-    <span class="c1"># one subshell. This makes it possible to initialize variables before the</span>
-    <span class="c1"># while loop, assign the variables in the loop and use them after the loop.</span>
-    vorbiscomment -l <span class="s2">"</span><span class="nv">$SOURCE_FILE</span><span class="s2">"</span><span class="p">|</span>
-    <span class="o">{</span>
-        <span class="nb">local</span> <span class="nv">LINE</span><span class="o">=</span>
-        <span class="nb">local</span> <span class="nv">ARTIST</span><span class="o">=</span>
-        <span class="nb">local</span> <span class="nv">ALBUM</span><span class="o">=</span>
-        <span class="nb">local</span> <span class="nv">TITLE</span><span class="o">=</span>
-        <span class="nb">local</span> <span class="nv">VAL</span><span class="o">=</span>
-        <span class="k">while</span> <span class="nv">IFS</span><span class="o">=</span> <span class="nb">read</span> -r LINE<span class="p">;</span> <span class="k">do</span>
-            <span class="nv">VAL</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>sed <span class="s2">"s/^[^=]\+=//"</span><span class="k">)</span><span class="p">;</span>
-            <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>grep -q ^artist<span class="o">=</span> <span class="o">&amp;&amp;</span> <span class="nv">ARTIST</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VAL</span><span class="s2">"</span><span class="p">;</span>
-            <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>grep -q ^album<span class="o">=</span> <span class="o">&amp;&amp;</span> <span class="nv">ALBUM</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VAL</span><span class="s2">"</span><span class="p">;</span>
-            <span class="nb">echo</span> <span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>grep -q ^title<span class="o">=</span> <span class="o">&amp;&amp;</span> <span class="nv">TITLE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VAL</span><span class="s2">"</span><span class="p">;</span>
-        <span class="k">done</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># vorbiscomment with -l switch lists the comments in the Ogg file (one line</span>
+<span class="w">    </span><span class="c1"># per comment, key=value format). The output is piped to a group of</span>
+<span class="w">    </span><span class="c1"># commands (delimited with curly braces). The whole group is executed in</span>
+<span class="w">    </span><span class="c1"># one subshell. This makes it possible to initialize variables before the</span>
+<span class="w">    </span><span class="c1"># while loop, assign the variables in the loop and use them after the loop.</span>
+<span class="w">    </span>vorbiscomment<span class="w"> </span>-l<span class="w"> </span><span class="s2">"</span><span class="nv">$SOURCE_FILE</span><span class="s2">"</span><span class="p">|</span>
+<span class="w">    </span><span class="o">{</span>
+<span class="w">        </span><span class="nb">local</span><span class="w"> </span><span class="nv">LINE</span><span class="o">=</span>
+<span class="w">        </span><span class="nb">local</span><span class="w"> </span><span class="nv">ARTIST</span><span class="o">=</span>
+<span class="w">        </span><span class="nb">local</span><span class="w"> </span><span class="nv">ALBUM</span><span class="o">=</span>
+<span class="w">        </span><span class="nb">local</span><span class="w"> </span><span class="nv">TITLE</span><span class="o">=</span>
+<span class="w">        </span><span class="nb">local</span><span class="w"> </span><span class="nv">VAL</span><span class="o">=</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>LINE<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">            </span><span class="nv">VAL</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>sed<span class="w"> </span><span class="s2">"s/^[^=]\+=//"</span><span class="k">)</span><span class="p">;</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>grep<span class="w"> </span>-q<span class="w"> </span>^artist<span class="o">=</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">ARTIST</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VAL</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>grep<span class="w"> </span>-q<span class="w"> </span>^album<span class="o">=</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">ALBUM</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VAL</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$LINE</span><span class="s2">"</span><span class="p">|</span>grep<span class="w"> </span>-q<span class="w"> </span>^title<span class="o">=</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">TITLE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$VAL</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">        </span><span class="k">done</span><span class="p">;</span>
 
-        <span class="c1"># Convert Ogg source file to MP3 (INTERMEDIATE_FILE).</span>
-        ffmpeg -nostdin -nostats -loglevel quiet -i <span class="s2">"</span><span class="nv">$SOURCE_FILE</span><span class="s2">"</span> <span class="se">\</span>
-            -metadata <span class="nv">artist</span><span class="o">=</span><span class="s2">"</span><span class="nv">$ARTIST</span><span class="s2">"</span> <span class="se">\</span>
-            -metadata <span class="nv">album</span><span class="o">=</span><span class="s2">"</span><span class="nv">$ALBUM</span><span class="s2">"</span> <span class="se">\</span>
-            -metadata <span class="nv">title</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span> <span class="se">\</span>
-            <span class="s2">"</span><span class="nv">$INTERMEDIATE_FILE</span><span class="s2">"</span><span class="p">;</span>
-    <span class="o">}</span>
+<span class="w">        </span><span class="c1"># Convert Ogg source file to MP3 (INTERMEDIATE_FILE).</span>
+<span class="w">        </span>ffmpeg<span class="w"> </span>-nostdin<span class="w"> </span>-nostats<span class="w"> </span>-loglevel<span class="w"> </span>quiet<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$SOURCE_FILE</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-metadata<span class="w"> </span><span class="nv">artist</span><span class="o">=</span><span class="s2">"</span><span class="nv">$ARTIST</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-metadata<span class="w"> </span><span class="nv">album</span><span class="o">=</span><span class="s2">"</span><span class="nv">$ALBUM</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-metadata<span class="w"> </span><span class="nv">title</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TITLE</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="s2">"</span><span class="nv">$INTERMEDIATE_FILE</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="o">}</span>
 
-    mkdir -p <span class="s2">"</span><span class="si">${</span><span class="nv">TARGET_FILE</span><span class="p">%/*</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span>
-    mv <span class="s2">"</span><span class="nv">$INTERMEDIATE_FILE</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">TARGET_FILE</span><span class="p">%/*</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span>mv<span class="w"> </span><span class="s2">"</span><span class="nv">$INTERMEDIATE_FILE</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
 <span class="o">}</span>
 
 <span class="c1"># -----------------------------------------------------------------------------</span>
 
-process_file<span class="o">()</span> <span class="o">{</span>
+process_file<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 
-    <span class="nb">local</span> <span class="nv">SOURCE_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">SOURCE_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="p">;</span>
 
-    <span class="c1"># Initialize TEMPO_TARGET_FILE with SOURCE_FILE, but with extension changed</span>
-    <span class="c1"># to MP3 extension.</span>
-    <span class="nb">local</span> <span class="nv">TEMPO_TARGET_FILE</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">SOURCE_FILE</span><span class="p">%</span><span class="nv">$OGGEXT</span><span class="si">}</span><span class="nv">$MP3EXT</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Initialize TEMPO_TARGET_FILE with SOURCE_FILE, but with extension changed</span>
+<span class="w">    </span><span class="c1"># to MP3 extension.</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">TEMPO_TARGET_FILE</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">SOURCE_FILE</span><span class="p">%</span><span class="nv">$OGGEXT</span><span class="si">}</span><span class="nv">$MP3EXT</span><span class="s2">"</span><span class="p">;</span>
 
-    <span class="c1"># Store a copy of TEMPO_TARGET_FILE initial value, will be useful later.</span>
-    <span class="nb">local</span> <span class="nv">INTERMEDIATE_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TEMPO_TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Store a copy of TEMPO_TARGET_FILE initial value, will be useful later.</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">INTERMEDIATE_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$TEMPO_TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
 
-    <span class="c1"># Remove the beginning of the path of TEMPO_TARGET_FILE (keep only the</span>
-    <span class="c1"># parent directory, the directory and the basename).</span>
-    <span class="k">while</span> <span class="o">[</span> <span class="s2">"</span><span class="si">${</span><span class="nv">TEMPO_TARGET_FILE</span><span class="p">%/*/*/*</span><span class="si">}</span><span class="s2">"</span> !<span class="o">=</span> <span class="s2">"</span><span class="nv">$TEMPO_TARGET_FILE</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">do</span>
-        <span class="nv">TEMPO_TARGET_FILE</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">TEMPO_TARGET_FILE</span><span class="p">#*/</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span>
-    <span class="k">done</span><span class="p">;</span>
+<span class="w">    </span><span class="c1"># Remove the beginning of the path of TEMPO_TARGET_FILE (keep only the</span>
+<span class="w">    </span><span class="c1"># parent directory, the directory and the basename).</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">TEMPO_TARGET_FILE</span><span class="p">%/*/*/*</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">"</span><span class="nv">$TEMPO_TARGET_FILE</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nv">TEMPO_TARGET_FILE</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">TEMPO_TARGET_FILE</span><span class="p">#*/</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">done</span><span class="p">;</span>
 
-    <span class="nb">local</span> <span class="nv">TARGET_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="nv">$TEMPO_TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">TARGET_FILE</span><span class="o">=</span><span class="s2">"</span><span class="nv">$OUTPUT_DIR</span><span class="s2">/</span><span class="nv">$TEMPO_TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
 
-    <span class="k">if</span> <span class="o">[</span> -e <span class="s2">"</span><span class="nv">$TARGET_FILE</span><span class="s2">"</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-        <span class="nb">echo</span> <span class="s2">"Already exists in output directory: </span><span class="nv">$TEMPO_TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
-    <span class="k">else</span>
-        <span class="nb">echo</span> <span class="s2">"Creating </span><span class="nv">$TEMPO_TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
-        ogg2mp3 <span class="s2">"</span><span class="nv">$SOURCE_FILE</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$INTERMEDIATE_FILE</span><span class="s2">"</span> <span class="s2">"</span><span class="nv">$TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
-    <span class="k">fi</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"</span><span class="nv">$TARGET_FILE</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Already exists in output directory: </span><span class="nv">$TEMPO_TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Creating </span><span class="nv">$TEMPO_TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">        </span>ogg2mp3<span class="w"> </span><span class="s2">"</span><span class="nv">$SOURCE_FILE</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$INTERMEDIATE_FILE</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$TARGET_FILE</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">fi</span><span class="p">;</span>
 <span class="o">}</span>
 
 <span class="c1"># -----------------------------------------------------------------------------</span>
 
-process_dir<span class="o">()</span> <span class="o">{</span>
-    <span class="nb">local</span> <span class="nv">DIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="p">;</span>
-    <span class="k">for</span> OGGFILE in <span class="k">$(</span>find <span class="s2">"</span><span class="nv">$DIR</span><span class="s2">"</span> -maxdepth <span class="m">1</span> -type f -name <span class="s2">"*</span><span class="nv">$OGGEXT</span><span class="s2">"</span><span class="p">|</span>sort<span class="k">)</span><span class="p">;</span> <span class="k">do</span>
-        process_file <span class="s2">"</span><span class="nv">$OGGFILE</span><span class="s2">"</span><span class="p">;</span>
-    <span class="k">done</span><span class="p">;</span>
+process_dir<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">DIR</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>OGGFILE<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>find<span class="w"> </span><span class="s2">"</span><span class="nv">$DIR</span><span class="s2">"</span><span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-name<span class="w"> </span><span class="s2">"*</span><span class="nv">$OGGEXT</span><span class="s2">"</span><span class="p">|</span>sort<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span>process_file<span class="w"> </span><span class="s2">"</span><span class="nv">$OGGFILE</span><span class="s2">"</span><span class="p">;</span>
+<span class="w">    </span><span class="k">done</span><span class="p">;</span>
 <span class="o">}</span>
 
 <span class="c1"># -----------------------------------------------------------------------------</span>
 
-<span class="k">for</span> DIR in <span class="k">$(</span>find <span class="s2">"</span><span class="nv">$OGG_TREE_ROOT</span><span class="s2">"</span> -type d<span class="k">)</span><span class="p">;</span> <span class="k">do</span>
-    process_dir <span class="s2">"</span><span class="nv">$DIR</span><span class="s2">"</span><span class="p">;</span>
+<span class="k">for</span><span class="w"> </span>DIR<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>find<span class="w"> </span><span class="s2">"</span><span class="nv">$OGG_TREE_ROOT</span><span class="s2">"</span><span class="w"> </span>-type<span class="w"> </span>d<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>process_dir<span class="w"> </span><span class="s2">"</span><span class="nv">$DIR</span><span class="s2">"</span><span class="p">;</span>
 <span class="k">done</span><span class="p">;</span>
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -498,8 +501,9 @@ process_dir<span class="o">()</span> <span class="o">{</span>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li>
 <a class="reference internal" href="#">Music</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -514,20 +518,25 @@ process_dir<span class="o">()</span> <span class="o">{</span>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="wifi.html" title="previous chapter">Wi-Fi</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="nu_html_checker.html" title="next chapter">Nu HTML Checker</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="wifi.html" title="previous chapter">Wi-Fi</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="nu_html_checker.html" title="next chapter">Nu HTML Checker</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       <input type="submit" value="Go">
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>

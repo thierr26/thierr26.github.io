@@ -4,15 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
+
     <title>Installation of Openbox on Debian — Personal Notes</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -42,10 +45,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="installation-of-openbox-on-debian">
-<h1>Installation of Openbox on Debian<a class="headerlink" href="#installation-of-openbox-on-debian" title="Permalink to this headline">¶</a>
+  <section id="installation-of-openbox-on-debian">
+<h1>Installation of Openbox on Debian<a class="headerlink" href="#installation-of-openbox-on-debian" title="Permalink to this heading">¶</a>
 </h1>
-<div class="contents local topic" id="page-content">
+<nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
@@ -61,22 +64,22 @@
 <li><p><a class="reference internal" href="#benefiting-from-vim-clipboard-feature" id="id11">Benefiting from Vim clipboard feature</a></p></li>
 <li><p><a class="reference internal" href="#other-resources" id="id12">Other resources</a></p></li>
 </ul>
-</div>
-<div class="section" id="introduction">
+</nav>
+<section id="introduction">
 <h2>
-<a class="toc-backref" href="#id1">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p>These are my notes about the installation and configuration of <a class="reference external" href="https://en.wikipedia.org/wiki/Openbox">Openbox</a> on <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a>. I’m doing this installation just after the
 <a class="reference internal" href="debian_base_install.html"><span class="doc">Debian base installation</span></a>.</p>
-</div>
-<div class="section" id="installation">
+</section>
+<section id="installation">
 <h2>
-<a class="toc-backref" href="#id2">Installation</a><a class="headerlink" href="#installation" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Installation</a><a class="headerlink" href="#installation" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-0">I install <a class="reference external" href="https://www.x.org">X.Org X Window System</a> and Openbox with the
 following command (<strong>as root</strong>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install xorg openbox openbox-menu menu <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>xorg<span class="w"> </span>openbox<span class="w"> </span>openbox-menu<span class="w"> </span>menu<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>Then (and assuming that the <code class="docutils literal notranslate"><span class="pre">/etc/X11/Xwrapper.config</span></code> file contains the line
@@ -91,10 +94,10 @@ terminal.</p>
 <p>If the keyboard layout is wrong, try rebooting.</p>
 <p>At this point, I <a class="reference internal" href="debian_apps_install.html"><span class="doc">install and tweak the applications I want on the system</span></a>. Then I proceed with the configuration of
 the Openbox environment and that’s what is described in the rest of this page.</p>
-</div>
-<div class="section" id="addition-of-a-rdp-server-for-a-remote-machine">
+</section>
+<section id="addition-of-a-rdp-server-for-a-remote-machine">
 <h2>
-<a class="toc-backref" href="#id3">Addition of a RDP server (for a remote machine)</a><a class="headerlink" href="#addition-of-a-rdp-server-for-a-remote-machine" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Addition of a RDP server (for a remote machine)</a><a class="headerlink" href="#addition-of-a-rdp-server-for-a-remote-machine" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-1">On a remote machine with no physical access, I use the <a class="reference external" href="https://en.wikipedia.org/wiki/Remote_Desktop_Protocol">Remote Desktop Protocol
 (RDP)</a> to work in
@@ -102,7 +105,7 @@ Openbox. I did the installation just like I would have done for a desktop
 machine (same <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span></code> command as in the previous section), and
 installed a display manager (<a class="reference external" href="https://en.wikipedia.org/wiki/LightDM">LightDM</a>) as well as a RDP server (<a class="reference external" href="http://xrdp.org">xrdp</a>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install lightdm xrdp <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>lightdm<span class="w"> </span>xrdp<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>Package <code class="docutils literal notranslate"><span class="pre">ssl-cert</span></code> gets installed as well (it’s a dependency of <code class="docutils literal notranslate"><span class="pre">xrdp</span></code>) and
@@ -112,17 +115,17 @@ certificate stored at <code class="docutils literal notranslate"><span class="pr
 necessary to add user <code class="docutils literal notranslate"><span class="pre">xrdp</span></code> to group <code class="docutils literal notranslate"><span class="pre">ssl-cert</span></code>. Without that, xrdp is not
 able to read the certificate, using the following command (<strong>as root</strong>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>adduser xrdp ssl-cert <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>adduser<span class="w"> </span>xrdp<span class="w"> </span>ssl-cert<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>Then I restarted the server and was able to open an Openbox session on the
 remote machine from my local desktop machine using a <code class="docutils literal notranslate"><span class="pre">xfreerdp</span></code> command like
 the following one:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>xfreerdp +glyph-cache /relax-order-checks <span class="se">\</span>
-    /u:&lt;my_user_name_on_the_remote_machine&gt; <span class="se">\</span>
-    /v:&lt;remote_machine_address&gt; <span class="se">\</span>
-    /kbd:0x40c /f
+<div class="highlight"><pre><span></span>xfreerdp<span class="w"> </span>+glyph-cache<span class="w"> </span>/relax-order-checks<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/u:&lt;my_user_name_on_the_remote_machine&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/v:&lt;remote_machine_address&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>/kbd:0x40c<span class="w"> </span>/f
 </pre></div>
 </div>
 <p>I use the <code class="docutils literal notranslate"><span class="pre">/kbd:0x40c</span></code> option becasue I have a french keyboard on my local
@@ -136,10 +139,10 @@ the line <code class="docutils literal notranslate"><span class="pre">allowed_us
 with <code class="docutils literal notranslate"><span class="pre">xfreerdp</span></code>. It implies that the <code class="docutils literal notranslate"><span class="pre">logname</span></code> command does not output your
 user name but outputs “logname: no login name” instead, and your <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code>
 file is not sourced. But <code class="docutils literal notranslate"><span class="pre">~/.xsessionrc</span></code> is sourced.</p>
-</div>
-<div class="section" id="thunar-for-file-archive-and-removable-media-management">
+</section>
+<section id="thunar-for-file-archive-and-removable-media-management">
 <h2>
-<a class="toc-backref" href="#id4">Thunar for file, archive and removable media management</a><a class="headerlink" href="#thunar-for-file-archive-and-removable-media-management" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Thunar for file, archive and removable media management</a><a class="headerlink" href="#thunar-for-file-archive-and-removable-media-management" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">By installing Thunar and its extension for volumes management (<a class="reference external" href="https://goodies.xfce.org/projects/thunar-plugins/thunar-volman">thunar-volman</a>), you get a
 graphical file manager with the ability to mount removable medias. With
@@ -147,15 +150,15 @@ graphical file manager with the ability to mount removable medias. With
 also get the ability to easily open and create archives. Do the installation
 (<strong>as root</strong>) with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install thunar thunar-archive-plugin thunar-volman <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>thunar<span class="w"> </span>thunar-archive-plugin<span class="w"> </span>thunar-volman<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p><a class="reference external" href="https://docs.xfce.org/xfce/thunar/using-removable-media#managing_removable_drives_and_media">Follow the link for instructions about how to enable and configure the volume
 management.</a></p>
-</div>
-<div class="section" id="requiring-confirmation-before-exiting">
+</section>
+<section id="requiring-confirmation-before-exiting">
 <h2>
-<a class="toc-backref" href="#id5">Requiring confirmation before exiting</a><a class="headerlink" href="#requiring-confirmation-before-exiting" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id5" role="doc-backlink">Requiring confirmation before exiting</a><a class="headerlink" href="#requiring-confirmation-before-exiting" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-3">I want to be prompted for confirmation when exiting Openbox via the root-menu.
 The same when shuting down the system or rebooting. I could obtain that with
@@ -192,47 +195,47 @@ entries like the following in <code class="docutils literal notranslate"><span c
 </div>
 <div class="line">&lt;/item&gt;</div>
 </div>
-</div>
-<div class="section" id="theme-and-wallpaper">
+</section>
+<section id="theme-and-wallpaper">
 <h2>
-<a class="toc-backref" href="#id6">Theme and wallpaper</a><a class="headerlink" href="#theme-and-wallpaper" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">Theme and wallpaper</a><a class="headerlink" href="#theme-and-wallpaper" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-4">I launch obconf from a terminal window and choose the Syscrash theme:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>obconf <span class="p">&amp;</span>
+<div class="highlight"><pre><span></span>obconf<span class="w"> </span><span class="p">&amp;</span>
 </pre></div>
 </div>
 <p>for the wallpaper, I install <code class="docutils literal notranslate"><span class="pre">feh</span></code> <strong>as root</strong>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install feh <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>feh<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>Then I “install” the wallpaper with commands like:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>feh --bg-fill path/to/image.jpg <span class="c1"># See https://wiki.archlinux.org/index.php/feh</span>
-<span class="nb">echo</span> <span class="s2">"~/.fehbg &amp;"</span> &gt;&gt; ~/.config/openbox/autostart
+<div class="highlight"><pre><span></span>feh<span class="w"> </span>--bg-fill<span class="w"> </span>path/to/image.jpg<span class="w"> </span><span class="c1"># See https://wiki.archlinux.org/index.php/feh</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"~/.fehbg &amp;"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.config/openbox/autostart
 </pre></div>
 </div>
-</div>
-<div class="section" id="turning-numlock-on-on-openbox-startup">
+</section>
+<section id="turning-numlock-on-on-openbox-startup">
 <h2>
-<a class="toc-backref" href="#id7">Turning NumLock on on Openbox startup</a><a class="headerlink" href="#turning-numlock-on-on-openbox-startup" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id7" role="doc-backlink">Turning NumLock on on Openbox startup</a><a class="headerlink" href="#turning-numlock-on-on-openbox-startup" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-5">You can install numlockx (<strong>as root</strong>) with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install numlockx <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>numlockx<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>Adding the command <code class="docutils literal notranslate"><span class="pre">numlockx</span> <span class="pre">on</span> <span class="pre">&amp;</span></code> to <code class="docutils literal notranslate"><span class="pre">~/.config/openbox/autostart</span></code> ensures
 that numlockx turns on NumLock on Openbox startup:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="s2">"numlockx on &amp;"</span> &gt;&gt; ~/.config/openbox/autostart
+<div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span><span class="s2">"numlockx on &amp;"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>~/.config/openbox/autostart
 </pre></div>
 </div>
-</div>
-<div class="section" id="binding-menu-key-to-root-menu">
+</section>
+<section id="binding-menu-key-to-root-menu">
 <h2>
-<a class="toc-backref" href="#id8">Binding menu key to root-menu</a><a class="headerlink" href="#binding-menu-key-to-root-menu" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id8" role="doc-backlink">Binding menu key to root-menu</a><a class="headerlink" href="#binding-menu-key-to-root-menu" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-6">If your machine has a <a class="reference external" href="https://en.wikipedia.org/wiki/Menu_key">menu key</a>, you
 may want to bind it to the Openbox root-menu. Make sure your
@@ -254,10 +257,10 @@ may want to bind it to the Openbox root-menu. Make sure your
 </div>
 <div class="line">&lt;/keyboard&gt;</div>
 </div>
-</div>
-<div class="section" id="binding-super-e-to-thunar">
+</section>
+<section id="binding-super-e-to-thunar">
 <h2>
-<a class="toc-backref" href="#id9">Binding Super-E to Thunar</a><a class="headerlink" href="#binding-super-e-to-thunar" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id9" role="doc-backlink">Binding Super-E to Thunar</a><a class="headerlink" href="#binding-super-e-to-thunar" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-7">When working on Windows at the office, I usually open the file manager with the
 Windows-E (a.k.a.
@@ -281,10 +284,10 @@ following in my <code class="docutils literal notranslate"><span class="pre">~/.
 </div>
 <div class="line">&lt;/keyboard&gt;</div>
 </div>
-</div>
-<div class="section" id="undecorating-and-or-maximizing-windows">
+</section>
+<section id="undecorating-and-or-maximizing-windows">
 <h2>
-<a class="toc-backref" href="#id10">Undecorating and/or maximizing windows</a><a class="headerlink" href="#undecorating-and-or-maximizing-windows" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id10" role="doc-backlink">Undecorating and/or maximizing windows</a><a class="headerlink" href="#undecorating-and-or-maximizing-windows" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-8">I want that <a class="reference external" href="https://www.mozilla.org/firefox">Firefox</a>, <a class="reference external" href="https://www.claws-mail.org">Claws Mail</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Xterm">xterm</a> open with Window maximized. I also want
 the xterm window to be undecorated (to get rid of the title bar).</p>
@@ -321,30 +324,30 @@ the xterm window to be undecorated (to get rid of the title bar).</p>
 </div>
 <p>Note the <code class="docutils literal notranslate"><span class="pre">&lt;application</span> <span class="pre">type="dialog"&gt;</span></code> markup for dialog boxes. It prevents
 the dialog boxes from being maximized.</p>
-</div>
-<div class="section" id="benefiting-from-vim-clipboard-feature">
+</section>
+<section id="benefiting-from-vim-clipboard-feature">
 <h2>
-<a class="toc-backref" href="#id11">Benefiting from Vim clipboard feature</a><a class="headerlink" href="#benefiting-from-vim-clipboard-feature" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id11" role="doc-backlink">Benefiting from Vim clipboard feature</a><a class="headerlink" href="#benefiting-from-vim-clipboard-feature" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-9">Even if using Vim only in a terminal and not as a graphical application, it is
 useful to install the <code class="docutils literal notranslate"><span class="pre">vim-gtk</span></code> package instead of just the <code class="docutils literal notranslate"><span class="pre">vim</span></code> package,
 to benefit from the clipboard feature:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get install vim-gtk <span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>vim-gtk<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p><a class="reference external" href="https://vi.stackexchange.com/questions/13564/why-is-vim-for-debian-compiled-without-clipboard">Follow the link for an interesting discussion on that topic on
 vi.stackexchange.com</a>.</p>
-</div>
-<div class="section" id="other-resources">
+</section>
+<section id="other-resources">
 <h2>
-<a class="toc-backref" href="#id12">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id12" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
 </h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://defkey.com/openbox-shortcuts">Openbox default keyboard shortcuts</a></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -353,8 +356,9 @@ vi.stackexchange.com</a>.</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li>
 <a class="reference internal" href="#">Installation of Openbox on Debian</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -373,20 +377,25 @@ vi.stackexchange.com</a>.</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="debian_base_install.html" title="previous chapter">Debian base installation</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="debian_apps_install.html" title="next chapter">Debian applications installation</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="debian_base_install.html" title="previous chapter">Debian base installation</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="debian_apps_install.html" title="next chapter">Debian applications installation</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       <input type="submit" value="Go">
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>

@@ -4,15 +4,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
+
     <title>Reminder — Personal Notes</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css">
-    <link rel="stylesheet" href="_static/classic.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
     <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -42,10 +45,10 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="reminder">
-<h1>Reminder<a class="headerlink" href="#reminder" title="Permalink to this headline">¶</a>
+  <section id="reminder">
+<h1>Reminder<a class="headerlink" href="#reminder" title="Permalink to this heading">¶</a>
 </h1>
-<div class="contents local topic" id="page-content">
+<nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
@@ -53,67 +56,67 @@
 <li><p><a class="reference internal" href="#broadcasted-message-using-wall" id="id3">Broadcasted message (using wall)</a></p></li>
 <li><p><a class="reference internal" href="#using-cron-to-display-or-broadcast-a-message" id="id4">Using cron to display or broadcast a message</a></p></li>
 </ul>
-</div>
-<div class="section" id="introduction">
+</nav>
+<section id="introduction">
 <h2>
-<a class="toc-backref" href="#id1">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p>This page provides commands that can be used to produce a graphical popup and
 to broadcast a message to opened terminals.</p>
 <p>It also indicates how to setup reminders by having these commands called
 periodically by <a class="reference external" href="https://en.wikipedia.org/wiki/Cron">cron</a>.</p>
-</div>
-<div class="section" id="graphical-popup-using-xmessage">
+</section>
+<section id="graphical-popup-using-xmessage">
 <h2>
-<a class="toc-backref" href="#id2">Graphical popup (using xmessage)</a><a class="headerlink" href="#graphical-popup-using-xmessage" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Graphical popup (using xmessage)</a><a class="headerlink" href="#graphical-popup-using-xmessage" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-0">The <code class="docutils literal notranslate"><span class="pre">xmessage</span></code> command (provided by package <code class="docutils literal notranslate"><span class="pre">x11-utils</span></code> on a Debian
 GNU/Linux system) causes a popup message box to appear:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>xmessage <span class="s1">'My message'</span>
+<div class="highlight"><pre><span></span>xmessage<span class="w"> </span><span class="s1">'My message'</span>
 
-xmessage -display :0.0 <span class="s1">'My message'</span>            <span class="c1"># A cron job launching</span>
-                                               <span class="c1"># xmessage with the display</span>
-                                               <span class="c1"># option fails.</span>
+xmessage<span class="w"> </span>-display<span class="w"> </span>:0.0<span class="w"> </span><span class="s1">'My message'</span><span class="w">            </span><span class="c1"># A cron job launching</span>
+<span class="w">                                               </span><span class="c1"># xmessage with the display</span>
+<span class="w">                                               </span><span class="c1"># option fails.</span>
 
-xmessage -center -geometry 130x68 <span class="s1">'My message'</span> <span class="c1"># Specifies position (center</span>
-                                               <span class="c1"># of the screen) and size.</span>
-                                               <span class="c1"># In Xmonad at least, message</span>
-                                               <span class="c1"># is not readable if size is</span>
-                                               <span class="c1"># not specified.</span>
+xmessage<span class="w"> </span>-center<span class="w"> </span>-geometry<span class="w"> </span>130x68<span class="w"> </span><span class="s1">'My message'</span><span class="w"> </span><span class="c1"># Specifies position (center</span>
+<span class="w">                                               </span><span class="c1"># of the screen) and size.</span>
+<span class="w">                                               </span><span class="c1"># In Xmonad at least, message</span>
+<span class="w">                                               </span><span class="c1"># is not readable if size is</span>
+<span class="w">                                               </span><span class="c1"># not specified.</span>
 </pre></div>
 </div>
 <p>Follow the <a class="reference external" href="https://www.oreilly.com/library/view/x-window-system/9780937175149/Chapter08.html">link for more information about X applications command line
 options</a>.</p>
-</div>
-<div class="section" id="broadcasted-message-using-wall">
+</section>
+<section id="broadcasted-message-using-wall">
 <h2>
-<a class="toc-backref" href="#id3">Broadcasted message (using wall)</a><a class="headerlink" href="#broadcasted-message-using-wall" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Broadcasted message (using wall)</a><a class="headerlink" href="#broadcasted-message-using-wall" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-1">The <code class="docutils literal notranslate"><span class="pre">wall</span></code> command (provided by package <code class="docutils literal notranslate"><span class="pre">bsdutils</span></code> on a Debian GNU/Linux
 system) causes a message to be broadcasted to every terminal:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>wall <span class="s1">'My message'</span>
+<div class="highlight"><pre><span></span>wall<span class="w"> </span><span class="s1">'My message'</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="using-cron-to-display-or-broadcast-a-message">
+</section>
+<section id="using-cron-to-display-or-broadcast-a-message">
 <h2>
-<a class="toc-backref" href="#id4">Using cron to display or broadcast a message</a><a class="headerlink" href="#using-cron-to-display-or-broadcast-a-message" title="Permalink to this headline">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Using cron to display or broadcast a message</a><a class="headerlink" href="#using-cron-to-display-or-broadcast-a-message" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">Add a job to your crontab with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>crontab -e
+<div class="highlight"><pre><span></span>crontab<span class="w"> </span>-e
 </pre></div>
 </div>
 <p>List the content of your crontab with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>crontab -l
+<div class="highlight"><pre><span></span>crontab<span class="w"> </span>-l
 </pre></div>
 </div>
 <p>An <a class="reference download internal" download="" href="_downloads/b5c6ab1ee9da06573348fcd0702ecbbe/crontab_l"><code class="xref download docutils literal notranslate"><span class="pre">example</span> <span class="pre">output</span> <span class="pre">of</span> <span class="pre">"crontab</span> <span class="pre">-l"</span> <span class="pre">(with</span> <span class="pre">a</span> <span class="pre">xmessage</span> <span class="pre">job)</span></code></a> is downloadable.</p>
-</div>
-</div>
+</section>
+</section>
 
 
             <div class="clearer"></div>
@@ -122,8 +125,9 @@ system) causes a message to be broadcasted to every terminal:</p>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li>
 <a class="reference internal" href="#">Reminder</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
@@ -134,20 +138,25 @@ system) causes a message to be broadcasted to every terminal:</p>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="sphinx.html" title="previous chapter">Sphinx</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="base16_color_schemes_xterm_and_vim.html" title="next chapter">Base16 color schemes (xterm and Vim)</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="sphinx.html" title="previous chapter">Sphinx</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="base16_color_schemes_xterm_and_vim.html" title="next chapter">Base16 color schemes (xterm and Vim)</a></p>
+  </div>
 <div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" aria-labelledby="searchlabel">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
       <input type="submit" value="Go">
     </form>
     </div>
 </div>
-<script>$('#searchbox').show(0);</script>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
