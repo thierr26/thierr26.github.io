@@ -734,6 +734,12 @@ git<span class="w"> </span>pull<span class="w"> </span>&lt;repository_url_or_pat
 <span class="w">                                         </span><span class="c1"># URL or a directory path.</span>
 </pre></div>
 </div>
+<p>The following command downloads changes from the branch “branch_name” of remote
+“origine” and updates the local branch, no need to check out “branch_name”:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git<span class="w"> </span>fetch<span class="w"> </span>origin<span class="w"> </span>branch_name:branch_name
+</pre></div>
+</div>
 <p>You can list the URLs for remote “origin” with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>get-url<span class="w"> </span>--all<span class="w"> </span>origin

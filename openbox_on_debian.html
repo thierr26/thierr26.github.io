@@ -118,6 +118,15 @@ able to read the certificate, using the following command (<strong>as root</stro
 <div class="highlight"><pre><span></span>adduser<span class="w"> </span>xrdp<span class="w"> </span>ssl-cert<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
+<p>When you need to regenerate the certificate, use a command like the follwing
+one (<strong>as root</strong>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>openssl<span class="w"> </span>req<span class="w"> </span>-x509<span class="w"> </span>-newkey<span class="w"> </span>rsa:4096<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-keyout<span class="w"> </span>/etc/ssl/private/ssl-cert-snakeoil.key<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-out<span class="w"> </span>/etc/ssl/certs/ssl-cert-snakeoil.pem<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-sha256<span class="w"> </span>-days<span class="w"> </span><span class="m">365</span><span class="w"> </span>-nodes<span class="w">                         </span><span class="c1"># As root.</span>
+</pre></div>
+</div>
 <p>Then I restarted the server and was able to open an Openbox session on the
 remote machine from my local desktop machine using a <code class="docutils literal notranslate"><span class="pre">xfreerdp</span></code> command like
 the following one:</p>
