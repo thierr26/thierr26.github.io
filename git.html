@@ -87,11 +87,12 @@
 <li><p><a class="reference internal" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file" id="id30">Find the last modification date and author of any line of a file</a></p></li>
 <li><p><a class="reference internal" href="#cancelling-changes" id="id31">Cancelling changes</a></p></li>
 <li><p><a class="reference internal" href="#maintaining-a-difference-between-working-and-committed-trees" id="id32">Maintaining a difference between working and committed trees</a></p></li>
-<li><p><a class="reference internal" href="#creating-an-archive-of-the-latest-commit-without-any-history" id="id33">Creating an archive of the latest commit (without any history)</a></p></li>
-<li><p><a class="reference internal" href="#scripting" id="id34">Scripting</a></p></li>
-<li><p><a class="reference internal" href="#hooks" id="id35">Hooks</a></p></li>
-<li><p><a class="reference internal" href="#submodules" id="id36">Submodules</a></p></li>
-<li><p><a class="reference internal" href="#other-resources" id="id37">Other resources</a></p></li>
+<li><p><a class="reference internal" href="#resetting-the-commit-and-author-dates" id="id33">Resetting the commit and author dates</a></p></li>
+<li><p><a class="reference internal" href="#creating-an-archive-of-the-latest-commit-without-any-history" id="id34">Creating an archive of the latest commit (without any history)</a></p></li>
+<li><p><a class="reference internal" href="#scripting" id="id35">Scripting</a></p></li>
+<li><p><a class="reference internal" href="#hooks" id="id36">Hooks</a></p></li>
+<li><p><a class="reference internal" href="#submodules" id="id37">Submodules</a></p></li>
+<li><p><a class="reference internal" href="#other-resources" id="id38">Other resources</a></p></li>
 </ul>
 </nav>
 <section id="introduction">
@@ -608,7 +609,7 @@ another branch, <code class="docutils literal notranslate"><span class="pre">git
 <p id="index-15">Basic tag manipulations (creation, deletion) are done using the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">tag</span></code>
 command and its various option. But there are more things to do with tags
 (cloning, pushing). <a class="reference external" href="https://stackoverflow.com/a/35979751">A Stack Otherflow answer gives many details about tagging
-in Git.</a></p>
+in Git</a>.</p>
 <p>Note also the following commands, useful to find tags and corresponding
 commits:</p>
 <div class="highlight-shell notranslate">
@@ -782,7 +783,7 @@ git<span class="w"> </span>checkout<span class="w"> </span>--orphan<span class="
 </pre></div>
 </div>
 <p>This of course raises the question of which naming scheme to use for the
-branches. <a class="reference external" href="https://stackoverflow.com/questions/273695/what-are-some-examples-of-commonly-used-practices-for-naming-git-branches/6065944#6065944">This Stack Overflow answer by Phil Hord helps.</a></p>
+branches. <a class="reference external" href="https://stackoverflow.com/questions/273695/what-are-some-examples-of-commonly-used-practices-for-naming-git-branches/6065944#6065944">This Stack Overflow answer by Phil Hord helps</a>.</p>
 <p>Working with branches, you inevitably have to do some merging (using the <code class="docutils literal notranslate"><span class="pre">git</span>
 <span class="pre">merge</span></code> command) or rebasing (using the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span></code> command). Rebasing is
 not always easy. I found <a class="reference external" href="https://www.viget.com/articles/how-to-fix-your-git-branches-after-a-rebase">this article by Chris Jones</a>
@@ -805,6 +806,9 @@ git<span class="w"> </span>commit<span class="w"> </span>--fixup<span class="o">
 <span class="w">    </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>rebase<span class="w"> </span>-i<span class="w"> </span>-autosquash<span class="w"> </span>commit_before_target_commit
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">--update-refs</span></code> option, introduced with Git 2.38, may make your life much
+easier, especially if you use stacked branches. See <a class="reference external" href="https://andrewlock.net/working-with-stacked-branches-in-git-is-easier-with-update-refs/">this article by Andrew
+Lock</a>.</p>
 <p>Merge the branch named “branch_name” into the current branch with one of the
 following commands:</p>
 <div class="highlight-shell notranslate">
@@ -1114,11 +1118,47 @@ root</strong>) with:</p>
 </pre></div>
 </div>
 </section>
+<section id="resetting-the-commit-and-author-dates">
+<h2>
+<a class="toc-backref" href="#id33" role="doc-backlink">Resetting the commit and author dates</a><a class="headerlink" href="#resetting-the-commit-and-author-dates" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-25">Two dates are associated with a given commit: <a class="reference external" href="https://stackoverflow.com/a/11857467">the author date and the commit
+date</a>.</p>
+<p>One way to show both dates is to use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> with option
+<code class="docutils literal notranslate"><span class="pre">--pretty=fuller</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git<span class="w"> </span>log<span class="w"> </span>--pretty<span class="o">=</span>fuller
+</pre></div>
+</div>
+<p>If for any reason you want to reset those dates to the current date for all the
+commits (well, except the initial commit) of the current branch, you can do it
+with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git<span class="w"> </span>rebase<span class="w"> </span>&lt;branch_name&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exec<span class="w"> </span><span class="s1">'git commit --amend --date="now" --no-edit --allow-empty'</span>
+</pre></div>
+</div>
+<p>You may want to add the <code class="docutils literal notranslate"><span class="pre">--update-refs</span></code> option to preserve the branching
+structure:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git<span class="w"> </span>rebase<span class="w"> </span>&lt;branch_name&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--exec<span class="w"> </span><span class="s1">'git commit --amend --date="now" --no-edit --allow-empty'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--update-refs
+</pre></div>
+</div>
+<p>If you also want to reset the dates of the initial commit, you can check it out
+and do:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>--amend<span class="w"> </span>--date<span class="o">=</span><span class="s2">"now"</span><span class="w"> </span>--no-edit<span class="w"> </span>--allow-empty
+</pre></div>
+</div>
+<p>But then you will have to rebase your working branch on the new initial commit.</p>
+</section>
 <section id="creating-an-archive-of-the-latest-commit-without-any-history">
 <h2>
-<a class="toc-backref" href="#id33" role="doc-backlink">Creating an archive of the latest commit (without any history)</a><a class="headerlink" href="#creating-an-archive-of-the-latest-commit-without-any-history" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id34" role="doc-backlink">Creating an archive of the latest commit (without any history)</a><a class="headerlink" href="#creating-an-archive-of-the-latest-commit-without-any-history" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-25">The following commands create archives of the working directory in “tar” and
+<p id="index-26">The following commands create archives of the working directory in “tar” and
 “zip” formats:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git<span class="w"> </span>archive<span class="w"> </span>-o<span class="w"> </span>latest.tar<span class="w"> </span>HEAD
@@ -1128,9 +1168,9 @@ git<span class="w"> </span>archive<span class="w"> </span>-o<span class="w"> </s
 </section>
 <section id="scripting">
 <h2>
-<a class="toc-backref" href="#id34" role="doc-backlink">Scripting</a><a class="headerlink" href="#scripting" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id35" role="doc-backlink">Scripting</a><a class="headerlink" href="#scripting" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-26">It is sometimes needed to automate a sequence of Git commands and write a
+<p id="index-27">It is sometimes needed to automate a sequence of Git commands and write a
 script (a <a class="reference external" href="https://en.wikipedia.org/wiki/Shell_script">shell script</a> for
 example). Scripting makes it possible to define <a class="reference internal" href="#hooks"><span class="std std-ref">hooks</span></a>.</p>
 <p><a class="reference external" href="https://stackoverflow.com/a/39848551">Git commands are divided into two categories</a>:</p>
@@ -1202,9 +1242,9 @@ git<span class="w"> </span>merge-base<span class="w"> </span>--is-ancestor<span 
 </section>
 <section id="hooks">
 <span id="id3"></span><h2>
-<a class="toc-backref" href="#id35" role="doc-backlink">Hooks</a><a class="headerlink" href="#hooks" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id36" role="doc-backlink">Hooks</a><a class="headerlink" href="#hooks" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-27">Assuming that:</p>
+<p id="index-28">Assuming that:</p>
 <ul class="simple">
 <li><p>You have a script “script-name” meant to be used as, say, a post-commit hook,</p></li>
 <li><p>This script is located at the top level of the working tree,</p></li>
@@ -1246,9 +1286,9 @@ variables instead:</p>
 </section>
 <section id="submodules">
 <h2>
-<a class="toc-backref" href="#id36" role="doc-backlink">Submodules</a><a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id37" role="doc-backlink">Submodules</a><a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-28">You can add a repository as a submodule to your repository with a command
+<p id="index-29">You can add a repository as a submodule to your repository with a command
 like:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>submodule_repository_url<span class="w"> </span>subdirectory
@@ -1270,7 +1310,7 @@ git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w
 </section>
 <section id="other-resources">
 <h2>
-<a class="toc-backref" href="#id37" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id38" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
 </h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://git-scm.com/docs">Git documentation</a></p></li>
@@ -1280,6 +1320,7 @@ git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w
 <li><p><a class="reference external" href="https://nvie.com/posts/a-successful-git-branching-model">A Git branching model</a></p></li>
 <li><p><a class="reference external" href="https://www.viget.com/articles/how-to-fix-your-git-branches-after-a-rebase">How to fix your Git branches after a rebase</a></p></li>
 <li><p><a class="reference external" href="https://delicious-insights.com/en/posts/getting-solid-at-git-rebase-vs-merge">Getting solid at Git rebase vs. merge</a></p></li>
+<li><p><a class="reference external" href="https://andrewlock.net/working-with-stacked-branches-in-git-is-easier-with-update-refs">Working with stacked branches in Git is easier with –update-refs</a></p></li>
 <li><p><a class="reference external" href="https://blog.filippo.io/git-fixup-amending-an-older-commit">git fixup: –amend for older commits</a></p></li>
 <li><p><a class="reference external" href="https://jamescooke.info/git-to-squash-or-not-to-squash.html">Git: To squash or not to squash?</a></p></li>
 <li><p><a class="reference external" href="https://blog.github.com/2016-02-01-working-with-submodules">Git Submodules</a></p></li>
@@ -1334,6 +1375,7 @@ git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w
 <li><a class="reference internal" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file">Find the last modification date and author of any line of a file</a></li>
 <li><a class="reference internal" href="#cancelling-changes">Cancelling changes</a></li>
 <li><a class="reference internal" href="#maintaining-a-difference-between-working-and-committed-trees">Maintaining a difference between working and committed trees</a></li>
+<li><a class="reference internal" href="#resetting-the-commit-and-author-dates">Resetting the commit and author dates</a></li>
 <li><a class="reference internal" href="#creating-an-archive-of-the-latest-commit-without-any-history">Creating an archive of the latest commit (without any history)</a></li>
 <li><a class="reference internal" href="#scripting">Scripting</a></li>
 <li><a class="reference internal" href="#hooks">Hooks</a></li>
