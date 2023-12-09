@@ -59,6 +59,7 @@
 <li><p><a class="reference internal" href="#getting-the-track-list-of-an-audio-cd" id="id7">Getting the track list of an audio CD</a></p></li>
 <li><p><a class="reference internal" href="#building-audio-ogg-files-from-an-audio-cd" id="id8">Building audio (Ogg) files from an audio CD</a></p></li>
 <li><p><a class="reference internal" href="#converting-ogg-files-to-mp3" id="id9">Converting Ogg files to MP3</a></p></li>
+<li><p><a class="reference internal" href="#converting-mp3-files-to-ogg" id="id10">Converting MP3 files to Ogg</a></p></li>
 </ul>
 </nav>
 <section id="introduction">
@@ -375,7 +376,7 @@ mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span>
 <p id="index-6">Converting an Ogg file to <a class="reference external" href="https://en.wikipedia.org/wiki/MP3">MP3</a> is pretty
 easy with <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code>:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>ffmpeg<span class="w"> </span>-i<span class="w"> </span>my_audio_file.ogg<span class="w"> </span>my_audio_file.mp3
+<div class="highlight"><pre><span></span>ffmpeg<span class="w"> </span>-i<span class="w"> </span>my_audio_file/usr/share/music/kptn/flammes/10<span class="se">\ </span>-<span class="se">\ </span>Irresistant.mp3.ogg<span class="w"> </span>my_audio_file.mp3
 </pre></div>
 </div>
 <p>Metadata can be included in the MP3 output file. Example:</p>
@@ -492,6 +493,16 @@ process_dir<span class="o">()</span><span class="w"> </span><span class="o">{</s
 </pre></div>
 </div>
 </section>
+<section id="converting-mp3-files-to-ogg">
+<h2>
+<a class="toc-backref" href="#id10" role="doc-backlink">Converting MP3 files to Ogg</a><a class="headerlink" href="#converting-mp3-files-to-ogg" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-7">You can also convert MP3 files to Ogg with <code class="docutils literal notranslate"><span class="pre">ffmpeg</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>ffmpeg<span class="w"> </span>-i<span class="w"> </span>my_audio_file.mp3<span class="w"> </span>-codec<span class="w"> </span>libvorbis<span class="w"> </span>my_audio_file.ogg
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -514,6 +525,7 @@ process_dir<span class="o">()</span><span class="w"> </span><span class="o">{</s
 <li><a class="reference internal" href="#getting-the-track-list-of-an-audio-cd">Getting the track list of an audio CD</a></li>
 <li><a class="reference internal" href="#building-audio-ogg-files-from-an-audio-cd">Building audio (Ogg) files from an audio CD</a></li>
 <li><a class="reference internal" href="#converting-ogg-files-to-mp3">Converting Ogg files to MP3</a></li>
+<li><a class="reference internal" href="#converting-mp3-files-to-ogg">Converting MP3 files to Ogg</a></li>
 </ul>
 </li>
 </ul>
