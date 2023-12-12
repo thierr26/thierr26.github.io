@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    
+
+    <title>When things go wrong… — Personal Notes</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="Linux firewalling" href="linux_firewalling.html">
+    <link rel="prev" title="Debian applications installation" href="debian_apps_install.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="linux_firewalling.html" title="Linux firewalling" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="debian_apps_install.html" title="Debian applications installation" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">When things go wrong…</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="when-things-go-wrong">
+<h1>When things go wrong…<a class="headerlink" href="#when-things-go-wrong" title="Permalink to this heading">¶</a>
+</h1>
+<nav class="contents local" id="page-content">
+<p class="topic-title">Page content</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#reconfiguring-grub-to-boot-an-older-kernel-by-default" id="id2">Reconfiguring GRUB to boot an older kernel by default</a></p></li>
+<li><p><a class="reference internal" href="#checking-file-systems-with-fsck" id="id3">Checking file systems with fsck</a></p></li>
+<li><p><a class="reference internal" href="#checking-a-git-repository" id="id4">Checking a Git repository</a></p></li>
+<li><p><a class="reference internal" href="#checking-taskwarrior-data-files" id="id5">Checking Taskwarrior data files</a></p></li>
+<li><p><a class="reference internal" href="#rsync-checksum-and-trial-run-options" id="id6">rsync checksum and trial run options</a></p></li>
+<li><p><a class="reference internal" href="#other-resources" id="id7">Other resources</a></p></li>
+</ul>
+</nav>
+<section id="introduction">
+<h2>
+<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
+</h2>
+<p>This page is where I’ve noted the commands I used when things went wrong or
+when I needed to be reassured about the integrity of the data on my <a class="reference external" href="https://www.debian.org">Debian
+GNU/Linux</a> systems.</p>
+</section>
+<section id="reconfiguring-grub-to-boot-an-older-kernel-by-default">
+<h2>
+<a class="toc-backref" href="#id2" role="doc-backlink">Reconfiguring GRUB to boot an older kernel by default</a><a class="headerlink" href="#reconfiguring-grub-to-boot-an-older-kernel-by-default" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-0">The kernel GRUB boots by default is determined by the “GRUB_DEFAULT” line in
+file <code class="docutils literal notranslate"><span class="pre">/etc/default/grub</span></code>. By default, it is “GRUB_DEFAULT=0” which designates
+the first entry in the GRUB menu, and this is probably the last installed
+kernel.</p>
+<p>You can designate a specific entry by using the entry name as it appears in the
+menu. If the entry is in a submenu, use <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> to separate the submenu name and
+the entry name. For example, the following line designates the “Debian
+GNU/Linux, with Linux 6.1.0-13-amd64” entry in the “Advanced options for Debian
+GNU/Linux” submenu:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nv">GRUB_DEFAULT</span><span class="o">=</span><span class="s2">"Advanced options for Debian GNU/Linux&gt;Debian GNU/Linux, with Linux 6.1.0-13-amd64"</span>
+</pre></div>
+</div>
+<p>The entry and submenu names can be found in file <code class="docutils literal notranslate"><span class="pre">/boot/grub/grub.cfg</span></code>.</p>
+<p>After modifying (<strong>as root</strong> of course) the <code class="docutils literal notranslate"><span class="pre">/etc/default/grub</span></code> file, run
+<code class="docutils literal notranslate"><span class="pre">update-grub</span></code> (still <strong>as root</strong>) and reboot.</p>
+</section>
+<section id="checking-file-systems-with-fsck">
+<h2>
+<a class="toc-backref" href="#id3" role="doc-backlink">Checking file systems with fsck</a><a class="headerlink" href="#checking-file-systems-with-fsck" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-1">When using <code class="docutils literal notranslate"><span class="pre">fsck</span></code>, it is important to provide the right file system on the
+command line, and to make sure the file system is not mounted.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lsblk</span></code> lists the file systems with their mount points when applicable.</p>
+<p><code class="docutils literal notranslate"><span class="pre">fdisk</span> <span class="pre">-l</span></code> (<strong>as root</strong>) shows information about the file systems, in
+particular the device name (like <code class="docutils literal notranslate"><span class="pre">/dev/sda2</span></code>).</p>
+<p>For an <a class="reference external" href="https://en.wikipedia.org/wiki/Extended_file_system">ext file system</a>
+at least, invoke (<strong>as root</strong>) <code class="docutils literal notranslate"><span class="pre">fsck</span></code> with the <code class="docutils literal notranslate"><span class="pre">-f</span></code> option to force the
+file system checking:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>fsck<span class="w"> </span>-f<span class="w"> </span>/dev/sda2
+</pre></div>
+</div>
+</section>
+<section id="checking-a-git-repository">
+<h2>
+<a class="toc-backref" href="#id4" role="doc-backlink">Checking a Git repository</a><a class="headerlink" href="#checking-a-git-repository" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-2">Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fsck</span></code> to check a Git repository. Run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">fsck</span></code> for more
+details.</p>
+</section>
+<section id="checking-taskwarrior-data-files">
+<h2>
+<a class="toc-backref" href="#id5" role="doc-backlink">Checking Taskwarrior data files</a><a class="headerlink" href="#checking-taskwarrior-data-files" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-3"><code class="docutils literal notranslate"><span class="pre">task</span> <span class="pre">diagnostics</span></code> performs a diagnostic scan of the Taskwarrior data files.</p>
+</section>
+<section id="rsync-checksum-and-trial-run-options">
+<h2>
+<a class="toc-backref" href="#id6" role="doc-backlink">rsync checksum and trial run options</a><a class="headerlink" href="#rsync-checksum-and-trial-run-options" title="Permalink to this heading">¶</a>
+</h2>
+<p>If you use rsync to maintain a backup copy of some files, and you have a doubt
+about the integrity of one of the sources, you may want to use the following
+rsync options:</p>
+<blockquote>
+<div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--checksum</span></code> to force rsync to do a real comparison of the files using a
+checksum instead of just doing a quick check based on files date and size.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--dry-run</span></code> (or <code class="docutils literal notranslate"><span class="pre">-n</span></code>) to perform a trial run and not change any file.</p></li>
+</ul>
+</div>
+</blockquote>
+</section>
+<section id="other-resources">
+<h2>
+<a class="toc-backref" href="#id7" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
+</h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.gnu.org/software/grub/manual/grub/html_node/Simple-configuration.html#Simple-configuration">GRUB Manual - Simple configuration</a></p></li>
+<li><p><a class="reference external" href="https://superuser.com/questions/19982/what-is-the-difference-between-fsck-and-e2fsck">What is the difference between fsck and e2fsck?</a></p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li>
+<a class="reference internal" href="#">When things go wrong…</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#reconfiguring-grub-to-boot-an-older-kernel-by-default">Reconfiguring GRUB to boot an older kernel by default</a></li>
+<li><a class="reference internal" href="#checking-file-systems-with-fsck">Checking file systems with fsck</a></li>
+<li><a class="reference internal" href="#checking-a-git-repository">Checking a Git repository</a></li>
+<li><a class="reference internal" href="#checking-taskwarrior-data-files">Checking Taskwarrior data files</a></li>
+<li><a class="reference internal" href="#rsync-checksum-and-trial-run-options">rsync checksum and trial run options</a></li>
+<li><a class="reference internal" href="#other-resources">Other resources</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="debian_apps_install.html" title="previous chapter">Debian applications installation</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="linux_firewalling.html" title="next chapter">Linux firewalling</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <input type="submit" value="Go">
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="linux_firewalling.html" title="Linux firewalling">next</a> |</li>
+        <li class="right">
+          <a href="debian_apps_install.html" title="Debian applications installation">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">When things go wrong…</a></li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2022, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>
