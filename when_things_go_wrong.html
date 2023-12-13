@@ -88,6 +88,12 @@ GNU/Linux” submenu:</p>
 <p>The entry and submenu names can be found in file <code class="docutils literal notranslate"><span class="pre">/boot/grub/grub.cfg</span></code>.</p>
 <p>After modifying (<strong>as root</strong> of course) the <code class="docutils literal notranslate"><span class="pre">/etc/default/grub</span></code> file, run
 <code class="docutils literal notranslate"><span class="pre">update-grub</span></code> (still <strong>as root</strong>) and reboot.</p>
+<p>Anyway, to durably avoid booting a kernel, the best thing to do is probably to
+uninstall it, with <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">purge</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>purge<span class="w"> </span>linux-image-6.1.0-14-amd64
+</pre></div>
+</div>
 </section>
 <section id="checking-file-systems-with-fsck">
 <h2>
