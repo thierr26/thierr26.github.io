@@ -90,6 +90,10 @@ using the <a class="reference external" href="https://wiki.debian.org/DebianAlte
 <div class="highlight"><pre><span></span>apt-cache<span class="w"> </span>search<span class="w"> </span>pinentry<span class="p">|</span>grep<span class="w"> </span>^pinentry
 </pre></div>
 </div>
+<p>Pinentry may not work if you don’t own the tty (e.g. when you have changed user
+with <code class="docutils literal notranslate"><span class="pre">su</span></code>). In such cases, one solution is to invoke <code class="docutils literal notranslate"><span class="pre">gpg</span></code> with the
+<code class="docutils literal notranslate"><span class="pre">--pinentry-mode</span> <span class="pre">loopback</span></code> option. Installing and selecting <code class="docutils literal notranslate"><span class="pre">pinentry-tty</span></code>
+package may also be a solution (but I haven’t tested yet).</p>
 </section>
 <section id="configuring-the-passphrase-caching-time">
 <h2>
