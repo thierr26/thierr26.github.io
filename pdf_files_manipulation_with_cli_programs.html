@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    
+
+    <title>PDF files manipulation with command-line programs — Personal Notes</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="Email with nmh and other command-line programs" href="email_with_nmh_and_other_cli_programs.html">
+    <link rel="prev" title="tmux" href="tmux.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="email_with_nmh_and_other_cli_programs.html" title="Email with nmh and other command-line programs" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="tmux.html" title="tmux" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">PDF files manipulation with command-line programs</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="pdf-files-manipulation-with-command-line-programs">
+<h1>PDF files manipulation with command-line programs<a class="headerlink" href="#pdf-files-manipulation-with-command-line-programs" title="Permalink to this heading">¶</a>
+</h1>
+<nav class="contents local" id="page-content">
+<p class="topic-title">Page content</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#merging-concatenating-pdf-files" id="id2">Merging (“concatenating”) PDF files</a></p></li>
+<li><p><a class="reference internal" href="#extracting-specified-pages-from-a-pdf-file" id="id3">Extracting specified pages from a PDF file</a></p></li>
+<li><p><a class="reference internal" href="#removing-a-password-from-a-pdf-file" id="id4">Removing a password from a PDF file</a></p></li>
+<li><p><a class="reference internal" href="#reducing-pdf-file-size" id="id5">Reducing PDF file size</a></p></li>
+<li><p><a class="reference internal" href="#converting-pdf-file-to-plain-text-file" id="id6">Converting PDF file to plain text file</a></p></li>
+<li><p><a class="reference internal" href="#other-resources" id="id7">Other resources</a></p></li>
+</ul>
+</nav>
+<section id="introduction">
+<h2>
+<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-0">This short page is where I keep track of the commands I use to manipulate <a class="reference external" href="https://en.wikipedia.org/wiki/PDF">PDF</a> files with my <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> box.</p>
+<p>Those commands are actually invocations of <code class="docutils literal notranslate"><span class="pre">gs</span></code>, <code class="docutils literal notranslate"><span class="pre">ps2pdf</span></code> (both provided by
+package <code class="docutils literal notranslate"><span class="pre">ghostscript</span></code>) and <code class="docutils literal notranslate"><span class="pre">pdf2text</span></code> (provided by package
+<code class="docutils literal notranslate"><span class="pre">poppler-utils</span></code>).</p>
+<p><a class="reference external" href="https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit">PDFtk</a> might be a
+solution as well, but I haven’t used it yet.</p>
+</section>
+<section id="merging-concatenating-pdf-files">
+<h2>
+<a class="toc-backref" href="#id2" role="doc-backlink">Merging (“concatenating”) PDF files</a><a class="headerlink" href="#merging-concatenating-pdf-files" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-1">Merge files doc_1.pdf, doc_2.pdf and doc_3.pdf to file output.pdf with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>gs<span class="w"> </span>-dBATCH<span class="w"> </span>-dNOPAUSE<span class="w"> </span>-q<span class="w"> </span>-sDEVICE<span class="o">=</span>pdfwrite<span class="w"> </span>-sOutputFile<span class="o">=</span>output.pdf<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>doc_1.pdf<span class="w"> </span>doc_2.pdf<span class="w"> </span>doc_3.pdf
+</pre></div>
+</div>
+</section>
+<section id="extracting-specified-pages-from-a-pdf-file">
+<h2>
+<a class="toc-backref" href="#id3" role="doc-backlink">Extracting specified pages from a PDF file</a><a class="headerlink" href="#extracting-specified-pages-from-a-pdf-file" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-2">Extract pages 2 to 4 from file input.pdf to file output.pdf with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>gs<span class="w"> </span>-sDEVICE<span class="o">=</span>pdfwrite<span class="w"> </span>-q<span class="w"> </span>-dNOPAUSE<span class="w"> </span>-dBATCH<span class="w"> </span>-sOutputFile<span class="o">=</span>output.pdf<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-dFirstPage<span class="o">=</span><span class="m">2</span><span class="w"> </span>-dLastPage<span class="o">=</span><span class="m">4</span><span class="w"> </span>input.pdf
+</pre></div>
+</div>
+</section>
+<section id="removing-a-password-from-a-pdf-file">
+<h2>
+<a class="toc-backref" href="#id4" role="doc-backlink">Removing a password from a PDF file</a><a class="headerlink" href="#removing-a-password-from-a-pdf-file" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-3">Assuming the file input.pdf is password-protected and that you know the
+password, create file output.pdf as a copy of file input.pdf, but with no
+protection with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>gs<span class="w"> </span>-q<span class="w"> </span>-dNOPAUSE<span class="w"> </span>-dBATCH<span class="w"> </span>-sDEVICE<span class="o">=</span>pdfwrite<span class="w"> </span>-sPDFPassword<span class="o">=</span><span class="s2">"the password"</span>
+-sOutputFile<span class="o">=</span>output.pdf<span class="w"> </span>input.pdf
+</pre></div>
+</div>
+<p>(Provide the password via the <code class="docutils literal notranslate"><span class="pre">-sPDFPassword</span></code> option.)</p>
+</section>
+<section id="reducing-pdf-file-size">
+<h2>
+<a class="toc-backref" href="#id5" role="doc-backlink">Reducing PDF file size</a><a class="headerlink" href="#reducing-pdf-file-size" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-4">I observe that a command like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>ps2pdf<span class="w"> </span>input.pdf<span class="w"> </span>output.pdf
+</pre></div>
+</div>
+<p>duplicates input.pdf to output.pdf, but with a smaller size. Not sure what’s
+going on here. It might a matter of default settings (<a class="reference external" href="https://ghostscript.readthedocs.io/en/gs10.0.0/VectorDevices.html#controls-and-features-specific-to-postscript-and-pdf-input">-dPDFSETTINGS option</a>)</p>
+</section>
+<section id="converting-pdf-file-to-plain-text-file">
+<h2>
+<a class="toc-backref" href="#id6" role="doc-backlink">Converting PDF file to plain text file</a><a class="headerlink" href="#converting-pdf-file-to-plain-text-file" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-5">Convert PDF file input.pdf to plain text file output.txt with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>pdftotext<span class="w"> </span>input.pdf<span class="w"> </span>output.txt
+</pre></div>
+</div>
+<p>With the <code class="docutils literal notranslate"><span class="pre">-layout</span></code> option, the original physical layout of the text is
+preserved as best as possible:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>pdftotext<span class="w"> </span>-layout<span class="w"> </span>input.pdf<span class="w"> </span>output.txt
+</pre></div>
+</div>
+</section>
+<section id="other-resources">
+<h2>
+<a class="toc-backref" href="#id7" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
+</h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://ghostscript.readthedocs.io/en/latest/Use.html">Ghostscript user documentation</a></p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li>
+<a class="reference internal" href="#">PDF files manipulation with command-line programs</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#merging-concatenating-pdf-files">Merging (“concatenating”) PDF files</a></li>
+<li><a class="reference internal" href="#extracting-specified-pages-from-a-pdf-file">Extracting specified pages from a PDF file</a></li>
+<li><a class="reference internal" href="#removing-a-password-from-a-pdf-file">Removing a password from a PDF file</a></li>
+<li><a class="reference internal" href="#reducing-pdf-file-size">Reducing PDF file size</a></li>
+<li><a class="reference internal" href="#converting-pdf-file-to-plain-text-file">Converting PDF file to plain text file</a></li>
+<li><a class="reference internal" href="#other-resources">Other resources</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="tmux.html" title="previous chapter">tmux</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="email_with_nmh_and_other_cli_programs.html" title="next chapter">Email with nmh and other command-line programs</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <input type="submit" value="Go">
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="email_with_nmh_and_other_cli_programs.html" title="Email with nmh and other command-line programs">next</a> |</li>
+        <li class="right">
+          <a href="tmux.html" title="tmux">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">PDF files manipulation with command-line programs</a></li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2022, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>

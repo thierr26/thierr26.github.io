@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    
+
+    <title>Minimal installation of Xfce on Debian — Personal Notes</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="Debian applications installation" href="debian_apps_install.html">
+    <link rel="prev" title="Installation of Openbox on Debian" href="openbox_on_debian.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="debian_apps_install.html" title="Debian applications installation" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="openbox_on_debian.html" title="Installation of Openbox on Debian" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Minimal installation of Xfce on Debian</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="minimal-installation-of-xfce-on-debian">
+<h1>Minimal installation of Xfce on Debian<a class="headerlink" href="#minimal-installation-of-xfce-on-debian" title="Permalink to this heading">¶</a>
+</h1>
+<nav class="contents local" id="page-content">
+<p class="topic-title">Page content</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#installation" id="id2">Installation</a></p></li>
+<li><p><a class="reference internal" href="#theming" id="id3">Theming</a></p></li>
+</ul>
+</nav>
+<section id="introduction">
+<h2>
+<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
+</h2>
+<p>I’m using <a class="reference external" href="https://en.wikipedia.org/wiki/Openbox">Openbox</a> (see my
+<a class="reference internal" href="openbox_on_debian.html"><span class="doc">Openbox installation notes</span></a>, but it may be desirable
+to also have a “heavier” desktop environment installed, as some users are not
+comfortable with a minimalist environment. <a class="reference external" href="https://xfce.org">Xfce</a> is a good
+compromise, closer to a full desktop environment but still lightweight.</p>
+</section>
+<section id="installation">
+<h2>
+<a class="toc-backref" href="#id2" role="doc-backlink">Installation</a><a class="headerlink" href="#installation" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-0">When I installed Xfce, I had already Openbox and X.org installed.</p>
+<p>I followed <a class="reference external" href="https://github.com/coonrad/Debian-Xfce4-Minimal-Install">Craig Coonrad’s recommendation</a> to install Xfce manually instead of
+using the Debian package selection (<code class="docutils literal notranslate"><span class="pre">tasksel</span></code>). I just installed the
+<code class="docutils literal notranslate"><span class="pre">xfce4</span></code> package:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>xfce4
+</pre></div>
+</div>
+<p>This triggered the installation of the <a class="reference external" href="https://en.wikipedia.org/wiki/LightDM">LightDM display manager</a>, which is fine.</p>
+</section>
+<section id="theming">
+<h2>
+<a class="toc-backref" href="#id3" role="doc-backlink">Theming</a><a class="headerlink" href="#theming" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-1">The installation of <code class="docutils literal notranslate"><span class="pre">xfce4</span></code> also triggered the installation of the
+<code class="docutils literal notranslate"><span class="pre">desktop-base</span></code> package which provides the Debian themes.</p>
+<p>Browse the <code class="docutils literal notranslate"><span class="pre">/usr/share/desktop-base</span></code> for an overview of the available themes,
+with for example:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>xzgv<span class="w"> </span>/usr/share/desktop-base
+</pre></div>
+</div>
+<p>Select your preferred theme (<strong>as root</strong>) with the Debian alternatives system:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>update-alternatives<span class="w"> </span>--config<span class="w"> </span>desktop-theme<span class="w"> </span><span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>Similarly, you can select the <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_GRUB">Grub</a>
+theme with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>update-alternatives<span class="w"> </span>--config<span class="w"> </span>desktop-grub<span class="w"> </span><span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>Then run <code class="docutils literal notranslate"><span class="pre">update-grub</span></code>.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li>
+<a class="reference internal" href="#">Minimal installation of Xfce on Debian</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#theming">Theming</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="openbox_on_debian.html" title="previous chapter">Installation of Openbox on Debian</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="debian_apps_install.html" title="next chapter">Debian applications installation</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <input type="submit" value="Go">
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="debian_apps_install.html" title="Debian applications installation">next</a> |</li>
+        <li class="right">
+          <a href="openbox_on_debian.html" title="Installation of Openbox on Debian">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Minimal installation of Xfce on Debian</a></li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2022, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>
