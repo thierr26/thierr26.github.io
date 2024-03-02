@@ -54,6 +54,7 @@
 <li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
 <li><p><a class="reference internal" href="#installation" id="id2">Installation</a></p></li>
 <li><p><a class="reference internal" href="#theming" id="id3">Theming</a></p></li>
+<li><p><a class="reference internal" href="#showing-or-not-the-user-list-on-lightdm-login-screen" id="id4">Showing (or not) the user list on LightDM login screen</a></p></li>
 </ul>
 </nav>
 <section id="introduction">
@@ -113,6 +114,17 @@ theme with:</p>
 </div>
 <p>Then run <code class="docutils literal notranslate"><span class="pre">update-grub</span></code>.</p>
 </section>
+<section id="showing-or-not-the-user-list-on-lightdm-login-screen">
+<h2>
+<a class="toc-backref" href="#id4" role="doc-backlink">Showing (or not) the user list on LightDM login screen</a><a class="headerlink" href="#showing-or-not-the-user-list-on-lightdm-login-screen" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-2">The <code class="docutils literal notranslate"><span class="pre">greeter-hide-users</span></code> option in <code class="docutils literal notranslate"><span class="pre">/etc/lightdm/lightdm.conf</span></code> determines
+whether the system user list is visible or not on the LightDM login screen.</p>
+<p>On a Debian GNU/Linux system at least, this option is absent (well, commented
+out) by default and the user list is not visible on the LightDM login screen.</p>
+<p>Uncomment the option (<code class="docutils literal notranslate"><span class="pre">greeter-hide-users=false</span></code>) <strong>as root</strong> and reboot the
+system to make the user list visible on the login screen.</p>
+</section>
 </section>
 
 
@@ -130,6 +142,7 @@ theme with:</p>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#theming">Theming</a></li>
+<li><a class="reference internal" href="#showing-or-not-the-user-list-on-lightdm-login-screen">Showing (or not) the user list on LightDM login screen</a></li>
 </ul>
 </li>
 </ul>
