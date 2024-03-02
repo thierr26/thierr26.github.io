@@ -275,8 +275,12 @@ shutdown or reboot the system:</p>
 systemctl<span class="w"> </span>reboot<span class="w">   </span><span class="c1"># Reboot.</span>
 </pre></div>
 </div>
-<p>If you want to shutdown but not immediately, you can use the <code class="docutils literal notranslate"><span class="pre">shutdown</span></code>
-command:</p>
+<p>You can delay the execution of the command:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>system-run<span class="w"> </span>--on-active<span class="o">=</span><span class="m">90</span><span class="w"> </span>systemctl<span class="w"> </span>poweroff<span class="w"> </span><span class="c1"># Shut down in 90 seconds.</span>
+</pre></div>
+</div>
+<p>Alternatively, you can use the <code class="docutils literal notranslate"><span class="pre">shutdown</span></code> command:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>shutdown<span class="w">    </span><span class="c1"># Power-off the machine in 1 minute.</span>
 shutdown<span class="w"> </span>+2<span class="w"> </span><span class="c1"># Power-off the machine in 2 minutes.</span>
