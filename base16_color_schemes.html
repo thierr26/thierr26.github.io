@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    
+
+    <title>Base16 color schemes — Personal Notes</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="tmux" href="tmux.html">
+    <link rel="prev" title="Reminder" href="reminder.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="tmux.html" title="tmux" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="reminder.html" title="Reminder" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Base16 color schemes</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="base16-color-schemes">
+<h1>Base16 color schemes<a class="headerlink" href="#base16-color-schemes" title="Permalink to this heading">¶</a>
+</h1>
+<nav class="contents local" id="page-content">
+<p class="topic-title">Page content</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id2">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#cloning-base16-repositories-locally" id="id3">Cloning Base16 repositories locally</a></p></li>
+<li>
+<p><a class="reference internal" href="#configuration" id="id4">Configuration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#enable-256-colors-in-terminals" id="id5">Enable 256 colors in terminals</a></p></li>
+<li><p><a class="reference internal" href="#have-the-color-scheme-applied-on-bash-startup" id="id6">Have the color scheme applied on Bash startup</a></p></li>
+<li><p><a class="reference internal" href="#have-the-color-scheme-applied-in-vim" id="id7">Have the color scheme applied in Vim</a></p></li>
+<li><p><a class="reference internal" href="#have-the-color-scheme-applied-in-tmux" id="id8">Have the color scheme applied in tmux</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#choosing-a-color-scheme" id="id9">Choosing a color scheme</a></p></li>
+</ul>
+</nav>
+<section id="introduction">
+<span id="index-0"></span><h2>
+<a class="toc-backref" href="#id2" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
+</h2>
+<p>I spend a lot of my computer time in front of a <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> box in a <a class="reference internal" href="tmux.html"><span class="doc">tmux</span></a> session with multiple
+windows and panes (opened in an <a class="reference external" href="https://en.wikipedia.org/wiki/Xterm">xterm</a>), editing text files with <a class="reference external" href="https://en.wikipedia.org/wiki/Vim_(text_editor)">Vim</a> or just doing command line
+work in <a class="reference external" href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a>.</p>
+<p>I’m using the Base16 theming system and appreciate that it makes it possible to
+keep tmux and all my panes (with or without Vim opened in them) synchronized
+with regard to the colors. I just have to issue a single command (like
+<code class="docutils literal notranslate"><span class="pre">base16_classic-dark</span></code>) in one of the panes to switch the color scheme
+everywhere.</p>
+</section>
+<section id="cloning-base16-repositories-locally">
+<h2>
+<a class="toc-backref" href="#id3" role="doc-backlink">Cloning Base16 repositories locally</a><a class="headerlink" href="#cloning-base16-repositories-locally" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-1">Just issue some <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> commands (as a normal user) in specific
+subdirectories of your home directory:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/.config
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/tinted-theming/base16-shell.git
+<span class="nb">cd</span><span class="w"> </span>~/.vim
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/tinted-theming/base16-vim.git
+<span class="nb">cd</span><span class="w"> </span>~/.tmux/plugins
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/tinted-theming/base16-tmux.git
+</pre></div>
+</div>
+</section>
+<section id="configuration">
+<h2>
+<a class="toc-backref" href="#id4" role="doc-backlink">Configuration</a><a class="headerlink" href="#configuration" title="Permalink to this heading">¶</a>
+</h2>
+<section id="enable-256-colors-in-terminals">
+<h3>
+<a class="toc-backref" href="#id5" role="doc-backlink">Enable 256 colors in terminals</a><a class="headerlink" href="#enable-256-colors-in-terminals" title="Permalink to this heading">¶</a>
+</h3>
+<p id="index-2">Make sure you have the following line in your <code class="docutils literal notranslate"><span class="pre">~/.Xresources</span></code>:</p>
+<div class="line-block">
+<div class="line">XTerm*termName: xterm-256color</div>
+</div>
+</section>
+<section id="have-the-color-scheme-applied-on-bash-startup">
+<h3>
+<a class="toc-backref" href="#id6" role="doc-backlink">Have the color scheme applied on Bash startup</a><a class="headerlink" href="#have-the-color-scheme-applied-on-bash-startup" title="Permalink to this heading">¶</a>
+</h3>
+<p id="index-3">You need to tweak your <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> file to have the color scheme applied on
+Bash startup. I didn’t exactly follow the recommendations in the <a class="reference external" href="https://github.com/tinted-theming/base16-shell">README of
+base16-shell</a>. Instead I
+added the following snippet to my <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>:</p>
+<div class="line-block">
+<div class="line">BASE16_SHELL_PATH=$HOME/.config/base16-shell/</div>
+<div class="line">unset BASE16_THEME</div>
+<div class="line">! shopt -q login_shell || [ -n “$TMUX” ] </div>
+<div class="line-block">
+<div class="line">&amp;&amp; [ -s “$BASE16_SHELL_PATH/profile_helper.sh” ] </div>
+<div class="line">&amp;&amp; BASE16_SHELL_SET_BACKGROUND=false </div>
+<div class="line">&amp;&amp; source “$BASE16_SHELL_PATH/profile_helper.sh”</div>
+</div>
+</div>
+<p>It makes sure that the color scheme is applied only when you’re in a terminal
+or in a tmux session, not when you’re in a login shell in a text console.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">BASE16_SHELL_SET_BACKGROUND=false</span></code> causes the background color of the
+color scheme to be ignored. Without that, I find that most of the dark schemes
+have a background color that is not black enough. The downside is that the
+light schemes are pretty much unusable, but I wouldn’t use them anyway…</p>
+</section>
+<section id="have-the-color-scheme-applied-in-vim">
+<h3>
+<a class="toc-backref" href="#id7" role="doc-backlink">Have the color scheme applied in Vim</a><a class="headerlink" href="#have-the-color-scheme-applied-in-vim" title="Permalink to this heading">¶</a>
+</h3>
+<p id="index-4">First I created the <code class="docutils literal notranslate"><span class="pre">~/.vim/colors</span></code> symbolic link with
+<code class="docutils literal notranslate"><span class="pre">~/.vim/base16-vim/colors</span></code> as the target:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/.vim
+ln<span class="w"> </span>-s<span class="w"> </span>base16-vim/colors
+</pre></div>
+</div>
+<p>Then I added the following snippet to my <code class="docutils literal notranslate"><span class="pre">~/.vimrc</span></code>:</p>
+<div class="line-block">
+<div class="line">if exists(‘$BASE16_THEME’)</div>
+<div class="line-block">
+<div class="line-block">
+<div class="line">&amp;&amp; (!exists(‘g:colors_name’)</div>
+<div class="line">|| g:colors_name != ‘base16-$BASE16_THEME’)</div>
+<div class="line"><br></div>
+</div>
+<div class="line">let base16colorspace=256</div>
+<div class="line">if !has(“gui_running”)</div>
+<div class="line-block">
+<div class="line">let base16_background_transparent=1</div>
+</div>
+<div class="line">endif</div>
+<div class="line">colorscheme base16-$BASE16_THEME</div>
+<div class="line"><br></div>
+</div>
+<div class="line">endif</div>
+</div>
+<p>This is what is recommended in the <a class="reference external" href="https://github.com/tinted-theming/base16-shell">README of base16-shell</a>, except for the
+<code class="docutils literal notranslate"><span class="pre">base16_background_transparent=1</span></code> part that I had to add for the same reason
+as I added <code class="docutils literal notranslate"><span class="pre">BASE16_SHELL_SET_BACKGROUND=false</span></code> above. The
+<code class="docutils literal notranslate"><span class="pre">!has("gui_running")</span></code> condition ensures the the transparent background option
+is applied only in “terminal” Vim and not in graphical Vim (gvim). In gvim, the
+transparent background option leads to a white background.</p>
+</section>
+<section id="have-the-color-scheme-applied-in-tmux">
+<h3>
+<a class="toc-backref" href="#id8" role="doc-backlink">Have the color scheme applied in tmux</a><a class="headerlink" href="#have-the-color-scheme-applied-in-tmux" title="Permalink to this heading">¶</a>
+</h3>
+<p id="index-5">The Base16 theming system seems to work well with the following lines at the
+top of the <code class="docutils literal notranslate"><span class="pre">~/.tmux/conf</span></code> file:</p>
+<div class="line-block">
+<div class="line"># Use a 256 color terminal.</div>
+<div class="line">set -g default-terminal “tmux-256color”</div>
+<div class="line"><br></div>
+<div class="line"># Useful if using base16-shell.</div>
+<div class="line">set -g allow-passthrough 1</div>
+<div class="line"><br></div>
+<div class="line"># Add base16-tmux plugin to the list of TPM (Tmux Plugin Manager) plugins.</div>
+<div class="line">set -g @plugin ‘tinted-theming/base16-tmux’</div>
+</div>
+</section>
+</section>
+<section id="choosing-a-color-scheme">
+<h2>
+<a class="toc-backref" href="#id9" role="doc-backlink">Choosing a color scheme</a><a class="headerlink" href="#choosing-a-color-scheme" title="Permalink to this heading">¶</a>
+</h2>
+<p>There are more than 260 Base16 color schemes, so you’re spoilt for choice!</p>
+<p>You can see the list of the base16 schemes with this command:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nb">alias</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"^alias base16_"</span><span class="p">|</span>sed<span class="w"> </span><span class="s2">"s/=.\+</span>$<span class="s2">//"</span><span class="p">|</span>sed<span class="w"> </span><span class="s2">"s/^.\+ //"</span>
+</pre></div>
+</div>
+<p>The <a class="reference external" href="https://tinted-theming.github.io/base16-gallery">Base16 Gallery</a> helps
+to make a choice.</p>
+<p>Alternatively, you can cycle through all the schemes with the following
+commands (3 seconds delay before switching to the next scheme):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nv">ALL_SCHEMES</span><span class="o">=</span><span class="k">$(</span>alias<span class="p">|</span>grep<span class="w"> </span><span class="s2">"^alias base16_"</span><span class="p">|</span>sed<span class="w"> </span><span class="s1">'s/^[^"]\+"\([^"]\+\)".*$/\1/'</span><span class="k">)</span>
+<span class="k">for</span><span class="w"> </span>S<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$ALL_SCHEMES</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>sleep<span class="w"> </span><span class="m">3</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$S</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span>set_theme<span class="w"> </span><span class="s2">"</span><span class="nv">$S</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</pre></div>
+</div>
+<p>If you want to exclude the schemes with “-light” in their name, do:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="nv">ALL_SCHEMES</span><span class="o">=</span><span class="k">$(</span>alias<span class="p">|</span>grep<span class="w"> </span><span class="s2">"^alias base16_"</span><span class="p">|</span>sed<span class="w"> </span><span class="s1">'s/^[^"]\+"\([^"]\+\)".*$/\1/'</span><span class="k">)</span>
+<span class="nv">ALL_NON_LIGHT_SCHEMES</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$ALL_SCHEMES</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s2">" "</span><span class="w"> </span><span class="s2">"\n"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">"\-light"</span><span class="k">)</span>
+<span class="k">for</span><span class="w"> </span>S<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$ALL_NON_LIGHT_SCHEMES</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>sleep<span class="w"> </span><span class="m">3</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$S</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span>set_theme<span class="w"> </span><span class="s2">"</span><span class="nv">$S</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</pre></div>
+</div>
+<p>Finally, to cycle through my favorite dark schemes, use:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span><span class="k">for</span><span class="w"> </span>S<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="m">3024</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>atelier-plateau<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>atlas<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>brewer<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>circus<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>codeschool<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>darcula<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>darktooth<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>embers<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>everforest<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>grayscale-dark<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>irblack<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>kanagawa<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>ocean<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>papercolor-dark<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>paraiso<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>phd<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>pico<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>primer-dark-dimmed<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sandcastle<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>solarflare<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>standardized-dark<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>summercamp<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>twilight<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>vulcan<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>sleep<span class="w"> </span><span class="m">3</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$S</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span>set_theme<span class="w"> </span><span class="s2">"</span><span class="nv">$S</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li>
+<a class="reference internal" href="#">Base16 color schemes</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#cloning-base16-repositories-locally">Cloning Base16 repositories locally</a></li>
+<li>
+<a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#enable-256-colors-in-terminals">Enable 256 colors in terminals</a></li>
+<li><a class="reference internal" href="#have-the-color-scheme-applied-on-bash-startup">Have the color scheme applied on Bash startup</a></li>
+<li><a class="reference internal" href="#have-the-color-scheme-applied-in-vim">Have the color scheme applied in Vim</a></li>
+<li><a class="reference internal" href="#have-the-color-scheme-applied-in-tmux">Have the color scheme applied in tmux</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#choosing-a-color-scheme">Choosing a color scheme</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="reminder.html" title="previous chapter">Reminder</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="tmux.html" title="next chapter">tmux</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <input type="submit" value="Go">
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="tmux.html" title="tmux">next</a> |</li>
+        <li class="right">
+          <a href="reminder.html" title="Reminder">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Base16 color schemes</a></li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2023, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>

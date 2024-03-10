@@ -77,7 +77,8 @@ on this page may not be the best solutions to the problems.</p>
 <div class="line">f</div>
 <div class="line">FF</div>
 </div>
-<p>The following Bash command line outputs the same numbers converted to decimal:</p>
+<p>The following <a class="reference external" href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a> command
+line outputs the same numbers converted to decimal:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>LINE<span class="p">;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">   </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"ibase=16; </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$LINE</span><span class="p">|</span>tr<span class="w"> </span><span class="s1">'[:lower:]'</span><span class="w"> </span><span class="s1">'[:upper:]'</span><span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="p">;</span><span class="w"> </span><span class="se">\</span>

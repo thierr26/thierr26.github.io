@@ -92,7 +92,7 @@ numbers having less than 4 digits):</p>
 <code class="docutils literal notranslate"><span class="pre">s</span></code> command performs a substitution. The <code class="docutils literal notranslate"><span class="pre">s</span></code> command here substitutes a
 line with a number made of one to three digits with the same number with a zero
 prepended.</p>
-<p>Here is the same command with the parameter (number of digits) set as a bash
+<p>Here is the same command with the parameter (number of digits) set as a shell
 variable:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span><span class="nv">N</span><span class="o">=</span><span class="m">4</span><span class="p">;</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s2">":redo; s/^\([0-9]\{1,</span><span class="k">$((</span><span class="nv">$N</span><span class="o">-</span><span class="m">1</span><span class="k">))</span><span class="s2">\}\)</span>$<span class="s2">/0\1/; t redo"</span><span class="w"> </span>numbers

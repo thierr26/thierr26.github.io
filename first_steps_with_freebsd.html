@@ -56,8 +56,8 @@
 <li><p><a class="reference internal" href="#tweaking-ssh-server-configuration" id="id3">Tweaking SSH server configuration</a></p></li>
 <li><p><a class="reference internal" href="#fixing-a-slow-boot-issue-unqualified-host-name-sleeping-for-retry" id="id4">Fixing a slow boot issue (“unqualified host name; sleeping for retry”)</a></p></li>
 <li><p><a class="reference internal" href="#having-root-s-shell-history-stored-to-file" id="id5">Having root’s shell history stored to file</a></p></li>
-<li><p><a class="reference internal" href="#installing-bash" id="id6">Installing bash</a></p></li>
-<li><p><a class="reference internal" href="#changing-user-s-shell-to-bash" id="id7">Changing user’s shell to bash</a></p></li>
+<li><p><a class="reference internal" href="#installing-bash" id="id6">Installing Bash</a></p></li>
+<li><p><a class="reference internal" href="#changing-user-s-shell-to-bash" id="id7">Changing user’s shell to Bash</a></p></li>
 <li><p><a class="reference internal" href="#making-it-possible-for-a-normal-user-to-change-user-to-root-with-su" id="id8">Making it possible for a “normal” user to change user to root (with <code class="docutils literal notranslate"><span class="pre">su</span> <span class="pre">-</span></code>)</a></p></li>
 <li><p><a class="reference internal" href="#searching-installing-binary-packages" id="id9">Searching / installing binary packages</a></p></li>
 </ul>
@@ -129,11 +129,11 @@ is not stored to file by default. The following two commands add lines to the
 </section>
 <section id="installing-bash">
 <h2>
-<a class="toc-backref" href="#id6" role="doc-backlink">Installing bash</a><a class="headerlink" href="#installing-bash" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">Installing Bash</a><a class="headerlink" href="#installing-bash" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-4">For non root users, the default shell on FreeBSD is <code class="docutils literal notranslate"><span class="pre">/bin/sh</span></code>. Linux users
-may feel more comfortable with bash instead.</p>
-<p>The following command shows that bash is available on FreeBSD:</p>
+may feel more comfortable with <a class="reference external" href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a> instead.</p>
+<p>The following command shows that Bash is available on FreeBSD:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>pkg<span class="w"> </span>search<span class="w"> </span>bash
 </pre></div>
@@ -141,7 +141,7 @@ may feel more comfortable with bash instead.</p>
 <p>(If you’re running a <code class="docutils literal notranslate"><span class="pre">pkg</span></code> command for the first time, make sure to run it
 <strong>as root</strong> because it will fetch and install the package management tool and
 this will fail if you are not root.)</p>
-<p>Install bash <strong>as root</strong> with:</p>
+<p>Install Bash <strong>as root</strong> with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>pkg<span class="w"> </span>install<span class="w"> </span>bash<span class="w"> </span>bash-completion<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
@@ -149,14 +149,14 @@ this will fail if you are not root.)</p>
 </section>
 <section id="changing-user-s-shell-to-bash">
 <h2>
-<a class="toc-backref" href="#id7" role="doc-backlink">Changing user’s shell to bash</a><a class="headerlink" href="#changing-user-s-shell-to-bash" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id7" role="doc-backlink">Changing user’s shell to Bash</a><a class="headerlink" href="#changing-user-s-shell-to-bash" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-5">As a “normal” (non root) user, you can change your shell to bash with:</p>
+<p id="index-5">As a “normal” (non root) user, you can change your shell to Bash with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>chsh<span class="w"> </span>-s<span class="w"> </span>/usr/local/bin/bash
 </pre></div>
 </div>
-<p>Create a <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> file with the following content to enable the bash
+<p>Create a <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> file with the following content to enable the Bash
 completion library:</p>
 <div class="line-block">
 <div class="line">[[ $PS1 &amp;&amp; -f /usr/local/share/bash-completion/bash-completion.sh ]] </div>
@@ -217,8 +217,8 @@ view this message later with a command like:</p>
 <li><a class="reference internal" href="#tweaking-ssh-server-configuration">Tweaking SSH server configuration</a></li>
 <li><a class="reference internal" href="#fixing-a-slow-boot-issue-unqualified-host-name-sleeping-for-retry">Fixing a slow boot issue (“unqualified host name; sleeping for retry”)</a></li>
 <li><a class="reference internal" href="#having-root-s-shell-history-stored-to-file">Having root’s shell history stored to file</a></li>
-<li><a class="reference internal" href="#installing-bash">Installing bash</a></li>
-<li><a class="reference internal" href="#changing-user-s-shell-to-bash">Changing user’s shell to bash</a></li>
+<li><a class="reference internal" href="#installing-bash">Installing Bash</a></li>
+<li><a class="reference internal" href="#changing-user-s-shell-to-bash">Changing user’s shell to Bash</a></li>
 <li><a class="reference internal" href="#making-it-possible-for-a-normal-user-to-change-user-to-root-with-su">Making it possible for a “normal” user to change user to root (with <code class="docutils literal notranslate"><span class="pre">su</span> <span class="pre">-</span></code>)</a></li>
 <li><a class="reference internal" href="#searching-installing-binary-packages">Searching / installing binary packages</a></li>
 </ul>

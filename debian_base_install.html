@@ -318,9 +318,7 @@ initramfs image (<strong>as root</strong> for both operations):</p>
 internet gives two solutions:</p>
 <ul>
 <li>
-<p>Commenting out entirely the ATAPI device rule, as suggested on <a class="reference external" href="https://paulphilippov.com/articles/how-to-fix-slow-boot-with-ata-errors">Paul
-Philippov’s website</a>,
-with this command:</p>
+<p>Commenting out entirely the ATAPI device rule using this command:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">'/ATAPI/,+1s/^/#/'</span><span class="w"> </span>/lib/udev/rules.d/60-persistent-storage.rules<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
@@ -422,9 +420,7 @@ firmware archive has been required) or post-installation, manually:</p>
 </div>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code> file must have the non-free section
 (and even <strong>the non-free-firmware section</strong>, starting with Debian 12).</p>
-<p>You can <a class="reference download internal" download="" href="_downloads/1b6a964b4404bf549e2d97ab8de32ceb/sources.list"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">my</span> <span class="pre">/etc/apt/sources.list</span> <span class="pre">for</span> <span class="pre">Debian</span> <span class="pre">11</span></code></a>.</p>
-<p>You can <a class="reference external" href="https://raw.githubusercontent.com/thierr26/thierr26_config_files/master/system_config/etc/apt/sources.list">download my /etc/apt/sources.list for the current Debian
-stable release</a>.</p>
+<p>You can <a class="reference download internal" download="" href="_downloads/1b6a964b4404bf549e2d97ab8de32ceb/sources.list"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">my</span> <span class="pre">/etc/apt/sources.list</span> <span class="pre">for</span> <span class="pre">Debian</span> <span class="pre">12</span></code></a>.</p>
 <p>Make sure you issue a <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span></code> command after changing
 <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code>.</p>
 </section>

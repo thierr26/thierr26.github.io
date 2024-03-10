@@ -21,7 +21,7 @@
     <link rel="index" title="Index" href="genindex.html">
     <link rel="search" title="Search" href="search.html">
     <link rel="next" title="PDF files manipulation with command-line programs" href="pdf_files_manipulation_with_cli_programs.html">
-    <link rel="prev" title="Base16 color schemes (xterm and Vim)" href="base16_color_schemes_xterm_and_vim.html"> 
+    <link rel="prev" title="Base16 color schemes" href="base16_color_schemes.html"> 
   </head>
 <body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -33,7 +33,7 @@
         <li class="right">
           <a href="pdf_files_manipulation_with_cli_programs.html" title="PDF files manipulation with command-line programs" accesskey="N">next</a> |</li>
         <li class="right">
-          <a href="base16_color_schemes_xterm_and_vim.html" title="Base16 color schemes (xterm and Vim)" accesskey="P">previous</a> |</li>
+          <a href="base16_color_schemes.html" title="Base16 color schemes" accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0">
 <a href="index.html">Personal Notes</a> »</li>
         <li class="nav-item nav-item-this"><a href="">tmux</a></li> 
@@ -88,7 +88,7 @@ root</strong>) with:</p>
 <div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>tmux<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-<p>You can launch tmux with command <code class="docutils literal notranslate"><span class="pre">tmux</span></code>. I always use tmux in an <a class="reference external" href="https://en.wikipedia.org/wiki/Xterm">xterm</a> and launch both with a single <code class="docutils literal notranslate"><span class="pre">xterm</span>
+<p>You can launch tmux with command <code class="docutils literal notranslate"><span class="pre">tmux</span></code>. I usually use tmux in an <a class="reference external" href="https://en.wikipedia.org/wiki/Xterm">xterm</a> and launch both with a single <code class="docutils literal notranslate"><span class="pre">xterm</span>
 <span class="pre">tmux</span></code> command.</p>
 <p>You may need the tmux-resurrect plugin. You can install it that way (as an
 unprivileged user):</p>
@@ -160,6 +160,8 @@ controlled using strings like <code class="docutils literal notranslate"><span c
 <div class="highlight"><pre><span></span><span class="nb">set</span><span class="w"> </span>-g<span class="w"> </span>status-right<span class="w"> </span><span class="s2">"#(printf '#[fg=colour184]yellow#[fg=colour0] black') %a"</span>
 </pre></div>
 </div>
+<p>(Note that I don’t use text coloring any more in my <code class="docutils literal notranslate"><span class="pre">~/.tmux.conf</span></code> because I
+now use base16-tmux (see <a class="reference internal" href="base16_color_schemes.html"><span class="doc">Base16 color schemes</span></a>).)</p>
 <p>The Caps lock mode indicator is build from the content of a file like
 <code class="docutils literal notranslate"><span class="pre">/sys/class/leds/input5::capslock/brightness</span></code>. But there might be multiple
 files like this one (if you have multiple keyboards plugged in to your
@@ -375,7 +377,7 @@ of the tmux process and to send a SIGCONT signal to it:</p>
   </div>
   <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="base16_color_schemes_xterm_and_vim.html" title="previous chapter">Base16 color schemes (xterm and Vim)</a></p>
+    <p class="topless"><a href="base16_color_schemes.html" title="previous chapter">Base16 color schemes</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
@@ -404,7 +406,7 @@ of the tmux process and to send a SIGCONT signal to it:</p>
         <li class="right">
           <a href="pdf_files_manipulation_with_cli_programs.html" title="PDF files manipulation with command-line programs">next</a> |</li>
         <li class="right">
-          <a href="base16_color_schemes_xterm_and_vim.html" title="Base16 color schemes (xterm and Vim)">previous</a> |</li>
+          <a href="base16_color_schemes.html" title="Base16 color schemes">previous</a> |</li>
         <li class="nav-item nav-item-0">
 <a href="index.html">Personal Notes</a> »</li>
         <li class="nav-item nav-item-this"><a href="">tmux</a></li> 
