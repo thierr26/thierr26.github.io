@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    
+
+    <title>Listing a Linux process’s threads — Personal Notes</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="The GNU Privacy Guard (GPG)" href="gnu_privacy_guard.html">
+    <link rel="prev" title="taskset" href="taskset.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="gnu_privacy_guard.html" title="The GNU Privacy Guard (GPG)" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="taskset.html" title="taskset" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Listing a Linux process’s threads</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="listing-a-linux-process-s-threads">
+<h1>Listing a Linux process’s threads<a class="headerlink" href="#listing-a-linux-process-s-threads" title="Permalink to this heading">¶</a>
+</h1>
+<nav class="contents local" id="page-content">
+<p class="topic-title">Page content</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#with-ps" id="id2">With ps</a></p></li>
+<li><p><a class="reference internal" href="#with-top" id="id3">With top</a></p></li>
+<li><p><a class="reference internal" href="#with-chrt" id="id4">With chrt</a></p></li>
+</ul>
+</nav>
+<section id="introduction">
+<span id="index-0"></span><h2>
+<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
+</h2>
+<p>This page presents the commands I’ve used to “see” the threads of a Linux
+process. They’re invocations of programs ps, top or chrt.</p>
+</section>
+<section id="with-ps">
+<h2>
+<a class="toc-backref" href="#id2" role="doc-backlink">With ps</a><a class="headerlink" href="#with-ps" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-1">The following <code class="docutils literal notranslate"><span class="pre">ps</span></code> commands provide information about the threads of a
+process with a given PID:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>ps<span class="w"> </span>-T<span class="w"> </span>-p<span class="w"> </span>&lt;PID&gt;
+ps<span class="w"> </span>-L<span class="w"> </span>-p<span class="w"> </span>&lt;PID&gt;
+ps<span class="w"> </span>-mo<span class="w"> </span>pid,tid,%cpu,psr,comm<span class="w"> </span>-p<span class="w"> </span>&lt;PID&gt;
+</pre></div>
+</div>
+</section>
+<section id="with-top">
+<h2>
+<a class="toc-backref" href="#id3" role="doc-backlink">With top</a><a class="headerlink" href="#with-top" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-2">The following command provides a dynamic real-time view of the threads of a
+process with a given PID:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>top<span class="w"> </span>-H<span class="w"> </span>-p<span class="w"> </span>&lt;PID&gt;
+</pre></div>
+</div>
+<p>Add a <code class="docutils literal notranslate"><span class="pre">-n</span> <span class="pre">1</span></code> option to have just a non dynamic listing:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>top<span class="w"> </span>-H<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>-p<span class="w"> </span>&lt;PID&gt;
+</pre></div>
+</div>
+<p>With the <code class="docutils literal notranslate"><span class="pre">-b</span></code> switch (Batch mode), there is no highlighting in the output,
+which is preferable when you redirect the output to another program or to a
+file:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>top<span class="w"> </span>-H<span class="w"> </span>-bn<span class="w"> </span><span class="m">1</span><span class="w"> </span>-p<span class="w"> </span>&lt;PID&gt;
+</pre></div>
+</div>
+<p>You can control the top output width with the <code class="docutils literal notranslate"><span class="pre">-w</span></code> switch:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>top<span class="w"> </span>-w<span class="w"> </span><span class="m">50</span><span class="w"> </span>-H<span class="w"> </span>-bn<span class="w"> </span><span class="m">1</span><span class="w"> </span>-p<span class="w"> </span>&lt;PID&gt;
+</pre></div>
+</div>
+</section>
+<section id="with-chrt">
+<h2>
+<a class="toc-backref" href="#id4" role="doc-backlink">With chrt</a><a class="headerlink" href="#with-chrt" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-3">Using <code class="docutils literal notranslate"><span class="pre">chrt</span></code> you can see the scheduling policy and the priority of the
+threads of a process with a given PID:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>chrt<span class="w"> </span>-a<span class="w"> </span>-p<span class="w"> </span>&lt;PID&gt;
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li>
+<a class="reference internal" href="#">Listing a Linux process’s threads</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#with-ps">With ps</a></li>
+<li><a class="reference internal" href="#with-top">With top</a></li>
+<li><a class="reference internal" href="#with-chrt">With chrt</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="taskset.html" title="previous chapter">taskset</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="gnu_privacy_guard.html" title="next chapter">The GNU Privacy Guard (GPG)</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <input type="submit" value="Go">
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="gnu_privacy_guard.html" title="The GNU Privacy Guard (GPG)">next</a> |</li>
+        <li class="right">
+          <a href="taskset.html" title="taskset">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Listing a Linux process’s threads</a></li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2023, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>

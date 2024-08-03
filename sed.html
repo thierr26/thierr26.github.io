@@ -51,22 +51,24 @@
 <nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
-<li><p><a class="reference internal" href="#left-padding-numbers-with-zeros" id="id2">Left-padding numbers with zeros</a></p></li>
-<li><p><a class="reference internal" href="#substituting-starting-at-a-specific-line-number" id="id3">Substituting starting at a specific line number</a></p></li>
-<li><p><a class="reference internal" href="#joining-lines-matching-a-pattern" id="id4">Joining lines matching a pattern</a></p></li>
+<li><p><a class="reference internal" href="#introduction" id="id2">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#left-padding-numbers-with-zeros" id="id3">Left-padding numbers with zeros</a></p></li>
+<li><p><a class="reference internal" href="#substituting-starting-at-a-specific-line-number" id="id4">Substituting starting at a specific line number</a></p></li>
+<li><p><a class="reference internal" href="#deleting-one-out-of-n-lines" id="id5">Deleting one out of N lines</a></p></li>
+<li><p><a class="reference internal" href="#joining-lines-matching-a-pattern" id="id6">Joining lines matching a pattern</a></p></li>
+<li><p><a class="reference internal" href="#keep-end-of-line-only-for-lines-matching-a-pattern" id="id7">Keep end of line only for lines matching a pattern</a></p></li>
 </ul>
 </nav>
 <section id="introduction">
 <span id="index-0"></span><h2>
-<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p>This page is where I note the <a class="reference external" href="https://www.gnu.org/software/sed/">GNU sed</a>
 commands I found difficult to elaborate.</p>
 </section>
 <section id="left-padding-numbers-with-zeros">
 <h2>
-<a class="toc-backref" href="#id2" role="doc-backlink">Left-padding numbers with zeros</a><a class="headerlink" href="#left-padding-numbers-with-zeros" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Left-padding numbers with zeros</a><a class="headerlink" href="#left-padding-numbers-with-zeros" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-1">Let’s say we have a text file called <code class="docutils literal notranslate"><span class="pre">numbers</span></code> containing integer numbers
 (one per line, and without any sign):</p>
@@ -101,7 +103,7 @@ variable:</p>
 </section>
 <section id="substituting-starting-at-a-specific-line-number">
 <h2>
-<a class="toc-backref" href="#id3" role="doc-backlink">Substituting starting at a specific line number</a><a class="headerlink" href="#substituting-starting-at-a-specific-line-number" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Substituting starting at a specific line number</a><a class="headerlink" href="#substituting-starting-at-a-specific-line-number" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">Taking the same example file as in the previous section, if you need to add a
 leading minus sign starting at line 3, you can use the following command:</p>
@@ -117,11 +119,25 @@ substitution is done on every remaining line.</p>
 <p>See <a class="reference external" href="https://www.gnu.org/software/sed/manual/html_node/sed-addresses.html#sed-addresses">the “addresses” section of the GNU sed manual</a>
 for all the details about line selection.</p>
 </section>
+<section id="deleting-one-out-of-n-lines">
+<h2>
+<a class="toc-backref" href="#id5" role="doc-backlink">Deleting one out of N lines</a><a class="headerlink" href="#deleting-one-out-of-n-lines" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-3">To drop one out of three (for example) lines from file <code class="docutils literal notranslate"><span class="pre">f</span></code>, starting at line
+(for exemple) 2, use the following command:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>sed<span class="w"> </span><span class="s2">"2~3d"</span><span class="w"> </span>f
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">d</span></code> here is for “delete”.</p>
+<p>See <a class="reference external" href="https://www.gnu.org/software/sed/manual/html_node/sed-addresses.html#sed-addresses">the “addresses” section of the GNU sed manual</a>
+for all the details about line selection.</p>
+</section>
 <section id="joining-lines-matching-a-pattern">
 <h2>
-<a class="toc-backref" href="#id4" role="doc-backlink">Joining lines matching a pattern</a><a class="headerlink" href="#joining-lines-matching-a-pattern" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">Joining lines matching a pattern</a><a class="headerlink" href="#joining-lines-matching-a-pattern" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-3">Still taking the same example file, the following command substitutes the
+<p id="index-4">Still taking the same example file, the following command substitutes the
 preceding end of line line sequence with a space character if the line matches
 a pattern (here pattern “67”):</p>
 <div class="highlight-shell notranslate">
@@ -136,6 +152,43 @@ exiting the loop, the <code class="docutils literal notranslate"><span class="pr
 the first end of line sequence and the <code class="docutils literal notranslate"><span class="pre">D</span></code> command deletes the pattern space
 up to the first end of line sequence (only if the pattern space contains an end
 of line sequence).</p>
+</section>
+<section id="keep-end-of-line-only-for-lines-matching-a-pattern">
+<h2>
+<a class="toc-backref" href="#id7" role="doc-backlink">Keep end of line only for lines matching a pattern</a><a class="headerlink" href="#keep-end-of-line-only-for-lines-matching-a-pattern" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-5">Let’s say we have a text file called <code class="docutils literal notranslate"><span class="pre">f</span></code> with the following content:</p>
+<div class="line-block">
+<div class="line">f</div>
+<div class="line">o</div>
+<div class="line">o</div>
+<div class="line">b</div>
+<div class="line">a</div>
+<div class="line">r</div>
+<div class="line">b</div>
+<div class="line">a</div>
+<div class="line">z</div>
+<div class="line">.</div>
+</div>
+<p>The following command outputs the same content but with end of lines removed
+except for lines matching “o”, “r” or “z”:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>sed<span class="w"> </span><span class="s2">":redo /[orz]/b; N; s/\n//; b redo"</span><span class="w"> </span>f
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line">fo</div>
+<div class="line">o</div>
+<div class="line">bar</div>
+<div class="line">baz</div>
+<div class="line">.</div>
+</div>
+<p>For lines matching <code class="docutils literal notranslate"><span class="pre">[orz]</span></code>, nothing special is done which implies that all
+the content accumulated in memory is output. (The <code class="docutils literal notranslate"><span class="pre">b</span></code> in <code class="docutils literal notranslate"><span class="pre">/[orz]/b;</span></code> means
+“branch to end of script”.)</p>
+<p>Other lines are accumulated in memory (thanks to <code class="docutils literal notranslate"><span class="pre">N;</span></code>), their end of line is
+removed (<code class="docutils literal notranslate"><span class="pre">s/\n//;</span></code>) and they’re not output immediately. (The <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">redo</span></code>
+causes a jump to the <code class="docutils literal notranslate"><span class="pre">:redo</span></code> label.)</p>
 </section>
 </section>
 
@@ -154,7 +207,9 @@ of line sequence).</p>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#left-padding-numbers-with-zeros">Left-padding numbers with zeros</a></li>
 <li><a class="reference internal" href="#substituting-starting-at-a-specific-line-number">Substituting starting at a specific line number</a></li>
+<li><a class="reference internal" href="#deleting-one-out-of-n-lines">Deleting one out of N lines</a></li>
 <li><a class="reference internal" href="#joining-lines-matching-a-pattern">Joining lines matching a pattern</a></li>
+<li><a class="reference internal" href="#keep-end-of-line-only-for-lines-matching-a-pattern">Keep end of line only for lines matching a pattern</a></li>
 </ul>
 </li>
 </ul>
