@@ -618,6 +618,16 @@ generate their own database, with a command like:</p>
 <div class="highlight"><pre><span></span>updatedb<span class="w"> </span>--output<span class="o">=</span>/home/<span class="nv">$USER</span>/.locatedb<span class="w"> </span><span class="m">2</span>&gt;/dev/null
 </pre></div>
 </div>
+<p>or:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>updatedb<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--prunepaths<span class="o">=</span><span class="s1">'/tmp /usr/tmp /var/tmp /afs /media'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="o">=</span>/home/<span class="nv">$USER</span>/.locatedb<span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</pre></div>
+</div>
+<p>(The <code class="docutils literal notranslate"><span class="pre">--prunepaths</span></code> option instructs <code class="docutils literal notranslate"><span class="pre">updatedb</span></code> to ignore the listed paths.
+By default, <code class="docutils literal notranslate"><span class="pre">/tmp</span></code>, <code class="docutils literal notranslate"><span class="pre">/usr/tmp</span></code>, <code class="docutils literal notranslate"><span class="pre">/var/tmp</span></code> and <code class="docutils literal notranslate"><span class="pre">/afs</span></code> are ignored and I
+added <code class="docutils literal notranslate"><span class="pre">/media</span></code> to prevent <code class="docutils literal notranslate"><span class="pre">updatedb</span></code> from exploring any mounted drive.)</p>
 <p>Users can use the <code class="docutils literal notranslate"><span class="pre">-d</span></code> option of command <code class="docutils literal notranslate"><span class="pre">locate</span></code> to search in their
 database. The database contains the files in their home directory and also the
 system files they have permissions to see:</p>

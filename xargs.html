@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    
+
+    <title>xargs — Personal Notes</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="bc" href="bc.html">
+    <link rel="prev" title="find" href="find.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="bc.html" title="bc" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="find.html" title="find" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">xargs</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="xargs">
+<h1>xargs<a class="headerlink" href="#xargs" title="Permalink to this heading">¶</a>
+</h1>
+<nav class="contents local" id="page-content">
+<p class="topic-title">Page content</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id2">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#splitting-null-terminated-input-items" id="id3">Splitting null terminated input items</a></p></li>
+<li><p><a class="reference internal" href="#executing-a-command-for-each-item" id="id4">Executing a command for each item</a></p></li>
+<li><p><a class="reference internal" href="#executing-a-command-for-each-item-with-item-used-anywhere-in-the-command" id="id5">Executing a command for each item (with item used anywhere in the command)</a></p></li>
+<li><p><a class="reference internal" href="#other-resources" id="id6">Other resources</a></p></li>
+</ul>
+</nav>
+<section id="introduction">
+<span id="index-0"></span><h2>
+<a class="toc-backref" href="#id2" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
+</h2>
+<p>This page contains a few examples of the xargs command that I want to keep at
+hand. I’m not very familiar with xargs and often resort to a “cheatsheet” (e.g.
+<a class="reference external" href="https://ioflood.com/blog/xargs-linux-command/">Mastering Xargs: Your Guide to Linux Command Efficiency</a>) when I have to use it.</p>
+</section>
+<section id="splitting-null-terminated-input-items">
+<h2>
+<a class="toc-backref" href="#id3" role="doc-backlink">Splitting null terminated input items</a><a class="headerlink" href="#splitting-null-terminated-input-items" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-1">Sometimes you need to list the environement variables of a running Linux
+process. If you just do <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">/proc/&lt;PID&gt;/environ</span></code>, you get a single long line
+of output with all the environement variables of the process with PID &lt;PID&gt;.
+This is because the environement variables are separated by the null character.</p>
+<p>There are at least two solutions based on xargs to get the environement
+variables on separate lines:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>cat<span class="w"> </span>/proc/&lt;PID&gt;/environ<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-0<span class="w"> </span><span class="nb">printf</span><span class="w"> </span><span class="s1">'%s\n'</span>
+cat<span class="w"> </span>/proc/&lt;PID&gt;/environ<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-0<span class="w"> </span>-L1
+</pre></div>
+</div>
+<p>You can avoid the pipe with the <code class="docutils literal notranslate"><span class="pre">-a</span></code> option which instructs xargs to read
+items from the specified file instead of standard input:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>xargs<span class="w"> </span>-0<span class="w"> </span>-L1<span class="w"> </span>-a<span class="w"> </span>/proc/&lt;PID&gt;/environ
+</pre></div>
+</div>
+<p>All this also works for <code class="docutils literal notranslate"><span class="pre">/proc/&lt;PID&gt;/cmdline</span></code> (command line arguments of a
+process). If you want the arguments separated by blanks on a single line do:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>xargs<span class="w"> </span>-0<span class="w"> </span>-a<span class="w"> </span>/proc/&lt;PID&gt;/cmdline
+</pre></div>
+</div>
+</section>
+<section id="executing-a-command-for-each-item">
+<h2>
+<a class="toc-backref" href="#id4" role="doc-backlink">Executing a command for each item</a><a class="headerlink" href="#executing-a-command-for-each-item" title="Permalink to this heading">¶</a>
+</h2>
+<p>A command like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>any_command<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>other_command
+</pre></div>
+</div>
+<p>causes <code class="docutils literal notranslate"><span class="pre">other_command</span></code> to be executed once for each item output by
+<code class="docutils literal notranslate"><span class="pre">any_command</span></code>.</p>
+</section>
+<section id="executing-a-command-for-each-item-with-item-used-anywhere-in-the-command">
+<h2>
+<a class="toc-backref" href="#id5" role="doc-backlink">Executing a command for each item (with item used anywhere in the command)</a><a class="headerlink" href="#executing-a-command-for-each-item-with-item-used-anywhere-in-the-command" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-2">This makes use of the <code class="docutils literal notranslate"><span class="pre">-I</span></code> option of xargs. The “{}” following <code class="docutils literal notranslate"><span class="pre">-I</span></code> means
+that later occurrences of “{}” are substituted with the item.</p>
+<p>Here is an example involving the <code class="docutils literal notranslate"><span class="pre">cleartool</span></code> command (primary command-line
+interface to <a class="reference external" href="https://www.ibm.com/products/devops-code-clearcase">ClearCase</a>
+version-control and configuration management software):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>cleartool<span class="w"> </span>lsco<span class="w"> </span>-all<span class="w"> </span>-me<span class="w"> </span>-short<span class="w"> </span>-cview<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-I<span class="w"> </span><span class="o">{}</span><span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s1">'diff --unified $(cleartool describe -fmt '</span>%En@@%PVn<span class="se">\\\\</span>n<span class="s1">' {}) {}'</span>
+</pre></div>
+</div>
+</section>
+<section id="other-resources">
+<h2>
+<a class="toc-backref" href="#id6" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
+</h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://linux.die.net/man/1/taskset">xargs man page</a></p></li>
+<li><p><a class="reference external" href="https://ioflood.com/blog/xargs-linux-command/">Mastering Xargs: Your Guide to Linux Command Efficiency</a></p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li>
+<a class="reference internal" href="#">xargs</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#splitting-null-terminated-input-items">Splitting null terminated input items</a></li>
+<li><a class="reference internal" href="#executing-a-command-for-each-item">Executing a command for each item</a></li>
+<li><a class="reference internal" href="#executing-a-command-for-each-item-with-item-used-anywhere-in-the-command">Executing a command for each item (with item used anywhere in the command)</a></li>
+<li><a class="reference internal" href="#other-resources">Other resources</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="find.html" title="previous chapter">find</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="bc.html" title="next chapter">bc</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <input type="submit" value="Go">
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="bc.html" title="bc">next</a> |</li>
+        <li class="right">
+          <a href="find.html" title="find">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">xargs</a></li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2023, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>
