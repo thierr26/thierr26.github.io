@@ -57,7 +57,8 @@
 <li><p><a class="reference internal" href="#printing-dates" id="id4">Printing dates</a></p></li>
 <li><p><a class="reference internal" href="#executing-one-or-more-commands-for-each-found-file" id="id5">Executing one or more commands for each found file</a></p></li>
 <li><p><a class="reference internal" href="#combining-logical-or-search-criteria" id="id6">Combining (logical “or”) search criteria</a></p></li>
-<li><p><a class="reference internal" href="#other-resources" id="id7">Other resources</a></p></li>
+<li><p><a class="reference internal" href="#counting-found-files" id="id7">Counting found files</a></p></li>
+<li><p><a class="reference internal" href="#other-resources" id="id8">Other resources</a></p></li>
 </ul>
 </nav>
 <section id="introduction">
@@ -167,9 +168,24 @@ escaped parentheses):</p>
 </pre></div>
 </div>
 </section>
+<section id="counting-found-files">
+<h2>
+<a class="toc-backref" href="#id7" role="doc-backlink">Counting found files</a><a class="headerlink" href="#counting-found-files" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-3">When you need to count the found files (and not print their name), you can use
+a command like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>find<span class="w"> </span>.<span class="w"> </span><span class="nb">type</span><span class="w"> </span>f<span class="w"> </span>-exec<span class="w"> </span><span class="nb">printf</span><span class="w"> </span>%c<span class="w"> </span><span class="o">{}</span><span class="w"> </span>+<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-c
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">printf</span> <span class="pre">%c</span></code> part causes the name of each found files to be printed as a
+single character (a dot). The <code class="docutils literal notranslate"><span class="pre">+</span></code> causes the whole output to be on a single
+line (without end of line sequence) and <code class="docutils literal notranslate"><span class="pre">wc</span> <span class="pre">-c</span></code> counts the number of
+character in the output line.</p>
+</section>
 <section id="other-resources">
 <h2>
-<a class="toc-backref" href="#id7" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id8" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
 </h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://linux.die.net/man/1/find">find man page</a></p></li>
@@ -195,6 +211,7 @@ escaped parentheses):</p>
 <li><a class="reference internal" href="#printing-dates">Printing dates</a></li>
 <li><a class="reference internal" href="#executing-one-or-more-commands-for-each-found-file">Executing one or more commands for each found file</a></li>
 <li><a class="reference internal" href="#combining-logical-or-search-criteria">Combining (logical “or”) search criteria</a></li>
+<li><a class="reference internal" href="#counting-found-files">Counting found files</a></li>
 <li><a class="reference internal" href="#other-resources">Other resources</a></li>
 </ul>
 </li>
