@@ -623,6 +623,12 @@ git<span class="w"> </span>ls-remote<span class="w"> </span>--tags<span class="w
 <div class="highlight"><pre><span></span>git<span class="w"> </span>rev-list<span class="w"> </span>-1<span class="w"> </span>my_tag
 </pre></div>
 </div>
+<p>And if you need to know whether the currently checked out commit has a tag or
+not, use:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git<span class="w"> </span>describe<span class="w"> </span>--exact-match<span class="w"> </span>--tags
+</pre></div>
+</div>
 </section>
 <section id="viewing-the-commit-log">
 <h2>
@@ -1196,6 +1202,8 @@ considered plumbing commands when used with the <code class="docutils literal no
 <div class="highlight"><pre><span></span>git<span class="w"> </span>symbolic-ref<span class="w"> </span>--short<span class="w"> </span>HEAD<span class="w">             </span><span class="c1"># Outputs the checked out branch.</span>
 git<span class="w"> </span>rev-parse<span class="w"> </span>--abbrev-ref<span class="w"> </span>HEAD<span class="w">           </span><span class="c1"># Same output (but listed as</span>
 <span class="w">                                          </span><span class="c1"># porcelain).</span>
+git<span class="w"> </span>branch<span class="w"> </span>--show-current<span class="w">                 </span><span class="c1"># Same output (but with Git 2.22 or</span>
+<span class="w">                                          </span><span class="c1"># newer).</span>
 
 git<span class="w"> </span><span class="k">for</span>-each-ref<span class="w"> </span><span class="se">\ </span><span class="w">                       </span><span class="c1"># Lists the local branches.</span>
 <span class="w">    </span>--format<span class="o">=</span><span class="s1">'%(refname:short)'</span><span class="w"> </span><span class="se">\</span>
