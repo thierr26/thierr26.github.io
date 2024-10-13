@@ -58,7 +58,8 @@
 <li><p><a class="reference internal" href="#executing-one-or-more-commands-for-each-found-file" id="id5">Executing one or more commands for each found file</a></p></li>
 <li><p><a class="reference internal" href="#combining-logical-or-search-criteria" id="id6">Combining (logical “or”) search criteria</a></p></li>
 <li><p><a class="reference internal" href="#counting-found-files" id="id7">Counting found files</a></p></li>
-<li><p><a class="reference internal" href="#other-resources" id="id8">Other resources</a></p></li>
+<li><p><a class="reference internal" href="#printing-full-paths" id="id8">Printing full paths</a></p></li>
+<li><p><a class="reference internal" href="#other-resources" id="id9">Other resources</a></p></li>
 </ul>
 </nav>
 <section id="introduction">
@@ -183,9 +184,28 @@ single character (a dot). The <code class="docutils literal notranslate"><span c
 line (without end of line sequence) and <code class="docutils literal notranslate"><span class="pre">wc</span> <span class="pre">-c</span></code> counts the number of
 character in the output line.</p>
 </section>
+<section id="printing-full-paths">
+<h2>
+<a class="toc-backref" href="#id8" role="doc-backlink">Printing full paths</a><a class="headerlink" href="#printing-full-paths" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-4">The <code class="docutils literal notranslate"><span class="pre">find</span></code> command prints the found files names as relative or absolute paths
+depending on how the searched directories were specified.</p>
+<p>Of course, a common case is searching in the current directory with a command
+starting with <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">.</span></code>. <code class="docutils literal notranslate"><span class="pre">.</span></code> designates the current directory <strong>relative
+to</strong> the current directory. This causes <code class="docutils literal notranslate"><span class="pre">find</span></code> to print the found files names
+as relative.</p>
+<p>If you want to get the full files names instead, and <strong>assuming your shell is
+Bash</strong>, the easiest way is to use <code class="docutils literal notranslate"><span class="pre">~+</span></code> instead of <code class="docutils literal notranslate"><span class="pre">.</span></code>. Bash expands <code class="docutils literal notranslate"><span class="pre">~+</span></code>
+to the current directory.</p>
+<p>A much more portable alternative is to use <code class="docutils literal notranslate"><span class="pre">pwd</span></code>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>find<span class="w"> </span><span class="s2">"</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">"</span><span class="w"> </span>...
+</pre></div>
+</div>
+</section>
 <section id="other-resources">
 <h2>
-<a class="toc-backref" href="#id8" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id9" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
 </h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://linux.die.net/man/1/find">find man page</a></p></li>
@@ -212,6 +232,7 @@ character in the output line.</p>
 <li><a class="reference internal" href="#executing-one-or-more-commands-for-each-found-file">Executing one or more commands for each found file</a></li>
 <li><a class="reference internal" href="#combining-logical-or-search-criteria">Combining (logical “or”) search criteria</a></li>
 <li><a class="reference internal" href="#counting-found-files">Counting found files</a></li>
+<li><a class="reference internal" href="#printing-full-paths">Printing full paths</a></li>
 <li><a class="reference internal" href="#other-resources">Other resources</a></li>
 </ul>
 </li>
