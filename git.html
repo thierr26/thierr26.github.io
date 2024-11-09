@@ -79,20 +79,26 @@
 <li><p><a class="reference internal" href="#committing" id="id22">Committing</a></p></li>
 <li><p><a class="reference internal" href="#tagging" id="id23">Tagging</a></p></li>
 <li><p><a class="reference internal" href="#viewing-the-commit-log" id="id24">Viewing the commit log</a></p></li>
-<li><p><a class="reference internal" href="#working-with-remote-repositories" id="id25">Working with remote repositories</a></p></li>
-<li><p><a class="reference internal" href="#working-with-branches" id="id26">Working with branches</a></p></li>
-<li><p><a class="reference internal" href="#stashing-changes" id="id27">Stashing changes</a></p></li>
-<li><p><a class="reference internal" href="#exploring-the-repository" id="id28">Exploring the repository</a></p></li>
-<li><p><a class="reference internal" href="#finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree" id="id29">Finding text patterns in the indexed files (or in any directory tree)</a></p></li>
-<li><p><a class="reference internal" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file" id="id30">Find the last modification date and author of any line of a file</a></p></li>
-<li><p><a class="reference internal" href="#cancelling-changes" id="id31">Cancelling changes</a></p></li>
-<li><p><a class="reference internal" href="#maintaining-a-difference-between-working-and-committed-trees" id="id32">Maintaining a difference between working and committed trees</a></p></li>
-<li><p><a class="reference internal" href="#resetting-the-commit-and-author-dates" id="id33">Resetting the commit and author dates</a></p></li>
-<li><p><a class="reference internal" href="#creating-an-archive-of-the-latest-commit-without-any-history" id="id34">Creating an archive of the latest commit (without any history)</a></p></li>
-<li><p><a class="reference internal" href="#scripting" id="id35">Scripting</a></p></li>
-<li><p><a class="reference internal" href="#hooks" id="id36">Hooks</a></p></li>
-<li><p><a class="reference internal" href="#submodules" id="id37">Submodules</a></p></li>
-<li><p><a class="reference internal" href="#other-resources" id="id38">Other resources</a></p></li>
+<li>
+<p><a class="reference internal" href="#working-with-remote-repositories" id="id25">Working with remote repositories</a></p>
+<ul>
+<li><p><a class="reference internal" href="#case-of-ssh-access" id="id26">Case of SSH access</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#working-with-branches" id="id27">Working with branches</a></p></li>
+<li><p><a class="reference internal" href="#stashing-changes" id="id28">Stashing changes</a></p></li>
+<li><p><a class="reference internal" href="#exploring-the-repository" id="id29">Exploring the repository</a></p></li>
+<li><p><a class="reference internal" href="#finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree" id="id30">Finding text patterns in the indexed files (or in any directory tree)</a></p></li>
+<li><p><a class="reference internal" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file" id="id31">Find the last modification date and author of any line of a file</a></p></li>
+<li><p><a class="reference internal" href="#cancelling-changes" id="id32">Cancelling changes</a></p></li>
+<li><p><a class="reference internal" href="#maintaining-a-difference-between-working-and-committed-trees" id="id33">Maintaining a difference between working and committed trees</a></p></li>
+<li><p><a class="reference internal" href="#resetting-the-commit-and-author-dates" id="id34">Resetting the commit and author dates</a></p></li>
+<li><p><a class="reference internal" href="#creating-an-archive-of-the-latest-commit-without-any-history" id="id35">Creating an archive of the latest commit (without any history)</a></p></li>
+<li><p><a class="reference internal" href="#cleaning-a-working-directory" id="id36">Cleaning a working directory</a></p></li>
+<li><p><a class="reference internal" href="#scripting" id="id37">Scripting</a></p></li>
+<li><p><a class="reference internal" href="#hooks" id="id38">Hooks</a></p></li>
+<li><p><a class="reference internal" href="#submodules" id="id39">Submodules</a></p></li>
+<li><p><a class="reference internal" href="#other-resources" id="id40">Other resources</a></p></li>
 </ul>
 </nav>
 <section id="introduction">
@@ -762,12 +768,23 @@ git<span class="w"> </span>pull<span class="w"> </span>&lt;repository_url_or_pat
 <div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>rm<span class="w"> </span>remote_name
 </pre></div>
 </div>
+<section id="case-of-ssh-access">
+<h3>
+<a class="toc-backref" href="#id26" role="doc-backlink">Case of SSH access</a><a class="headerlink" href="#case-of-ssh-access" title="Permalink to this heading">¶</a>
+</h3>
+<p id="index-18">You might need to specify the SSH key to use. The following links should help:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://superuser.com/questions/232373/how-to-tell-git-which-private-key-to-use">How to tell git which private key to use?</a></p></li>
+<li><p><a class="reference external" href="https://www.syedaslam.com/managing-multiple-ssh-keys/">Managing multiple SSH keys</a></p></li>
+<li><p><a class="reference external" href="https://wiki.autopdutop.fr/jenkins/jenkinsfile/#push-git-changes-through-ssh">Push git changes through ssh (in a Jenkins pipeline)</a></p></li>
+</ul>
+</section>
 </section>
 <section id="working-with-branches">
 <h2>
-<a class="toc-backref" href="#id26" role="doc-backlink">Working with branches</a><a class="headerlink" href="#working-with-branches" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id27" role="doc-backlink">Working with branches</a><a class="headerlink" href="#working-with-branches" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-18"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> shows the current branch (among other things).</p>
+<p id="index-19"><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">status</span></code> shows the current branch (among other things).</p>
 <p>To list the branches, use:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git<span class="w"> </span>branch<span class="w">    </span><span class="c1"># List the local branches.</span>
@@ -879,9 +896,9 @@ git<span class="w"> </span>branch<span class="w"> </span>--unset-upstream
 </section>
 <section id="stashing-changes">
 <h2>
-<a class="toc-backref" href="#id27" role="doc-backlink">Stashing changes</a><a class="headerlink" href="#stashing-changes" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id28" role="doc-backlink">Stashing changes</a><a class="headerlink" href="#stashing-changes" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-19">Store the current state of the working tree and the index in the stash stack
+<p id="index-20">Store the current state of the working tree and the index in the stash stack
 and go back to a clean working tree with one of the following commands:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git<span class="w"> </span>stash<span class="w"> </span>push
@@ -940,9 +957,9 @@ git<span class="w"> </span>stash<span class="w"> </span>clear<span class="w">   
 </section>
 <section id="exploring-the-repository">
 <h2>
-<a class="toc-backref" href="#id28" role="doc-backlink">Exploring the repository</a><a class="headerlink" href="#exploring-the-repository" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id29" role="doc-backlink">Exploring the repository</a><a class="headerlink" href="#exploring-the-repository" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-20">You can see the list of files and directories under version control in the
+<p id="index-21">You can see the list of files and directories under version control in the
 current directory using:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git<span class="w"> </span>ls-tree<span class="w"> </span>HEAD
@@ -970,9 +987,9 @@ git<span class="w"> </span>ls-files<span class="w"> </span>-s<span class="w"> </
 </section>
 <section id="finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree">
 <h2>
-<a class="toc-backref" href="#id29" role="doc-backlink">Finding text patterns in the indexed files (or in any directory tree)</a><a class="headerlink" href="#finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id30" role="doc-backlink">Finding text patterns in the indexed files (or in any directory tree)</a><a class="headerlink" href="#finding-text-patterns-in-the-indexed-files-or-in-any-directory-tree" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-21">Use commands like the following ones to search text patterns:</p>
+<p id="index-22">Use commands like the following ones to search text patterns:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git<span class="w"> </span>grep<span class="w"> </span>&lt;reg_exp&gt;<span class="w">            </span><span class="c1"># Search regular expression &lt;reg_exp&gt; in</span>
 <span class="w">                              </span><span class="c1"># indexed file.</span>
@@ -998,9 +1015,9 @@ do something like:</p>
 </section>
 <section id="find-the-last-modification-date-and-author-of-any-line-of-a-file">
 <h2>
-<a class="toc-backref" href="#id30" role="doc-backlink">Find the last modification date and author of any line of a file</a><a class="headerlink" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id31" role="doc-backlink">Find the last modification date and author of any line of a file</a><a class="headerlink" href="#find-the-last-modification-date-and-author-of-any-line-of-a-file" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-22">Use this command to see the last modification date and author of any line of a
+<p id="index-23">Use this command to see the last modification date and author of any line of a
 file:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git<span class="w"> </span>blame<span class="w"> </span>path/to/file
@@ -1009,9 +1026,9 @@ file:</p>
 </section>
 <section id="cancelling-changes">
 <h2>
-<a class="toc-backref" href="#id31" role="doc-backlink">Cancelling changes</a><a class="headerlink" href="#cancelling-changes" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id32" role="doc-backlink">Cancelling changes</a><a class="headerlink" href="#cancelling-changes" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-23">If you want to cancel changes before they have been pushed, the best option is
+<p id="index-24">If you want to cancel changes before they have been pushed, the best option is
 probably <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span></code>.</p>
 <p>Revert the index and working directory to the last, penultimate, etc… commit
 with commands like:</p>
@@ -1028,9 +1045,9 @@ probably <code class="docutils literal notranslate"><span class="pre">git</span>
 </section>
 <section id="maintaining-a-difference-between-working-and-committed-trees">
 <span id="git-maintain-work-commit-diff"></span><h2>
-<a class="toc-backref" href="#id32" role="doc-backlink">Maintaining a difference between working and committed trees</a><a class="headerlink" href="#maintaining-a-difference-between-working-and-committed-trees" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id33" role="doc-backlink">Maintaining a difference between working and committed trees</a><a class="headerlink" href="#maintaining-a-difference-between-working-and-committed-trees" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-24">In some cases, you want a particular file content in your working tree, that
+<p id="index-25">In some cases, you want a particular file content in your working tree, that
 you don’t want to commit.</p>
 <p>For example, this page you are currently reading is part of a <a class="reference external" href="http://www.sphinx-doc.org/en/master">Sphinx</a> project. The page you’re reading is the
 result of Sphinx processing some source files and generating HTML output. On
@@ -1126,9 +1143,9 @@ root</strong>) with:</p>
 </section>
 <section id="resetting-the-commit-and-author-dates">
 <h2>
-<a class="toc-backref" href="#id33" role="doc-backlink">Resetting the commit and author dates</a><a class="headerlink" href="#resetting-the-commit-and-author-dates" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id34" role="doc-backlink">Resetting the commit and author dates</a><a class="headerlink" href="#resetting-the-commit-and-author-dates" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-25">Two dates are associated with a given commit: <a class="reference external" href="https://stackoverflow.com/a/11857467">the author date and the commit
+<p id="index-26">Two dates are associated with a given commit: <a class="reference external" href="https://stackoverflow.com/a/11857467">the author date and the commit
 date</a>.</p>
 <p>One way to show both dates is to use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">log</span></code> with option
 <code class="docutils literal notranslate"><span class="pre">--pretty=fuller</span></code>:</p>
@@ -1162,9 +1179,9 @@ and do:</p>
 </section>
 <section id="creating-an-archive-of-the-latest-commit-without-any-history">
 <h2>
-<a class="toc-backref" href="#id34" role="doc-backlink">Creating an archive of the latest commit (without any history)</a><a class="headerlink" href="#creating-an-archive-of-the-latest-commit-without-any-history" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id35" role="doc-backlink">Creating an archive of the latest commit (without any history)</a><a class="headerlink" href="#creating-an-archive-of-the-latest-commit-without-any-history" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-26">The following commands create archives of the working directory in “tar” and
+<p id="index-27">The following commands create archives of the working directory in “tar” and
 “zip” formats:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git<span class="w"> </span>archive<span class="w"> </span>-o<span class="w"> </span>latest.tar<span class="w"> </span>HEAD
@@ -1172,11 +1189,26 @@ git<span class="w"> </span>archive<span class="w"> </span>-o<span class="w"> </s
 </pre></div>
 </div>
 </section>
+<section id="cleaning-a-working-directory">
+<h2>
+<a class="toc-backref" href="#id36" role="doc-backlink">Cleaning a working directory</a><a class="headerlink" href="#cleaning-a-working-directory" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-28">The <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clean</span> <span class="pre">-fdx</span></code> deletes all untracked file (including ignored files).
+<strong>Use with great care !</strong> You can do a dry run with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clean</span> <span class="pre">-ndx</span></code>.</p>
+<p>If you also want to reset the changes made to tracked files and in staging
+area, add a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">--hard</span></code> command:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git<span class="w"> </span>reset<span class="w"> </span>--hard
+git<span class="w"> </span>clean<span class="w"> </span>-fdx
+</pre></div>
+</div>
+<p>Again, <strong>use with care!</strong></p>
+</section>
 <section id="scripting">
 <h2>
-<a class="toc-backref" href="#id35" role="doc-backlink">Scripting</a><a class="headerlink" href="#scripting" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id37" role="doc-backlink">Scripting</a><a class="headerlink" href="#scripting" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-27">It is sometimes needed to automate a sequence of Git commands and write a
+<p id="index-29">It is sometimes needed to automate a sequence of Git commands and write a
 script (a <a class="reference external" href="https://en.wikipedia.org/wiki/Shell_script">shell script</a> for
 example). Scripting makes it possible to define <a class="reference internal" href="#hooks"><span class="std std-ref">hooks</span></a>.</p>
 <p><a class="reference external" href="https://stackoverflow.com/a/39848551">Git commands are divided into two categories</a>:</p>
@@ -1250,9 +1282,9 @@ git<span class="w"> </span>merge-base<span class="w"> </span>--is-ancestor<span 
 </section>
 <section id="hooks">
 <span id="id3"></span><h2>
-<a class="toc-backref" href="#id36" role="doc-backlink">Hooks</a><a class="headerlink" href="#hooks" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id38" role="doc-backlink">Hooks</a><a class="headerlink" href="#hooks" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-28">Assuming that:</p>
+<p id="index-30">Assuming that:</p>
 <ul class="simple">
 <li><p>You have a script “script-name” meant to be used as, say, a post-commit hook,</p></li>
 <li><p>This script is located at the top level of the working tree,</p></li>
@@ -1294,9 +1326,9 @@ variables instead:</p>
 </section>
 <section id="submodules">
 <h2>
-<a class="toc-backref" href="#id37" role="doc-backlink">Submodules</a><a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id39" role="doc-backlink">Submodules</a><a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-29">You can add a repository as a submodule to your repository with a command
+<p id="index-31">You can add a repository as a submodule to your repository with a command
 like:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>submodule_repository_url<span class="w"> </span>subdirectory
@@ -1318,7 +1350,7 @@ git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w
 </section>
 <section id="other-resources">
 <h2>
-<a class="toc-backref" href="#id38" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id40" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
 </h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://git-scm.com/docs">Git documentation</a></p></li>
@@ -1375,7 +1407,11 @@ git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w
 <li><a class="reference internal" href="#committing">Committing</a></li>
 <li><a class="reference internal" href="#tagging">Tagging</a></li>
 <li><a class="reference internal" href="#viewing-the-commit-log">Viewing the commit log</a></li>
-<li><a class="reference internal" href="#working-with-remote-repositories">Working with remote repositories</a></li>
+<li>
+<a class="reference internal" href="#working-with-remote-repositories">Working with remote repositories</a><ul>
+<li><a class="reference internal" href="#case-of-ssh-access">Case of SSH access</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#working-with-branches">Working with branches</a></li>
 <li><a class="reference internal" href="#stashing-changes">Stashing changes</a></li>
 <li><a class="reference internal" href="#exploring-the-repository">Exploring the repository</a></li>
@@ -1385,6 +1421,7 @@ git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w
 <li><a class="reference internal" href="#maintaining-a-difference-between-working-and-committed-trees">Maintaining a difference between working and committed trees</a></li>
 <li><a class="reference internal" href="#resetting-the-commit-and-author-dates">Resetting the commit and author dates</a></li>
 <li><a class="reference internal" href="#creating-an-archive-of-the-latest-commit-without-any-history">Creating an archive of the latest commit (without any history)</a></li>
+<li><a class="reference internal" href="#cleaning-a-working-directory">Cleaning a working directory</a></li>
 <li><a class="reference internal" href="#scripting">Scripting</a></li>
 <li><a class="reference internal" href="#hooks">Hooks</a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
