@@ -1166,14 +1166,14 @@ date</a>.</p>
 commits (well, except the initial commit) of the current branch, you can do it
 with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>git<span class="w"> </span>rebase<span class="w"> </span>&lt;branch_name&gt;<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span>git<span class="w"> </span>rebase<span class="w"> </span>&lt;commit_hash_of_the_initial_commit&gt;<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--exec<span class="w"> </span><span class="s1">'git commit --amend --date="now" --no-edit --allow-empty'</span>
 </pre></div>
 </div>
 <p>You may want to add the <code class="docutils literal notranslate"><span class="pre">--update-refs</span></code> option to preserve the branching
 structure:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>git<span class="w"> </span>rebase<span class="w"> </span>&lt;branch_name&gt;<span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span>git<span class="w"> </span>rebase<span class="w"> </span>&lt;commit_hash_of_the_initial_commit&gt;<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--exec<span class="w"> </span><span class="s1">'git commit --amend --date="now" --no-edit --allow-empty'</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>--update-refs
 </pre></div>
