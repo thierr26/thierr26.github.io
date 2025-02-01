@@ -695,6 +695,14 @@ instead of letter c for the “author date”.</p>
 <div class="highlight"><pre><span></span>git<span class="w"> </span>show<span class="w"> </span>-s<span class="w"> </span>git<span class="w"> </span>log<span class="w"> </span>--pretty<span class="o">=</span><span class="s2">"%ci %h"</span><span class="w"> </span>e66cceb
 </pre></div>
 </div>
+<p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rev-list</span> <span class="pre">branch_name</span></code> shows the commit hashes in reverse chronological
+order for the branch “branch_name”. Some options make it possible to filter by
+date. Example:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>git<span class="w"> </span>rev-list<span class="w"> </span>-1<span class="w"> </span>--before<span class="w"> </span><span class="s2">"2025-01-19 11:48"</span><span class="w"> </span>master<span class="w"> </span><span class="c1"># Most recent commit</span>
+<span class="w">                                                   </span><span class="c1"># before a date.</span>
+</pre></div>
+</div>
 </section>
 <section id="working-with-remote-repositories">
 <h2>
