@@ -57,6 +57,7 @@
 <li><p><a class="reference internal" href="#deleting-one-out-of-n-lines" id="id5">Deleting one out of N lines</a></p></li>
 <li><p><a class="reference internal" href="#joining-lines-matching-a-pattern" id="id6">Joining lines matching a pattern</a></p></li>
 <li><p><a class="reference internal" href="#keep-end-of-line-only-for-lines-matching-a-pattern" id="id7">Keep end of line only for lines matching a pattern</a></p></li>
+<li><p><a class="reference internal" href="#filter-by-line-numbers" id="id8">Filter by line numbers</a></p></li>
 </ul>
 </nav>
 <section id="introduction">
@@ -190,6 +191,28 @@ the content accumulated in memory is output. (The <code class="docutils literal 
 removed (<code class="docutils literal notranslate"><span class="pre">s/\n//;</span></code>) and they’re not output immediately. (The <code class="docutils literal notranslate"><span class="pre">b</span> <span class="pre">redo</span></code>
 causes a jump to the <code class="docutils literal notranslate"><span class="pre">:redo</span></code> label.)</p>
 </section>
+<section id="filter-by-line-numbers">
+<h2>
+<a class="toc-backref" href="#id8" role="doc-backlink">Filter by line numbers</a><a class="headerlink" href="#filter-by-line-numbers" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-6">The following pages show how to use sed to solve some line number-based output
+problems:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.baeldung.com/linux/print-specified-lines-file">Printing Specified Lines From a File</a>,</p></li>
+<li><p><a class="reference external" href="https://www.baeldung.com/linux/read-specific-line-from-file">Read a Specific Line From a File in Linux</a>.</p></li>
+</ul>
+<p>Here are a few more examples.</p>
+<p>To output lines number 2 to 4 and 7 to 9 of file <code class="docutils literal notranslate"><span class="pre">f</span></code>, do:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">'2,4p; 7,9p;'</span><span class="w"> </span>f
+</pre></div>
+</div>
+<p>To output all but lines number 2 to 4 of file <code class="docutils literal notranslate"><span class="pre">f</span></code>, do:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>sed<span class="w"> </span><span class="s1">'2,4d;'</span><span class="w"> </span>f
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -210,6 +233,7 @@ causes a jump to the <code class="docutils literal notranslate"><span class="pre
 <li><a class="reference internal" href="#deleting-one-out-of-n-lines">Deleting one out of N lines</a></li>
 <li><a class="reference internal" href="#joining-lines-matching-a-pattern">Joining lines matching a pattern</a></li>
 <li><a class="reference internal" href="#keep-end-of-line-only-for-lines-matching-a-pattern">Keep end of line only for lines matching a pattern</a></li>
+<li><a class="reference internal" href="#filter-by-line-numbers">Filter by line numbers</a></li>
 </ul>
 </li>
 </ul>
