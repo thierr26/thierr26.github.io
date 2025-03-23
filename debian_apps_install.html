@@ -156,6 +156,7 @@ installation is:</p>
 <span class="w">    </span>libgtkada-bin<span class="w"> </span>libgtkada-doc<span class="w"> </span>libgtkada22<span class="w"> </span>libgtkada22-dev<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>gdb<span class="w"> </span>gdb-doc<span class="w"> </span>gdbserver<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>valgrind<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>strace<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>lcov<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>libncurses5<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>libb-lint-perl<span class="w"> </span><span class="se">\</span>
@@ -375,103 +376,107 @@ libgtkada-bin libgtkada-doc, libgtkada22, libgtkada22-dev</p></td>
 <td><p>Program profiling tools</p></td>
 </tr>
 <tr class="row-even">
+<td><p>strace</p></td>
+<td><p>System call tracer</p></td>
+</tr>
+<tr class="row-odd">
 <td><p>lcov</p></td>
 <td><p>Test coverage report generation tools</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>libncurses5</p></td>
 <td><p>Libraries for terminal handling (legacy version), needed to run <a class="reference external" href="https://learn.adacore.com/courses/GNAT_Toolchain_Intro/chapters/gnat_studio.html">GNAT
 Programming Studio</a>
 as provided with <a class="reference external" href="https://www.adacore.com/download">GNAT Community</a>
 2018 and 2019.</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>libb-lint-perl</p></td>
 <td><p>Perl code checker</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>gimp, gimp-plugin-registry, jhead, imagemagick</p></td>
 <td><p>Image manipulation programs</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>libimage-exiftool-perl</p></td>
 <td><p>Includes exiftool (image metadata extraction)</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>xsane</p></td>
 <td><p>Frontend for SANE (Scanner Access Now Easy), includes Gimp plugin
 (the Gimp plugin may not work, on Debian Bookworm at least, but <a class="reference external" href="https://askubuntu.com/questions/1427978/lubuntu-22-04-1-xsane-gimp-plugin-doesnt-work">there is
 a fix</a>)</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>xzgv</p></td>
 <td><p>Image viewer</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>rawtherapee</p></td>
 <td><p>Raw image converter</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>irssi</p></td>
 <td><p>IRC client</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>pan</p></td>
 <td><p>Usenet newsreader</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>claws-mail</p></td>
 <td><p>Mail client (MH mailbox format)</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>claws-mail-themes</p></td>
 <td><p>Claws Mail themes</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>vim</p></td>
 <td><p>Vim text editor</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>unaccent</p></td>
 <td><p>Tool to replace accented letters by unaccented equivalent</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>psmisc</p></td>
 <td><p>killall, …</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>sudo</p></td>
 <td><p>Privilege escalation</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>pwgen</p></td>
 <td><p>Password generator</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>time</p></td>
 <td><p>CPU resource usage measurement</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>tree</p></td>
 <td><p>Indented directory listing tool</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>mmv</p></td>
 <td><p>Tool to move/copy/append/link multiple files by wildcard patterns</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>bc</p></td>
 <td><p>Calculator language, to be used in scripts or interactively</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>network-manager</p></td>
 <td><p>Network management framework</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>openconnect</p></td>
 <td><p>Client for GlobalProtect VPN (among others)</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>freerdp2-x11</p></td>
 <td><p>X11 based Remote Desktop Protocol client (On Debian Buster, I have to
 append options <code class="docutils literal notranslate"><span class="pre">/relax-order-checks</span></code> and <code class="docutils literal notranslate"><span class="pre">+glyph-cache</span></code> to the
@@ -480,72 +485,72 @@ append options <code class="docutils literal notranslate"><span class="pre">/rel
 line is like: <code class="docutils literal notranslate"><span class="pre">xfreerdp</span> <span class="pre">+glyph-cache</span> <span class="pre">/relax-order-checks</span> <span class="pre">/u:my_user_name</span>
 <span class="pre">/v:my.server</span> <span class="pre">/kbd:0x40c</span> <span class="pre">/f</span></code>)</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>whois</p></td>
 <td><p>Command-line WHOIS client</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>wireshark</p></td>
 <td><p>Graphical network traffic analyzer</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>tcpdump</p></td>
 <td><p>Command-line network traffic analyzer</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>ncat</p></td>
 <td><p>Utility to read / write data across networks from the command line</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>nmap</p></td>
 <td><p>Network mapper</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>openssh-server</p></td>
 <td><p>Secure shell (SSH) server</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>colortest</p></td>
 <td><p>Terminal color test graphs</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>mesa-utils</p></td>
 <td><p>glxgears and other programs</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>lm-sensors</p></td>
 <td><p>Utilities to read temperature/voltage/fan sensors (Run <code class="docutils literal notranslate"><span class="pre">sensors-detect</span></code>
 as root to configure and <code class="docutils literal notranslate"><span class="pre">sensors</span></code> to view a readout of the sensors.)</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>hwloc</p></td>
 <td><p>Hardware Locality tool suite</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>zbar-tools</p></td>
 <td><p>Bar code / QR-code related utilities</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>meld</p></td>
 <td><p>Graphical tool to show differences between text files</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>hexedit</p></td>
 <td><p>Hexadecimal editor</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>python3-sphinx</p></td>
 <td><p>Documentation generator</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>ruby-nokogiri</p></td>
 <td><p>HTML, XML, SAX, and Reader parser for Ruby</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>sakura</p></td>
 <td><p>Terminal emulator</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>foobillardplus</p></td>
 <td><p>3D OpenGL billiard game</p></td>
 </tr>
