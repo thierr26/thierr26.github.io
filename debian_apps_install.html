@@ -81,7 +81,7 @@
 <p><a class="reference internal" href="#third-party-applications-installation" id="id20">Third party applications installation</a></p>
 <ul>
 <li><p><a class="reference internal" href="#google-chrome-installation" id="id21">Google Chrome installation</a></p></li>
-<li><p><a class="reference internal" href="#gnat-community-edition-2021" id="id22">GNAT Community Edition 2021</a></p></li>
+<li><p><a class="reference internal" href="#gnat-studio" id="id22">GNAT Studio</a></p></li>
 <li><p><a class="reference internal" href="#alire-ada-library-repository-installation" id="id23">Alire (Ada LIbrary REpository) installation</a></p></li>
 <li><p><a class="reference internal" href="#signal-desktop-installation-and-linking-to-a-dumb-phone" id="id24">signal-desktop installation and linking to a “dumb phone”</a></p></li>
 <li><p><a class="reference internal" href="#session-for-desktop-installation" id="id25">Session for desktop installation</a></p></li>
@@ -135,7 +135,6 @@ installation is:</p>
 <span class="w">    </span>vlc<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>ffmpeg<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>sox<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>wkhtmltopdf<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>default-jre<span class="w"> </span>default-jdk<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>taskwarrior<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>gcal<span class="w"> </span><span class="se">\</span>
@@ -149,16 +148,17 @@ installation is:</p>
 <span class="w">    </span>catdoc<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>octave<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>shellcheck<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>gnat<span class="w"> </span>gprbuild<span class="w"> </span>libaunit22-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>reuse<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>exuberant-ctags<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>gnat<span class="w"> </span>gprbuild<span class="w"> </span>libaunit-dev<span class="w"> </span>libaunit-doc<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>ada-reference-manual-2012<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>libxmlada-dom12-dev<span class="w"> </span>libxmlada-input12-dev<span class="w"> </span>libxmlada-sax12-dev<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>libxmlada-schema12-dev<span class="w"> </span>libxmlada-unicode12-dev<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>libgtkada-bin<span class="w"> </span>libgtkada-doc<span class="w"> </span>libgtkada22<span class="w"> </span>libgtkada22-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libxmlada-dom-dev<span class="w"> </span>libxmlada-input-dev<span class="w"> </span>libxmlada-sax-dev<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libxmlada-schema-dev<span class="w"> </span>libxmlada-unicode-dev<span class="w"> </span>libxmlada-doc<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>libgtkada-dev<span class="w"> </span>libgtkada-doc<span class="w"> </span>libgtkada-bin<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>gdb<span class="w"> </span>gdb-doc<span class="w"> </span>gdbserver<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>valgrind<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>strace<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>lcov<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>libncurses5<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>libb-lint-perl<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>gimp<span class="w"> </span>gimp-plugin-registry<span class="w"> </span>jhead<span class="w"> </span>imagemagick<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>libimage-exiftool-perl<span class="w"> </span><span class="se">\</span>
@@ -180,7 +180,7 @@ installation is:</p>
 <span class="w">    </span>bc<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>network-manager<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>openconnect<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>freerdp2-x11<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>freerdp3-x11<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>whois<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>wireshark<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>tcpdump<span class="w"> </span><span class="se">\</span>
@@ -299,97 +299,94 @@ smartmontools tutorial by Random Bits</a>)</p></td>
 <td><p>Audio files manipulation programs</p></td>
 </tr>
 <tr class="row-odd">
-<td><p>wkhtmltopdf</p></td>
-<td><p>HTML to PDF conversion tool</p></td>
-</tr>
-<tr class="row-even">
 <td><p>default-jre, default-jdk</p></td>
 <td><p>Java runtime, Java development kit</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>taskwarrior</p></td>
 <td><p>Console based todo list manager</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>gcal</p></td>
 <td><p>Calendar program</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>gftp</p></td>
 <td><p>FTP client</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>ghostwriter</p></td>
 <td><p>Markdown editor</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>xpdf</p></td>
 <td><p>PDF reader</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>evince</p></td>
 <td><p>Document viewer (can fill in forms in PDF files)</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>librsvg2-bin</p></td>
 <td><p>Command-line utility to convert Scalable Vector Graphics (SVG) file</p></td>
 </tr>
-<tr class="row-even">
-<td><p>lyx texlive-lang-*</p></td>
+<tr class="row-odd">
+<td><p>lyx, texlive-lang-*</p></td>
 <td><p>Document processor (almost WYSIWYG-frontend for LaTeX)</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>pandoc</p></td>
 <td><p>General markup converter</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>catdoc</p></td>
 <td><p>Text extractor for MS-Office files</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>octave</p></td>
 <td><p>GNU Octave language (similar to Matlab)</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>shellcheck</p></td>
 <td><p>Shell script analysis tool</p></td>
 </tr>
+<tr class="row-even">
+<td><p>reuse</p></td>
+<td><p>Tool for REUSE copyright and license recommendations</p></td>
+</tr>
 <tr class="row-odd">
-<td><p>gnat, gprbuild, libaunit22-dev</p></td>
-<td><p>Ada programming tools</p></td>
+<td><p>exuberant-ctags</p></td>
+<td><p>Generator of source code definitions indexes</p></td>
 </tr>
 <tr class="row-even">
+<td><p>gnat, gprbuild, libaunit-dev, libaunit-doc</p></td>
+<td><p>Ada programming tools</p></td>
+</tr>
+<tr class="row-odd">
 <td><p>ada-reference-manual-2012</p></td>
 <td><p>Ada 2012 reference manual</p></td>
 </tr>
-<tr class="row-odd">
-<td><p>libxmlada-dom12-dev, libxmlada-input12-dev, libxmlada-sax12-dev,
-libxmlada-schema12-dev, libxmlada-unicode12-dev,
-libgtkada-bin libgtkada-doc, libgtkada22, libgtkada22-dev</p></td>
+<tr class="row-even">
+<td><p>libxmlada-dom-dev, libxmlada-input-dev, libxmlada-sax-dev,
+libxmlada-schema-dev, libxmlada-unicode-dev, libxmlada-doc,
+libgtkada-dev, libgtkada-doc, libgtkada-bin</p></td>
 <td><p>Ada libraries (XML/Ada and GtkAda)</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>gdb, gdb-doc, gdbserver</p></td>
 <td><p>GNU debugger (including remote server)</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>valgrind</p></td>
 <td><p>Program profiling tools</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>strace</p></td>
 <td><p>System call tracer</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>lcov</p></td>
 <td><p>Test coverage report generation tools</p></td>
-</tr>
-<tr class="row-even">
-<td><p>libncurses5</p></td>
-<td><p>Libraries for terminal handling (legacy version), needed to run <a class="reference external" href="https://learn.adacore.com/courses/GNAT_Toolchain_Intro/chapters/gnat_studio.html">GNAT
-Programming Studio</a>
-as provided with <a class="reference external" href="https://www.adacore.com/download">GNAT Community</a>
-2018 and 2019.</p></td>
 </tr>
 <tr class="row-odd">
 <td><p>libb-lint-perl</p></td>
@@ -478,7 +475,7 @@ a fix</a>)</p></td>
 <td><p>Client for GlobalProtect VPN (among others)</p></td>
 </tr>
 <tr class="row-even">
-<td><p>freerdp2-x11</p></td>
+<td><p>freerdp3-x11</p></td>
 <td><p>X11 based Remote Desktop Protocol client (On Debian Buster, I have to
 append options <code class="docutils literal notranslate"><span class="pre">/relax-order-checks</span></code> and <code class="docutils literal notranslate"><span class="pre">+glyph-cache</span></code> to the
 <code class="docutils literal notranslate"><span class="pre">xfreerdp</span></code> command line. See
@@ -585,10 +582,15 @@ websites”.</p>
 <span id="chromium-config"></span><h4>
 <a class="toc-backref" href="#id8" role="doc-backlink">Chromium</a><a class="headerlink" href="#chromium" title="Permalink to this heading">¶</a>
 </h4>
-<p id="index-2">In Settings | Search engines, set DuckDuckGo as the search engine used in the
-adress bar.</p>
-<p>In Settings | Autofill | Passwords, disable “Offer to save passwords” and “Auto
+<p id="index-2">In Settings | Autofill | Passwords, disable “Offer to save passwords” and “Auto
 sign-in”.</p>
+<p>Chromium may issue a warning on every startup, asking the pasword to unlock the
+default GNOME Keyring. To get rid of the warning, I clear my GNOME Keyring
+files:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>~/.local/share/keyrings/*
+</pre></div>
+</div>
 </section>
 <section id="irssi">
 <h4>
@@ -756,7 +758,7 @@ to the <code class="docutils literal notranslate"><span class="pre">wireshark</s
 </h4>
 <p id="index-13">The <code class="docutils literal notranslate"><span class="pre">lyx</span></code> package should preferably be installed along with the
 <code class="docutils literal notranslate"><span class="pre">librsvg2-bin</span></code> package, otherwise Lyx could fail to compile the
-<code class="docutils literal notranslate"><span class="pre">splash.lyx</span></code> file (located in <code class="docutils literal notranslate"><span class="pre">/usr/share/lyx/examples</span></code>). This is due to a
+<code class="docutils literal notranslate"><span class="pre">welcome.lyx</span></code> file (located in <code class="docutils literal notranslate"><span class="pre">/usr/share/lyx/examples</span></code>). This is due to a
 missing converter (the “SVG (compressed)” to “PDF (graphics)” converter).</p>
 <p>You can also install <code class="docutils literal notranslate"><span class="pre">librsvg2-bin</span></code> later and then add the “SVG (compressed)”
 to “PDF (graphics)” converter manually via the Tools | Preferences menu dialog
@@ -786,52 +788,36 @@ and installed it <strong>as root</strong> with:</p>
 <div class="highlight"><pre><span></span>dpkg<span class="w"> </span>-i<span class="w"> </span>google-chrome-stable_current_amd64.deb<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-<p>The installation was not successful. I had to issue the following command to
-fix the system:</p>
-<div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt<span class="w"> </span>install<span class="w"> </span>-f<span class="w"> </span><span class="c1"># As root.</span>
-</pre></div>
-</div>
 <p>I didn’t want Google Chrome to be the default browser, so I reselected Firefox
 ESR in the <a class="reference external" href="https://wiki.debian.org/DebianAlternatives">Debian alternatives system</a> with <code class="docutils literal notranslate"><span class="pre">update-alternatives</span>
 <span class="pre">--config</span> <span class="pre">x-www-browser</span></code> (<strong>as root</strong>).</p>
 <p>I then tweaked Google Chrome’s settings as for
 <a class="reference internal" href="#chromium-config"><span class="std std-ref">Chromium</span></a>.</p>
 </section>
-<section id="gnat-community-edition-2021">
+<section id="gnat-studio">
 <h3>
-<a class="toc-backref" href="#id22" role="doc-backlink">GNAT Community Edition 2021</a><a class="headerlink" href="#gnat-community-edition-2021" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id22" role="doc-backlink">GNAT Studio</a><a class="headerlink" href="#gnat-studio" title="Permalink to this heading">¶</a>
 </h3>
-<p id="index-15">GNAT Community Edition is available on <a class="reference external" href="https://www.adacore.com/download/more">Adacore’s download page</a>. Download the binary executable
-archive gnat-2021-20210519-x86_64-linux-bin and execute it <strong>as root</strong> to
-perform the installation. Before that, you probably have to make sure that the
-executable can connect to the X server using the following commands:</p>
-<div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>xhost<span class="w"> </span>+local:<span class="w"> </span><span class="c1"># As "normal" user.</span>
-</pre></div>
-</div>
-<p>and:</p>
-<div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">DISPLAY</span><span class="o">=</span>:0.0<span class="w"> </span><span class="c1"># As root.</span>
-</pre></div>
-</div>
+<p id="index-15">Follow the instructions at <a class="reference external" href="https://github.com/AdaCore/gnatstudio/releases">https://github.com/AdaCore/gnatstudio/releases</a>.</p>
+<p>I installed the Continuous Release 20250417, running the <code class="docutils literal notranslate"><span class="pre">do_install.sh</span></code>
+script as root.</p>
 </section>
 <section id="alire-ada-library-repository-installation">
 <h3>
 <a class="toc-backref" href="#id23" role="doc-backlink">Alire (Ada LIbrary REpository) installation</a><a class="headerlink" href="#alire-ada-library-repository-installation" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-16">The <a class="reference external" href="https://alire.ada.dev/">Alire</a> distribution is available as a Zip
-archive on Github. I download it using <code class="docutils literal notranslate"><span class="pre">wget</span></code> (example for version 1.2.1):</p>
+archive on Github. I download it using <code class="docutils literal notranslate"><span class="pre">wget</span></code> (example for version 2.1.0):</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>Downloads
-wget<span class="w"> </span>https://github.com/alire-project/alire/releases/download/v1.2.1/alr-1.2.1-bin-x86_64-linux.zip
+wget<span class="w"> </span>https://github.com/alire-project/alire/releases/download/v2.1.0/alr-2.1.0-bin-x86_64-linux.zip
 </pre></div>
 </div>
 <p>Then I extract it using <code class="docutils literal notranslate"><span class="pre">unzip</span></code> <strong>as root</strong>:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>&lt;directory_containing_the_archive&gt;<span class="w"> </span><span class="c1"># As root.</span>
 mkdir<span class="w"> </span>-p<span class="w"> </span>/opt/alire<span class="w"> </span><span class="c1"># As root.</span>
-unzip<span class="w"> </span>alr-1.2.1-bin-x86_64-linux.zip<span class="w"> </span>-d<span class="w"> </span>/opt/alire<span class="w"> </span><span class="c1"># As root.</span>
+unzip<span class="w"> </span>alr-2.1.0-bin-x86_64-linux.zip<span class="w"> </span>-d<span class="w"> </span>/opt/alire<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>Finally I add <code class="docutils literal notranslate"><span class="pre">/opt/alire/bin</span></code> to my path, via a line in my <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code>
@@ -968,7 +954,7 @@ about the use of the <code class="docutils literal notranslate"><span class="pre
 <li>
 <a class="reference internal" href="#third-party-applications-installation">Third party applications installation</a><ul>
 <li><a class="reference internal" href="#google-chrome-installation">Google Chrome installation</a></li>
-<li><a class="reference internal" href="#gnat-community-edition-2021">GNAT Community Edition 2021</a></li>
+<li><a class="reference internal" href="#gnat-studio">GNAT Studio</a></li>
 <li><a class="reference internal" href="#alire-ada-library-repository-installation">Alire (Ada LIbrary REpository) installation</a></li>
 <li><a class="reference internal" href="#signal-desktop-installation-and-linking-to-a-dumb-phone">signal-desktop installation and linking to a “dumb phone”</a></li>
 <li><a class="reference internal" href="#session-for-desktop-installation">Session for desktop installation</a></li>

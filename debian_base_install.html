@@ -52,8 +52,8 @@
 <p class="topic-title">Page content</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#introduction" id="id3">Introduction</a></p></li>
-<li><p><a class="reference internal" href="#getting-an-installation-cd" id="id4">Getting an installation CD</a></p></li>
-<li><p><a class="reference internal" href="#preparing-a-media-with-firmware-archive-just-in-case" id="id5">Preparing a media with firmware archive, just in case</a></p></li>
+<li><p><a class="reference internal" href="#making-a-bootable-usb-stick" id="id4">Making a bootable USB stick</a></p></li>
+<li><p><a class="reference internal" href="#getting-an-installation-cd" id="id5">Getting an installation CD</a></p></li>
 <li>
 <p><a class="reference internal" href="#disk-partitioning" id="id6">Disk partitioning</a></p>
 <ul>
@@ -79,7 +79,7 @@
 <li><p><a class="reference internal" href="#adding-deb-multimedia-to-the-sources" id="id18">Adding deb-multimedia to the sources</a></p></li>
 <li><p><a class="reference internal" href="#installing-firmware-linux-nonfree" id="id19">Installing firmware-linux-nonfree</a></p></li>
 <li><p><a class="reference internal" href="#checking-the-configured-time-zone" id="id20">Checking the configured time zone</a></p></li>
-<li><p><a class="reference internal" href="#cheking-systemd-timesyncd-service" id="id21">Cheking systemd-timesyncd service</a></p></li>
+<li><p><a class="reference internal" href="#checking-systemd-timesyncd-service" id="id21">Checking systemd-timesyncd service</a></p></li>
 <li><p><a class="reference internal" href="#installing-a-console-locker" id="id22">Installing a console locker</a></p></li>
 <li><p><a class="reference internal" href="#installing-a-memory-ram-tester" id="id23">Installing a memory (RAM) tester</a></p></li>
 <li><p><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool" id="id24">Installing a wireless devices status management tool</a></p></li>
@@ -97,32 +97,46 @@
 <a class="toc-backref" href="#id3" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p>These are my notes about the installation of a <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> system on a 64-bit (“AMD64” architecture) PC. A
-significant part of these notes describe the preparation of the installation
+significant part of these notes describes the preparation of the installation
 medias. The assumption is made that you have access to a working machine with a
 Debian GNU/Linux system installed and a fast enough internet connection (to
 download a few hundreds of megabytes). This machine will be used to prepare the
 installation medias for the new system.</p>
-<p>Many software packages are also downloaded during the installation, so the
-target machine should also have a fast enough internet connection.</p>
+<p>Most of the software packages are also downloaded during the installation, so
+the target machine should also have a fast enough internet connection.</p>
+<p>The easiest way nowadays is probably to make a bootable USB stick. I used to
+make a <a class="reference external" href="https://www.debian.org/CD/netinst">“netinst” CD</a>, but Debian
+“netinst” images have become bigger and they don’t fit on a 700MB CD-ROM
+anymore.</p>
+</section>
+<section id="making-a-bootable-usb-stick">
+<span id="getting-debian-iso-image"></span><h2>
+<a class="toc-backref" href="#id4" role="doc-backlink">Making a bootable USB stick</a><a class="headerlink" href="#making-a-bootable-usb-stick" title="Permalink to this heading">¶</a>
+</h2>
+<p id="index-1">Just download the tiny (64MB) “netboot” image (mini.iso) and write it (<strong>as
+root</strong>) to the device corresponding to your USB stick (e.g. <code class="docutils literal notranslate"><span class="pre">/dev/sdc</span></code>, check
+using <code class="docutils literal notranslate"><span class="pre">lsblk</span></code>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>wget<span class="w"> </span>https://deb.debian.org/debian/dists/testing/main/installer-amd64/current/images/netboot/mini.iso
+cp<span class="w"> </span>mini.iso<span class="w"> </span>/dev/sdc<span class="p">;</span><span class="w"> </span><span class="c1"># As root.</span>
+sync<span class="p">;</span><span class="w"> </span><span class="c1"># As root.</span>
+</pre></div>
+</div>
 </section>
 <section id="getting-an-installation-cd">
-<span id="getting-debian-iso-image"></span><h2>
-<a class="toc-backref" href="#id4" role="doc-backlink">Getting an installation CD</a><a class="headerlink" href="#getting-an-installation-cd" title="Permalink to this heading">¶</a>
+<h2>
+<a class="toc-backref" href="#id5" role="doc-backlink">Getting an installation CD</a><a class="headerlink" href="#getting-an-installation-cd" title="Permalink to this heading">¶</a>
 </h2>
-<p id="index-1">See the <a class="reference external" href="https://www.debian.org/distrib/">Getting Debian page</a> for
-information about how to download a Debian installer CD image or buy
-installation CDs.</p>
-<p>If you have a fast enough internet connection and a CD burning drive, you can
-download a <a class="reference external" href="https://www.debian.org/distrib/netinst">small (approximately 300MB) installation image</a> and burn it to a blank CD-R.
-Commands like the ones below should do it. The example is for Debian 12.4.0
-(Bookworm). Note also that it is assumed that you have <a class="reference external" href="http://scdbackup.sourceforge.net/cdrskin_eng.html">cdrskin</a> installed. Run <code class="docutils literal notranslate"><span class="pre">apt-get</span>
-<span class="pre">install</span> <span class="pre">cdrskin</span></code> <strong>as root</strong> if not. Note also that the
+<p id="index-2">If you choose to go the CD-ROM route, here is what you need to do. The provided
+URLs are for Debian 13.0.0 (Trixie). Note also that it is assumed that you have
+<a class="reference external" href="http://scdbackup.sourceforge.net/cdrskin_eng.html">cdrskin</a> installed. Run
+<code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">cdrskin</span></code> <strong>as root</strong> if not. Note also that the
 <code class="docutils literal notranslate"><span class="pre">dev=&lt;cd_burning_drive_device_file&gt;</span></code> option is probably not mandatory as
 cdrskin can detect CD burning devices (<code class="docutils literal notranslate"><span class="pre">cdrskin</span> <span class="pre">--devices</span></code> lists the detected
 devices):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>wget<span class="w"> </span>https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-12.4.0-amd64-netinst.iso
-cdrskin<span class="w"> </span><span class="nv">dev</span><span class="o">=</span>&lt;cd_burning_drive_device_file&gt;<span class="w"> </span>-eject<span class="w"> </span>-v<span class="w"> </span>-data<span class="w"> </span>debian-12.4.0-amd64-netinst.iso
+<div class="highlight"><pre><span></span>wget<span class="w"> </span>https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-13.0.0-amd64-netinst.iso
+cdrskin<span class="w"> </span><span class="nv">dev</span><span class="o">=</span>&lt;cd_burning_drive_device_file&gt;<span class="w"> </span>-eject<span class="w"> </span>-v<span class="w"> </span>-data<span class="w"> </span>debian-13.0.0-amd64-netinst.iso
 </pre></div>
 </div>
 <p>You might want to verify the authenticity of the ISO image. Download the SHA512
@@ -159,44 +173,10 @@ burned CD. Just compare the output of the following command with the checksum
 from the downloaded checksum file as provided in file SHA512SUMS:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/&lt;cd_burning_drive_device_file&gt;<span class="w"> </span><span class="nv">bs</span><span class="o">=</span><span class="m">2048</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="nv">count</span><span class="o">=</span><span class="k">$(($(</span>stat<span class="w"> </span>-c<span class="w"> </span>%s<span class="w"> </span>debian-12.4.0-amd64-netinst.iso<span class="k">)</span><span class="o">/</span><span class="m">2048</span><span class="k">))</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="nv">count</span><span class="o">=</span><span class="k">$(($(</span>stat<span class="w"> </span>-c<span class="w"> </span>%s<span class="w"> </span>debian-13.0.0-amd64-netinst.iso<span class="k">)</span><span class="o">/</span><span class="m">2048</span><span class="k">))</span><span class="w"> </span><span class="se">\</span>
 <span class="w">  </span><span class="nv">conv</span><span class="o">=</span>notrunc,noerror<span class="w"> </span><span class="p">|</span><span class="w"> </span>sha512sum
 </pre></div>
 </div>
-</section>
-<section id="preparing-a-media-with-firmware-archive-just-in-case">
-<h2>
-<a class="toc-backref" href="#id5" role="doc-backlink">Preparing a media with firmware archive, just in case</a><a class="headerlink" href="#preparing-a-media-with-firmware-archive-just-in-case" title="Permalink to this heading">¶</a>
-</h2>
-<p id="index-2">Note that this step is <strong>not necessary if your installation CD already includes
-firmware</strong> (that is if you have downloaded the image from a subdirectory of
-cdimage.debian.org/cdimage/unofficial/non-free/cd-including-firmware).</p>
-<p>Note also that this section does not apply any more, starting with Debian 12.
-(Firmware is now included in the normal Debian installer images.)</p>
-<p>The <a class="reference external" href="https://wiki.debian.org/Firmware">Debian Wiki</a> provides some
-instructions, but here are the details of what I’ve done (for a Debian Bookworm
-install, and including the authenticity verification of the archive):</p>
-<div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/download/debian_bookworm_firmware<span class="w"> </span><span class="c1"># Create a directory somewhere.</span>
-<span class="nb">cd</span><span class="w"> </span>~/download/debian_bookworm_firmware<span class="w">       </span><span class="c1"># Move to that directory.</span>
-
-<span class="c1"># Download the firmware archive, its SHA512 checksum and associated signature</span>
-<span class="c1"># file.</span>
-wget<span class="w"> </span>http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bookworm/current/firmware.tar.gz
-wget<span class="w"> </span>http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bookworm/current/SHA512SUMS
-wget<span class="w"> </span>http://cdimage.debian.org/cdimage/unofficial/non-free/firmware/bookworm/current/SHA512SUMS.sign
-</pre></div>
-</div>
-<p>I’ve checked the SHA512 checksum of <code class="docutils literal notranslate"><span class="pre">firmware.tar.gz</span></code> by issuing a
-<code class="docutils literal notranslate"><span class="pre">sha512sum</span> <span class="pre">-c</span> <span class="pre">--ignore-missing</span> <span class="pre">SHA512SUMS</span></code>.</p>
-<p>I’ve checked the signature by issuing a <code class="docutils literal notranslate"><span class="pre">gpg</span> <span class="pre">--verify</span> <span class="pre">SHA512SUMS.sign</span></code>
-command.</p>
-<p>The final steps consisted in extracting the files from the firmware archive
-(<code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">xvzf</span> <span class="pre">firmware.tar.gz</span></code>) and copy all the files with <code class="docutils literal notranslate"><span class="pre">.deb</span></code> extension
-to a “firmware” directory located at the root of a USB stick.</p>
-<p>During Debian installation, plug in this USB stick when (and if) you get this
-kind of screen:</p>
-<img alt="_images/debian_install_screenshot_hw-detect_load_firmware_0.png" src="_images/debian_install_screenshot_hw-detect_load_firmware_0.png">
 </section>
 <section id="disk-partitioning">
 <h2>
@@ -329,7 +309,7 @@ internet gives two solutions:</p>
 is what I was doing.</p></li>
 </ul>
 <p>Note that the change to <code class="docutils literal notranslate"><span class="pre">/lib/udev/rules.d/60-persistent-storage.rules</span></code> and
-the regenration of the initramfs image have to be redone after each update of
+the regeneration of the initramfs image have to be redone after each update of
 the <code class="docutils literal notranslate"><span class="pre">udev</span></code> Debian package (because
 <code class="docutils literal notranslate"><span class="pre">/lib/udev/rules.d/60-persistent-storage.rules</span></code> is overwritten and the
 initramfs image regenerated by the update).</p>
@@ -392,10 +372,10 @@ gimp<span class="w"> </span><span class="p">&amp;</span>
 <p id="index-13">You may want to add deb-multimedia as a source of packages for the newly
 installed Debian system (see <a class="reference external" href="https://linuxconfig.org/amp-up-your-multimedia-experience-on-debian-9-stretch-linux">this linuxconfig.org article</a>).</p>
 <p><a class="reference external" href="http://deb-multimedia.org">http://deb-multimedia.org</a> provides some instructions:</p>
-<p>First, add <strong>as root</strong> a line like this one (example for Debian bookworm) in
+<p>First, add <strong>as root</strong> a line like this one (example for Debian 13 (Trixie)) in
 your <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code>:</p>
 <div class="line-block">
-<div class="line">deb <a class="reference external" href="https://www.deb-multimedia.org">https://www.deb-multimedia.org</a> bookworm main non-free</div>
+<div class="line">deb <a class="reference external" href="https://www.deb-multimedia.org">https://www.deb-multimedia.org</a> trixie main non-free</div>
 </div>
 <p>Then, issue <strong>as root</strong> the following commands:</p>
 <div class="highlight-shell notranslate">
@@ -420,7 +400,7 @@ firmware archive has been required) or post-installation, manually:</p>
 </div>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code> file must have the non-free section
 (and even <strong>the non-free-firmware section</strong>, starting with Debian 12).</p>
-<p>You can <a class="reference download internal" download="" href="_downloads/1b6a964b4404bf549e2d97ab8de32ceb/sources.list"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">my</span> <span class="pre">/etc/apt/sources.list</span> <span class="pre">for</span> <span class="pre">Debian</span> <span class="pre">12</span></code></a>.</p>
+<p>You can <a class="reference download internal" download="" href="_downloads/1b6a964b4404bf549e2d97ab8de32ceb/sources.list"><code class="xref download docutils literal notranslate"><span class="pre">download</span> <span class="pre">my</span> <span class="pre">/etc/apt/sources.list</span> <span class="pre">for</span> <span class="pre">Debian</span> <span class="pre">13</span></code></a>.</p>
 <p>Make sure you issue a <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">update</span></code> command after changing
 <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code>.</p>
 </section>
@@ -430,7 +410,12 @@ firmware archive has been required) or post-installation, manually:</p>
 </h3>
 <p id="index-15">Check the configured time zone with:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>cat<span class="w"> </span>/etc/timezone
+<div class="highlight"><pre><span></span>cat<span class="w"> </span>/etc/timezone<span class="w"> </span><span class="c1"># For Debian 12 (Bookworm) and earlier.</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>ls<span class="w"> </span>-l<span class="w"> </span>/etc/localtime<span class="w"> </span><span class="c1"># Starting with Debian 13 (Trixie).</span>
 </pre></div>
 </div>
 <p>If the configuration is not correct, you can change it <strong>as root</strong> with:</p>
@@ -439,20 +424,14 @@ firmware archive has been required) or post-installation, manually:</p>
 </pre></div>
 </div>
 </section>
-<section id="cheking-systemd-timesyncd-service">
+<section id="checking-systemd-timesyncd-service">
 <h3>
-<a class="toc-backref" href="#id21" role="doc-backlink">Cheking systemd-timesyncd service</a><a class="headerlink" href="#cheking-systemd-timesyncd-service" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id21" role="doc-backlink">Checking systemd-timesyncd service</a><a class="headerlink" href="#checking-systemd-timesyncd-service" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-16">Service systemd-timesyncd (network time synchronization service) should have
 been automatically enabled:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>systemctl<span class="w"> </span>status<span class="w"> </span>systemd-timesyncd
-</pre></div>
-</div>
-<p>The service logs its initial synchronization to <code class="docutils literal notranslate"><span class="pre">/var/log/syslog</span></code>. Check (<strong>as
-root</strong>) with:</p>
-<div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>grep<span class="w"> </span>systemd-timesyncd<span class="w"> </span>/var/log/syslog
 </pre></div>
 </div>
 <p>You can find the lastest synchronization date by checking the modification time
@@ -533,11 +512,12 @@ internal or external (USB) CD burning drive:</p>
 </h3>
 <p id="index-21">Check whether the <code class="docutils literal notranslate"><span class="pre">DIR_MODE</span></code> (default permissions for users home directories)
 setting in file <code class="docutils literal notranslate"><span class="pre">/etc/adduser.conf</span></code> is appropriate for your needs. The
-default value is “0755”. It implies that any unprivileged user have read access
-to the files of other users. You may want to change (<strong>as root</strong>) the value to
-“0750” to avoid that:</p>
+default value is nox “0700” (which seems OK to me) but it used to be “0755”.
+“0755” implies that any unprivileged user have read access to the files of
+other users. You may want to change (<strong>as root</strong>) the value to “0700” to avoid
+that:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>sed<span class="w"> </span>-i<span class="w"> </span>s/DIR_MODE<span class="o">=</span><span class="m">0755</span>/DIR_MODE<span class="o">=</span><span class="m">0750</span>/<span class="w"> </span>/etc/adduser.conf
+<div class="highlight"><pre><span></span>sed<span class="w"> </span>-i<span class="w"> </span>s/DIR_MODE<span class="o">=</span><span class="m">0755</span>/DIR_MODE<span class="o">=</span><span class="m">0700</span>/<span class="w"> </span>/etc/adduser.conf
 </pre></div>
 </div>
 <p>Then, to create a new user, just use the <code class="docutils literal notranslate"><span class="pre">adduser</span></code> script (<strong>as root</strong>):</p>
@@ -549,7 +529,7 @@ to the files of other users. You may want to change (<strong>as root</strong>) t
 permissions, you can update their home directories permissions with a command
 like (<strong>as root</strong>):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>chmod<span class="w"> </span><span class="m">750</span><span class="w"> </span>/home/*
+<div class="highlight"><pre><span></span>chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>/home/*
 </pre></div>
 </div>
 </section>
@@ -755,8 +735,8 @@ dpkg<span class="w"> </span>-l<span class="w"> </span><span class="se">\</span>
 <li>
 <a class="reference internal" href="#">Debian base installation</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#making-a-bootable-usb-stick">Making a bootable USB stick</a></li>
 <li><a class="reference internal" href="#getting-an-installation-cd">Getting an installation CD</a></li>
-<li><a class="reference internal" href="#preparing-a-media-with-firmware-archive-just-in-case">Preparing a media with firmware archive, just in case</a></li>
 <li>
 <a class="reference internal" href="#disk-partitioning">Disk partitioning</a><ul>
 <li><a class="reference internal" href="#choosing-the-amount-of-swap-space">Choosing the amount of swap space</a></li>
@@ -779,7 +759,7 @@ dpkg<span class="w"> </span>-l<span class="w"> </span><span class="se">\</span>
 <li><a class="reference internal" href="#adding-deb-multimedia-to-the-sources">Adding deb-multimedia to the sources</a></li>
 <li><a class="reference internal" href="#installing-firmware-linux-nonfree">Installing firmware-linux-nonfree</a></li>
 <li><a class="reference internal" href="#checking-the-configured-time-zone">Checking the configured time zone</a></li>
-<li><a class="reference internal" href="#cheking-systemd-timesyncd-service">Cheking systemd-timesyncd service</a></li>
+<li><a class="reference internal" href="#checking-systemd-timesyncd-service">Checking systemd-timesyncd service</a></li>
 <li><a class="reference internal" href="#installing-a-console-locker">Installing a console locker</a></li>
 <li><a class="reference internal" href="#installing-a-memory-ram-tester">Installing a memory (RAM) tester</a></li>
 <li><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool">Installing a wireless devices status management tool</a></li>

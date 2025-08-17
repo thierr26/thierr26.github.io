@@ -181,7 +181,7 @@ top of the <code class="docutils literal notranslate"><span class="pre">~/.tmux/
 <div class="line">set -g default-terminal “tmux-256color”</div>
 <div class="line"><br></div>
 <div class="line"># Useful if using base16-shell.</div>
-<div class="line">set -g allow-passthrough 1</div>
+<div class="line">set -g allow-passthrough on</div>
 <div class="line"><br></div>
 <div class="line"># Add base16-tmux plugin to the list of TPM (Tmux Plugin Manager) plugins.</div>
 <div class="line">set -g @plugin ‘tinted-theming/base16-tmux’</div>
@@ -198,8 +198,6 @@ top of the <code class="docutils literal notranslate"><span class="pre">~/.tmux/
 <div class="highlight"><pre><span></span><span class="nb">alias</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"^alias base16_"</span><span class="p">|</span>sed<span class="w"> </span><span class="s2">"s/=.\+</span>$<span class="s2">//"</span><span class="p">|</span>sed<span class="w"> </span><span class="s2">"s/^.\+ //"</span>
 </pre></div>
 </div>
-<p>The <a class="reference external" href="https://tinted-theming.github.io/base16-gallery">Base16 Gallery</a> helps
-to make a choice.</p>
 <p>Alternatively, you can cycle through all the schemes with the following
 commands (3 seconds delay before switching to the next scheme):</p>
 <div class="highlight-shell notranslate">
