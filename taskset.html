@@ -1,21 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
 
     <title>taskset — Personal Notes</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
-    <link rel="stylesheet" type="text/css" href="_static/classic.css">
-    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=037667e9">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=6d82fa11">
     
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/documentation_options.js?v=7f41d439"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -24,7 +21,7 @@
     <link rel="prev" title="Git" href="git.html"> 
   </head>
 <body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -46,7 +43,7 @@
           <div class="body" role="main">
             
   <section id="taskset">
-<h1>taskset<a class="headerlink" href="#taskset" title="Permalink to this heading">¶</a>
+<h1>taskset<a class="headerlink" href="#taskset" title="Link to this heading">¶</a>
 </h1>
 <nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
@@ -59,13 +56,13 @@
 </nav>
 <section id="introduction">
 <span id="index-0"></span><h2>
-<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading">¶</a>
 </h2>
 <p>This short page contains the taskset commands I want to keep at hand.</p>
 </section>
 <section id="retrieving-a-running-process-s-cpu-affinity">
 <h2>
-<a class="toc-backref" href="#id2" role="doc-backlink">Retrieving a running process’s CPU affinity</a><a class="headerlink" href="#retrieving-a-running-process-s-cpu-affinity" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Retrieving a running process’s CPU affinity</a><a class="headerlink" href="#retrieving-a-running-process-s-cpu-affinity" title="Link to this heading">¶</a>
 </h2>
 <p>Retrieve the CPU affinity of prpocess with a given PID with a command like:</p>
 <div class="highlight-shell notranslate">
@@ -76,7 +73,7 @@
 </section>
 <section id="setting-cpu-affinity-for-a-process-when-launching-it">
 <h2>
-<a class="toc-backref" href="#id3" role="doc-backlink">Setting CPU affinity for a process (when launching it)</a><a class="headerlink" href="#setting-cpu-affinity-for-a-process-when-launching-it" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Setting CPU affinity for a process (when launching it)</a><a class="headerlink" href="#setting-cpu-affinity-for-a-process-when-launching-it" title="Link to this heading">¶</a>
 </h2>
 <p>To set the CPU affinity of a process when you launch it prepend the command you
 would normally use (like <code class="docutils literal notranslate"><span class="pre">&lt;COMMAND&gt;</span> <span class="pre">&lt;FIRST_ARGUMENT&gt;</span> <span class="pre">&lt;SECOND_ARGUMENT&gt;</span> <span class="pre">...</span></code>)
@@ -89,7 +86,7 @@ taskset<span class="w"> </span>-c<span class="w"> </span><span class="m">0</span
 </section>
 <section id="other-resources">
 <h2>
-<a class="toc-backref" href="#id4" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Link to this heading">¶</a>
 </h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://linux.die.net/man/1/taskset">taskset man page</a></p></li>
@@ -102,7 +99,7 @@ taskset<span class="w"> </span>-c<span class="w"> </span><span class="m">0</span
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
@@ -126,7 +123,7 @@ taskset<span class="w"> </span>-c<span class="w"> </span><span class="m">0</span
     <h4>Next topic</h4>
     <p class="topless"><a href="linux_process_thread_list.html" title="next chapter">Listing a Linux process’s threads</a></p>
   </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -134,13 +131,13 @@ taskset<span class="w"> </span>-c<span class="w"> </span><span class="m">0</span
       <input type="submit" value="Go">
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">

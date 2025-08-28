@@ -1,21 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
 
     <title>GPRbuild on OpenBSD — Personal Notes</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
-    <link rel="stylesheet" type="text/css" href="_static/classic.css">
-    <link rel="stylesheet" type="text/css" href="_static/custom.css">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=037667e9">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=6d82fa11">
     
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/documentation_options.js?v=7f41d439"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -24,7 +21,7 @@
     <link rel="prev" title="My first steps with OpenBSD" href="first_steps_with_openbsd.html"> 
   </head>
 <body>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -46,7 +43,7 @@
           <div class="body" role="main">
             
   <section id="gprbuild-on-openbsd">
-<h1>GPRbuild on OpenBSD<a class="headerlink" href="#gprbuild-on-openbsd" title="Permalink to this heading">¶</a>
+<h1>GPRbuild on OpenBSD<a class="headerlink" href="#gprbuild-on-openbsd" title="Link to this heading">¶</a>
 </h1>
 <nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
@@ -66,7 +63,7 @@
 </nav>
 <section id="introduction">
 <span id="index-0"></span><h2>
-<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading">¶</a>
 </h2>
 <p id="index-1">This page describes how I could build <a class="reference external" href="https://learn.adacore.com/courses/GNAT_Toolchain_Intro/chapters/gprbuild.html">GPRbuild (the project manager of the
 GNAT toolchain)</a>
@@ -84,7 +81,7 @@ not recognised automatically by the building tool.</p>
 </section>
 <section id="prerequisites">
 <h2>
-<a class="toc-backref" href="#id2" role="doc-backlink">Prerequisites</a><a class="headerlink" href="#prerequisites" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Prerequisites</a><a class="headerlink" href="#prerequisites" title="Link to this heading">¶</a>
 </h2>
 <p id="index-2">GCC and GNAT 8.3.0p4 must be installed. Please read the <a class="reference internal" href="first_steps_with_openbsd.html"><span class="doc">“My first steps
 with OpenBSD” page</span></a> for more details.</p>
@@ -102,11 +99,11 @@ repositories much easier:</p>
 </section>
 <section id="building-and-installing-gprbuild">
 <h2>
-<a class="toc-backref" href="#id3" role="doc-backlink">Building and installing GPRbuild</a><a class="headerlink" href="#building-and-installing-gprbuild" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Building and installing GPRbuild</a><a class="headerlink" href="#building-and-installing-gprbuild" title="Link to this heading">¶</a>
 </h2>
 <section id="cloning-the-repositories-and-creating-a-bootstrapped-gprbuild">
 <h3>
-<a class="toc-backref" href="#id4" role="doc-backlink">Cloning the repositories and creating a bootstrapped GPRbuild</a><a class="headerlink" href="#cloning-the-repositories-and-creating-a-bootstrapped-gprbuild" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Cloning the repositories and creating a bootstrapped GPRbuild</a><a class="headerlink" href="#cloning-the-repositories-and-creating-a-bootstrapped-gprbuild" title="Link to this heading">¶</a>
 </h3>
 <p id="index-3">As a “normal” (non root) user, create a working directory and clone the
 GPRbuild and XML/Ada repositories:</p>
@@ -129,7 +126,7 @@ recognized (and not needed) by the OpenBSD <code class="docutils literal notrans
 </section>
 <section id="creating-a-gcc-symbolic-link-to-egcc">
 <h3>
-<a class="toc-backref" href="#id5" role="doc-backlink">Creating a <code class="docutils literal notranslate"><span class="pre">gcc</span></code> symbolic link to <code class="docutils literal notranslate"><span class="pre">egcc</span></code></a><a class="headerlink" href="#creating-a-gcc-symbolic-link-to-egcc" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id5" role="doc-backlink">Creating a <code class="docutils literal notranslate"><span class="pre">gcc</span></code> symbolic link to <code class="docutils literal notranslate"><span class="pre">egcc</span></code></a><a class="headerlink" href="#creating-a-gcc-symbolic-link-to-egcc" title="Link to this heading">¶</a>
 </h3>
 <p id="index-4">As root, create a <code class="docutils literal notranslate"><span class="pre">gcc</span></code> symbolic link to <code class="docutils literal notranslate"><span class="pre">egcc</span></code>:</p>
 <div class="highlight-shell notranslate">
@@ -159,7 +156,7 @@ add the <code class="docutils literal notranslate"><span class="pre">gprbuild</s
 </section>
 <section id="configuring-building-and-installing-xml-ada">
 <h3>
-<a class="toc-backref" href="#id6" role="doc-backlink">Configuring, building and installing XML/Ada</a><a class="headerlink" href="#configuring-building-and-installing-xml-ada" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">Configuring, building and installing XML/Ada</a><a class="headerlink" href="#configuring-building-and-installing-xml-ada" title="Link to this heading">¶</a>
 </h3>
 <p id="index-5">As a normal user, move to the <code class="docutils literal notranslate"><span class="pre">gprbuild</span></code> directory and create a GPRbuild
 default configuration file (<code class="docutils literal notranslate"><span class="pre">default.cgpr</span></code>):</p>
@@ -192,7 +189,7 @@ gmake<span class="w"> </span>all<span class="w"> </span>install<span class="w"> 
 </section>
 <section id="configuring-building-and-installing-gprbuild">
 <h3>
-<a class="toc-backref" href="#id7" role="doc-backlink">Configuring, building and installing GPRBuild</a><a class="headerlink" href="#configuring-building-and-installing-gprbuild" title="Permalink to this heading">¶</a>
+<a class="toc-backref" href="#id7" role="doc-backlink">Configuring, building and installing GPRBuild</a><a class="headerlink" href="#configuring-building-and-installing-gprbuild" title="Link to this heading">¶</a>
 </h3>
 <p id="index-6">As a normal user, make sure that the <code class="docutils literal notranslate"><span class="pre">gprbuild</span></code> directory is in the path
 (issue a <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">PATH=~/bootstrapped_gprbuild/gprbuild:"$PATH"</span></code> command if
@@ -247,7 +244,7 @@ want the output of <code class="docutils literal notranslate"><span class="pre">
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
@@ -277,7 +274,7 @@ want the output of <code class="docutils literal notranslate"><span class="pre">
     <h4>Next topic</h4>
     <p class="topless"><a href="freebsd_vm.html" title="next chapter">Installing a FreeBSD virtual machine</a></p>
   </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -285,13 +282,13 @@ want the output of <code class="docutils literal notranslate"><span class="pre">
       <input type="submit" value="Go">
     </form>
     </div>
-</div>
+</search>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="related navigation">
+    <div class="related" role="navigation" aria-label="Related">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
