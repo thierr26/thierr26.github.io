@@ -78,9 +78,9 @@
 <li><p><a class="reference internal" href="#checking-the-configured-time-zone" id="id20">Checking the configured time zone</a></p></li>
 <li><p><a class="reference internal" href="#checking-systemd-timesyncd-service" id="id21">Checking systemd-timesyncd service</a></p></li>
 <li><p><a class="reference internal" href="#installing-a-console-locker" id="id22">Installing a console locker</a></p></li>
-<li><p><a class="reference internal" href="#installing-a-memory-ram-tester" id="id23">Installing a memory (RAM) tester</a></p></li>
-<li><p><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool" id="id24">Installing a wireless devices status management tool</a></p></li>
-<li><p><a class="reference internal" href="#installing-a-cd-burning-tool" id="id25">Installing a CD burning tool</a></p></li>
+<li><p><a class="reference internal" href="#installing-a-cd-burning-tool" id="id23">Installing a CD burning tool</a></p></li>
+<li><p><a class="reference internal" href="#installing-a-memory-ram-tester" id="id24">Installing a memory (RAM) tester</a></p></li>
+<li><p><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool" id="id25">Installing a wireless devices status management tool</a></p></li>
 <li><p><a class="reference internal" href="#creating-new-users" id="id26">Creating new users</a></p></li>
 <li><p><a class="reference internal" href="#creating-a-super-user-account-disabling-root-login" id="id27">Creating a “super user” account, disabling root login</a></p></li>
 <li><p><a class="reference internal" href="#installing-locate-updatedb" id="id28">Installing locate / updatedb</a></p></li>
@@ -450,11 +450,22 @@ of file <code class="docutils literal notranslate"><span class="pre">/run/system
 </pre></div>
 </div>
 </section>
+<section id="installing-a-cd-burning-tool">
+<h3>
+<a class="toc-backref" href="#id23" role="doc-backlink">Installing a CD burning tool</a><a class="headerlink" href="#installing-a-cd-burning-tool" title="Link to this heading">¶</a>
+</h3>
+<p id="index-18">I use cdrskin to burn CDs (in particular the Debian installation CDs) on an
+internal or external (USB) CD burning drive:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>cdrskin<span class="w"> </span><span class="c1"># As root.</span>
+</pre></div>
+</div>
+</section>
 <section id="installing-a-memory-ram-tester">
 <h3>
-<a class="toc-backref" href="#id23" role="doc-backlink">Installing a memory (RAM) tester</a><a class="headerlink" href="#installing-a-memory-ram-tester" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id24" role="doc-backlink">Installing a memory (RAM) tester</a><a class="headerlink" href="#installing-a-memory-ram-tester" title="Link to this heading">¶</a>
 </h3>
-<p id="index-18">RAM failures are not so rare in my experience. A tester like <a class="reference external" href="https://www.memtest.org/">Memtest86+</a> can really help diagnosing a RAM failure. The
+<p id="index-19">RAM failures are not so rare in my experience. A tester like <a class="reference external" href="https://www.memtest.org/">Memtest86+</a> can really help diagnosing a RAM failure. The
 <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span></code> command below installs Memtest86+ and adds an entry in the
 <a class="reference external" href="https://en.wikipedia.org/wiki/GNU_GRUB">Grub</a> menu (you have to reboot your
 machine and select the Memtest86+ grub entry to start Memtest86+):</p>
@@ -477,9 +488,9 @@ cdrskin<span class="w"> </span>-eject<span class="w"> </span>-v<span class="w"> 
 </section>
 <section id="installing-a-wireless-devices-status-management-tool">
 <h3>
-<a class="toc-backref" href="#id24" role="doc-backlink">Installing a wireless devices status management tool</a><a class="headerlink" href="#installing-a-wireless-devices-status-management-tool" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id25" role="doc-backlink">Installing a wireless devices status management tool</a><a class="headerlink" href="#installing-a-wireless-devices-status-management-tool" title="Link to this heading">¶</a>
 </h3>
-<p id="index-19">On a laptop computer, it may be useful to check the status (enabled, hard
+<p id="index-20">On a laptop computer, it may be useful to check the status (enabled, hard
 blocked, soft blocked) of the wireless devices. Package <code class="docutils literal notranslate"><span class="pre">rfkill</span></code> makes that
 possible:</p>
 <div class="highlight-shell notranslate">
@@ -489,17 +500,6 @@ possible:</p>
 <p>Check the statuses with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>/usr/sbin/rfkill<span class="w"> </span>list
-</pre></div>
-</div>
-</section>
-<section id="installing-a-cd-burning-tool">
-<h3>
-<a class="toc-backref" href="#id25" role="doc-backlink">Installing a CD burning tool</a><a class="headerlink" href="#installing-a-cd-burning-tool" title="Link to this heading">¶</a>
-</h3>
-<p id="index-20">I use cdrskin to burn CDs (in particular the Debian installation CDs) on an
-internal or external (USB) CD burning drive:</p>
-<div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>cdrskin<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 </section>
@@ -758,9 +758,9 @@ dpkg<span class="w"> </span>-l<span class="w"> </span><span class="se">\</span>
 <li><a class="reference internal" href="#checking-the-configured-time-zone">Checking the configured time zone</a></li>
 <li><a class="reference internal" href="#checking-systemd-timesyncd-service">Checking systemd-timesyncd service</a></li>
 <li><a class="reference internal" href="#installing-a-console-locker">Installing a console locker</a></li>
+<li><a class="reference internal" href="#installing-a-cd-burning-tool">Installing a CD burning tool</a></li>
 <li><a class="reference internal" href="#installing-a-memory-ram-tester">Installing a memory (RAM) tester</a></li>
 <li><a class="reference internal" href="#installing-a-wireless-devices-status-management-tool">Installing a wireless devices status management tool</a></li>
-<li><a class="reference internal" href="#installing-a-cd-burning-tool">Installing a CD burning tool</a></li>
 <li><a class="reference internal" href="#creating-new-users">Creating new users</a></li>
 <li><a class="reference internal" href="#creating-a-super-user-account-disabling-root-login">Creating a “super user” account, disabling root login</a></li>
 <li><a class="reference internal" href="#installing-locate-updatedb">Installing locate / updatedb</a></li>
