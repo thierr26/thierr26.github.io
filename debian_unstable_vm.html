@@ -330,9 +330,9 @@ when this command is issued (<strong>exit X.org first</strong>):</p>
 identifier <code class="docutils literal notranslate"><span class="pre">Monitor0</span></code>. I add “Modelines” in this section.</p>
 <p>“Modelines” look like:</p>
 <div class="line-block">
-<div class="line">Modeline     “1024x768_24”   65.00  1024 1048 1184 1344  768 771 777 806 -hsync -vsync</div>
-<div class="line">Modeline     “1920x1080_24”  148.50  1920 2008 2052 2200  1080 1084 1089 1125 -hsync -vsync</div>
-<div class="line">Modeline     “1600x900_24”  108.00  1600 1624 1704 1800 900 901 904 1000 +hsync +vsync</div>
+<div class="line">Modeline     "1024x768_24"   65.00  1024 1048 1184 1344  768 771 777 806 -hsync -vsync</div>
+<div class="line">Modeline     "1920x1080_24"  148.50  1920 2008 2052 2200  1080 1084 1089 1125 -hsync -vsync</div>
+<div class="line">Modeline     "1600x900_24"  108.00  1600 1624 1704 1800 900 901 904 1000 +hsync +vsync</div>
 </div>
 <p>We can find the data that those “Modelines” are made of in a X.org log file
 generated with (in this example, the file is called <code class="docutils literal notranslate"><span class="pre">xlog.txt</span></code>):</p>
@@ -356,22 +356,22 @@ Xorg<span class="w"> </span>-verbose<span class="w"> </span><span class="m">6</s
 <p>In <code class="docutils literal notranslate"><span class="pre">xlog.txt</span></code>, we find lines like the following, which help building the
 “Modelines”:</p>
 <div class="line-block">
-<div class="line">(II) qxl(0): Modeline “1920x1080”x60.0  148.50  1920 2008 2052 2200  1080 1084 1089 1125 -hsync -vsync (67.5 kHz eP)</div>
-<div class="line">(II) qxl(0): Modeline “1600x900”x60.0  108.00  1600 1624 1704 1800  900 901 904 1000 +hsync +vsync (60.0 kHz e)</div>
-<div class="line">(II) qxl(0): Modeline “1024x768”x60.0   65.00  1024 1048 1184 1344  768 771 777 806 -hsync -vsync (48.4 kHz e)</div>
+<div class="line">(II) qxl(0): Modeline "1920x1080"x60.0  148.50  1920 2008 2052 2200  1080 1084 1089 1125 -hsync -vsync (67.5 kHz eP)</div>
+<div class="line">(II) qxl(0): Modeline "1600x900"x60.0  108.00  1600 1624 1704 1800  900 901 904 1000 +hsync +vsync (60.0 kHz e)</div>
+<div class="line">(II) qxl(0): Modeline "1024x768"x60.0   65.00  1024 1048 1184 1344  768 771 777 806 -hsync -vsync (48.4 kHz e)</div>
 </div>
 <p>Once I have added the “Modelines” in <code class="docutils literal notranslate"><span class="pre">/root/xorg.conf.new</span></code>, I edit the
 <code class="docutils literal notranslate"><span class="pre">Screen</span></code> section and add a <code class="docutils literal notranslate"><span class="pre">Display</span></code> subsection with a <code class="docutils literal notranslate"><span class="pre">Modes</span></code> line
 matching the resolution I want:</p>
 <div class="line-block">
-<div class="line">Section “Screen”</div>
+<div class="line">Section "Screen"</div>
 <div class="line-block">
-<div class="line">Identifier “Screen0”</div>
-<div class="line">Device     “Card0”</div>
-<div class="line">Monitor    “Monitor0”</div>
-<div class="line">SubSection “Display”</div>
+<div class="line">Identifier "Screen0"</div>
+<div class="line">Device     "Card0"</div>
+<div class="line">Monitor    "Monitor0"</div>
+<div class="line">SubSection "Display"</div>
 <div class="line-block">
-<div class="line">Modes “1920x1080”</div>
+<div class="line">Modes "1920x1080"</div>
 </div>
 <div class="line">EndSubSection</div>
 </div>

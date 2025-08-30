@@ -82,10 +82,13 @@ everywhere.</p>
 <p id="index-1">Just issue some <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> commands (as a normal user) in specific
 subdirectories of your home directory:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/.config
+<div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/.config
+<span class="nb">cd</span><span class="w"> </span>~/.config
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/tinted-theming/base16-shell.git
+mkdir<span class="w"> </span>-p<span class="w"> </span>~/.vim
 <span class="nb">cd</span><span class="w"> </span>~/.vim
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/tinted-theming/base16-vim.git
+mkdir<span class="w"> </span>-p<span class="w"> </span>~/.tmux/plugins
 <span class="nb">cd</span><span class="w"> </span>~/.tmux/plugins
 git<span class="w"> </span>clone<span class="w"> </span>https://github.com/tinted-theming/base16-tmux.git
 </pre></div>
@@ -115,11 +118,11 @@ added the following snippet to my <code class="docutils literal notranslate"><sp
 <div class="line-block">
 <div class="line">BASE16_SHELL_PATH=$HOME/.config/base16-shell/</div>
 <div class="line">unset BASE16_THEME</div>
-<div class="line">! shopt -q login_shell || [ -n “$TMUX” ] </div>
+<div class="line">! shopt -q login_shell || [ -n "$TMUX" ] \</div>
 <div class="line-block">
-<div class="line">&amp;&amp; [ -s “$BASE16_SHELL_PATH/profile_helper.sh” ] </div>
-<div class="line">&amp;&amp; BASE16_SHELL_SET_BACKGROUND=false </div>
-<div class="line">&amp;&amp; source “$BASE16_SHELL_PATH/profile_helper.sh”</div>
+<div class="line">&amp;&amp; [ -s "$BASE16_SHELL_PATH/profile_helper.sh" ] \</div>
+<div class="line">&amp;&amp; BASE16_SHELL_SET_BACKGROUND=false \</div>
+<div class="line">&amp;&amp; source "$BASE16_SHELL_PATH/profile_helper.sh"</div>
 </div>
 </div>
 <p>It makes sure that the color scheme is applied only when you’re in a terminal
@@ -142,15 +145,15 @@ ln<span class="w"> </span>-s<span class="w"> </span>base16-vim/colors
 </div>
 <p>Then I added the following snippet to my <code class="docutils literal notranslate"><span class="pre">~/.vimrc</span></code>:</p>
 <div class="line-block">
-<div class="line">if exists(‘$BASE16_THEME’)</div>
+<div class="line">if exists('$BASE16_THEME')</div>
 <div class="line-block">
 <div class="line-block">
-<div class="line">&amp;&amp; (!exists(‘g:colors_name’)</div>
-<div class="line">|| g:colors_name != ‘base16-$BASE16_THEME’)</div>
+<div class="line">\ &amp;&amp; (!exists('g:colors_name')</div>
+<div class="line">\ || g:colors_name != 'base16-$BASE16_THEME')</div>
 <div class="line"><br></div>
 </div>
 <div class="line">let base16colorspace=256</div>
-<div class="line">if !has(“gui_running”)</div>
+<div class="line">if !has("gui_running")</div>
 <div class="line-block">
 <div class="line">let base16_background_transparent=1</div>
 </div>
@@ -175,13 +178,13 @@ transparent background option leads to a white background.</p>
 top of the <code class="docutils literal notranslate"><span class="pre">~/.tmux/conf</span></code> file:</p>
 <div class="line-block">
 <div class="line"># Use a 256 color terminal.</div>
-<div class="line">set -g default-terminal “tmux-256color”</div>
+<div class="line">set -g default-terminal "tmux-256color"</div>
 <div class="line"><br></div>
 <div class="line"># Useful if using base16-shell.</div>
 <div class="line">set -g allow-passthrough on</div>
 <div class="line"><br></div>
 <div class="line"># Add base16-tmux plugin to the list of TPM (Tmux Plugin Manager) plugins.</div>
-<div class="line">set -g @plugin ‘tinted-theming/base16-tmux’</div>
+<div class="line">set -g @plugin 'tinted-theming/base16-tmux'</div>
 </div>
 </section>
 </section>
