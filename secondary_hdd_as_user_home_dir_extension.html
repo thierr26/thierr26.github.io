@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en" data-content_root="./">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    
+
+    <title>Using secondary hard disk drive to extend a specific user home directory — Personal Notes</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=037667e9">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=6d82fa11">
+    
+    <script src="_static/documentation_options.js?v=7f41d439"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="Minimal installation of Xfce on Debian" href="minimal_xfce_on_debian.html">
+    <link rel="prev" title="Installation of Openbox on Debian" href="openbox_on_debian.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="minimal_xfce_on_debian.html" title="Minimal installation of Xfce on Debian" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="openbox_on_debian.html" title="Installation of Openbox on Debian" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Using secondary hard disk drive to extend a specific user home directory</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="using-secondary-hard-disk-drive-to-extend-a-specific-user-home-directory">
+<h1>Using secondary hard disk drive to extend a specific user home directory<a class="headerlink" href="#using-secondary-hard-disk-drive-to-extend-a-specific-user-home-directory" title="Link to this heading">¶</a>
+</h1>
+<nav class="contents local" id="page-content">
+<p class="topic-title">Page content</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#finding-the-luks-containers" id="id2">Finding the LUKS containers</a></p></li>
+<li><p><a class="reference internal" href="#unlocking-and-mounting-automatically-at-boot-time" id="id3">Unlocking and mounting automatically at boot time</a></p></li>
+<li><p><a class="reference internal" href="#setting-permissions-and-creating-a-symbolic-link-to-the-mount-point" id="id4">Setting permissions and creating a symbolic link to the mount point</a></p></li>
+<li><p><a class="reference internal" href="#other-resources" id="id5">Other resources</a></p></li>
+</ul>
+</nav>
+<section id="introduction">
+<h2>
+<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading">¶</a>
+</h2>
+<p>On a machine having two disks (one <a class="reference external" href="https://en.wikipedia.org/wiki/Solid-state_drive">SSD</a> and one larger <a class="reference external" href="https://en.wikipedia.org/wiki/Hard_disk_drive">traditional
+spinning hard disk drive</a>), I
+wanted to use the SSD as the “main” disk (i.e. the disk where all files are
+installed, including <code class="docutils literal notranslate"><span class="pre">/home</span></code>) and the spinning disk as an extension of the
+home directory of a specific user (which is the only user of the machine).</p>
+<p>I also wanted encryption on both disks.</p>
+<p>After the run of the Debian installer, the system was entirely installed on the
+SSD (device <code class="docutils literal notranslate"><span class="pre">/dev/nvme0n1</span></code>), and the other drive (device <code class="docutils literal notranslate"><span class="pre">/dev/sda</span></code>) had an
+(empty) ext4 partition in a <a class="reference external" href="https://fr.wikipedia.org/wiki/LUKS">LUKS</a>
+container (<code class="docutils literal notranslate"><span class="pre">/dev/sda1</span></code>), unused (i.e. not mounted).</p>
+</section>
+<section id="finding-the-luks-containers">
+<h2>
+<a class="toc-backref" href="#id2" role="doc-backlink">Finding the LUKS containers</a><a class="headerlink" href="#finding-the-luks-containers" title="Link to this heading">¶</a>
+</h2>
+<p id="index-0">Here are a few commands that make it possible to determine whether a partition
+is a LUKS container or not.</p>
+<p><code class="docutils literal notranslate"><span class="pre">lsblk</span></code> is usable by unprivileged users. Example output:</p>
+<div class="line-block">
+<div class="line">NAME                    MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINTS</div>
+<div class="line">sda                       8:0    0 931.5G  0 disk</div>
+<div class="line">└─sda1                    8:1    0 931.5G  0 part</div>
+<div class="line">sr0                      11:0    1  1024M  0 rom</div>
+<div class="line">nvme0n1                 259:0    0 232.9G  0 disk</div>
+<div class="line">├─nvme0n1p1             259:1    0   976M  0 part  /boot</div>
+<div class="line">├─nvme0n1p2             259:2    0     1K  0 part</div>
+<div class="line">└─nvme0n1p5             259:3    0 231.9G  0 part</div>
+<div class="line-block">
+<div class="line">└─nvme0n1p5_crypt     254:0    0 231.9G  0 crypt</div>
+<div class="line-block">
+<div class="line">├─debian–vg-root   254:1    0   224G  0 lvm   /</div>
+<div class="line">└─debian–vg-swap_1 254:2    0   7.9G  0 lvm   [SWAP]</div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">nvme0n1p5</span></code> here is a LUKS container, and is opened (unlocked). <code class="docutils literal notranslate"><span class="pre">sda1</span></code> is
+also a LUKS container but is not currently opened.</p>
+<p>The following command (to be run <strong>as root</strong>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>cryptsetup<span class="w"> </span>isLuks<span class="w"> </span>-v<span class="w"> </span>/dev/sda1<span class="w"> </span><span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>outputs “Command successful.” which means that <code class="docutils literal notranslate"><span class="pre">sda1</span></code> is a LUKS container.</p>
+<p>With the <code class="docutils literal notranslate"><span class="pre">-f</span></code> switch, <code class="docutils literal notranslate"><span class="pre">lsblk</span></code> gives more details and makes it easier to
+find the LUKS container (but be aware that <strong>the output of ``lsblk`` is
+sensible to terminal width</strong>, so you may not always get the same output):</p>
+<div class="line-block">
+<div class="line">NAME                    FSTYPE      FSVER    LABEL UUID                                   FSAVAIL FSUSE% MOUNTPOINTS</div>
+<div class="line">sda</div>
+<div class="line">└─sda1                  crypto_LUKS 2              93cecf1d-efa8-4f70-b811-b67cb996f040</div>
+<div class="line">sr0</div>
+<div class="line">nvme0n1</div>
+<div class="line">├─nvme0n1p1             ext4        1.0            b4ab51f0-75ff-4558-8b68-60e9558a5e41    737.7M    15% /boot</div>
+<div class="line">├─nvme0n1p2</div>
+<div class="line">└─nvme0n1p5             crypto_LUKS 2              a1a95860-81f5-403c-80b0-b1611751029d</div>
+<div class="line-block">
+<div class="line">└─nvme0n1p5_crypt     LVM2_member LVM2 001       0pzMEU-UQ5A-OO2C-zGob-1k1f-WZ4E-jCRqVC</div>
+<div class="line-block">
+<div class="line">├─debian–vg-root   ext4        1.0            3231f3f8-cf5c-41e8-9cd6-20bde82debed    180.3G    13% /</div>
+<div class="line">└─debian–vg-swap_1 swap        1              fc0b8623-d7cd-45b8-8527-79084d6dcf39                  [SWAP]</div>
+</div>
+</div>
+</div>
+<p>Alternatively, you can use <code class="docutils literal notranslate"><span class="pre">blkid</span></code> (<strong>as root</strong>), which outputs something
+like:</p>
+<div class="line-block">
+<div class="line">/dev/mapper/debian–vg-root: UUID="3231f3f8-cf5c-41e8-9cd6-20bde82debed" BLOCK_SIZE="4096" TYPE="ext4"</div>
+<div class="line">/dev/nvme0n1p5: UUID="a1a95860-81f5-403c-80b0-b1611751029d" TYPE="crypto_LUKS" PARTUUID="13888c7b-05"</div>
+<div class="line">/dev/nvme0n1p1: UUID="b4ab51f0-75ff-4558-8b68-60e9558a5e41" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="13888c7b-01"</div>
+<div class="line">/dev/mapper/debian–vg-swap_1: UUID="fc0b8623-d7cd-45b8-8527-79084d6dcf39" TYPE="swap"</div>
+<div class="line">/dev/mapper/nvme0n1p5_crypt: UUID="0pzMEU-UQ5A-OO2C-zGob-1k1f-WZ4E-jCRqVC" TYPE="LVM2_member"</div>
+<div class="line">/dev/sda1: UUID="93cecf1d-efa8-4f70-b811-b67cb996f040" TYPE="crypto_LUKS" PARTUUID="eb9eab94-01"</div>
+</div>
+</section>
+<section id="unlocking-and-mounting-automatically-at-boot-time">
+<h2>
+<a class="toc-backref" href="#id3" role="doc-backlink">Unlocking and mounting automatically at boot time</a><a class="headerlink" href="#unlocking-and-mounting-automatically-at-boot-time" title="Link to this heading">¶</a>
+</h2>
+<p id="index-1">This section describes a way to open (unlock) and mount <code class="docutils literal notranslate"><span class="pre">sda1</span></code> at boot time.</p>
+<p>Obviously, you have to know the passphrase that was provided to the Debian
+installer. If you want to change it, use (<strong>as root</strong>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>cryptsetup<span class="w"> </span>luksChangeKey<span class="w"> </span>/dev/sda1
+</pre></div>
+</div>
+<p>This is fast and does not imply re-encrypting the whole drive, it just
+re-encrypts the “master key”.</p>
+<p>The passphrase has to be stored somewhere, and the best option may be to store
+it a hidden file on the (encrypted) “root” partition, in the home directory of
+the root user (<code class="docutils literal notranslate"><span class="pre">/root</span></code>).</p>
+<p>Some people have had difficulties with this (see for example <a class="reference external" href="https://superuser.com/a/1703892">this answer on
+superuser.com</a>) <strong>due to a trailing new line
+in the file</strong>. I made sure to make a file without the trailing new line with a
+command like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>head<span class="w"> </span>-c<span class="w"> </span>-1<span class="w"> </span>file_with_trailing_new_line<span class="w"> </span>&gt;/root/.keyfile<span class="w"> </span><span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>Make sure also that the key file cannot be read by any one but the root user:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>/root/.keyfile<span class="w"> </span><span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>The automatic opening of the LUKS container at boot time is achieved by adding
+a line (<strong>as root</strong>) to <code class="docutils literal notranslate"><span class="pre">/etc/crypttab</span></code> (which probably already exists and
+contains a line to open the swap partition container). The line to add is like:</p>
+<div class="line-block">
+<div class="line">extension_crypt UUID=93cecf1d-efa8-4f70-b811-b67cb996f040 /root/.keyfile luks</div>
+</div>
+<p>The automatic mounting of the partition that the container contains is achieved
+by adding a line (<strong>as root</strong>) to <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code>. This line specifies the mount
+point, make sure to create it (<strong>as root</strong>):</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>mkdir<span class="w"> </span>/media/extension<span class="w"> </span><span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>The line to add to <code class="docutils literal notranslate"><span class="pre">/etc/fstab</span></code> is like:</p>
+<div class="line-block">
+<div class="line">/dev/mapper/extension_crypt /media/extension ext4 defaults 0 0</div>
+</div>
+<p>After a reboot, the spinning disk partition should be mounted on
+<code class="docutils literal notranslate"><span class="pre">/media/extension</span></code> (a <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">/etc/mtab</span></code> should show a line starting with
+“/dev/mapper/extension_crypt”).</p>
+</section>
+<section id="setting-permissions-and-creating-a-symbolic-link-to-the-mount-point">
+<h2>
+<a class="toc-backref" href="#id4" role="doc-backlink">Setting permissions and creating a symbolic link to the mount point</a><a class="headerlink" href="#setting-permissions-and-creating-a-symbolic-link-to-the-mount-point" title="Link to this heading">¶</a>
+</h2>
+<p id="index-2">The final steps consist in:</p>
+<ul class="simple">
+<li><p>Creating a directory in the mounted partition (the symbolic link we are going
+to create will point to this directory instead of directly to the mount
+point, this will make sure the <code class="docutils literal notranslate"><span class="pre">lost+found</span></code> directory (which exists at the
+top level of any ext2, ext3 and ext4 partitions) is not visible through the
+symbolic link).</p></li>
+<li><p>Changing the ownership and permissions of the mount point, to make sure that
+only the intended user can access the mounted partition (the effect of this
+is persistent).</p></li>
+<li><p>Creating a symbolic link in the home directory of the user.</p></li>
+</ul>
+<p>You can do this with commands like:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>mkdir<span class="w"> </span>/media/extension/data<span class="w">             </span><span class="c1"># As root.</span>
+chown<span class="w"> </span>-R<span class="w"> </span>&lt;user&gt;:&lt;user&gt;<span class="w"> </span>/media/extension<span class="w"> </span><span class="c1"># As root.</span>
+chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">700</span><span class="w"> </span>/media/extension<span class="w">           </span><span class="c1"># As root.</span>
+
+<span class="nb">cd</span><span class="w">                                      </span><span class="c1"># As &lt;user&gt;.</span>
+ln<span class="w"> </span>-s<span class="w"> </span>/media/extension/data<span class="w"> </span>extension<span class="w">   </span><span class="c1"># As &lt;user&gt;.</span>
+</pre></div>
+</div>
+<p>User &lt;user&gt; has now a home directory extended with the full space available on
+the spinning disk. User &lt;user&gt; has access to this space through
+<code class="docutils literal notranslate"><span class="pre">~/extension</span></code>.</p>
+</section>
+<section id="other-resources">
+<h2>
+<a class="toc-backref" href="#id5" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Link to this heading">¶</a>
+</h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.baeldung.com/linux/check-disk-encryption">Verifying if a Disk Is Encrypted in Linux</a></p></li>
+<li><p><a class="reference external" href="https://www.baeldung.com/linux/luks-change-passphrase">Changing a LUKS Passphrase</a></p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li>
+<a class="reference internal" href="#">Using secondary hard disk drive to extend a specific user home directory</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#finding-the-luks-containers">Finding the LUKS containers</a></li>
+<li><a class="reference internal" href="#unlocking-and-mounting-automatically-at-boot-time">Unlocking and mounting automatically at boot time</a></li>
+<li><a class="reference internal" href="#setting-permissions-and-creating-a-symbolic-link-to-the-mount-point">Setting permissions and creating a symbolic link to the mount point</a></li>
+<li><a class="reference internal" href="#other-resources">Other resources</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="openbox_on_debian.html" title="previous chapter">Installation of Openbox on Debian</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="minimal_xfce_on_debian.html" title="next chapter">Minimal installation of Xfce on Debian</a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <input type="submit" value="Go">
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="minimal_xfce_on_debian.html" title="Minimal installation of Xfce on Debian">next</a> |</li>
+        <li class="right">
+          <a href="openbox_on_debian.html" title="Installation of Openbox on Debian">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">Using secondary hard disk drive to extend a specific user home directory</a></li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2025, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>
