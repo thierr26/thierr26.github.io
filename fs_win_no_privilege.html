@@ -117,9 +117,44 @@ kind of commands  (ls, grep, sed, find, …) you have on a *nix shell.</p>
 <p>To install Cygwin as an unprivileged user, use the <code class="docutils literal notranslate"><span class="pre">--no-admin</span></code> option of the
 installer.</p>
 <p>The installer prompts you for an installation type. I choose “Install from
-Internet”. Then the installer prompts for a mirror.
-<a class="reference external" href="https://mirrors.kernel.org/sourceware/cygwin">https://mirrors.kernel.org/sourceware/cygwin</a> seems to be a good choice. (Not
-all mirrors have the full package collection.)</p>
+Internet”. Then the installer prompts for a mirror. <a class="reference external" href="https://ftp.fau.de/cygwin">https://ftp.fau.de/cygwin</a>
+or <a class="reference external" href="https://mirrors.kernel.org/sourceware/cygwin">https://mirrors.kernel.org/sourceware/cygwin</a> seem to be good choices (not
+all mirrors have the full package collection). Then you can select packages to
+install. The default selection may be enough if you just need the basic tools
+(the Vim version you get in this case is vim-minimal).</p>
+<p>After the Cygwin installation, you should have a desktop icon that launches the
+Cygwin terminal emulator (mintty).</p>
+<p>Cygwin makes it possible to run graphical applications (e.g. gvim). If you need
+to run graphical applications, make sure to select the following packages for
+installation:</p>
+<ul class="simple">
+<li><p>xorg-server</p></li>
+<li><p>xinit</p></li>
+<li><p>xorg-docs</p></li>
+<li><p>openbox (there might be other window managers though)</p></li>
+<li><p>gvim (if you need graphical Vim)</p></li>
+</ul>
+<p>To be able to use a graphical application, you first have to start X.org, by
+running the XWin command in the Cygwin terminal emulator. Examples:</p>
+<div class="highlight-text notranslate">
+<div class="highlight"><pre><span></span>XWin
+</pre></div>
+</div>
+<p>Or:</p>
+<div class="highlight-text notranslate">
+<div class="highlight"><pre><span></span>XWin -clipboard -multiwindow
+</pre></div>
+</div>
+<p>The first example opens an “X screen”, and graphical applications will be
+displayed in this screen. The second example does not show any X screen, and graphical applications will
+be displayed in their own windows.</p>
+<p>From another Cygwin terminal emulator, set and export the <code class="docutils literal notranslate"><span class="pre">DISPLAY</span></code> variable
+(<code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">DISPLAY=:0.0</span></code>), and start your graphical application (e.g.
+<code class="docutils literal notranslate"><span class="pre">gvim</span></code>).</p>
+<p>Also start Openbox to get window management capacities (windows moving and
+resizing) and Openbox menu in the X screen.</p>
+<p>See <a class="reference external" href="https://x.cygwin.com/docs/ug/overview-windowing-modes.html">Windowing mode</a> in the Cygwin/X
+documentation.</p>
 </section>
 <section id="ccrypt">
 <h2>
