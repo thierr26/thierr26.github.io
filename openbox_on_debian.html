@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" data-content_root="./">
+<html lang="en">
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
 
     <title>Installation of Openbox on Debian — Personal Notes</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50">
-    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=037667e9">
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=dbea93a2">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <script src="_static/documentation_options.js?v=7f41d439"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -21,7 +24,7 @@
     <link rel="prev" title="Debian base installation" href="debian_base_install.html"> 
   </head>
 <body>
-    <div class="related" role="navigation" aria-label="Related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -43,7 +46,7 @@
           <div class="body" role="main">
             
   <section id="installation-of-openbox-on-debian">
-<h1>Installation of Openbox on Debian<a class="headerlink" href="#installation-of-openbox-on-debian" title="Link to this heading">¶</a>
+<h1>Installation of Openbox on Debian<a class="headerlink" href="#installation-of-openbox-on-debian" title="Permalink to this heading">¶</a>
 </h1>
 <nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
@@ -64,7 +67,7 @@
 </nav>
 <section id="introduction">
 <h2>
-<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p>These are my notes about the installation and configuration of <a class="reference external" href="https://en.wikipedia.org/wiki/Openbox">Openbox</a> on <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a>. Openbox is a window manager which provides a
 minimalist environment, that is a configurable “root menu” you open with a
@@ -73,7 +76,7 @@ right click on the background and configurable key bindings.</p>
 </section>
 <section id="installation">
 <h2>
-<a class="toc-backref" href="#id2" role="doc-backlink">Installation</a><a class="headerlink" href="#installation" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Installation</a><a class="headerlink" href="#installation" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-0">I install <a class="reference external" href="https://www.x.org">X.Org X Window System</a> and Openbox with the
 following command (<strong>as root</strong>):</p>
@@ -96,7 +99,7 @@ the Openbox environment and that’s what is described in the rest of this page.
 </section>
 <section id="addition-of-a-rdp-server-for-a-remote-machine">
 <h2>
-<a class="toc-backref" href="#id3" role="doc-backlink">Addition of a RDP server (for a remote machine)</a><a class="headerlink" href="#addition-of-a-rdp-server-for-a-remote-machine" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Addition of a RDP server (for a remote machine)</a><a class="headerlink" href="#addition-of-a-rdp-server-for-a-remote-machine" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-1">On a remote machine with no physical access, I use the <a class="reference external" href="https://en.wikipedia.org/wiki/Remote_Desktop_Protocol">Remote Desktop Protocol
 (RDP)</a> to work in
@@ -150,7 +153,7 @@ file is not sourced. But <code class="docutils literal notranslate"><span class=
 </section>
 <section id="thunar-for-file-archive-and-removable-media-management">
 <h2>
-<a class="toc-backref" href="#id4" role="doc-backlink">Thunar for file, archive and removable media management</a><a class="headerlink" href="#thunar-for-file-archive-and-removable-media-management" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Thunar for file, archive and removable media management</a><a class="headerlink" href="#thunar-for-file-archive-and-removable-media-management" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">By installing Thunar and its extension for volumes management (<a class="reference external" href="https://goodies.xfce.org/projects/thunar-plugins/thunar-volman">thunar-volman</a>), you get a
 graphical file manager with the ability to mount removable medias. With
@@ -166,7 +169,7 @@ management</a>.</p>
 </section>
 <section id="requiring-confirmation-before-exiting">
 <h2>
-<a class="toc-backref" href="#id5" role="doc-backlink">Requiring confirmation before exiting</a><a class="headerlink" href="#requiring-confirmation-before-exiting" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id5" role="doc-backlink">Requiring confirmation before exiting</a><a class="headerlink" href="#requiring-confirmation-before-exiting" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-3">I want to be prompted for confirmation when exiting Openbox via the root-menu.
 The same when shuting down the system or rebooting. I could obtain that with
@@ -206,7 +209,7 @@ entries like the following in <code class="docutils literal notranslate"><span c
 </section>
 <section id="theme-and-wallpaper">
 <h2>
-<a class="toc-backref" href="#id6" role="doc-backlink">Theme and wallpaper</a><a class="headerlink" href="#theme-and-wallpaper" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">Theme and wallpaper</a><a class="headerlink" href="#theme-and-wallpaper" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-4">I launch obconf from a terminal window and choose the Syscrash theme:</p>
 <div class="highlight-shell notranslate">
@@ -227,7 +230,7 @@ entries like the following in <code class="docutils literal notranslate"><span c
 </section>
 <section id="turning-numlock-on-on-openbox-startup">
 <h2>
-<a class="toc-backref" href="#id7" role="doc-backlink">Turning NumLock on on Openbox startup</a><a class="headerlink" href="#turning-numlock-on-on-openbox-startup" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id7" role="doc-backlink">Turning NumLock on on Openbox startup</a><a class="headerlink" href="#turning-numlock-on-on-openbox-startup" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-5">You can install numlockx (<strong>as root</strong>) with:</p>
 <div class="highlight-shell notranslate">
@@ -243,7 +246,7 @@ that numlockx turns on NumLock on Openbox startup:</p>
 </section>
 <section id="binding-menu-key-to-root-menu">
 <h2>
-<a class="toc-backref" href="#id8" role="doc-backlink">Binding menu key to root-menu</a><a class="headerlink" href="#binding-menu-key-to-root-menu" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id8" role="doc-backlink">Binding menu key to root-menu</a><a class="headerlink" href="#binding-menu-key-to-root-menu" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-6">If your machine has a <a class="reference external" href="https://en.wikipedia.org/wiki/Menu_key">menu key</a>, you
 may want to bind it to the Openbox root-menu. Make sure your
@@ -268,7 +271,7 @@ may want to bind it to the Openbox root-menu. Make sure your
 </section>
 <section id="binding-super-e-to-thunar">
 <h2>
-<a class="toc-backref" href="#id9" role="doc-backlink">Binding Super-E to Thunar</a><a class="headerlink" href="#binding-super-e-to-thunar" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id9" role="doc-backlink">Binding Super-E to Thunar</a><a class="headerlink" href="#binding-super-e-to-thunar" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-7">When working on Windows at the office, I usually open the file manager with the
 Windows-E (a.k.a.
@@ -295,7 +298,7 @@ following in my <code class="docutils literal notranslate"><span class="pre">~/.
 </section>
 <section id="undecorating-and-or-maximizing-windows">
 <h2>
-<a class="toc-backref" href="#id10" role="doc-backlink">Undecorating and/or maximizing windows</a><a class="headerlink" href="#undecorating-and-or-maximizing-windows" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id10" role="doc-backlink">Undecorating and/or maximizing windows</a><a class="headerlink" href="#undecorating-and-or-maximizing-windows" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-8">I want that <a class="reference external" href="https://www.mozilla.org/firefox">Firefox</a>, <a class="reference external" href="https://www.claws-mail.org">Claws Mail</a> and <a class="reference external" href="https://en.wikipedia.org/wiki/Xterm">xterm</a> open with Window maximized. I also want
 the xterm window to be undecorated (to get rid of the title bar).</p>
@@ -335,7 +338,7 @@ the dialog boxes from being maximized.</p>
 </section>
 <section id="benefiting-from-vim-clipboard-feature">
 <h2>
-<a class="toc-backref" href="#id11" role="doc-backlink">Benefiting from Vim clipboard feature</a><a class="headerlink" href="#benefiting-from-vim-clipboard-feature" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id11" role="doc-backlink">Benefiting from Vim clipboard feature</a><a class="headerlink" href="#benefiting-from-vim-clipboard-feature" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-9">Even if using Vim only in a terminal and not as a graphical application, it is
 useful to install the <code class="docutils literal notranslate"><span class="pre">vim-gtk3</span></code> package instead of just the <code class="docutils literal notranslate"><span class="pre">vim</span></code> package,
@@ -349,7 +352,7 @@ vi.stackexchange.com</a>.</p>
 </section>
 <section id="other-resources">
 <h2>
-<a class="toc-backref" href="#id12" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id12" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
 </h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://defkey.com/openbox-shortcuts">Openbox default keyboard shortcuts</a></p></li>
@@ -362,7 +365,7 @@ vi.stackexchange.com</a>.</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
@@ -394,7 +397,7 @@ vi.stackexchange.com</a>.</p>
     <h4>Next topic</h4>
     <p class="topless"><a href="secondary_hdd_as_user_home_dir_extension.html" title="next chapter">Using secondary hard disk drive to extend a specific user home directory</a></p>
   </div>
-<search id="searchbox" style="display: none" role="search">
+<div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -402,13 +405,13 @@ vi.stackexchange.com</a>.</p>
       <input type="submit" value="Go">
     </form>
     </div>
-</search>
+</div>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="Related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">

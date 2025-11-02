@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" data-content_root="./">
+<html lang="en">
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
 
     <title>Sphinx — Personal Notes</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50">
-    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=037667e9">
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=dbea93a2">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <script src="_static/documentation_options.js?v=7f41d439"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -21,7 +24,7 @@
     <link rel="prev" title="Sed" href="sed.html"> 
   </head>
 <body>
-    <div class="related" role="navigation" aria-label="Related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -43,7 +46,7 @@
           <div class="body" role="main">
             
   <section id="sphinx">
-<h1>Sphinx<a class="headerlink" href="#sphinx" title="Link to this heading">¶</a>
+<h1>Sphinx<a class="headerlink" href="#sphinx" title="Permalink to this heading">¶</a>
 </h1>
 <nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
@@ -58,7 +61,7 @@
 </nav>
 <section id="introduction">
 <h2>
-<a class="toc-backref" href="#id2" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p><a class="reference external" href="http://www.sphinx-doc.org/en/master">Sphinx</a> is the tool I settled on to
 create this static website. Sphinx is primarily designed to create
@@ -67,7 +70,7 @@ it is also appropriate as a <a class="reference external" href="https://www.full
 </section>
 <section id="installation">
 <h2>
-<a class="toc-backref" href="#id3" role="doc-backlink">Installation</a><a class="headerlink" href="#installation" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Installation</a><a class="headerlink" href="#installation" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-0">On a <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> system, install Sphinx (<strong>as
 root</strong>) with:</p>
@@ -78,7 +81,7 @@ root</strong>) with:</p>
 </section>
 <section id="starting-a-project">
 <h2>
-<a class="toc-backref" href="#id4" role="doc-backlink">Starting a project</a><a class="headerlink" href="#starting-a-project" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Starting a project</a><a class="headerlink" href="#starting-a-project" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-1">To create a new Sphinx project, create a directory, move to that directory and
 run <code class="docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code>:</p>
@@ -166,7 +169,7 @@ you are currently reading:</p>
 </section>
 <section id="generating-html-output">
 <h2>
-<a class="toc-backref" href="#id5" role="doc-backlink">Generating HTML output</a><a class="headerlink" href="#generating-html-output" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id5" role="doc-backlink">Generating HTML output</a><a class="headerlink" href="#generating-html-output" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">Assuming <code class="docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code> has created a <a class="reference external" href="http://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/">Makefile</a>,  you can
 build the HTML output with:</p>
@@ -189,7 +192,7 @@ output, do:</p>
 </section>
 <section id="having-make-produce-html-output-by-default">
 <h2>
-<a class="toc-backref" href="#id6" role="doc-backlink">Having make produce HTML output by default</a><a class="headerlink" href="#having-make-produce-html-output-by-default" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">Having make produce HTML output by default</a><a class="headerlink" href="#having-make-produce-html-output-by-default" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-3">The <code class="docutils literal notranslate"><span class="pre">make</span></code> (without argument) command outputs a help message. Substituting
 the Makefile created by <code class="docutils literal notranslate"><span class="pre">sphinx-quickstart</span></code> with <a class="reference download internal" download="" href="_downloads/e985e6421371eee4f3889efb205c71b4/Makefile"><code class="xref download docutils literal notranslate"><span class="pre">this</span> <span class="pre">one</span></code></a> causes <code class="docutils literal notranslate"><span class="pre">make</span></code>
@@ -199,7 +202,7 @@ the Makefile created by <code class="docutils literal notranslate"><span class="
 </section>
 <section id="other-resources">
 <h2>
-<a class="toc-backref" href="#id7" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id7" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
 </h2>
 <ul class="simple">
 <li><p><a class="reference external" href="http://www.sphinx-doc.org/en/master">Sphinx documentation</a></p></li>
@@ -212,7 +215,7 @@ the Makefile created by <code class="docutils literal notranslate"><span class="
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
@@ -238,7 +241,7 @@ the Makefile created by <code class="docutils literal notranslate"><span class="
     <h4>Next topic</h4>
     <p class="topless"><a href="reminder.html" title="next chapter">Reminder</a></p>
   </div>
-<search id="searchbox" style="display: none" role="search">
+<div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -246,13 +249,13 @@ the Makefile created by <code class="docutils literal notranslate"><span class="
       <input type="submit" value="Go">
     </form>
     </div>
-</search>
+</div>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="Related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">

@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" data-content_root="./">
+<html lang="en">
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
 
     <title>When things go wrong… — Personal Notes</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50">
-    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=037667e9">
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=dbea93a2">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <script src="_static/documentation_options.js?v=7f41d439"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -21,7 +24,7 @@
     <link rel="prev" title="Debian applications installation" href="debian_apps_install.html"> 
   </head>
 <body>
-    <div class="related" role="navigation" aria-label="Related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -43,7 +46,7 @@
           <div class="body" role="main">
             
   <section id="when-things-go-wrong">
-<h1>When things go wrong…<a class="headerlink" href="#when-things-go-wrong" title="Link to this heading">¶</a>
+<h1>When things go wrong…<a class="headerlink" href="#when-things-go-wrong" title="Permalink to this heading">¶</a>
 </h1>
 <nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
@@ -59,7 +62,7 @@
 </nav>
 <section id="introduction">
 <h2>
-<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p>This page is where I’ve noted the commands I used when things went wrong or
 when I needed to be reassured about the integrity of the data on my <a class="reference external" href="https://www.debian.org">Debian
@@ -67,7 +70,7 @@ GNU/Linux</a> systems.</p>
 </section>
 <section id="reconfiguring-grub-to-boot-an-older-kernel-by-default">
 <h2>
-<a class="toc-backref" href="#id2" role="doc-backlink">Reconfiguring GRUB to boot an older kernel by default</a><a class="headerlink" href="#reconfiguring-grub-to-boot-an-older-kernel-by-default" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Reconfiguring GRUB to boot an older kernel by default</a><a class="headerlink" href="#reconfiguring-grub-to-boot-an-older-kernel-by-default" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-0">The kernel GRUB boots by default is determined by the “GRUB_DEFAULT” line in
 file <code class="docutils literal notranslate"><span class="pre">/etc/default/grub</span></code>. By default, it is “GRUB_DEFAULT=0” which designates
@@ -94,7 +97,7 @@ uninstall it, with <code class="docutils literal notranslate"><span class="pre">
 </section>
 <section id="checking-file-systems-with-fsck">
 <h2>
-<a class="toc-backref" href="#id3" role="doc-backlink">Checking file systems with fsck</a><a class="headerlink" href="#checking-file-systems-with-fsck" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Checking file systems with fsck</a><a class="headerlink" href="#checking-file-systems-with-fsck" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-1">When using <code class="docutils literal notranslate"><span class="pre">fsck</span></code>, it is important to provide the right file system on the
 command line, and to make sure the file system is not mounted.</p>
@@ -111,20 +114,20 @@ file system checking:</p>
 </section>
 <section id="checking-a-git-repository">
 <h2>
-<a class="toc-backref" href="#id4" role="doc-backlink">Checking a Git repository</a><a class="headerlink" href="#checking-a-git-repository" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Checking a Git repository</a><a class="headerlink" href="#checking-a-git-repository" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fsck</span></code> to check a Git repository. Run <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">help</span> <span class="pre">fsck</span></code> for more
 details.</p>
 </section>
 <section id="checking-taskwarrior-data-files">
 <h2>
-<a class="toc-backref" href="#id5" role="doc-backlink">Checking Taskwarrior data files</a><a class="headerlink" href="#checking-taskwarrior-data-files" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id5" role="doc-backlink">Checking Taskwarrior data files</a><a class="headerlink" href="#checking-taskwarrior-data-files" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-3"><code class="docutils literal notranslate"><span class="pre">task</span> <span class="pre">diagnostics</span></code> performs a diagnostic scan of the Taskwarrior data files.</p>
 </section>
 <section id="rsync-checksum-and-trial-run-options">
 <h2>
-<a class="toc-backref" href="#id6" role="doc-backlink">rsync checksum and trial run options</a><a class="headerlink" href="#rsync-checksum-and-trial-run-options" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">rsync checksum and trial run options</a><a class="headerlink" href="#rsync-checksum-and-trial-run-options" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-4">If you use rsync to maintain a backup copy of some files, and you have a doubt
 about the integrity of one of the sources, you may want to use the following
@@ -141,7 +144,7 @@ checksum instead of just doing a quick check based on files date and size.</p></
 </section>
 <section id="other-resources">
 <h2>
-<a class="toc-backref" href="#id7" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id7" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
 </h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.gnu.org/software/grub/manual/grub/html_node/Simple-configuration.html#Simple-configuration">GRUB Manual - Simple configuration</a></p></li>
@@ -155,7 +158,7 @@ checksum instead of just doing a quick check based on files date and size.</p></
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
@@ -182,7 +185,7 @@ checksum instead of just doing a quick check based on files date and size.</p></
     <h4>Next topic</h4>
     <p class="topless"><a href="linux_firewalling.html" title="next chapter">Linux firewalling</a></p>
   </div>
-<search id="searchbox" style="display: none" role="search">
+<div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -190,13 +193,13 @@ checksum instead of just doing a quick check based on files date and size.</p></
       <input type="submit" value="Go">
     </form>
     </div>
-</search>
+</div>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="Related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">

@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" data-content_root="./">
+<html lang="en">
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     
     
 
     <title>Installing a Debian unstable virtual machine — Personal Notes</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50">
-    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=037667e9">
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=dbea93a2">
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css">
     
-    <script src="_static/documentation_options.js?v=7f41d439"></script>
-    <script src="_static/doctools.js?v=9bcbadda"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     
     <link rel="author" title="About these documents" href="about.html">
     <link rel="index" title="Index" href="genindex.html">
@@ -21,7 +24,7 @@
     <link rel="prev" title="Linux firewalling" href="linux_firewalling.html"> 
   </head>
 <body>
-    <div class="related" role="navigation" aria-label="Related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
@@ -43,7 +46,7 @@
           <div class="body" role="main">
             
   <section id="installing-a-debian-unstable-virtual-machine">
-<h1>Installing a Debian unstable virtual machine<a class="headerlink" href="#installing-a-debian-unstable-virtual-machine" title="Link to this heading">¶</a>
+<h1>Installing a Debian unstable virtual machine<a class="headerlink" href="#installing-a-debian-unstable-virtual-machine" title="Permalink to this heading">¶</a>
 </h1>
 <nav class="contents local" id="page-content">
 <p class="topic-title">Page content</p>
@@ -80,7 +83,7 @@
 </nav>
 <section id="introduction">
 <span id="index-0"></span><h2>
-<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">¶</a>
 </h2>
 <p>These are my notes about the installation of a <a class="reference external" href="https://www.makeuseof.com/tag/virtual-machine-makeuseof-explains">virtual machine</a> on my
 <a class="reference external" href="https://www.debian.org">Debian GNU/Linux</a> stable system (“AMD64”
@@ -92,7 +95,7 @@ version of some packages.</p>
 </section>
 <section id="checking-the-virtualizations-extensions-presence-on-the-cpu">
 <h2>
-<a class="toc-backref" href="#id2" role="doc-backlink">Checking the virtualizations extensions presence on the CPU</a><a class="headerlink" href="#checking-the-virtualizations-extensions-presence-on-the-cpu" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id2" role="doc-backlink">Checking the virtualizations extensions presence on the CPU</a><a class="headerlink" href="#checking-the-virtualizations-extensions-presence-on-the-cpu" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-1">If your hardware has virtualization support, then you should enable it <strong>in the
 BIOS</strong>.</p>
@@ -110,7 +113,7 @@ support:</p>
 </section>
 <section id="installing-the-libvirt-family-of-tools">
 <h2>
-<a class="toc-backref" href="#id3" role="doc-backlink">Installing the libvirt family of tools</a><a class="headerlink" href="#installing-the-libvirt-family-of-tools" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id3" role="doc-backlink">Installing the libvirt family of tools</a><a class="headerlink" href="#installing-the-libvirt-family-of-tools" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-2">I install the <a class="reference external" href="https://libvirt.org">libvirt</a> family of tools <strong>as root</strong>
 with:</p>
@@ -134,11 +137,11 @@ virsh<span class="w"> </span>net-list<span class="w"> </span>--all<span class="w
 </section>
 <section id="preparing-storage-locations">
 <h2>
-<a class="toc-backref" href="#id4" role="doc-backlink">Preparing storage locations</a><a class="headerlink" href="#preparing-storage-locations" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id4" role="doc-backlink">Preparing storage locations</a><a class="headerlink" href="#preparing-storage-locations" title="Permalink to this heading">¶</a>
 </h2>
 <section id="for-the-virtual-machine-images">
 <h3>
-<a class="toc-backref" href="#id5" role="doc-backlink">For the virtual machine images</a><a class="headerlink" href="#for-the-virtual-machine-images" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id5" role="doc-backlink">For the virtual machine images</a><a class="headerlink" href="#for-the-virtual-machine-images" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-3">The default location (“storage pool”) for the virtual machines is
 <code class="docutils literal notranslate"><span class="pre">/var/lib/libvirt/images</span></code>.</p>
@@ -178,7 +181,7 @@ path.</p>
 </section>
 <section id="for-the-installer-iso-image">
 <h3>
-<a class="toc-backref" href="#id6" role="doc-backlink">For the installer ISO image</a><a class="headerlink" href="#for-the-installer-iso-image" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id6" role="doc-backlink">For the installer ISO image</a><a class="headerlink" href="#for-the-installer-iso-image" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-4">Nothing complicated here, I just create a directory as an unprivileged user:</p>
 <div class="highlight-shell notranslate">
@@ -189,7 +192,7 @@ path.</p>
 </section>
 <section id="searching-operating-systems-in-the-osinfo-database">
 <h2>
-<a class="toc-backref" href="#id7" role="doc-backlink">Searching operating systems in the osinfo database</a><a class="headerlink" href="#searching-operating-systems-in-the-osinfo-database" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id7" role="doc-backlink">Searching operating systems in the osinfo database</a><a class="headerlink" href="#searching-operating-systems-in-the-osinfo-database" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-5">When <a class="reference internal" href="#creating-debian-unstable-vm"><span class="std std-ref">creating the virtual machine with virt-install</span></a>, it is recommended to provide the –os-variant
 option. The possible values for that option are the short IDs provided by
@@ -202,7 +205,7 @@ osinfo-query<span class="w"> </span>os<span class="p">|</span>grep<span class="w
 </section>
 <section id="getting-a-debian-testing-installer-image">
 <h2>
-<a class="toc-backref" href="#id8" role="doc-backlink">Getting a Debian testing installer image</a><a class="headerlink" href="#getting-a-debian-testing-installer-image" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id8" role="doc-backlink">Getting a Debian testing installer image</a><a class="headerlink" href="#getting-a-debian-testing-installer-image" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-6">Debian testing installer images are available for download and updated daily
 (for the small (“netinst”) images at least).
@@ -220,11 +223,11 @@ process as for a
 </section>
 <section id="creating-the-debian-unstable-virtual-machine">
 <span id="creating-debian-unstable-vm"></span><h2>
-<a class="toc-backref" href="#id9" role="doc-backlink">Creating the Debian unstable virtual machine</a><a class="headerlink" href="#creating-the-debian-unstable-virtual-machine" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id9" role="doc-backlink">Creating the Debian unstable virtual machine</a><a class="headerlink" href="#creating-the-debian-unstable-virtual-machine" title="Permalink to this heading">¶</a>
 </h2>
 <section id="start-the-installation">
 <span id="start-debian-unstable-vm-install"></span><h3>
-<a class="toc-backref" href="#id10" role="doc-backlink">Start the installation</a><a class="headerlink" href="#start-the-installation" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id10" role="doc-backlink">Start the installation</a><a class="headerlink" href="#start-the-installation" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-7">I enable the default virtual network <strong>as root</strong> with:</p>
 <div class="highlight-shell notranslate">
@@ -262,7 +265,7 @@ directory was the one containing the Debian testing installer ISO image):</p>
 </section>
 <section id="debian-testing-base-installation">
 <h3>
-<a class="toc-backref" href="#id11" role="doc-backlink">Debian testing base installation</a><a class="headerlink" href="#debian-testing-base-installation" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id11" role="doc-backlink">Debian testing base installation</a><a class="headerlink" href="#debian-testing-base-installation" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-8">I proceed with the installation as I would for a “normal” Debian installation.
 I choose the most simple disk partition scheme (all in a single partition) and
@@ -277,7 +280,7 @@ I lauch <code class="docutils literal notranslate"><span class="pre">virt-viewer
 </section>
 <section id="upgrade-to-debian-unstable">
 <h3>
-<a class="toc-backref" href="#id12" role="doc-backlink">Upgrade to Debian unstable</a><a class="headerlink" href="#upgrade-to-debian-unstable" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id12" role="doc-backlink">Upgrade to Debian unstable</a><a class="headerlink" href="#upgrade-to-debian-unstable" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-9">The first step to upgrade to Debian unstable is to edit
 <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code> (<strong>as root, on the guest</strong>):</p>
@@ -294,7 +297,7 @@ I lauch <code class="docutils literal notranslate"><span class="pre">virt-viewer
 </section>
 <section id="install-x-org-and-openbox">
 <h3>
-<a class="toc-backref" href="#id13" role="doc-backlink">Install X.org and Openbox</a><a class="headerlink" href="#install-x-org-and-openbox" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id13" role="doc-backlink">Install X.org and Openbox</a><a class="headerlink" href="#install-x-org-and-openbox" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-10">I then install X.org and <a class="reference internal" href="openbox_on_debian.html"><span class="doc">Openbox</span></a> on
 the virtual machine:</p>
@@ -305,7 +308,7 @@ the virtual machine:</p>
 </section>
 <section id="enable-copy-n-paste-between-host-and-guest">
 <h3>
-<a class="toc-backref" href="#id14" role="doc-backlink">Enable copy’n’paste between host and guest</a><a class="headerlink" href="#enable-copy-n-paste-between-host-and-guest" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id14" role="doc-backlink">Enable copy’n’paste between host and guest</a><a class="headerlink" href="#enable-copy-n-paste-between-host-and-guest" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-11">The package <code class="docutils literal notranslate"><span class="pre">spice-vdagent</span></code> enables copy’n’paste between host and guest:</p>
 <div class="highlight-shell notranslate">
@@ -315,7 +318,7 @@ the virtual machine:</p>
 </section>
 <section id="configure-display-resolution">
 <h3>
-<a class="toc-backref" href="#id15" role="doc-backlink">Configure display resolution</a><a class="headerlink" href="#configure-display-resolution" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id15" role="doc-backlink">Configure display resolution</a><a class="headerlink" href="#configure-display-resolution" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-12">By default, X.org display resolution on the guest is 1024x768. I prefer
 1920x1080 (which is the resolution of my monitor). So I create a specific X.org
@@ -399,7 +402,7 @@ with a test of X.org:</p>
 </section>
 <section id="reboot">
 <h3>
-<a class="toc-backref" href="#id16" role="doc-backlink">Reboot</a><a class="headerlink" href="#reboot" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id16" role="doc-backlink">Reboot</a><a class="headerlink" href="#reboot" title="Permalink to this heading">¶</a>
 </h3>
 <p id="index-13">At this point, I reboot (or else the keyboard layout in X.org may not be the
 expected one):</p>
@@ -416,7 +419,7 @@ expected one):</p>
 </section>
 <section id="shutting-down-and-restarting-the-virtual-machine">
 <h2>
-<a class="toc-backref" href="#id17" role="doc-backlink">Shutting down and restarting the virtual machine</a><a class="headerlink" href="#shutting-down-and-restarting-the-virtual-machine" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id17" role="doc-backlink">Shutting down and restarting the virtual machine</a><a class="headerlink" href="#shutting-down-and-restarting-the-virtual-machine" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-14">To shut down the virtual machine, I just do as for a “real” machine. For
 example:</p>
@@ -460,7 +463,7 @@ the X server, so you may have to do (prior to launching <code class="docutils li
 </section>
 <section id="finding-the-ip-address-of-the-virtual-machine">
 <h2>
-<a class="toc-backref" href="#id18" role="doc-backlink">Finding the IP address of the virtual machine</a><a class="headerlink" href="#finding-the-ip-address-of-the-virtual-machine" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id18" role="doc-backlink">Finding the IP address of the virtual machine</a><a class="headerlink" href="#finding-the-ip-address-of-the-virtual-machine" title="Permalink to this heading">¶</a>
 </h2>
 <p>Having the IP address of the virtual machine is useful, for example to connect
 to it from the host via <a class="reference internal" href="ssh.html"><span class="doc">SSH</span></a>.</p>
@@ -487,7 +490,7 @@ login into the guest, using <code class="docutils literal notranslate"><span cla
 </section>
 <section id="removing-the-virtual-machine">
 <h2>
-<a class="toc-backref" href="#id19" role="doc-backlink">Removing the virtual machine</a><a class="headerlink" href="#removing-the-virtual-machine" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id19" role="doc-backlink">Removing the virtual machine</a><a class="headerlink" href="#removing-the-virtual-machine" title="Permalink to this heading">¶</a>
 </h2>
 <p id="index-15">Once shutdown, the virtual machine can be entirely removed with these
 commands:</p>
@@ -499,7 +502,7 @@ virsh<span class="w"> </span>vol-delete<span class="w"> </span>--pool<span class
 </section>
 <section id="other-resources">
 <h2>
-<a class="toc-backref" href="#id20" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id20" role="doc-backlink">Other resources</a><a class="headerlink" href="#other-resources" title="Permalink to this heading">¶</a>
 </h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://serverfault.com/questions/208693/difference-between-kvm-and-qemu">Difference between KVM and QEMU (on serverfault.com)</a></p></li>
@@ -514,7 +517,7 @@ virsh<span class="w"> </span>vol-delete<span class="w"> </span>--pool<span class
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <div>
     <h3><a href="index.html">Table of Contents</a></h3>
@@ -560,7 +563,7 @@ virsh<span class="w"> </span>vol-delete<span class="w"> </span>--pool<span class
     <h4>Next topic</h4>
     <p class="topless"><a href="ssh.html" title="next chapter">SSH</a></p>
   </div>
-<search id="searchbox" style="display: none" role="search">
+<div id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -568,13 +571,13 @@ virsh<span class="w"> </span>vol-delete<span class="w"> </span>--pool<span class
       <input type="submit" value="Go">
     </form>
     </div>
-</search>
+</div>
 <script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related" role="navigation" aria-label="Related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
