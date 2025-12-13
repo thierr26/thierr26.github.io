@@ -195,7 +195,12 @@ machine</strong> with for example a command like:</p>
 <p><code class="docutils literal notranslate"><span class="pre">ssh-keygen</span></code> requires a passphrase. It is possible to leave it empty but in
 this case the key is not encrypted and anyone obtaining your private key can
 use it.</p>
-<p>The generated key pair is stored in <code class="docutils literal notranslate"><span class="pre">~/.ssh</span></code>.</p>
+<p>The generated key pair is stored by default in <code class="docutils literal notranslate"><span class="pre">~/.ssh</span></code> (e.g.
+<code class="docutils literal notranslate"><span class="pre">~/.ssh/id_ed25519.pub</span></code> for the public key and <code class="docutils literal notranslate"><span class="pre">~/.ssh/id_ed25519</span></code> for the
+private key).</p>
+<p>There is a comment associated with the key in the <code class="docutils literal notranslate"><span class="pre">.pub</span></code> file. By default, it
+is like “<a class="reference external" href="mailto:username%40hostname">username<span>@</span>hostname</a>”. Use option <code class="docutils literal notranslate"><span class="pre">-C</span></code> in <code class="docutils literal notranslate"><span class="pre">ssh-keygen</span></code> command to
+provide a non default comment.</p>
 <p>The next step is to copy the public key to the server with a command like:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>ssh-copy-id<span class="w"> </span>username@192.168.122.250<span class="w"> </span><span class="c1"># Use server IP address.</span>
