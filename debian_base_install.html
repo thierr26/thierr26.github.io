@@ -62,7 +62,7 @@
 <li><p><a class="reference internal" href="#preventing-the-system-from-beeping" id="id12">Preventing the system from beeping</a></p></li>
 <li><p><a class="reference internal" href="#adding-support-for-other-languages" id="id13">Adding support for other languages</a></p></li>
 <li><p><a class="reference internal" href="#adding-deb-multimedia-to-the-sources" id="id14">Adding deb-multimedia to the sources</a></p></li>
-<li><p><a class="reference internal" href="#installing-firmware-linux-nonfree" id="id15">Installing firmware-linux-nonfree</a></p></li>
+<li><p><a class="reference internal" href="#installing-binary-firmware-packages" id="id15">Installing binary firmware packages</a></p></li>
 <li><p><a class="reference internal" href="#checking-the-configured-time-zone" id="id16">Checking the configured time zone</a></p></li>
 <li><p><a class="reference internal" href="#checking-systemd-timesyncd-service" id="id17">Checking systemd-timesyncd service</a></p></li>
 <li><p><a class="reference internal" href="#installing-a-console-locker" id="id18">Installing a console locker</a></p></li>
@@ -331,17 +331,17 @@ apt-get<span class="w"> </span>dist-upgrade
 </pre></div>
 </div>
 </section>
-<section id="installing-firmware-linux-nonfree">
+<section id="installing-binary-firmware-packages">
 <h3>
-<a class="toc-backref" href="#id15" role="doc-backlink">Installing firmware-linux-nonfree</a><a class="headerlink" href="#installing-firmware-linux-nonfree" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id15" role="doc-backlink">Installing binary firmware packages</a><a class="headerlink" href="#installing-binary-firmware-packages" title="Link to this heading">¶</a>
 </h3>
-<p id="index-10">Depending on your hardware, you may not need the <code class="docutils literal notranslate"><span class="pre">firmware-linux-nonfree</span></code>
-package. On my machines, this package makes life easier (most notably with
-Wi-Fi network adapter and/or graphics) and is installed either during
-installation (if the firmware archive has been required) or post-installation,
-manually:</p>
+<p id="index-10">Depending on your hardware, you may not need the <code class="docutils literal notranslate"><span class="pre">firmware-linux-nonfree</span></code> or
+<code class="docutils literal notranslate"><span class="pre">firmware-iwlwifi</span></code> packages. On my machines, I need them to enable graphics
+and/or Wi-Fi network adapter. Depending on the installation media you use, they
+are installed during installation or not. If not, you can install them manually
+post-installation:</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>firmware-linux-nonfree<span class="w"> </span><span class="c1"># As root.</span>
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>firmware-linux-nonfree<span class="w"> </span>firmware-iwlwifi<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list</span></code> file must have the non-free section
@@ -458,7 +458,7 @@ possible:</p>
 </h3>
 <p id="index-17">Check whether the <code class="docutils literal notranslate"><span class="pre">DIR_MODE</span></code> (default permissions for users home directories)
 setting in file <code class="docutils literal notranslate"><span class="pre">/etc/adduser.conf</span></code> is appropriate for your needs. The
-default value is nox “0700” (which seems OK to me) but it used to be “0755”.
+default value is now “0700” (which seems OK to me) but it used to be “0755”.
 “0755” implies that any unprivileged user have read access to the files of
 other users. You may want to change (<strong>as root</strong>) the value to “0700” to avoid
 that:</p>
@@ -693,7 +693,7 @@ dpkg<span class="w"> </span>-l<span class="w"> </span><span class="se">\</span>
 <li><a class="reference internal" href="#preventing-the-system-from-beeping">Preventing the system from beeping</a></li>
 <li><a class="reference internal" href="#adding-support-for-other-languages">Adding support for other languages</a></li>
 <li><a class="reference internal" href="#adding-deb-multimedia-to-the-sources">Adding deb-multimedia to the sources</a></li>
-<li><a class="reference internal" href="#installing-firmware-linux-nonfree">Installing firmware-linux-nonfree</a></li>
+<li><a class="reference internal" href="#installing-binary-firmware-packages">Installing binary firmware packages</a></li>
 <li><a class="reference internal" href="#checking-the-configured-time-zone">Checking the configured time zone</a></li>
 <li><a class="reference internal" href="#checking-systemd-timesyncd-service">Checking systemd-timesyncd service</a></li>
 <li><a class="reference internal" href="#installing-a-console-locker">Installing a console locker</a></li>
