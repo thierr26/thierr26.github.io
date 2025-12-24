@@ -136,6 +136,7 @@ installation is:</p>
 <span class="w">    </span>default-jre<span class="w"> </span>default-jdk<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>taskwarrior<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>gcal<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>gnome-disk-utility<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>gftp<span class="w"> </span>filezilla<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>ghostwriter<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>xpdf<span class="w"> </span><span class="se">\</span>
@@ -314,174 +315,180 @@ smartmontools tutorial by Random Bits</a>)</p></td>
 <td><p>Calendar program</p></td>
 </tr>
 <tr class="row-odd">
+<td><p>gnome-disk-utility</p></td>
+<td><p>Disk drives and media management tool (makes it easy to reformat and set
+up full disk encryption (<a class="reference external" href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS</a>) for external
+disks).</p></td>
+</tr>
+<tr class="row-even">
 <td><p>gftp, filezilla</p></td>
 <td><p>FTP clients (text mode only for gftp in Debian 13 (Trixie))</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>ghostwriter</p></td>
 <td><p>Markdown editor</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>xpdf</p></td>
 <td><p>PDF reader</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>evince</p></td>
 <td><p>Document viewer (can fill in forms in PDF files)</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>librsvg2-bin</p></td>
 <td><p>Command-line utility to convert Scalable Vector Graphics (SVG) file</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>lyx, texlive-lang-*</p></td>
 <td><p>Document processor (almost WYSIWYG-frontend for LaTeX)</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>pandoc</p></td>
 <td><p>General markup converter</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>catdoc</p></td>
 <td><p>Text extractor for MS-Office files</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>octave</p></td>
 <td><p>GNU Octave language (similar to Matlab)</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>shellcheck</p></td>
 <td><p>Shell script analysis tool</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>reuse</p></td>
 <td><p>Tool for REUSE copyright and license recommendations</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>lintian</p></td>
 <td><p>Debian package checker</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>exuberant-ctags</p></td>
 <td><p>Generator of source code definitions indexes</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>gnat, gprbuild, libaunit-dev, libaunit-doc</p></td>
 <td><p>Ada programming tools</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>ada-reference-manual-2012</p></td>
 <td><p>Ada 2012 reference manual</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>libxmlada-dom-dev, libxmlada-input-dev, libxmlada-sax-dev,
 libxmlada-schema-dev, libxmlada-unicode-dev, libxmlada-doc,
 libgtkada-dev, libgtkada-doc, libgtkada-bin</p></td>
 <td><p>Ada libraries (XML/Ada and GtkAda)</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>gdb, gdb-doc, gdbserver</p></td>
 <td><p>GNU debugger (including remote server)</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>valgrind</p></td>
 <td><p>Program profiling tools</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>strace</p></td>
 <td><p>System call tracer</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>lcov</p></td>
 <td><p>Test coverage report generation tools</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>libb-lint-perl</p></td>
 <td><p>Perl code checker</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>gimp, jhead, imagemagick</p></td>
 <td><p>Image manipulation programs</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>libimage-exiftool-perl</p></td>
 <td><p>Includes exiftool (image metadata extraction)</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>xsane</p></td>
 <td><p>Frontend for SANE (Scanner Access Now Easy), includes Gimp plugin
 (the Gimp plugin may not work, on Debian Bookworm at least, but <a class="reference external" href="https://askubuntu.com/questions/1427978/lubuntu-22-04-1-xsane-gimp-plugin-doesnt-work">there is
 a fix</a>)</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>xzgv</p></td>
 <td><p>Image viewer</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>rawtherapee</p></td>
 <td><p>Raw image converter</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>irssi</p></td>
 <td><p>IRC client</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>pan</p></td>
 <td><p>Usenet newsreader</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>claws-mail</p></td>
 <td><p>Mail client (MH mailbox format)</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>claws-mail-themes</p></td>
 <td><p>Claws Mail themes</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>vim</p></td>
 <td><p>Vim text editor</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>unaccent</p></td>
 <td><p>Tool to replace accented letters by unaccented equivalent</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>psmisc</p></td>
 <td><p>killall, …</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>sudo</p></td>
 <td><p>Privilege escalation</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>pwgen</p></td>
 <td><p>Password generator</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>time</p></td>
 <td><p>CPU resource usage measurement</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>tree</p></td>
 <td><p>Indented directory listing tool</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>mmv</p></td>
 <td><p>Tool to move/copy/append/link multiple files by wildcard patterns</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>bc</p></td>
 <td><p>Calculator language, to be used in scripts or interactively</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>network-manager</p></td>
 <td><p>Network management framework</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>openconnect</p></td>
 <td><p>Client for GlobalProtect VPN (among others)</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>freerdp3-x11</p></td>
 <td><p>X11 based Remote Desktop Protocol client (On Debian Buster, I have to
 append options <code class="docutils literal notranslate"><span class="pre">/relax-order-checks</span></code> and <code class="docutils literal notranslate"><span class="pre">+glyph-cache</span></code> to the
@@ -490,76 +497,76 @@ append options <code class="docutils literal notranslate"><span class="pre">/rel
 line is like: <code class="docutils literal notranslate"><span class="pre">xfreerdp</span> <span class="pre">+glyph-cache</span> <span class="pre">/relax-order-checks</span> <span class="pre">/u:my_user_name</span>
 <span class="pre">/v:my.server</span> <span class="pre">/kbd:0x40c</span> <span class="pre">/f</span></code>)</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>whois</p></td>
 <td><p>Command-line WHOIS client</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>wireshark</p></td>
 <td><p>Graphical network traffic analyzer</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>tcpdump</p></td>
 <td><p>Command-line network traffic analyzer</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>ncat</p></td>
 <td><p>Utility to read / write data across networks from the command line</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>nmap</p></td>
 <td><p>Network mapper</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>openssh-server</p></td>
 <td><p>Secure shell (SSH) server</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>colortest</p></td>
 <td><p>Terminal color test graphs</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>mesa-utils</p></td>
 <td><p>glxgears and other programs</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>lm-sensors</p></td>
 <td><p>Utilities to read temperature/voltage/fan sensors (Run <code class="docutils literal notranslate"><span class="pre">sensors-detect</span></code>
 as root to configure and <code class="docutils literal notranslate"><span class="pre">sensors</span></code> to view a readout of the sensors.)</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>hwloc</p></td>
 <td><p>Hardware Locality tool suite</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>zbar-tools</p></td>
 <td><p>Bar code / QR-code related utilities</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>meld</p></td>
 <td><p>Graphical tool to show differences between text files</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>hexedit</p></td>
 <td><p>Hexadecimal editor</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>gawk</p></td>
 <td><p>GNU awk, a pattern scanning and processing language</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>python3-sphinx</p></td>
 <td><p>Documentation generator</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>ruby-nokogiri</p></td>
 <td><p>HTML, XML, SAX, and Reader parser for Ruby</p></td>
 </tr>
-<tr class="row-odd">
+<tr class="row-even">
 <td><p>sakura</p></td>
 <td><p>Terminal emulator</p></td>
 </tr>
-<tr class="row-even">
+<tr class="row-odd">
 <td><p>foobillardplus</p></td>
 <td><p>3D OpenGL billiard game</p></td>
 </tr>
