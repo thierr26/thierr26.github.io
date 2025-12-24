@@ -817,7 +817,16 @@ ESR in the <a class="reference external" href="https://wiki.debian.org/DebianAlt
 </h3>
 <p id="index-15">Follow the instructions at <a class="reference external" href="https://github.com/AdaCore/gnatstudio/releases">https://github.com/AdaCore/gnatstudio/releases</a>.</p>
 <p>I installed the Continuous Release 20250417, running the <code class="docutils literal notranslate"><span class="pre">doinstall</span></code> script
-as root.</p>
+<strong>as root</strong>.</p>
+<p>To make sure that GNAT Studio is in the search path for all users, I added
+(<strong>as root</strong>) a <code class="docutils literal notranslate"><span class="pre">gnatstudio_path.sh</span></code> file in <code class="docutils literal notranslate"><span class="pre">/etc/profile.d</span></code> containing:</p>
+<div class="line-block">
+<div class="line">if [ -d /opt/gnatstudio/bin ] ; then</div>
+<div class="line-block">
+<div class="line">PATH=”$PATH”:/opt/gnatstudio/bin</div>
+</div>
+<div class="line">fi</div>
+</div>
 </section>
 <section id="alire-ada-library-repository-installation">
 <h3>
@@ -826,7 +835,7 @@ as root.</p>
 <p id="index-16">The <a class="reference external" href="https://alire.ada.dev/">Alire</a> distribution is available as a Zip
 archive on Github. I download it using <code class="docutils literal notranslate"><span class="pre">wget</span></code> (example for version 2.1.0):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>Downloads
+<div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/Downloads
 wget<span class="w"> </span>https://github.com/alire-project/alire/releases/download/v2.1.0/alr-2.1.0-bin-x86_64-linux.zip
 </pre></div>
 </div>
@@ -837,10 +846,21 @@ mkdir<span class="w"> </span>-p<span class="w"> </span>/opt/alire<span class="w"
 unzip<span class="w"> </span>alr-2.1.0-bin-x86_64-linux.zip<span class="w"> </span>-d<span class="w"> </span>/opt/alire<span class="w"> </span><span class="c1"># As root.</span>
 </pre></div>
 </div>
-<p>Finally I add <code class="docutils literal notranslate"><span class="pre">/opt/alire/bin</span></code> to my path, via a line in my <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code>
-file:</p>
+<p>To make sure that Alire (more precisely the <code class="docutils literal notranslate"><span class="pre">alr</span></code> program ) is in the search
+path for all users, I added (<strong>as root</strong>) a <code class="docutils literal notranslate"><span class="pre">alire_path.sh</span></code> file in
+<code class="docutils literal notranslate"><span class="pre">/etc/profile.d</span></code> containing:</p>
 <div class="line-block">
-<div class="line">PATH="$PATH":/opt/alire/bin</div>
+<div class="line">if [ -d /opt/alire/bin ] ; then</div>
+<div class="line-block">
+<div class="line">PATH=”$PATH”:/opt/alire/bin</div>
+</div>
+<div class="line">fi</div>
+</div>
+<p>The first time you run an <code class="docutils literal notranslate"><span class="pre">alr</span> <span class="pre">edit</span></code> command, Alire proposes to configure
+your preferred editor. Choose “Other” and enter the following command line:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>/opt/gnatstudio/bin/gnatstudio<span class="w"> </span>-P<span class="w"> </span><span class="si">${</span><span class="nv">GPR_FILE</span><span class="si">}</span>
+</pre></div>
 </div>
 </section>
 <section id="signal-desktop-installation-and-linking-to-a-dumb-phone">

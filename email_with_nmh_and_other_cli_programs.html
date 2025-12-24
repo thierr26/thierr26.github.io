@@ -112,13 +112,17 @@ nmh (<strong>as root</strong>) with:</p>
 </div>
 <p>The nmh programs are installed in <code class="docutils literal notranslate"><span class="pre">/usr/bin/mh</span></code>. This directory is not in the
 search path by default. You can add it to the search path by adding this line
-to  a startup file (e.g. <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code>, <code class="docutils literal notranslate"><span class="pre">.xsessionrc</span></code>):</p>
+to a user startup file (e.g. <code class="docutils literal notranslate"><span class="pre">~/.profile</span></code>, <code class="docutils literal notranslate"><span class="pre">.xsessionrc</span></code>):</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$PATH</span><span class="s2">:/usr/bin/mh"</span>
 </pre></div>
 </div>
 <p>This makes it possible to invoke the nmh programs by their base name (e.g.
 <code class="docutils literal notranslate"><span class="pre">inc</span></code>) instead of their full path (e.g. <code class="docutils literal notranslate"><span class="pre">/usr/bin/mh/inc</span></code>).</p>
+<p>Alternatively, and if you want all the users to be able to invoke the nmh
+programs by their base name, you can add (<strong>as root</strong>) a file named for example
+<code class="docutils literal notranslate"><span class="pre">mh_path.sh</span></code> (don’t omit the <code class="docutils literal notranslate"><span class="pre">\.sh</span></code> suffix) in <code class="docutils literal notranslate"><span class="pre">/etc/profile.d</span></code>,
+containing the same <code class="docutils literal notranslate"><span class="pre">PATH="$PATH:/usr/bin/mh"</span></code> line.</p>
 <p>If exim4 is not already installed, install it (<strong>as root</strong>) with:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>exim4<span class="w"> </span><span class="c1"># As root.</span>
