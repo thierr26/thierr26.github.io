@@ -78,10 +78,11 @@
 <p><a class="reference internal" href="#third-party-applications-installation" id="id20">Third party applications installation</a></p>
 <ul>
 <li><p><a class="reference internal" href="#google-chrome-installation" id="id21">Google Chrome installation</a></p></li>
-<li><p><a class="reference internal" href="#gnat-studio" id="id22">GNAT Studio</a></p></li>
-<li><p><a class="reference internal" href="#alire-ada-library-repository-installation" id="id23">Alire (Ada LIbrary REpository) installation</a></p></li>
-<li><p><a class="reference internal" href="#signal-desktop-installation-and-linking-to-a-dumb-phone" id="id24">signal-desktop installation and linking to a “dumb phone”</a></p></li>
-<li><p><a class="reference internal" href="#session-for-desktop-installation" id="id25">Session for desktop installation</a></p></li>
+<li><p><a class="reference internal" href="#docker-installation" id="id22">Docker installation</a></p></li>
+<li><p><a class="reference internal" href="#gnat-studio-installation" id="id23">GNAT Studio installation</a></p></li>
+<li><p><a class="reference internal" href="#alire-ada-library-repository-installation" id="id24">Alire (Ada LIbrary REpository) installation</a></p></li>
+<li><p><a class="reference internal" href="#signal-desktop-installation-and-linking-to-a-dumb-phone" id="id25">signal-desktop installation and linking to a “dumb phone”</a></p></li>
+<li><p><a class="reference internal" href="#session-for-desktop-installation" id="id26">Session for desktop installation</a></p></li>
 </ul>
 </li>
 </ul>
@@ -821,11 +822,90 @@ ESR in the <a class="reference external" href="https://wiki.debian.org/DebianAlt
 <p>I then tweaked Google Chrome’s settings as for
 <a class="reference internal" href="#chromium-config"><span class="std std-ref">Chromium</span></a>.</p>
 </section>
-<section id="gnat-studio">
+<section id="docker-installation">
 <h3>
-<a class="toc-backref" href="#id22" role="doc-backlink">GNAT Studio</a><a class="headerlink" href="#gnat-studio" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id22" role="doc-backlink">Docker installation</a><a class="headerlink" href="#docker-installation" title="Link to this heading">¶</a>
 </h3>
-<p id="index-15">Follow the instructions at <a class="reference external" href="https://github.com/AdaCore/gnatstudio/releases">https://github.com/AdaCore/gnatstudio/releases</a>.</p>
+<p id="index-15">I installed Docker as provided by the Docker repository
+(<a class="reference external" href="https://download.docker.com/linux/debian/">https://download.docker.com/linux/debian/</a>). Another option (that I haven’t
+tested) is to just install the <code class="docutils literal notranslate"><span class="pre">docker.io</span></code> Debian package (using, <strong>as
+root</strong>, <code class="docutils literal notranslate"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">docker.io</span></code>).</p>
+<p>First, make sure that Debian packages <code class="docutils literal notranslate"><span class="pre">curl</span></code> and <code class="docutils literal notranslate"><span class="pre">ca-certificates</span></code> are
+installed:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>curl<span class="w"> </span>ca-certificates<span class="w"> </span><span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>Then import the Docker repository signature key:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://download.docker.com/linux/debian/gpg<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>-o<span class="w"> </span>/usr/share/keyrings/docker-archive-keyring.gpg
+</pre></div>
+</div>
+<p>You can now add the Docker repository to your APT sources, by creating file
+<code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list.d/docker.list</span></code> containing the following line:</p>
+<div class="line-block">
+<div class="line">deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] <a class="reference external" href="https://download.docker.com/linux/debian">https://download.docker.com/linux/debian</a> trixie stable</div>
+</div>
+<p>and resynchronize your local package index:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>update
+</pre></div>
+</div>
+<p>Install Docker (<strong>as root</strong>) with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>docker-ce<span class="w"> </span><span class="se">\</span>
+<span class="w">                </span>docker-ce-cli<span class="w"> </span><span class="se">\</span>
+<span class="w">                </span>containerd.io<span class="w"> </span><span class="se">\</span>
+<span class="w">                </span>docker-buildx-plugin<span class="w"> </span><span class="se">\</span>
+<span class="w">                </span>docker-compose-plugin<span class="w"> </span><span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>You end up with the Docker service and socket enabled:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>systemctl<span class="w"> </span>status<span class="w"> </span>docker.service
+systemctl<span class="w"> </span>status<span class="w"> </span>docker.socket
+</pre></div>
+</div>
+<p>And the ability to run containers (the <code class="docutils literal notranslate"><span class="pre">hello-world</span> <span class="pre">demo</span> <span class="pre">for</span> <span class="pre">example</span></code>), but
+only <strong>as root</strong>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>hello-world<span class="w"> </span><span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>If you need to run containers as an unprivileged user, you can use Docker
+“rootless”. For that, you need to have <code class="docutils literal notranslate"><span class="pre">uidmap</span></code> installed:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>apt-get<span class="w"> </span>install<span class="w"> </span>uidmap<span class="w"> </span><span class="c1"># As root.</span>
+</pre></div>
+</div>
+<p>You should probably also disable the normal Docker service and socket:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>systemctl<span class="w"> </span>disable<span class="w"> </span>--now<span class="w"> </span>docker.service<span class="w"> </span>docker.socket
+rm<span class="w"> </span>/var/run/docker.sock
+</pre></div>
+</div>
+<p>Install Docker “rootless” with:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>dockerd-rootless-setuptool.sh<span class="w"> </span>install<span class="w"> </span><span class="c1"># As unprivileged user.</span>
+</pre></div>
+</div>
+<p>Your own Docker service is now enabled:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>systemctl<span class="w"> </span>--user<span class="w"> </span>status<span class="w"> </span>docker.service<span class="w"> </span><span class="c1"># As unprivileged user.</span>
+</pre></div>
+</div>
+<p>and you can run containers without root privileges:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>hello-world<span class="w"> </span><span class="c1"># As unprivileged user.</span>
+</pre></div>
+</div>
+</section>
+<section id="gnat-studio-installation">
+<h3>
+<a class="toc-backref" href="#id23" role="doc-backlink">GNAT Studio installation</a><a class="headerlink" href="#gnat-studio-installation" title="Link to this heading">¶</a>
+</h3>
+<p id="index-16">Follow the instructions at <a class="reference external" href="https://github.com/AdaCore/gnatstudio/releases">https://github.com/AdaCore/gnatstudio/releases</a>.</p>
 <p>I installed the Continuous Release 20250417, running the <code class="docutils literal notranslate"><span class="pre">doinstall</span></code> script
 <strong>as root</strong>.</p>
 <p>To make sure that GNAT Studio is in the search path for all users, I added
@@ -840,9 +920,9 @@ ESR in the <a class="reference external" href="https://wiki.debian.org/DebianAlt
 </section>
 <section id="alire-ada-library-repository-installation">
 <h3>
-<a class="toc-backref" href="#id23" role="doc-backlink">Alire (Ada LIbrary REpository) installation</a><a class="headerlink" href="#alire-ada-library-repository-installation" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id24" role="doc-backlink">Alire (Ada LIbrary REpository) installation</a><a class="headerlink" href="#alire-ada-library-repository-installation" title="Link to this heading">¶</a>
 </h3>
-<p id="index-16">The <a class="reference external" href="https://alire.ada.dev/">Alire</a> distribution is available as a Zip
+<p id="index-17">The <a class="reference external" href="https://alire.ada.dev/">Alire</a> distribution is available as a Zip
 archive on Github. I download it using <code class="docutils literal notranslate"><span class="pre">wget</span></code> (example for version 2.1.0):</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/Downloads
@@ -875,9 +955,9 @@ your preferred editor. Choose “Other” and enter the following command line:<
 </section>
 <section id="signal-desktop-installation-and-linking-to-a-dumb-phone">
 <h3>
-<a class="toc-backref" href="#id24" role="doc-backlink">signal-desktop installation and linking to a “dumb phone”</a><a class="headerlink" href="#signal-desktop-installation-and-linking-to-a-dumb-phone" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id25" role="doc-backlink">signal-desktop installation and linking to a “dumb phone”</a><a class="headerlink" href="#signal-desktop-installation-and-linking-to-a-dumb-phone" title="Link to this heading">¶</a>
 </h3>
-<p id="index-17">Here are the commands I issued (<strong>as root</strong>) to install signal-desktop (you may
+<p id="index-18">Here are the commands I issued (<strong>as root</strong>) to install signal-desktop (you may
 want to check the <a class="reference external" href="https://signal.org/download">Signal official site</a>):</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>wget<span class="w"> </span>https://updates.signal.org/desktop/apt/keys.asc<span class="w"> </span>-O<span class="w"> </span>-<span class="w"> </span><span class="p">|</span><span class="w"> </span>apt-key<span class="w"> </span>add
@@ -941,9 +1021,9 @@ your phone:</p>
 </section>
 <section id="session-for-desktop-installation">
 <h3>
-<a class="toc-backref" href="#id25" role="doc-backlink">Session for desktop installation</a><a class="headerlink" href="#session-for-desktop-installation" title="Link to this heading">¶</a>
+<a class="toc-backref" href="#id26" role="doc-backlink">Session for desktop installation</a><a class="headerlink" href="#session-for-desktop-installation" title="Link to this heading">¶</a>
 </h3>
-<p id="index-18">Here is how I currently install and use Session for desktop. I download the
+<p id="index-19">Here is how I currently install and use Session for desktop. I download the
 Appimage file for Linux from <a class="reference external" href="https://www.getsession.org/linux">https://www.getsession.org/linux</a> and place it
 in my home directory. Then I give the file executable permission with a command
 like:</p>
@@ -1001,7 +1081,8 @@ about the use of the <code class="docutils literal notranslate"><span class="pre
 <li>
 <a class="reference internal" href="#third-party-applications-installation">Third party applications installation</a><ul>
 <li><a class="reference internal" href="#google-chrome-installation">Google Chrome installation</a></li>
-<li><a class="reference internal" href="#gnat-studio">GNAT Studio</a></li>
+<li><a class="reference internal" href="#docker-installation">Docker installation</a></li>
+<li><a class="reference internal" href="#gnat-studio-installation">GNAT Studio installation</a></li>
 <li><a class="reference internal" href="#alire-ada-library-repository-installation">Alire (Ada LIbrary REpository) installation</a></li>
 <li><a class="reference internal" href="#signal-desktop-installation-and-linking-to-a-dumb-phone">signal-desktop installation and linking to a “dumb phone”</a></li>
 <li><a class="reference internal" href="#session-for-desktop-installation">Session for desktop installation</a></li>
