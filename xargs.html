@@ -101,7 +101,8 @@ process). If you want the arguments separated by blanks on a single line do:</p>
 </pre></div>
 </div>
 <p>causes <code class="docutils literal notranslate"><span class="pre">other_command</span></code> to be executed once for each item output by
-<code class="docutils literal notranslate"><span class="pre">any_command</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">any_command</span></code>. If any invocation of <code class="docutils literal notranslate"><span class="pre">other_command</span></code> exits with a non zero
+exit status, then the exit status of <code class="docutils literal notranslate"><span class="pre">xargs</span></code> is non zero.</p>
 </section>
 <section id="executing-a-command-for-each-item-with-item-used-anywhere-in-the-command">
 <h2>

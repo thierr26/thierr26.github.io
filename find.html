@@ -154,6 +154,17 @@ spaces:</p>
 <li><p>the MD5 digest value (due to the <code class="docutils literal notranslate"><span class="pre">md5sum</span> <span class="pre">"$1"</span></code> part, the piping to <code class="docutils literal notranslate"><span class="pre">sed</span></code>
 is used to remove the file name from the <code class="docutils literal notranslate"><span class="pre">md5sum</span></code> output).</p></li>
 </ul>
+<p>When <code class="docutils literal notranslate"><span class="pre">-exec</span></code> is used as demonstrated in the examples above, the exit status
+of <code class="docutils literal notranslate"><span class="pre">find</span></code> is not affected by the exit status of the commands run.</p>
+<p>There is another way of using <code class="docutils literal notranslate"><span class="pre">-exec</span></code>, which is to terminate the command with
+<code class="docutils literal notranslate"><span class="pre">+</span></code> instead of <code class="docutils literal notranslate"><span class="pre">\;</span></code>. In this case, the command is run once and <code class="docutils literal notranslate"><span class="pre">{}</span></code>
+contains the whole list of found files (and there can be only one occurrence of
+<code class="docutils literal notranslate"><span class="pre">{}</span></code>, that must be just before the <code class="docutils literal notranslate"><span class="pre">+</span></code>). And the exit status of <code class="docutils literal notranslate"><span class="pre">find</span></code> is
+affected by the exit status of the command (a non zero exit status of the
+command implies a non zero exit status of <code class="docutils literal notranslate"><span class="pre">find</span></code>).</p>
+<p>When you need to run a command for every found file an want a non zero exit
+status if one of the invocation of the command fails, then you should consider
+to use <a class="reference internal" href="xargs.html"><span class="doc">xargs</span></a> instead of the <code class="docutils literal notranslate"><span class="pre">-exec</span></code> option of <code class="docutils literal notranslate"><span class="pre">find</span></code>.</p>
 </section>
 <section id="combining-logical-or-search-criteria">
 <h2>
