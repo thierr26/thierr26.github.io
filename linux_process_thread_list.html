@@ -70,6 +70,7 @@ process with a given PID:</p>
 <div class="highlight-shell notranslate">
 <div class="highlight"><pre><span></span>ps<span class="w"> </span>-T<span class="w"> </span>-p<span class="w"> </span>&lt;PID&gt;
 ps<span class="w"> </span>-L<span class="w"> </span>-p<span class="w"> </span>&lt;PID&gt;
+ps<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>pid,tid,tname,policy,pri,nice,%cpu,time,wchan:12,comm<span class="w"> </span>-p<span class="w"> </span>&lt;PID&gt;
 ps<span class="w"> </span>-mo<span class="w"> </span>pid,tid,%cpu,psr,comm<span class="w"> </span>-p<span class="w"> </span>&lt;PID&gt;
 </pre></div>
 </div>
