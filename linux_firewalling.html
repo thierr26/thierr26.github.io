@@ -255,9 +255,10 @@ install it with:</p>
 </pre></div>
 </div>
 <p>For example, to see which services uses the ports that Nmap has found opened,
-you can do something like:</p>
+you can do something like (see the <a class="reference internal" href="awk.html"><span class="doc">AWK</span></a> page for more
+details):</p>
 <div class="highlight-shell notranslate">
-<div class="highlight"><pre><span></span>ss<span class="w"> </span>-ane<span class="p">|</span>awk<span class="w"> </span><span class="s2">"NR == 1 || /[0-9\]]:(22 |68 |3142 |5353 )/"</span>
+<div class="highlight"><pre><span></span>ss<span class="w"> </span>-ane<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s2">"NR == 1 || /[0-9a-zA-Z\]]:(22 |68 |3142 |5353 )/"</span>
 </pre></div>
 </div>
 <p>The output obtained on my Debian machines <a class="reference download internal" download="" href="_downloads/4bb5b08b0a8a4719a64cf18849d4d695/ss_22_68_3142_5353"><code class="xref download docutils literal notranslate"><span class="pre">is</span> <span class="pre">available</span> <span class="pre">for</span> <span class="pre">download</span>

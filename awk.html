@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" data-content_root="./">
+  <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    
+    
+
+    <title>AWK — Personal Notes</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50">
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=037667e9">
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=dbea93a2">
+    
+    <script src="_static/documentation_options.js?v=7f41d439"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="author" title="About these documents" href="about.html">
+    <link rel="index" title="Index" href="genindex.html">
+    <link rel="search" title="Search" href="search.html">
+    <link rel="next" title="Sphinx" href="sphinx.html">
+    <link rel="prev" title="Sed" href="sed.html"> 
+  </head>
+<body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index" accesskey="I">index</a>
+</li>
+        <li class="right">
+          <a href="sphinx.html" title="Sphinx" accesskey="N">next</a> |</li>
+        <li class="right">
+          <a href="sed.html" title="Sed" accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">AWK</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="awk">
+<h1>AWK<a class="headerlink" href="#awk" title="Link to this heading">¶</a>
+</h1>
+<nav class="contents local" id="page-content">
+<p class="topic-title">Page content</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id2">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#extracting-one-or-more-columns-from-a-csv-file" id="id3">Extracting one or more columns from a CSV file</a></p></li>
+<li><p><a class="reference internal" href="#filtering-but-keeping-the-first-line-headers" id="id4">Filtering, but keeping the first line (headers)</a></p></li>
+<li><p><a class="reference internal" href="#removing-leading-and-trailing-blank-lines" id="id5">Removing leading and trailing blank lines</a></p></li>
+</ul>
+</nav>
+<section id="introduction">
+<span id="index-0"></span><h2>
+<a class="toc-backref" href="#id2" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Link to this heading">¶</a>
+</h2>
+<p>I don’t use <a class="reference external" href="https://en.wikipedia.org/wiki/AWK">AWK</a> very often and so am not
+very comfortable with it. I wrote on this page a few AWK commands I used. They
+may be helpful as a starting point next time I need AWK.</p>
+<p>Note that the commands on this page have been tested with <a class="reference external" href="https://www.gnu.org/software/gawk">GNU AWK</a>.</p>
+</section>
+<section id="extracting-one-or-more-columns-from-a-csv-file">
+<h2>
+<a class="toc-backref" href="#id3" role="doc-backlink">Extracting one or more columns from a CSV file</a><a class="headerlink" href="#extracting-one-or-more-columns-from-a-csv-file" title="Link to this heading">¶</a>
+</h2>
+<p id="index-1">A command like the following prints the input file (a <a class="reference external" href="https://en.wikipedia.org/wiki/Comma-separated_values">comma-separated value</a> file), but keeping
+only columns 1 and 3:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>awk<span class="w"> </span>-F<span class="s1">','</span><span class="w"> </span><span class="s1">'{printf "%s,%s\n", $1, $3}'</span><span class="w"> </span>my_table.csv
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">-F</span></code> option specifies the delimiter. When omitted, the delimiter defaults
+to blank character (space or tabulation).</p>
+<p>If you need to extract only one column (say column 2), you can just do:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>awk<span class="w"> </span>-F<span class="s1">','</span><span class="w"> </span><span class="s1">'{print $2}'</span><span class="w"> </span>my_table.csv
+</pre></div>
+</div>
+</section>
+<section id="filtering-but-keeping-the-first-line-headers">
+<h2>
+<a class="toc-backref" href="#id4" role="doc-backlink">Filtering, but keeping the first line (headers)</a><a class="headerlink" href="#filtering-but-keeping-the-first-line-headers" title="Link to this heading">¶</a>
+</h2>
+<p>There is a AWK command on my <a class="reference internal" href="linux_firewalling.html"><span class="doc">Linux firewalling</span></a>
+page:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>awk<span class="w"> </span><span class="s2">"NR == 1 || /[0-9a-zA-Z\]]:(22 |68 |3142 |5353 )/"</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">||</span></code> symbol is a logical or, the <code class="docutils literal notranslate"><span class="pre">NR</span> <span class="pre">==</span> <span class="pre">1</span></code> condition is true when AWK
+is processing the first “record” (i.e. the first input line) and the rest
+specifies a <a class="reference external" href="https://www.math.utah.edu/docs/info/gawk_5.html">regular expression</a>.</p>
+<p>The regular expression matches strings containing successively:</p>
+<ul class="simple">
+<li><p>A digit, letter or closing square bracket,</p></li>
+<li><p>A colon (:),</p></li>
+<li><p>One of the following strings: “22 “, “68 “, “3142 “, “5353 “.</p></li>
+</ul>
+<p>The whole command leads AWK to print the first input line and all lines
+matching the regular expression.</p>
+</section>
+<section id="removing-leading-and-trailing-blank-lines">
+<h2>
+<a class="toc-backref" href="#id5" role="doc-backlink">Removing leading and trailing blank lines</a><a class="headerlink" href="#removing-leading-and-trailing-blank-lines" title="Link to this heading">¶</a>
+</h2>
+<p>The following AWK command comes directly from <a class="reference external" href="https://stackoverflow.com/questions/7359527/removing-trailing-starting-newlines-with-sed-awk-tr-and-friends">this Stack Overflow discussion
+about the removal of leading / trailing blank lines</a>:</p>
+<div class="highlight-shell notranslate">
+<div class="highlight"><pre><span></span>awk<span class="w"> </span><span class="s1">'/[[:graph:]]/ {</span>
+<span class="s1">         p=1;</span>
+<span class="s1">         for (i=0; i&lt;n; i++) {</span>
+<span class="s1">             print "";</span>
+<span class="s1">         }</span>
+<span class="s1">         n=0;</span>
+<span class="s1">         print;</span>
+<span class="s1">     }</span>
+<span class="s1">     p &amp;&amp; /^[[:space:]]*$/ {</span>
+<span class="s1">         n++;</span>
+<span class="s1">     };'</span>
+</pre></div>
+</div>
+<p>In the command, there are two instruction sequences.</p>
+<p>The first one is executed for input lines that contain at least one character
+in the “graphical” class (i.e. at least one printable and visible character).
+Note that executing this instruction sequence causes <code class="docutils literal notranslate"><span class="pre">p</span></code> to be set to 1.
+(Before that, <code class="docutils literal notranslate"><span class="pre">p</span></code> is 0 due to implicit initialization to 0.)</p>
+<p>The second one is executed for input lines that contain only characters in the
+“space” class (which most notably contains space and tabulation), and (due to
+the <code class="docutils literal notranslate"><span class="pre">p</span> <span class="pre">&amp;&amp;</span></code> part) only if p is non zero (i.e. if at least one non blank line
+has already been seen). The instruction sequence just counts the successive
+blank lines.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">for</span></code> loop in the first instruction sequence output the blank lines
+before printing a non blank line.</p>
+<p>All in all, the whole command ignores any blank line as long a non blank line
+has not been seen (thus “removing leading blank lines”), and does not output
+blank lines if no non blank line is coming after (thus “removing trailing blank
+lines”).</p>
+<p>You can find the full list of character classes in <a class="reference external" href="https://docs.jade.fyi/gnu/gawk/gawk.html#Using-Bracket-Expressions">“Effective AWK Programming
+(section “Using Bracket Expressions”)”</a>.</p>
+<p>If you consider only strictly empty lines as blank lines, you can remove
+<code class="docutils literal notranslate"><span class="pre">[[:space:]]*</span></code> in the command and keep only <code class="docutils literal notranslate"><span class="pre">^$</span></code> in the regular expression.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li>
+<a class="reference internal" href="#">AWK</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#extracting-one-or-more-columns-from-a-csv-file">Extracting one or more columns from a CSV file</a></li>
+<li><a class="reference internal" href="#filtering-but-keeping-the-first-line-headers">Filtering, but keeping the first line (headers)</a></li>
+<li><a class="reference internal" href="#removing-leading-and-trailing-blank-lines">Removing leading and trailing blank lines</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="sed.html" title="previous chapter">Sed</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="sphinx.html" title="next chapter">Sphinx</a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <input type="submit" value="Go">
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index">index</a>
+</li>
+        <li class="right">
+          <a href="sphinx.html" title="Sphinx">next</a> |</li>
+        <li class="right">
+          <a href="sed.html" title="Sed">previous</a> |</li>
+        <li class="nav-item nav-item-0">
+<a href="index.html">Personal Notes</a> »</li>
+        <li class="nav-item nav-item-this"><a href="">AWK</a></li> 
+      </ul>
+    </div>
+  <div class="footer" role="contentinfo">
+        © Copyright 2018-2026, <a class="reference internal" href="about.html"><span class="doc">Thierry Rascle</span></a>.<br>
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/80x15.png"></a>
+    Work licensed under a
+    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br>
+      <div class="generator_mention">Static website built using <a href="http://sphinx-doc.org/">Sphinx</a> and <a href="https://nokogiri.org/">Nokogiri</a>. Validated <a href="https://validator.w3.org/check?uri=referer">HTML5</a> / <a href="https://jigsaw.w3.org/css-validator/check/referer">CSS3</a>.</div>
+    <a href="mailto:thierr26@free.fr">Feedback welcome</a>.
+  </div>
+
+  </body>
+</html>
